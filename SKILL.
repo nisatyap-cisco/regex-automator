@@ -1,0 +1,167 @@
+{
+  "name": "universal-regex-discovery-bedrock",
+  "version": "1.1",
+  "description": "Multi-agent regex discovery system using Amazon Bedrock Claude Sonnet. The system collects examples, discovers patterns, generates regex, and validates results automatically for any numbering system.",
+  "entrypoint": "main.py",
+  "parameters": {
+    "condition": {
+      "type": "string",
+      "description": "Identifier or numbering system to analyze. Example: California ZIP code, US Medicare number, UK postcode."
+    },
+    "dataset_size": {
+      "type": "integer",
+      "default": 1000
+    }
+  },
+  "llm_configuration": {
+    "provider": "aws_bedrock",
+    "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+    "temperature": 0.2,
+    "max_tokens": 4096,
+    "region": "us-east-1"
+  },
+  "aws_credentials": {
+    "method": "environment_variables",
+    "required_variables": [
+      "AWS_PROFILE",
+      "AWS_REGION"
+    ]
+  },
+  "agents": [
+    {
+      "name": "data_collector",
+      "description": "Generates or retrieves realistic examples of the identifier system using Claude Sonnet.",
+      "inputs": [
+        "condition",
+        "dataset_size"
+      ],
+      "outputs": [
+        "data/raw_examples.txt",
+        "data/train.txt",
+        "data/test.txt"
+      ],
+      "logic": [
+        "Use Claude Sonnet via Amazon Bedrock to generate dataset_size realistic examples.",
+        "Ensure examples match real-world format.",
+        "Remove duplicates.",
+        "Write dataset to raw_examples.txt.",
+        "Split dataset: 70% training and 30% validation."
+      ],
+      "prompt_template": "Generate {dataset_size} realistic examples of {condition}. Only output the values. One value per line. Ensure they resemble real-world data."
+    },
+    {
+      "name": "pattern_analyzer",
+      "description": "Discovers structural patterns and numbering policies.",
+      "inputs": [
+        "data/train.txt",
+        "condition"
+      ],
+      "outputs": [
+        "results/patterns.json"
+      ],
+      "analysis_tasks": [
+        "Detect length patterns",
+        "Detect numeric ranges",
+        "Detect prefix patterns",
+        "Detect formatting structures",
+        "Search for known numbering rules",
+        "Identify contextual keywords"
+      ],
+      "prompt_template": "Analyze this dataset representing {condition}. Identify structural numbering rules, prefix ranges, formatting rules, and contextual keywords. Return structured JSON."
+    },
+    {
+      "name": "regex_generator",
+      "description": "Converts rules into optimized regex expressions.",
+      "inputs": [
+        "results/patterns.json"
+      ],
+      "outputs": [
+        "results/regex_patterns.json"
+      ],
+      "rules": [
+        "Each discovered rule must produce a regex.",
+        "Regex must be Python compatible.",
+        "Avoid catastrophic backtracking.",
+        "Use anchors where applicable."
+      ],
+      "prompt_template": "Convert the following rules into efficient Python regex patterns."
+    },
+    {
+      "name": "validator",
+      "description": "Validates regex patterns against reserved dataset.",
+      "inputs": [
+        "data/test.txt",
+        "results/regex_patterns.json"
+      ],
+      "outputs": [
+        "results/validation_report.json"
+      ],
+      "logic": [
+        "Run regex against test dataset.",
+        "Measure match rate.",
+        "Compute precision, recall, and accuracy.",
+        "Generate validation report."
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "step": 1,
+      "agent": "data_collector"
+    },
+    {
+      "step": 2,
+      "agent": "pattern_analyzer"
+    },
+    {
+      "step": 3,
+      "agent": "regex_generator"
+    },
+    {
+      "step": 4,
+      "agent": "validator"
+    }
+  ],
+  "project_structure": {
+    "root": "regex_discovery_system",
+    "directories": [
+      "agents",
+      "data",
+      "results",
+      "utils"
+    ],
+    "files": [
+      "main.py",
+      "config.yaml",
+      "requirements.txt",
+      "utils/bedrock_client.py",
+      "agents/data_collector.py",
+      "agents/pattern_analyzer.py",
+      "agents/regex_generator.py",
+      "agents/validator.py"
+    ]
+  },
+  "execution": {
+    "command": "python main.py --condition \"<identifier system>\""
+  },
+  "dependencies": [
+    "python>=3.10",
+    "boto3",
+    "regex",
+    "pandas",
+    "pyyaml"
+  ],
+  "bedrock_client_logic": {
+    "description": "Create Bedrock client using boto3 and call Claude Sonnet model.",
+    "python_example": "import boto3\n\nclient = boto3.client('bedrock-runtime', region_name='us-east-1')\n\nresponse = client.invoke_model(\n    modelId='anthropic.claude-3-5-sonnet-20240620-v1:0',\n    body=json.dumps({\n        'messages': [{'role':'user','content':'hello'}],\n        'max_tokens': 4096,\n        'temperature': 0.2,\n        'anthropic_version': 'bedrock-2023-05-31'\n    })\n)"
+  },
+  "outputs": [
+    "data/raw_examples.txt",
+    "data/train.txt",
+    "data/test.txt",
+    "results/patterns.json",
+    "results/regex_patterns.json",
+    "results/validation_report.json",
+    "results/final_report.md"
+  ]
+}
