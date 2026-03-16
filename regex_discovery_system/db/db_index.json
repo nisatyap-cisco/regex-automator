@@ -1,0 +1,12 @@
+{
+  "description": "Fallback reference database. Agent 1 checks this before LLM synthesis.",
+  "entries": [
+    {
+      "keywords": ["california", "zip", "zip code", "ca zip", "california zip code"],
+      "file": "california_zips.xlsx",
+      "format": "xlsx",
+      "column": "zip",
+      "description": "1802 official California ZIP codes (90001–96161)"
+    }
+  ]
+}

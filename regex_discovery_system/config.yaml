@@ -1,9 +1,12 @@
 model_id: "anthropic.claude-3-5-sonnet-20240620-v1:0"
-region: "us-east-1"
-aws_profile: "strln"
 temperature: 0.2
 max_tokens: 4096
-dataset_size: 1000
+dataset_size: 1500
 train_ratio: 0.70
 batch_size: 200
 max_retries: 3
+
+# ── Secrets are loaded from .env (see .env.example) ──
+# AWS_PROFILE, AWS_REGION, TAVILY_API_KEY, PROXIES
+# Set them in .env for local dev; on EC2/ECS leave AWS_PROFILE empty
+# to use the instance role automatically.

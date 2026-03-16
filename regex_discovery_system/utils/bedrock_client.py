@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import time
+from pathlib import Path
 from typing import Optional
 
 import boto3
@@ -12,17 +13,48 @@ import yaml
 logger = logging.getLogger(__name__)
 
 
-def load_config(path: str = "config.yaml") -> dict:
-    cfg = {}
-    with open(path) as f:
-        cfg = yaml.safe_load(f)
+def _load_dotenv() -> None:
+    """Best-effort load of .env file next to config.yaml."""
+    try:
+        from dotenv import load_dotenv
+        env_path = Path(__file__).resolve().parent.parent / ".env"
+        if env_path.exists():
+            load_dotenv(env_path, override=False)
+            logger.debug("Loaded .env from %s", env_path)
+    except ImportError:
+        pass
 
-    if cfg.get("aws_profile"):
-        os.environ["AWS_PROFILE"] = cfg["aws_profile"]
-    if cfg.get("region"):
-        os.environ["AWS_REGION"] = cfg["region"]
+
+def load_config(path: str = "config.yaml") -> dict:
+    _load_dotenv()
+
+    with open(path) as f:
+        cfg = yaml.safe_load(f) or {}
+
+    profile = os.getenv("AWS_PROFILE", cfg.get("aws_profile", ""))
+    region = os.getenv("AWS_REGION", cfg.get("region", "us-east-1"))
+    tavily_key = os.getenv("TAVILY_API_KEY", cfg.get("tavily_api_key", ""))
+    proxies_env = os.getenv("PROXIES", "")
+    proxies = [p.strip() for p in proxies_env.split(",") if p.strip()] if proxies_env else cfg.get("proxies", [])
+
+    cfg["aws_profile"] = profile
+    cfg["region"] = region
+    cfg["tavily_api_key"] = tavily_key
+    cfg["proxies"] = proxies
 
     return cfg
+
+
+def _build_session(config: dict) -> boto3.Session:
+    """Build a boto3 session: use named profile for local dev, instance role for deployed."""
+    profile = config.get("aws_profile", "")
+    region = config.get("region", "us-east-1")
+
+    session_kwargs = {"region_name": region}
+    if profile:
+        session_kwargs["profile_name"] = profile
+
+    return boto3.Session(**session_kwargs)
 
 
 def invoke_claude(
@@ -32,7 +64,7 @@ def invoke_claude(
     max_retries: Optional[int] = None,
 ) -> str:
     retries = max_retries if max_retries is not None else config.get("max_retries", 3)
-    session = boto3.Session(profile_name=config.get("aws_profile", "strln"))
+    session = _build_session(config)
     client = session.client("bedrock-runtime", region_name=config["region"])
 
     messages = [{"role": "user", "content": prompt}]

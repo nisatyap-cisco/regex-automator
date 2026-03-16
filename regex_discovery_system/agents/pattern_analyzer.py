@@ -19,7 +19,7 @@ STATISTICAL SUMMARY:
 
 SAMPLE VALUES (200 of {total}):
 {sample_values}
-
+{policies}
 TASKS — return a JSON object with these keys:
 
 1. "format_rules": array of objects, each with:
@@ -35,8 +35,20 @@ TASKS — return a JSON object with these keys:
 
 3. "contextual_keywords": array of strings — words/phrases that commonly
    appear near this identifier in documents (case-insensitive).
-   Include at least 8-15 keywords. Think: form field labels, column headers,
-   surrounding text in real documents.
+   IMPORTANT: Include as MANY relevant keywords as possible — aim for 8-15.
+   Cast a wide net but do NOT include generic words that would cause false
+   positives (e.g. avoid "number", "code", "ID" alone — too ambiguous).
+   Every keyword must be specific enough that its presence near a value
+   is a strong signal that the value is this identifier type.
+   Think broadly across these categories:
+     - Form field labels (e.g. "ZIP code", "postal code", "mailing address")
+     - Column headers in spreadsheets/databases
+     - Surrounding text in official documents, forms, invoices
+     - Abbreviations and acronyms used in the industry
+     - Multilingual variants if the identifier is used internationally
+     - Related field names in software systems and APIs
+     - Labels used by DLP/security vendors (Microsoft, Netskope, Broadcom,
+       Zscaler, Skyhigh) for this same identifier type
 
 4. "keyword_proximity": integer — how many terms away a keyword can be
    from the identifier and still indicate a match (default 10).
@@ -112,8 +124,16 @@ def _parse_json_response(text: str) -> dict:
     return json.loads(text)
 
 
-def analyze_patterns(condition: str, config: dict) -> dict:
-    with open("data/train.txt") as f:
+def analyze_patterns(
+    condition: str,
+    config: dict,
+    paths: dict[str, str] | None = None,
+    policies: dict | None = None,
+) -> dict:
+    train_path = (paths or {}).get("train", "data/train.txt")
+    patterns_path = (paths or {}).get("patterns", "results/patterns.json")
+
+    with open(train_path) as f:
         values = [line.strip() for line in f if line.strip()]
 
     logger.info("Agent 2: analyzing %d training values for '%s'", len(values), condition)
@@ -125,11 +145,56 @@ def analyze_patterns(condition: str, config: dict) -> dict:
     rng = random.Random(42)
     sample = rng.sample(values, sample_size)
 
+    policy_section = ""
+    if policies:
+        parts: list[str] = []
+
+        if policies.get("policies"):
+            rules = policies["policies"]
+            authority = policies.get("numbering_authority", "unknown")
+            parts.append(
+                f"\nKNOWN POLICIES/RULES (from {authority}):\n"
+                + "\n".join(f"- {r}" for r in rules)
+            )
+            logger.info("Agent 2: injecting %d policy rules from Agent 1P", len(rules))
+
+        if policies.get("vendor_patterns"):
+            vendor_lines: list[str] = []
+            for vp in policies["vendor_patterns"]:
+                vendor = vp.get("vendor", "Unknown")
+                vr = vp.get("regex")
+                vk = vp.get("keywords", [])
+                vrl = vp.get("rules", [])
+                line = f"  {vendor}:"
+                if vr:
+                    line += f" regex={vr}"
+                if vk:
+                    line += f" keywords={vk}"
+                if vrl:
+                    line += f" rules={vrl}"
+                vendor_lines.append(line)
+            parts.append(
+                "\nVENDOR/COMPETITOR DLP PATTERNS (for reference — use to improve keyword coverage):\n"
+                + "\n".join(vendor_lines)
+            )
+            logger.info("Agent 2: injecting %d vendor patterns from Agent 1P", len(policies["vendor_patterns"]))
+
+        if policies.get("vendor_keywords"):
+            parts.append(
+                "\nADDITIONAL KEYWORDS FROM VENDOR PRODUCTS:\n"
+                + ", ".join(policies["vendor_keywords"])
+                + "\n(Include any of these that are genuinely relevant to the identifier.)"
+            )
+            logger.info("Agent 2: injecting %d vendor keywords from Agent 1P", len(policies["vendor_keywords"]))
+
+        policy_section = "\n".join(parts) + "\n" if parts else ""
+
     prompt = PROMPT_TEMPLATE.format(
         condition=condition,
         stats_json=json.dumps(stats, indent=2),
         total=len(values),
         sample_values="\n".join(sample),
+        policies=policy_section,
     )
 
     response = invoke_claude(prompt, config)
@@ -148,7 +213,7 @@ def analyze_patterns(condition: str, config: dict) -> dict:
 
     patterns["condition"] = condition
 
-    with open("results/patterns.json", "w") as f:
+    with open(patterns_path, "w") as f:
         json.dump(patterns, f, indent=2)
 
     rule_count = len(patterns.get("format_rules", []))

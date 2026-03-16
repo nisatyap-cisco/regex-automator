@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regex Discovery System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ── Sidebar: Run History ──────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Run History</h2>
+    <button class="btn btn-sm btn-ghost" onclick="refreshHistory()">↻ Refresh</button>
+    <ul id="history-list">
+      {% for r in runs %}
+      <li class="history-row">
+        <button class="history-item" onclick="loadRun('{{ r.slug }}')">
+          <span class="history-name">{{ r.condition }}</span>
+          <span class="history-date">{{ r.mtime }}</span>
+        </button>
+        <button class="btn-delete" onclick="deleteRun('{{ r.slug }}')" title="Delete run">&times;</button>
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <!-- ── Main content ──────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Input Section -->
+    <section class="card" id="input-section">
+      <h1>Regex Discovery System</h1>
+      <p class="subtitle">Enter a condition to discover regex patterns via 4-agent pipeline</p>
+      <div class="input-row">
+        <input type="text" id="condition-input" placeholder="e.g. California ZIP code, USA Medicare Numbers, india postcode..."
+               class="input-field" autofocus>
+        <button class="btn btn-primary" id="run-btn" onclick="startRun()">
+          <span id="run-btn-text">Run Pipeline</span>
+          <span id="run-btn-spinner" class="spinner hidden"></span>
+        </button>
+      </div>
+      <div id="status-bar" class="status-bar hidden">
+        <div class="status-step" id="status-step"></div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        <pre class="log-box" id="log-box"></pre>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="card hidden" id="results-section">
+      <div class="results-header">
+        <h2 id="results-title">Results</h2>
+        <span class="badge" id="results-badge"></span>
+      </div>
+
+      <!-- Tab nav -->
+      <div class="tab-nav" id="tab-nav">
+        <button class="tab active" data-tab="final_report">Final Report</button>
+        <button class="tab" data-tab="source_of_truth">Source of Truth</button>
+        <button class="tab" data-tab="patterns">Patterns</button>
+        <button class="tab" data-tab="regex_patterns">Regex</button>
+        <button class="tab" data-tab="validation_report">Validation</button>
+        <button class="tab" data-tab="compare">Compare</button>
+      </div>
+
+      <!-- Tab content -->
+      <div class="tab-panels">
+        <div class="tab-panel active" id="panel-final_report">
+          <div class="md-content" id="content-final_report"></div>
+        </div>
+        <div class="tab-panel" id="panel-source_of_truth">
+          <div class="md-content" id="content-source_of_truth"></div>
+        </div>
+        <div class="tab-panel" id="panel-patterns">
+          <pre class="code-block" id="content-patterns"></pre>
+        </div>
+        <div class="tab-panel" id="panel-regex_patterns">
+          <pre class="code-block" id="content-regex_patterns"></pre>
+        </div>
+        <div class="tab-panel" id="panel-validation_report">
+          <pre class="code-block" id="content-validation_report"></pre>
+        </div>
+        <div class="tab-panel" id="panel-compare">
+          <div class="md-content" id="content-compare">
+            <p class="muted">No comparison yet. Use the Compare section below to generate one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compare Section -->
+    <section class="card hidden" id="compare-section">
+      <h2>Compare Regex Patterns</h2>
+      <p class="subtitle">Add one or more value regexes to compare against the system output. Analysis powered by Claude Sonnet.</p>
+      <div class="compare-form">
+        <label>Value Regexes</label>
+        <div id="regex-inputs">
+          <div class="regex-input-row">
+            <input type="text" class="input-field mono regex-value-input"
+                   placeholder="e.g. [Ll][Vv][-]{0,1}\d{4}">
+            <button class="btn-remove-regex" onclick="removeRegexInput(this)" title="Remove">&times;</button>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-ghost" onclick="addRegexInput()" style="margin-top:6px">+ Add another regex</button>
+        <label style="margin-top:12px">Keyword Regex <span class="muted">(optional)</span></label>
+        <input type="text" id="user-keyword-regex" class="input-field mono"
+               placeholder="e.g. (?i)(?:swift code|BIC|RTN|SWIFT Address)">
+        <button class="btn btn-accent" id="compare-btn" onclick="runCompare()" style="margin-top:8px">
+          <span id="compare-btn-text">Compare with LLM Analysis</span>
+          <span id="compare-btn-spinner" class="spinner hidden"></span>
+        </button>
+      </div>
+      <div id="compare-result" class="hidden">
+        <h3>Comparison Result</h3>
+        <div class="md-content" id="compare-result-content"></div>
+      </div>
+    </section>
+
+    <!-- Notes Section -->
+    <section class="card hidden" id="notes-section">
+      <h2>Notes</h2>
+      <p class="subtitle">Save observations, ground-truth info, or anything else for this run</p>
+      <textarea id="notes-textarea" class="input-field notes-field"
+                placeholder="Type your notes here..."></textarea>
+      <button class="btn btn-secondary" onclick="saveNotes()">Save Notes</button>
+      <span id="notes-saved" class="muted hidden">Saved ✓</span>
+    </section>
+
+  </main>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

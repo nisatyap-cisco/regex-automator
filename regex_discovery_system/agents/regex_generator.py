@@ -64,8 +64,11 @@ def _clean_regex_response(text: str) -> str:
     return text.strip()
 
 
-def generate_regex(config: dict) -> dict:
-    with open("results/patterns.json") as f:
+def generate_regex(config: dict, paths: dict[str, str] | None = None) -> dict:
+    patterns_path = (paths or {}).get("patterns", "results/patterns.json")
+    regex_path = (paths or {}).get("regex_patterns", "results/regex_patterns.json")
+
+    with open(patterns_path) as f:
         patterns = json.load(f)
 
     condition = patterns.get("condition", "unknown")
@@ -145,7 +148,7 @@ def generate_regex(config: dict) -> dict:
         "patterns": output_patterns,
     }
 
-    with open("results/regex_patterns.json", "w") as f:
+    with open(regex_path, "w") as f:
         json.dump(result, f, indent=2)
 
     logger.info("Agent 3 done: %d patterns written", len(output_patterns))
