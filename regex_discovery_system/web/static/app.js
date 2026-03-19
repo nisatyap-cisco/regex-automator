@@ -1,14 +1,36 @@
 /* Regex Discovery System — Frontend */
 
 let currentSlug = null;
+let currentCondition = null;
 let pollTimer = null;
 
 /* ── Run Pipeline ─────────────────────────────────────────────── */
+
+function reRunCurrent() {
+  if (!currentCondition) return;
+  reRun(currentCondition);
+}
+
+function reRun(condition) {
+  // Scroll to top, fill the input, and trigger the pipeline.
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  const input = document.getElementById("condition-input");
+  input.value = condition;
+  startRun();
+}
 
 async function startRun() {
   const input = document.getElementById("condition-input");
   const condition = input.value.trim();
   if (!condition) { input.focus(); return; }
+
+  // Disable the Re-run button for the results section while running.
+  const rerunBtn = document.getElementById("rerun-btn");
+  if (rerunBtn) {
+    rerunBtn.disabled = true;
+    document.getElementById("rerun-btn-text").textContent = "Running...";
+    document.getElementById("rerun-btn-spinner").classList.remove("hidden");
+  }
 
   const btn = document.getElementById("run-btn");
   btn.disabled = true;
@@ -19,6 +41,8 @@ async function startRun() {
   setStep("Starting pipeline...");
   setProgress(5);
   clearLogs();
+  showWarning("");
+  hideContinueBtn();
 
   try {
     const resp = await fetch("/api/run", {
@@ -48,6 +72,7 @@ function pollStatus(runId) {
 
       setStep(status.step || "");
       updateLogs(logs.logs || []);
+      showWarning(status.warning || "");
 
       const stepMap = {
         "Step 1/4": 25, "Step 2/4": 50, "Step 3/4": 75, "Step 4/4": 90,
@@ -60,13 +85,19 @@ function pollStatus(runId) {
         clearInterval(pollTimer);
         setProgress(100);
         setStep("Done — " + (status.overall || ""));
+        hideContinueBtn();
         resetRunBtn();
         if (status.slug) loadRun(status.slug);
         refreshHistory();
       } else if (status.status === "error") {
         clearInterval(pollTimer);
         setProgress(100);
+        hideContinueBtn();
         resetRunBtn();
+      } else if (status.status === "paused_tavily") {
+        clearInterval(pollTimer);
+        setProgress(25);
+        showContinueBtn(runId);
       }
     } catch (e) {
       console.error("Poll error:", e);
@@ -78,6 +109,7 @@ function pollStatus(runId) {
 
 async function loadRun(slug) {
   currentSlug = slug;
+  currentCondition = slug.replace(/_/g, " ");
 
   document.querySelectorAll(".history-item").forEach(el => el.classList.remove("active"));
   document.querySelectorAll(".history-item").forEach(el => {
@@ -112,7 +144,7 @@ async function loadRun(slug) {
   fillTab("final_report", files.final_report || "", true);
   fillSourceOfTruth(files.source_of_truth || "");
   fillTab("patterns", files.patterns || "");
-  fillTab("regex_patterns", files.regex_patterns || "");
+  fillRegexPatterns(files.regex_patterns || "");
   fillTab("validation_report", files.validation_report || "");
 
   if (files.compare) {
@@ -230,6 +262,50 @@ function fillSourceOfTruth(raw) {
   el.innerHTML = renderMarkdown(lines.join("\n"));
 }
 
+/* ── Regex Patterns renderer ──────────────────────────────────── */
+
+function fillRegexPatterns(raw) {
+  const el = document.getElementById("content-regex_patterns");
+  if (!el) return;
+  if (!raw) { el.innerHTML = '<p class="muted">No regex patterns available.</p>'; return; }
+
+  let data;
+  try { data = JSON.parse(raw); } catch (_) {
+    el.innerHTML = "<pre>" + raw.replace(/</g, "&lt;") + "</pre>";
+    return;
+  }
+
+  const patterns = data.patterns || [];
+  if (!patterns.length) {
+    el.innerHTML = '<p class="muted">No patterns found.</p>';
+    return;
+  }
+
+  const lines = [];
+  lines.push(`# Regex Patterns — ${data.condition || ""}`);
+  lines.push("");
+
+  patterns.forEach((p, i) => {
+    const typeLabel = p.type === "context" ? "🔑 context" : "🔍 value";
+    lines.push(`## ${i + 1}. \`${p.rule_id}\` — ${typeLabel}`);
+    lines.push("");
+    lines.push(`**Description:** ${p.description}`);
+    lines.push("");
+    lines.push("~~~~");
+    lines.push(p.regex);
+    lines.push("~~~~");
+
+    if (p.keywords_readable) {
+      lines.push("");
+      lines.push(`**Keywords (readable):** ${p.keywords_readable}`);
+    }
+
+    lines.push("");
+  });
+
+  el.innerHTML = renderMarkdown(lines.join("\n"));
+}
+
 /* ── Tabs ─────────────────────────────────────────────────────── */
 
 document.addEventListener("click", (e) => {
@@ -313,6 +389,82 @@ async function runCompare() {
   }
 }
 
+/* ── Batch Re-run All ─────────────────────────────────────────── */
+
+let batchPollTimer = null;
+
+async function startRerunAll() {
+  if (!confirm(`Re-run the pipeline for ALL ${document.querySelectorAll("#history-list li").length} past conditions?\n\nThis will overwrite existing results with the latest logic. It may take a while.`)) return;
+
+  const btn = document.getElementById("rerun-all-btn");
+  btn.disabled = true;
+  btn.textContent = "Running…";
+
+  try {
+    const resp = await fetch("/api/rerun-all", { method: "POST" });
+    const data = await resp.json();
+    if (data.error) {
+      alert("Could not start batch re-run: " + data.error);
+      btn.disabled = false;
+      btn.textContent = "↻ Re-run All";
+      return;
+    }
+    showBatchPanel(data.total);
+    pollBatchStatus();
+  } catch (e) {
+    alert("Network error: " + e.message);
+    btn.disabled = false;
+    btn.textContent = "↻ Re-run All";
+  }
+}
+
+function showBatchPanel(total) {
+  const panel = document.getElementById("batch-panel");
+  panel.classList.remove("hidden");
+  document.getElementById("batch-counter").textContent = `0 / ${total}`;
+  document.getElementById("batch-progress-fill").style.width = "0%";
+  document.getElementById("batch-results").innerHTML = "";
+  document.getElementById("batch-current").textContent = "";
+}
+
+function pollBatchStatus() {
+  if (batchPollTimer) clearInterval(batchPollTimer);
+  batchPollTimer = setInterval(async () => {
+    try {
+      const resp = await fetch("/api/rerun-all/status");
+      const s = await resp.json();
+
+      const pct = s.total > 0 ? Math.round((s.done / s.total) * 100) : 0;
+      document.getElementById("batch-progress-fill").style.width = pct + "%";
+      document.getElementById("batch-counter").textContent = `${s.done} / ${s.total}`;
+      document.getElementById("batch-current").textContent =
+        s.current ? `Running: ${s.current}` : "";
+
+      // Render per-item results
+      const ul = document.getElementById("batch-results");
+      ul.innerHTML = (s.results || []).map(r => {
+        const icon = r.status === "done" ? "✅" : r.status === "error" ? "❌" : "⏳";
+        const err = r.error ? `<span class="batch-err" title="${r.error}"> — ${r.error}</span>` : "";
+        return `<li class="batch-result-row">${icon} ${r.condition}${err}</li>`;
+      }).join("");
+
+      if (!s.running) {
+        clearInterval(batchPollTimer);
+        document.getElementById("batch-label").textContent =
+          `Done — ${s.total - s.failed} succeeded, ${s.failed} failed`;
+        document.getElementById("batch-current").textContent = "";
+        const btn = document.getElementById("rerun-all-btn");
+        btn.disabled = false;
+        btn.textContent = "↻ Re-run All";
+        // Refresh the history list so mtimes are updated
+        refreshHistory();
+      }
+    } catch (e) {
+      console.error("Batch poll error:", e);
+    }
+  }, 3000);
+}
+
 /* ── Notes ────────────────────────────────────────────────────── */
 
 async function saveNotes() {
@@ -330,6 +482,15 @@ async function saveNotes() {
 
 /* ── History ──────────────────────────────────────────────────── */
 
+function _histBadge(overall) {
+  if (!overall) return "";
+  if (overall === "PASS")
+    return `<span class="hist-badge hist-badge-pass">✅ PASS</span>`;
+  if (overall === "FAIL")
+    return `<span class="hist-badge hist-badge-fail">❌ FAIL</span>`;
+  return `<span class="hist-badge hist-badge-review">⚠️ ${overall}</span>`;
+}
+
 async function refreshHistory() {
   const resp = await fetch("/api/runs");
   const runs = await resp.json();
@@ -338,10 +499,13 @@ async function refreshHistory() {
     <li class="history-row">
       <button class="history-item ${r.slug === currentSlug ? 'active' : ''}"
               onclick="loadRun('${r.slug}')">
-        <span class="history-name">${r.condition}</span>
+        <span class="history-name">${_histBadge(r.overall)}${r.condition}</span>
         <span class="history-date">${r.mtime}</span>
       </button>
-      <button class="btn-delete" onclick="deleteRun('${r.slug}')" title="Delete run">&times;</button>
+      <div class="history-actions">
+        <button class="btn-rerun-sm" onclick="reRun('${r.condition}')" title="Re-run">↻</button>
+        <button class="btn-delete" onclick="deleteRun('${r.slug}')" title="Delete run">&times;</button>
+      </div>
     </li>
   `).join("");
 }
@@ -367,6 +531,56 @@ async function deleteRun(slug) {
 
 /* ── Helpers ──────────────────────────────────────────────────── */
 
+function showContinueBtn(runId) {
+  let btn = document.getElementById("continue-btn");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.id = "continue-btn";
+    btn.className = "btn btn-primary";
+    btn.style.cssText = "margin-top:10px;width:100%;";
+    const statusBar = document.getElementById("status-bar");
+    statusBar.appendChild(btn);
+  }
+  btn.textContent = "▶ Continue Pipeline (Steps 2–4)";
+  btn.onclick = () => resumeRun(runId);
+  btn.style.display = "block";
+}
+
+function hideContinueBtn() {
+  const btn = document.getElementById("continue-btn");
+  if (btn) btn.style.display = "none";
+}
+
+async function resumeRun(runId) {
+  const btn = document.getElementById("continue-btn");
+  if (btn) { btn.disabled = true; btn.textContent = "Resuming…"; }
+  showWarning("");
+  try {
+    await fetch(`/api/resume/${runId}`, { method: "POST" });
+    pollStatus(runId);
+  } catch (e) {
+    setStep("Resume error: " + e.message);
+    if (btn) { btn.disabled = false; btn.textContent = "▶ Continue Pipeline (Steps 2–4)"; }
+  }
+}
+
+function showWarning(msg) {
+  let banner = document.getElementById("warning-banner");
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.id = "warning-banner";
+    banner.style.cssText = "background:#b91c1c;color:#fff;padding:10px 16px;border-radius:6px;margin-bottom:10px;font-weight:600;display:none;text-align:center;";
+    const statusBar = document.getElementById("status-bar");
+    statusBar.parentElement.insertBefore(banner, statusBar);
+  }
+  if (msg) {
+    banner.textContent = msg;
+    banner.style.display = "block";
+  } else {
+    banner.style.display = "none";
+  }
+}
+
 function showStatus() { document.getElementById("status-bar").classList.remove("hidden"); }
 function setStep(s) { document.getElementById("status-step").textContent = s; }
 function setProgress(pct) { document.getElementById("progress-fill").style.width = pct + "%"; }
@@ -382,6 +596,13 @@ function resetRunBtn() {
   btn.disabled = false;
   document.getElementById("run-btn-text").textContent = "Run Pipeline";
   document.getElementById("run-btn-spinner").classList.add("hidden");
+
+  const rerunBtn = document.getElementById("rerun-btn");
+  if (rerunBtn) {
+    rerunBtn.disabled = false;
+    document.getElementById("rerun-btn-text").textContent = "↻ Re-run";
+    document.getElementById("rerun-btn-spinner").classList.add("hidden");
+  }
 }
 
 function setBadge(status) {

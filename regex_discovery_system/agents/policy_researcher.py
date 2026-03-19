@@ -34,8 +34,13 @@ CONDITION: {condition}
 
 I have scraped the following web pages that may describe the format rules,
 allocation policies, or structural constraints for the identifier above.
-These pages were sourced primarily from government (.gov) and official
-regulatory body websites.
+These pages may include government (.gov) sites, official regulatory body
+websites, reputable third-party references (Wikipedia, open-data portals,
+educational institutions), or well-known industry sites.
+
+IMPORTANT: Accept and extract rules from ANY reputable, legitimate source —
+not just government sites. If no government data is available but a credible
+third-party site provides format rules, use that data confidently.
 
 --- START OF SCRAPED TEXT ---
 {texts}
@@ -49,7 +54,7 @@ TASKS — return a JSON object with these keys:
    Include at least 5 rules if the text supports it.
    CRITICAL: Only include rules that are verifiable from the scraped text
    or that you know to be established by the official governing body.
-   Cite the government or regulatory source where possible.
+   Cite the source where possible (government, Wikipedia, industry ref).
 
 2. "numbering_authority": the name of the official government body or
    regulatory authority that governs this numbering system
@@ -116,10 +121,16 @@ def research_policies(condition: str, config: dict) -> dict:
         result["sources"].extend(policy_urls)
         logger.info("Agent 1P [policy]: found %d policy URLs for '%s'", len(policy_urls), condition)
         raw_texts = _scrape_policy_pages(policy_urls, config)
+        logger.info("Agent 1P [policy]: scraped %d/%d pages successfully", len(raw_texts), len(policy_urls))
         if raw_texts:
-            combined = "\n\n---\n\n".join(raw_texts[:3])
-            if len(combined) > 30_000:
-                combined = combined[:30_000] + "\n... (truncated)"
+            # Use up to 5 pages; cap each page at 12 000 chars so we stay within token limits
+            # while still feeding significantly more content than before.
+            pages_to_use = raw_texts[:5]
+            capped = [t[:12_000] for t in pages_to_use]
+            combined = "\n\n---\n\n".join(capped)
+            if len(combined) > 50_000:
+                combined = combined[:50_000] + "\n... (truncated)"
+            logger.debug("Agent 1P [policy]: sending %d chars to LLM (%d pages)", len(combined), len(pages_to_use))
             try:
                 response = invoke_claude(
                     _POLICY_PROMPT.format(condition=condition, texts=combined), config,
@@ -128,9 +139,11 @@ def research_policies(condition: str, config: dict) -> dict:
                 result["policies"] = parsed.get("policies", [])
                 result["numbering_authority"] = parsed.get("numbering_authority", "unknown")
                 logger.info(
-                    "Agent 1P [policy]: %d rules (authority: %s)",
+                    "Agent 1P [policy]: %d rules extracted (authority: %s)",
                     len(result["policies"]), result["numbering_authority"],
                 )
+                for i, rule in enumerate(result["policies"]):
+                    logger.debug("Agent 1P [policy] rule[%d]: %s", i, rule)
             except Exception as exc:
                 logger.warning("Agent 1P [policy]: LLM extraction failed: %s", exc)
     else:
@@ -142,10 +155,14 @@ def research_policies(condition: str, config: dict) -> dict:
         result["sources"].extend(vendor_urls)
         logger.info("Agent 1P [vendor]: found %d vendor URLs for '%s'", len(vendor_urls), condition)
         vendor_texts = _scrape_policy_pages(vendor_urls, config)
+        logger.info("Agent 1P [vendor]: scraped %d/%d pages successfully", len(vendor_texts), len(vendor_urls))
         if vendor_texts:
-            combined = "\n\n---\n\n".join(vendor_texts[:3])
-            if len(combined) > 30_000:
-                combined = combined[:30_000] + "\n... (truncated)"
+            pages_to_use = vendor_texts[:5]
+            capped = [t[:12_000] for t in pages_to_use]
+            combined = "\n\n---\n\n".join(capped)
+            if len(combined) > 50_000:
+                combined = combined[:50_000] + "\n... (truncated)"
+            logger.debug("Agent 1P [vendor]: sending %d chars to LLM (%d pages)", len(combined), len(pages_to_use))
             try:
                 response = invoke_claude(
                     _VENDOR_PROMPT.format(condition=condition, texts=combined), config,
@@ -159,6 +176,8 @@ def research_policies(condition: str, config: dict) -> dict:
                     "Agent 1P [vendor]: %d vendor patterns, %d common keywords",
                     len(result["vendor_patterns"]), len(common_kw),
                 )
+                for i, vp in enumerate(result["vendor_patterns"]):
+                    logger.debug("Agent 1P [vendor] pattern[%d]: %s", i, vp)
             except Exception as exc:
                 logger.warning("Agent 1P [vendor]: LLM extraction failed: %s", exc)
     else:
@@ -188,19 +207,21 @@ def _find_policy_urls(condition: str, config: dict) -> list[str]:
 def _find_vendor_urls(condition: str, config: dict) -> list[str]:
     """Search for how DLP/security vendors identify this data type."""
     vendor_queries = [
-        f"{condition} regex DLP sensitive data type Microsoft Purview Netskope",
-        f"{condition} data identifier pattern Broadcom Symantec Zscaler Skyhigh",
-        f"{condition} classification regex pattern DLP policy",
+        f"{condition} Microsoft Purview sensitive information type regex",
+        f"{condition} regex DLP detection rules Netskope Broadcom Symantec",
+        f"{condition} Zscaler Skyhigh data classification pattern",
+        f"{condition} DLP policy regex pattern identification rules",
+        f"{condition} sensitive data type regex format validation",
     ]
     api_key = config.get("tavily_api_key")
     try:
         if api_key:
             from tools.search_tool import _tavily_search_multi
-            urls = _tavily_search_multi(vendor_queries, api_key, max_results=3)
+            urls = _tavily_search_multi(vendor_queries, api_key, max_results=6)
             if urls:
                 return urls
         from tools.scraper.search import search_urls
-        return search_urls(vendor_queries, max_total=3)
+        return search_urls(vendor_queries, max_total=5)
     except Exception as exc:
         logger.warning("Agent 1P [vendor]: URL search failed: %s", exc)
         return []
@@ -261,14 +282,16 @@ def _scrape_policy_pages(urls: list[str], config: dict) -> list[str]:
     from tools.scraper.browser import scrape_pages
 
     proxies = config.get("proxies", [])
-    page_results = scrape_pages(urls[:3], proxies=proxies or None, sleep_s=1.5)
+    page_results = scrape_pages(urls[:6], proxies=proxies or None, sleep_s=1.5)
 
     texts: list[str] = []
     for url, html in page_results:
         text = _html_to_text(html)
         if text:
             texts.append(text)
-            logger.info("Agent 1P [policy]: scraped %s (%d chars text)", url, len(text))
+            logger.info("Agent 1P: scraped %s (%d chars)", url, len(text))
+        else:
+            logger.warning("Agent 1P: scraped %s but extracted no text (blocked/empty?)", url)
     return texts
 
 

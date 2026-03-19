@@ -46,15 +46,29 @@ def load_config(path: str = "config.yaml") -> dict:
 
 
 def _build_session(config: dict) -> boto3.Session:
-    """Build a boto3 session: use named profile for local dev, instance role for deployed."""
-    profile = config.get("aws_profile", "")
+    """Build a boto3 session: use named profile for local dev, instance role for deployed.
+
+    boto3 reads AWS_PROFILE from the environment even when profile_name is not
+    passed explicitly.  If the .env sets AWS_PROFILE="" (empty), boto3 tries to
+    find a profile named "" and raises "The config profile () could not be found".
+    We therefore pop the env var when no profile is configured so that boto3 falls
+    through to the instance-role / default credential chain.
+    """
+    profile = config.get("aws_profile") or ""
     region = config.get("region", "us-east-1")
 
-    session_kwargs = {"region_name": region}
     if profile:
-        session_kwargs["profile_name"] = profile
+        return boto3.Session(profile_name=profile, region_name=region)
 
-    return boto3.Session(**session_kwargs)
+    # No profile configured — use instance role / default credential chain.
+    # Temporarily remove AWS_PROFILE from the environment so boto3 doesn't
+    # try to resolve the empty-string profile name.
+    _env_profile = os.environ.pop("AWS_PROFILE", None)
+    try:
+        return boto3.Session(region_name=region)
+    finally:
+        if _env_profile:          # only restore if it was a real non-empty value
+            os.environ["AWS_PROFILE"] = _env_profile
 
 
 def invoke_claude(

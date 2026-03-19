@@ -5,6 +5,10 @@ dataset_size: 1500
 train_ratio: 0.70
 batch_size: 200
 max_retries: 3
+# Rotating proxies for Camoufox stealth browser (overridden by PROXIES in .env)
+proxies:
+  - "http://user:pass@proxy1.example.com:8080"
+  - "http://user:pass@proxy2.example.com:8080"
 
 # ── Secrets are loaded from .env (see .env.example) ──
 # AWS_PROFILE, AWS_REGION, TAVILY_API_KEY, PROXIES

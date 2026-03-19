@@ -18,12 +18,49 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from utils.bedrock_client import load_config
 from utils.paths import build_paths
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
+import logging.handlers as _lh
+
+_LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
+os.makedirs(_LOG_DIR, exist_ok=True)
+
+_log_formatter = logging.Formatter(
+    "%(asctime)s [%(levelname)s] %(name)s — %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
+_console_handler = logging.StreamHandler(sys.stdout)
+_console_handler.setLevel(logging.DEBUG)
+_console_handler.setFormatter(_log_formatter)
+
+_file_handler = _lh.RotatingFileHandler(
+    os.path.join(_LOG_DIR, "pipeline.log"),
+    maxBytes=10 * 1024 * 1024,
+    backupCount=10,
+    encoding="utf-8",
+)
+_file_handler.setLevel(logging.DEBUG)
+_file_handler.setFormatter(_log_formatter)
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    handlers=[_console_handler, _file_handler],
+)
 logger = logging.getLogger("main")
+
+
+def _install_run_log_handler(log_path: str) -> logging.FileHandler:
+    """Add a per-run DEBUG file handler to the root logger."""
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    handler = logging.FileHandler(log_path, mode="w", encoding="utf-8")
+    handler.setLevel(logging.DEBUG)
+    handler.setFormatter(_log_formatter)
+    logging.getLogger().addHandler(handler)
+    return handler
+
+
+def _remove_run_log_handler(handler: logging.FileHandler) -> None:
+    handler.flush()
+    handler.close()
+    logging.getLogger().removeHandler(handler)
 
 
 def main() -> None:
@@ -56,6 +93,10 @@ def main() -> None:
     os.makedirs("results", exist_ok=True)
 
     paths = build_paths(args.condition)
+
+    # Install per-run debug log — every DEBUG message for this run goes here.
+    run_log_handler = _install_run_log_handler(paths["debug_log"])
+    logger.info("Per-run debug log → %s", paths["debug_log"])
     logger.info("Output files will use prefix: %s", list(paths.values())[0].split("/")[1].rsplit("_", 1)[0])
     for key, path in paths.items():
         logger.info("  %s → %s", key, path)
@@ -109,7 +150,7 @@ def main() -> None:
     logger.info("STEP 3/4 — Regex Generator")
     logger.info("=" * 60)
     from agents.regex_generator import generate_regex
-    regex_result = generate_regex(config, paths)
+    regex_result = generate_regex(config, paths, policies=policies)
     logger.info("Generated %d regex patterns", len(regex_result.get("patterns", [])))
 
     logger.info("=" * 60)
@@ -123,6 +164,8 @@ def main() -> None:
     logger.info("DONE in %.1fs — Overall: %s | Data source: %s", elapsed, report["overall_status"], data_source)
     logger.info("See %s for details.", paths["final_report"])
     logger.info("=" * 60)
+
+    _remove_run_log_handler(run_log_handler)
 
 
 if __name__ == "__main__":

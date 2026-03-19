@@ -20,4 +20,5 @@ def build_paths(condition: str) -> dict[str, str]:
         "regex_patterns":    f"results/{prefix}_regex_patterns.json",
         "validation_report": f"results/{prefix}_validation_report.json",
         "final_report":      f"results/{prefix}_final_report.md",
+        "debug_log":         f"logs/debug_{prefix}.log",
     }

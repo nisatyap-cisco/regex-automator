@@ -11,6 +11,9 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
+tavily_exhausted: bool = False
+tavily_exhausted_msg: str = ""
+
 _BLOCKED_DOMAINS = {
     "youtube.com", "facebook.com", "twitter.com", "x.com",
     "instagram.com", "tiktok.com", "reddit.com", "linkedin.com",
@@ -47,18 +50,25 @@ def search_data_urls(
 def search_policy_urls(
     condition: str,
     tavily_api_key: Optional[str] = None,
-    max_results: int = 3,
+    max_results: int = 6,
 ) -> list[str]:
     """Search for pages describing format rules / policies for *condition*.
 
-    Prioritises government (.gov) and official regulatory body websites.
+    Runs multiple query strategies to maximise coverage of format rules,
+    allocation policies, structural specs, and validation logic.
     """
     api_key = tavily_api_key or os.environ.get("TAVILY_API_KEY")
+
+    # Broad set of query angles targeting official specs, Wikipedia, validators,
+    # and format-guide references — more queries = more rule coverage.
     queries = [
-        f"{condition} numbering format rules official .gov",
-        f"{condition} allocation policy specification government",
-        f"{condition} valid range structure official authority",
-        f"{condition} numbering format rules",
+        f"{condition} format specification rules official",
+        f"{condition} numbering policy allocation government authority",
+        f"{condition} valid range structure check digit specification",
+        f"{condition} format wikipedia",
+        f"{condition} validation rules structure format guide",
+        f"{condition} format rules digits length example",
+        f"{condition} official format documentation",
     ]
 
     if api_key:
@@ -66,11 +76,32 @@ def search_policy_urls(
         if urls:
             return urls
 
-    return _ddg_fallback_multi(queries, max_results)
+    return _ddg_fallback_multi(queries, max_results, condition=condition)
+
+
+def _check_tavily_exhaustion(exc: Exception) -> bool:
+    """Detect Tavily quota/rate-limit errors and set the global flag."""
+    global tavily_exhausted, tavily_exhausted_msg
+    err = str(exc).lower()
+    if any(k in err for k in ("429", "rate limit", "quota", "exceeded", "limit reached",
+                               "too many requests", "insufficient credits", "api limit")):
+        tavily_exhausted = True
+        tavily_exhausted_msg = str(exc)
+        logger.warning("=" * 60)
+        logger.warning("  TAVILY API QUOTA EXHAUSTED: %s", exc)
+        logger.warning("  All subsequent searches will use DuckDuckGo fallback.")
+        logger.warning("  Consider stopping the run and retrying later.")
+        logger.warning("=" * 60)
+        return True
+    return False
 
 
 def _tavily_search(condition: str, api_key: str, max_results: int) -> list[str]:
     """Search for data pages, prioritising government and official sources."""
+    global tavily_exhausted
+    if tavily_exhausted:
+        logger.info("[tavily] skipping — API quota previously exhausted")
+        return []
     try:
         from tavily import TavilyClient
         from tools.scraper.search import _detect_gov_domains
@@ -114,11 +145,17 @@ def _tavily_search(condition: str, api_key: str, max_results: int) -> list[str]:
         logger.info("[tavily] '%s' → %d URLs (gov-prioritised)", condition, len(gov_first))
         return gov_first[:max_results]
     except Exception as exc:
+        if _check_tavily_exhaustion(exc):
+            return []
         logger.warning("[tavily] search failed: %s", exc)
         return []
 
 
 def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> list[str]:
+    global tavily_exhausted
+    if tavily_exhausted:
+        logger.info("[tavily-multi] skipping — API quota previously exhausted")
+        return []
     try:
         from tavily import TavilyClient
         client = TavilyClient(api_key)
@@ -127,7 +164,11 @@ def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> 
         for q in queries:
             if len(urls) >= max_results:
                 break
-            resp = client.search(query=q, search_depth="basic", max_results=3)
+            resp = client.search(
+                query=q,
+                search_depth="advanced",   # deep search for richer rule pages
+                max_results=5,
+            )
             for r in resp.get("results", []):
                 u = r["url"]
                 if u not in seen and _is_useful_url(u):
@@ -135,9 +176,12 @@ def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> 
                     urls.append(u)
                     if len(urls) >= max_results:
                         break
-        logger.info("[tavily-policy] %d URLs from %d queries", len(urls), len(queries))
+            logger.debug("[tavily-policy] query=%r → %d total unique URLs so far", q, len(urls))
+        logger.info("[tavily-policy] %d URLs collected from %d queries", len(urls), len(queries))
         return urls
     except Exception as exc:
+        if _check_tavily_exhaustion(exc):
+            return []
         logger.warning("[tavily-policy] failed: %s", exc)
         return []
 

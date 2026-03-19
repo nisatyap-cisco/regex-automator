@@ -30,8 +30,8 @@ Rules for country and gov_domains:
   * The country's government domain (e.g. gov.cz, gov.in, gov.uk, gov for USA)
   * The official authority/agency that manages this data type
     (e.g. ceskaposta.cz for Czech postcodes, indiapost.gov.in for India PIN)
-- These domains are used to filter search results — only pages from these
-  domains (or containing the country name) will be trusted
+- These domains help prioritize official results, but DO NOT reject
+  legitimate third-party sites — accept any reputable source with data
 
 Rules for search_queries (5 queries, ASCII only):
 - Queries should find web pages that LIST many real examples of this data

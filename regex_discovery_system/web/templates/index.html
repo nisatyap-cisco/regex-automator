@@ -13,16 +13,44 @@
 
   <!-- ── Sidebar: Run History ──────────────────────────────────── -->
   <aside class="sidebar" id="sidebar">
-    <h2>Run History</h2>
-    <button class="btn btn-sm btn-ghost" onclick="refreshHistory()">↻ Refresh</button>
+    <div class="sidebar-header">
+      <h2>Run History</h2>
+      <div class="sidebar-header-actions">
+        <button class="btn btn-sm btn-ghost" onclick="refreshHistory()" title="Refresh list">↻</button>
+        <button class="btn btn-sm btn-rerun" id="rerun-all-btn" onclick="startRerunAll()" title="Re-run all past conditions with latest pipeline logic">
+          ↻ Re-run All
+        </button>
+      </div>
+    </div>
+
+    <!-- Batch progress panel (hidden until a batch run is active) -->
+    <div id="batch-panel" class="batch-panel hidden">
+      <div class="batch-header">
+        <span id="batch-label">Re-running all…</span>
+        <span id="batch-counter" class="batch-counter">0 / 0</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="batch-progress-fill"></div></div>
+      <div id="batch-current" class="batch-current"></div>
+      <ul id="batch-results" class="batch-results"></ul>
+    </div>
+
     <ul id="history-list">
       {% for r in runs %}
       <li class="history-row">
         <button class="history-item" onclick="loadRun('{{ r.slug }}')">
-          <span class="history-name">{{ r.condition }}</span>
+          <span class="history-name">
+            {% if r.overall == 'PASS' %}<span class="hist-badge hist-badge-pass">✅ PASS</span>
+            {% elif r.overall == 'FAIL' %}<span class="hist-badge hist-badge-fail">❌ FAIL</span>
+            {% elif r.overall %}<span class="hist-badge hist-badge-review">⚠️ {{ r.overall }}</span>
+            {% endif %}
+            {{ r.condition }}
+          </span>
           <span class="history-date">{{ r.mtime }}</span>
         </button>
-        <button class="btn-delete" onclick="deleteRun('{{ r.slug }}')" title="Delete run">&times;</button>
+        <div class="history-actions">
+          <button class="btn-rerun-sm" onclick="reRun('{{ r.condition }}')" title="Re-run">↻</button>
+          <button class="btn-delete" onclick="deleteRun('{{ r.slug }}')" title="Delete run">&times;</button>
+        </div>
       </li>
       {% endfor %}
     </ul>
@@ -54,7 +82,13 @@
     <section class="card hidden" id="results-section">
       <div class="results-header">
         <h2 id="results-title">Results</h2>
-        <span class="badge" id="results-badge"></span>
+        <div class="results-header-actions">
+          <span class="badge" id="results-badge"></span>
+          <button class="btn btn-sm btn-rerun" id="rerun-btn" onclick="reRunCurrent()" title="Re-run pipeline for this condition">
+            <span id="rerun-btn-text">↻ Re-run</span>
+            <span id="rerun-btn-spinner" class="spinner hidden"></span>
+          </button>
+        </div>
       </div>
 
       <!-- Tab nav -->
@@ -79,7 +113,7 @@
           <pre class="code-block" id="content-patterns"></pre>
         </div>
         <div class="tab-panel" id="panel-regex_patterns">
-          <pre class="code-block" id="content-regex_patterns"></pre>
+          <div class="md-content" id="content-regex_patterns"></div>
         </div>
         <div class="tab-panel" id="panel-validation_report">
           <pre class="code-block" id="content-validation_report"></pre>

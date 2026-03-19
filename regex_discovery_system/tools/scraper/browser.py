@@ -52,6 +52,16 @@ def _reset_circuit() -> None:
             logger.info("[browser] circuit breaker CLOSED — Camoufox recovered")
 
 
+def reset_circuit_breaker() -> None:
+    """Force-reset the circuit breaker (call at the start of each pipeline run)."""
+    global _camoufox_consecutive_fails, _camoufox_circuit_open
+    was_open = _camoufox_circuit_open
+    _camoufox_consecutive_fails = 0
+    _camoufox_circuit_open = False
+    if was_open:
+        logger.info("[browser] circuit breaker RESET for new pipeline run")
+
+
 # ── Firefox network prefs (fix DNS issues in spawned browser) ────────────────
 _FIREFOX_DNS_PREFS = {
     "network.dns.disableIPv6": True,
@@ -76,12 +86,16 @@ def _scrape_page_impl(
         proxy_cfg = {"server": proxy} if proxy else None
         geoip_val: object = True if proxy else False
 
+        import warnings
+        warnings.filterwarnings("ignore", message=".*Blocking image requests.*")
+
         with Camoufox(
             headless=headless,
             proxy=proxy_cfg,
             geoip=geoip_val,
             humanize=True,
             block_images=True,
+            i_know_what_im_doing=True,
             firefox_user_prefs=_FIREFOX_DNS_PREFS,
         ) as browser:
             page = browser.new_page()
@@ -146,11 +160,16 @@ def scrape_page(
 
 
 def _httpx_fetch_all(urls: list[str]) -> list[tuple[str, str]]:
-    """Fetch all URLs with httpx. Returns (url, html) pairs for successes."""
+    """Fetch all URLs with httpx. Returns (url, html) pairs for successes.
+
+    Retries individual URLs with a legacy-TLS client when the standard
+    client fails with SSL protocol errors.
+    """
     results: list[tuple[str, str]] = []
     try:
         from tools.scraper.fetch import fetch_text, make_client
         client = make_client()
+        legacy_client = None
         for url in urls:
             try:
                 html = fetch_text(client, url)
@@ -160,8 +179,25 @@ def _httpx_fetch_all(urls: list[str]) -> list[tuple[str, str]]:
                 else:
                     logger.warning("[browser] httpx empty for %s", url)
             except Exception as exc:
-                logger.warning("[browser] httpx failed on %s: %s", url, exc)
+                err_str = str(exc).lower()
+                if "ssl" in err_str or "tls" in err_str or "protocol" in err_str:
+                    logger.info("[browser] SSL error on %s — retrying with legacy TLS", url)
+                    try:
+                        if legacy_client is None:
+                            legacy_client = make_client(legacy_tls=True)
+                        html = fetch_text(legacy_client, url)
+                        if html and len(html) > 200:
+                            results.append((url, html))
+                            logger.info("[browser] httpx legacy-TLS OK: %s (%d chars)", url, len(html))
+                        else:
+                            logger.warning("[browser] httpx legacy-TLS empty for %s", url)
+                    except Exception as exc2:
+                        logger.warning("[browser] httpx legacy-TLS also failed on %s: %s", url, exc2)
+                else:
+                    logger.warning("[browser] httpx failed on %s: %s", url, exc)
         client.close()
+        if legacy_client:
+            legacy_client.close()
     except ImportError:
         logger.warning("[browser] httpx not available")
     return results
