@@ -160,8 +160,16 @@ async function loadRun(slug) {
   document.getElementById("notes-textarea").value = notesData.text || "";
   document.getElementById("notes-saved").classList.add("hidden");
 
-  // Switch to first tab
-  switchTab("final_report");
+  // Switch to the best available tab: regex_patterns if no final_report
+  if (files.final_report) {
+    switchTab("final_report");
+  } else if (files.regex_patterns) {
+    switchTab("regex_patterns");
+  } else if (files.source_of_truth) {
+    switchTab("source_of_truth");
+  } else {
+    switchTab("final_report");
+  }
 }
 
 function fillTab(name, content, isMarkdown = false) {

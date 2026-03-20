@@ -13,6 +13,10 @@ def slugify(condition: str) -> str:
 def build_paths(condition: str) -> dict[str, str]:
     prefix = slugify(condition)
     return {
+        "raw":               f"data/{prefix}_raw_examples.txt",
+        "train":             f"data/{prefix}_train.txt",
+        "test":              f"data/{prefix}_test.txt",
+        "patterns":          f"results/{prefix}_patterns.json",
         "regex_patterns":    f"results/{prefix}_regex_patterns.json",
         "debug_log":         f"logs/debug_{prefix}.log",
     }

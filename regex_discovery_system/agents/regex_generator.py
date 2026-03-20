@@ -16,14 +16,30 @@ RULE: {rule_description}
 RANGE CONSTRAINTS: {range_restrictions}
 EXAMPLE MATCHES: {example_matches}
 
-NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here):
+=== AUTHORITATIVE NUMBERING POLICY (HIGHEST PRIORITY — these override data patterns) ===
 {numbering_policy}
+
+=== DATA-DERIVED OBSERVATIONS (supplementary — use ONLY when they don't conflict with policy) ===
+{data_observations}
+
+PRIORITY RULES (you MUST follow these):
+1. POLICY ALWAYS WINS: If an official policy rule contradicts a data-derived
+   observation, follow the POLICY. Data may be incomplete or biased.
+2. Policy-stated restrictions on character positions (e.g. "first digit is 2-9",
+   "checksum can be digit or letter") MUST be encoded exactly as stated.
+3. Data observations are useful for format hints (delimiters, segment structure)
+   but NEVER override policy on allowed values or lengths.
+4. If policy says nothing about a position but data shows a restriction, you may
+   use the data observation — but prefer the broader range if the sample is small.
 
 Requirements:
 - Use raw string notation.
 - Do NOT use ^ or $ anchors. The regex will be used for search within text.
 - Use \\b (word boundary) at the start and end of the pattern to prevent
   partial matches within longer strings.
+- IMPORTANT: \\b before a non-word character like + or ( will NOT match.
+  For patterns starting with a non-word character (e.g. +91), use a
+  lookbehind (?<=\\s|^) or omit the leading \\b and rely on the trailing \\b.
 - Avoid catastrophic backtracking.
 - Prefer character classes and quantifiers over alternation where possible.
 - CRITICAL: If the numbering policy states a per-position restriction
@@ -33,6 +49,8 @@ Requirements:
 - NEVER include literal placeholder strings like "XXX" or "NNN" in the regex.
   If an optional part can be any characters, use the appropriate character
   class (e.g. [A-Z0-9]{{3}} not XXX).
+- In character classes, do NOT use commas to separate ranges. Write [0-68-9]
+  not [0-6,8-9] — a comma inside [] is a literal character in regex.
 - If the rule involves check digits, encode the structural pattern only
   (check-digit validation is done in code, not regex).
 
@@ -48,14 +66,26 @@ RULES:
 RANGE CONSTRAINTS: {range_restrictions}
 EXAMPLE MATCHES: {example_matches}
 
-NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here):
+=== AUTHORITATIVE NUMBERING POLICY (HIGHEST PRIORITY — these override data patterns) ===
 {numbering_policy}
+
+=== DATA-DERIVED OBSERVATIONS (supplementary — use ONLY when they don't conflict with policy) ===
+{data_observations}
+
+PRIORITY RULES (you MUST follow these):
+1. POLICY ALWAYS WINS: If an official policy rule contradicts a data-derived
+   observation, follow the POLICY. Data may be incomplete or biased.
+2. Policy-stated restrictions MUST be encoded exactly as stated.
+3. Data observations are supplementary context only.
 
 Requirements:
 - The regex must enforce ALL rules at the same time — a value must satisfy every rule to match.
 - Use lookahead assertions ((?=...)) to layer simultaneous constraints where needed.
-- Do NOT use ^ or $ anchors. The regex will be used for search within text.
+- Do NOT use ^ or $ anchors inside lookaheads or the main pattern.
+  The regex will be used for search within text.
 - Use \\b (word boundary) at the start and end of the pattern to prevent partial matches.
+- IMPORTANT: \\b before a non-word character like + or ( will NOT match.
+  For patterns starting with a non-word character, use a lookbehind or omit leading \\b.
 - Avoid catastrophic backtracking.
 - Prefer the most specific structural pattern that naturally satisfies all constraints over a
   chain of lookaheads when possible.
@@ -66,6 +96,8 @@ Requirements:
   Do NOT substitute \\d where a restricted character class applies.
 - NEVER use alternation (|) to join the individual rule regexes — that would be OR logic.
 - NEVER include literal placeholder strings like "XXX" or "NNN".
+- In character classes, do NOT use commas to separate ranges. Write [0-68-9]
+  not [0-6,8-9] — a comma inside [] is a literal character in regex.
 - If a rule involves check digits, encode the structural pattern only.
 
 Return ONLY the regex string, no explanation."""
@@ -314,19 +346,24 @@ def generate_regex(
     config: dict,
     paths: dict[str, str] | None = None,
     policies: dict | None = None,
+    data_patterns: dict | None = None,
 ) -> dict:
-    """Generate regex patterns directly from policies.
-    
+    """Generate regex patterns from policies (primary) and data patterns (supplementary).
+
+    When both policies and data_patterns are available, policies take priority.
+    Data-derived format rules and range restrictions are passed as supplementary
+    observations that the LLM may use when they don't conflict with policy.
+
     Args:
         condition: The identifier type (e.g. "India Bank Account Number")
         config: Configuration dict
         paths: Path dict for output files
         policies: Policy Researcher output containing policies, vendor_patterns, etc.
+        data_patterns: Pattern Analyzer output (None when no real data was collected)
     """
     regex_path = (paths or {}).get("regex_patterns", "results/regex_patterns.json")
 
-    # Build format_rules from policies
-    # Each policy rule becomes a format rule
+    # ── Build format_rules: policy rules are PRIMARY ──
     format_rules: list[dict] = []
     if policies and policies.get("policies"):
         for i, rule in enumerate(policies["policies"]):
@@ -341,9 +378,7 @@ def generate_regex(
     if policies and policies.get("vendor_patterns"):
         for vp in policies["vendor_patterns"]:
             vendor = vp.get("vendor", "Unknown")
-            vendor_regex = vp.get("regex")
             vendor_rules = vp.get("rules", [])
-            
             if vendor_rules:
                 for j, vrule in enumerate(vendor_rules):
                     format_rules.append({
@@ -353,27 +388,38 @@ def generate_regex(
                         "example_matches": [],
                     })
 
-    # No range_restrictions without Pattern Analyzer
+    # Merge example_matches from data_patterns into policy rules where applicable
+    if data_patterns and data_patterns.get("format_rules"):
+        all_data_examples: list[str] = []
+        for dr in data_patterns["format_rules"]:
+            all_data_examples.extend(dr.get("example_matches", []))
+        unique_examples = list(dict.fromkeys(all_data_examples))
+        for fr in format_rules:
+            if not fr.get("example_matches"):
+                fr["example_matches"] = unique_examples[:5]
+
+    # ── Range restrictions: prefer policy, supplement with data ──
     range_restrictions: list[dict] = []
-    
-    # Get keywords from vendor patterns
+    if data_patterns and data_patterns.get("range_restrictions"):
+        range_restrictions = list(data_patterns["range_restrictions"])
+
+    # ── Keywords: prefer data_patterns (richer), fallback to vendor ──
     keywords: list[str] = []
-    if policies and policies.get("vendor_keywords"):
+    if data_patterns and data_patterns.get("contextual_keywords"):
+        keywords = data_patterns["contextual_keywords"]
+    if not keywords and policies and policies.get("vendor_keywords"):
         keywords = policies["vendor_keywords"]
-    elif policies and policies.get("vendor_patterns"):
+    elif not keywords and policies and policies.get("vendor_patterns"):
         for vp in policies["vendor_patterns"]:
             keywords.extend(vp.get("keywords", []))
-        keywords = list(dict.fromkeys(keywords))  # dedupe
-    
-    proximity = 10
-    numbering_policy = ""
+        keywords = list(dict.fromkeys(keywords))
 
-    # Build an enriched policy string that also includes the raw policy rules and
-    # vendor DLP patterns discovered by Agent 1P.  Agent 2 only captures what it
-    # *sees in data samples* — so if the condition spans multiple identifier types
-    # (e.g. "india taxpayer id" covers PAN *and* GSTIN) the vendor structural rules
-    # are the most authoritative source for the combined regex.
-    enriched_policy = numbering_policy
+    proximity = 10
+    if data_patterns and data_patterns.get("keyword_proximity"):
+        proximity = data_patterns["keyword_proximity"]
+
+    # ── Build the AUTHORITATIVE policy string (highest priority) ──
+    enriched_policy = ""
     if policies:
         raw_rules = policies.get("policies", [])
         vendor_patterns = policies.get("vendor_patterns", [])
@@ -381,7 +427,7 @@ def generate_regex(
         if raw_rules:
             rules_block = "\n".join(f"- {r}" for r in raw_rules)
             enriched_policy += (
-                f"\n\nAUTHORITATIVE FORMAT RULES (from official sources — "
+                f"AUTHORITATIVE FORMAT RULES (from official sources — "
                 f"encode ALL of these in the regex):\n{rules_block}"
             )
 
@@ -403,20 +449,35 @@ def generate_regex(
                 + "".join(vp_lines)
             )
 
-    if enriched_policy:
-        logger.info(
-            "Agent 3: numbering_policy injected (%d chars, includes Agent 1P rules=%s vendor=%s)",
-            len(enriched_policy),
-            bool(policies and policies.get("policies")),
-            bool(policies and policies.get("vendor_patterns")),
-        )
-    else:
-        logger.warning("Agent 3: no numbering_policy found in patterns — per-position constraints may be missed")
+    # ── Build the DATA OBSERVATIONS string (supplementary, lower priority) ──
+    data_observations = "(no real-world data was collected — rely on policy rules above)"
+    if data_patterns:
+        obs_parts: list[str] = []
+        if data_patterns.get("format_rules"):
+            obs_parts.append("Data-derived format observations:")
+            for dr in data_patterns["format_rules"]:
+                obs_parts.append(f"  - {dr.get('description', '')} (examples: {dr.get('example_matches', [])[:3]})")
+        if data_patterns.get("range_restrictions"):
+            obs_parts.append("Data-derived position constraints:")
+            for rr in data_patterns["range_restrictions"]:
+                obs_parts.append(
+                    f"  - Position {rr.get('position')}: allowed={rr.get('allowed_values')} "
+                    f"(source: {rr.get('source', 'data')})"
+                )
+        np_text = data_patterns.get("numbering_policy", "")
+        if np_text:
+            obs_parts.append(f"Data-derived numbering policy summary: {np_text}")
+        data_observations = "\n".join(obs_parts) if obs_parts else "(no data patterns)"
 
+    has_data = data_patterns is not None
+    logger.info(
+        "Agent 3: policy injected (%d chars) | data observations %s (%d chars)",
+        len(enriched_policy),
+        "available" if has_data else "NONE",
+        len(data_observations),
+    )
     logger.info("Agent 3: generating regex for %d rules + keyword pattern", len(format_rules))
 
-    # If no format_rules were extracted, create a single rule asking LLM to generate
-    # a regex directly for the condition based on policies
     if not format_rules:
         logger.info("Agent 3: no format_rules from policies, creating direct condition rule")
         format_rules = [{
@@ -429,8 +490,6 @@ def generate_regex(
     range_lookup: dict[str, dict] = {}
     for rr in range_restrictions:
         pos = rr.get("position", "")
-        # position can be a list (e.g. [0, 1]) when the LLM returns a range;
-        # convert to a stable string key so it's hashable.
         if isinstance(pos, list):
             pos = str(pos)
         range_lookup[pos] = rr
@@ -450,8 +509,9 @@ def generate_regex(
         prompt = PROMPT_TEMPLATE.format(
             rule_description=description,
             range_restrictions=range_text,
-            example_matches=", ".join(examples),
+            example_matches=", ".join(str(e) for e in examples),
             numbering_policy=enriched_policy or "(none provided)",
+            data_observations=data_observations,
         )
 
         response = invoke_claude(prompt, config)
@@ -498,8 +558,9 @@ def generate_regex(
         combined_prompt = COMBINED_PROMPT_TEMPLATE.format(
             rules_list=rules_list,
             range_restrictions=json.dumps(range_restrictions, indent=2),
-            example_matches=", ".join(unique_examples),
+            example_matches=", ".join(str(e) for e in unique_examples),
             numbering_policy=enriched_policy or "(none provided)",
+            data_observations=data_observations,
         )
         combined_response = invoke_claude(combined_prompt, config)
         combined_regex = _clean_regex_response(combined_response)

@@ -86,26 +86,68 @@ NOTES_DIR = ROOT / "notes"
 
 
 def _list_past_runs() -> list[dict]:
-    """Scan results/ for *_final_report.md to build run history."""
-    runs = []
-    for p in sorted(RESULTS_DIR.glob("*_final_report.md"), reverse=True):
-        slug = p.stem.replace("_final_report", "")
-        condition = slug.replace("_", " ")
-        overall = ""
-        vr_path = RESULTS_DIR / f"{slug}_validation_report.json"
-        if vr_path.exists():
-            try:
-                vr = json.loads(vr_path.read_text())
-                overall = vr.get("overall_status", "")
-            except Exception:
-                pass
-        runs.append({
-            "slug": slug,
-            "condition": condition,
-            "file": p.name,
-            "mtime": time.strftime("%Y-%m-%d %H:%M", time.localtime(p.stat().st_mtime)),
-            "overall": overall,
-        })
+    """Scan results/ for completed runs.
+
+    Discovers runs from any of these artifacts (checked in priority order):
+      1. *_regex_patterns.json  (current pipeline — always produced on success)
+      2. *_final_report.md      (legacy 4-agent pipeline)
+      3. *_source_of_truth.json (partial run — data/policy collected but regex gen not done)
+      4. *_patterns.json        (partial run — pattern analysis done)
+    """
+    seen_slugs: set[str] = set()
+    runs: list[dict] = []
+
+    suffixes = [
+        ("_regex_patterns.json", "_regex_patterns"),
+        ("_final_report.md", "_final_report"),
+        ("_source_of_truth.json", "_source_of_truth"),
+        ("_patterns.json", "_patterns"),
+    ]
+
+    for glob_suffix, stem_suffix in suffixes:
+        for p in sorted(RESULTS_DIR.glob(f"*{glob_suffix}"), reverse=True):
+            # Skip files that belong to a more-specific suffix already handled.
+            # e.g. ip_regex_patterns.json should not match the _patterns.json pass.
+            if stem_suffix == "_patterns" and p.stem.endswith("_regex_patterns"):
+                continue
+            slug = p.stem.replace(stem_suffix, "")
+            if slug in seen_slugs:
+                continue
+            seen_slugs.add(slug)
+
+            condition = slug.replace("_", " ")
+            overall = ""
+
+            sot_path = RESULTS_DIR / f"{slug}_source_of_truth.json"
+            if sot_path.exists():
+                try:
+                    sot = json.loads(sot_path.read_text())
+                    ds = sot.get("data_source", "")
+                    nv = sot.get("total_values", 0)
+                    np_ = len(sot.get("policies", []))
+                    overall = f"data={ds}({nv}) pol={np_}"
+                except Exception:
+                    pass
+
+            vr_path = RESULTS_DIR / f"{slug}_validation_report.json"
+            if vr_path.exists():
+                try:
+                    vr = json.loads(vr_path.read_text())
+                    overall = vr.get("overall_status", overall)
+                except Exception:
+                    pass
+
+            rp_path = RESULTS_DIR / f"{slug}_regex_patterns.json"
+            has_regex = rp_path.exists()
+
+            runs.append({
+                "slug": slug,
+                "condition": condition,
+                "file": p.name,
+                "mtime": time.strftime("%Y-%m-%d %H:%M", time.localtime(p.stat().st_mtime)),
+                "overall": overall if has_regex else f"(incomplete) {overall}".strip(),
+            })
+
     return runs
 
 
@@ -113,7 +155,10 @@ def _get_run_files(slug: str) -> dict:
     """Gather all output files for a given run slug."""
     files = {}
     mapping = {
+        "patterns": f"{slug}_patterns.json",
         "regex_patterns": f"{slug}_regex_patterns.json",
+        "validation_report": f"{slug}_validation_report.json",
+        "final_report": f"{slug}_final_report.md",
         "source_of_truth": f"{slug}_source_of_truth.json",
     }
     for key, fname in mapping.items():
@@ -156,7 +201,8 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         os.makedirs("data", exist_ok=True)
         os.makedirs("results", exist_ok=True)
         paths = build_paths(condition)
-        slug = list(paths.values())[0].split("/")[1].rsplit("_raw", 1)[0]
+        from utils.paths import slugify
+        slug = slugify(condition)
         _runs[run_id]["slug"] = slug
 
         # Per-run debug log — path comes from build_paths so naming is consistent
@@ -170,15 +216,29 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         _runs[run_id]["debug_log"] = str(run_log_path.relative_to(ROOT))
         logger.info("Per-run debug log → %s", run_log_path)
 
-        _runs[run_id]["step"] = "Step 1/2 — Policy Researcher"
-        _log(run_id, "Step 1/2: Policy Researcher")
+        # Step 1: Data Collector + Policy Researcher (parallel)
+        _runs[run_id]["step"] = "Step 1 — Data Collector + Policy Researcher"
+        _log(run_id, "Step 1: Data Collector + Policy Researcher (parallel)")
+        from concurrent.futures import ThreadPoolExecutor
+        from agents.data_collector import collect_data
         from agents.policy_researcher import research_policies
-        policies = research_policies(condition, config)
+
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            data_future = pool.submit(collect_data, condition, config, paths)
+            policy_future = pool.submit(research_policies, condition, config)
+
+        stats = data_future.result()
+        policies = policy_future.result()
+        data_source = stats.get("source", "none")
+        has_data = stats.get("total", 0) > 0
         policy_count = len(policies.get("policies", []))
+        _log(run_id, f"  Data: source={data_source}, {stats.get('total', 0)} values")
         _log(run_id, f"  Policy Researcher: {policy_count} rules (authority: {policies.get('numbering_authority', 'unknown')})")
 
         sot = {
             "condition": condition,
+            "data_source": data_source,
+            "total_values": stats.get("total", 0),
             "policies": policies.get("policies", []),
             "numbering_authority": policies.get("numbering_authority", ""),
             "vendor_patterns": policies.get("vendor_patterns", []),
@@ -189,21 +249,35 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         sot_path.write_text(json.dumps(sot, indent=2))
         _log(run_id, f"  Source-of-truth saved → {sot_path.name}")
 
-        _runs[run_id]["step"] = "Step 2/2 — Regex Generator"
-        _log(run_id, "Step 2/2: Regex Generator")
+        # Step 2: Pattern Analyzer (only when real data exists)
+        data_patterns = None
+        if has_data:
+            _runs[run_id]["step"] = "Step 2 — Pattern Analyzer"
+            _log(run_id, "Step 2: Pattern Analyzer (real data available)")
+            from agents.pattern_analyzer import analyze_patterns
+            data_patterns = analyze_patterns(condition, config, paths, policies=policies)
+            _log(run_id, f"  Discovered {len(data_patterns.get('format_rules', []))} format rules from data")
+        else:
+            _log(run_id, "Step 2: Pattern Analyzer SKIPPED (no real data collected)")
+
+        # Step 3: Regex Generator (policy-weighted)
+        mode_label = "policy-weighted: data + policy" if has_data else "policy-only"
+        _runs[run_id]["step"] = f"Step 3 — Regex Generator ({mode_label})"
+        _log(run_id, f"Step 3: Regex Generator ({mode_label})")
         from agents.regex_generator import generate_regex
         regex_result = generate_regex(
             condition,
             config,
             paths,
             policies=policies,
+            data_patterns=data_patterns,
         )
         _log(run_id, f"  Generated {len(regex_result.get('patterns', []))} patterns")
 
         _runs[run_id]["status"] = "done"
         _runs[run_id]["step"] = "Done"
         _runs[run_id]["overall"] = "COMPLETE"
-        _log(run_id, "Pipeline complete.")
+        _log(run_id, f"Pipeline complete. Data: {data_source} ({stats.get('total', 0)} values), Policies: {policy_count} rules")
 
     except Exception as exc:
         _runs[run_id]["status"] = "error"

@@ -1,40 +1,25 @@
-"""Agent 1 — Data Collector (multi-source).
+"""Agent 1 — Data Collector (DB + web scrape only, no LLM synthesis).
 
 Sourcing priority:
   1. db lookup    — checks db/db_index.json for a matching reference file
   2. scrape_tool  — web scraper (adapters → DuckDuckGo search + LLM hints)
-  3. LLM fallback — synthesises data via Bedrock Claude
 
-Whichever source provides data, the output is normalised into:
-  - raw_examples.txt   (all unique values)
-  - train.txt          (ground-truth: 100% to both; LLM: 60/40 split)
-  - test.txt
-
-The collector also returns metadata so downstream agents know the source.
+If neither source returns data the collector returns an empty result and the
+pipeline proceeds with policy-only regex generation.  LLM synthesis is
+intentionally removed to avoid the synthetic-data bias problems it causes.
 """
 from __future__ import annotations
 
 import json
 import logging
-import math
 import os
 import random
 from pathlib import Path
-
-from utils.bedrock_client import invoke_claude
 
 logger = logging.getLogger(__name__)
 
 SEED = 42
 DB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "db")
-
-PROMPT_TEMPLATE = """You are a data-generation assistant.
-Generate {batch_size} UNIQUE, REALISTIC examples of: {condition}.
-Rules:
-- One value per line, no numbering, no bullet points, no extra text.
-- Values must resemble real-world data actually in use.
-- Do not repeat values from previous batches: {previous_values_sample}
-Output ONLY the values."""
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -53,16 +38,12 @@ def _split_and_write(unique: list[str], source: str, paths: dict[str, str]) -> d
     train_path = paths.get("train", "data/train.txt")
     test_path = paths.get("test", "data/test.txt")
 
-    if source in ("db", "scrape_tool"):
-        train = list(unique)
-        test = list(unique)
-        logger.info("Split (ground truth): %d unique → both Agent 2 & Agent 4 get all %d values", len(unique), len(unique))
-    else:
-        split_idx = int(len(unique) * 0.60)
-        train = unique[:split_idx]
-        test = unique[split_idx:]
-        logger.info("Split (LLM): %d unique → %d train (60%% → Agent 2) / %d test (40%% → Agent 4)",
-                     len(unique), len(train), len(test))
+    train = list(unique)
+    test = list(unique)
+    logger.info(
+        "Split (ground truth): %d unique → both train & test get all %d values",
+        len(unique), len(unique),
+    )
 
     _write_lines(raw_path, unique)
     _write_lines(train_path, train)
@@ -202,70 +183,32 @@ def _try_db_lookup(condition: str) -> tuple[list[str] | None, str | None]:
     return unique, desc
 
 
-# ── source 3: LLM synthesis (fallback) ────────────────────────────────────────
-
-def _llm_synthesize(condition: str, config: dict) -> list[str]:
-    dataset_size = config.get("dataset_size", 1000)
-    batch_size = config.get("batch_size", 200)
-    num_batches = math.ceil(dataset_size / batch_size)
-
-    logger.info(
-        "Agent 1 [llm]: synthesising %d examples in %d batches of %d",
-        dataset_size, num_batches, batch_size,
-    )
-
-    all_values: list[str] = []
-    for batch_idx in range(num_batches):
-        sample_prev = ", ".join(all_values[-50:]) if all_values else "N/A (first batch)"
-        prompt = PROMPT_TEMPLATE.format(
-            batch_size=batch_size,
-            condition=condition,
-            previous_values_sample=sample_prev,
-        )
-        try:
-            response = invoke_claude(prompt, config)
-        except Exception as exc:
-            logger.warning("Batch %d/%d failed: %s", batch_idx + 1, num_batches, exc)
-            continue
-
-        lines = [line.strip() for line in response.strip().splitlines() if line.strip()]
-        all_values.extend(lines)
-        logger.info("Batch %d/%d: got %d (total raw: %d)", batch_idx + 1, num_batches, len(lines), len(all_values))
-
-    seen: set[str] = set()
-    unique: list[str] = []
-    for v in all_values:
-        if v not in seen:
-            seen.add(v)
-            unique.append(v)
-
-    if len(unique) < dataset_size:
-        logger.warning("Only collected %d unique values (target %d)", len(unique), dataset_size)
-
-    return unique
-
-
 # ── public API ────────────────────────────────────────────────────────────────
 
 def collect_data(condition: str, config: dict, paths: dict[str, str] | None = None) -> dict:
+    """Collect real-world data from DB or web scraping.  No LLM synthesis.
+
+    Returns a stats dict with keys: total, train, test, source.
+    If no data is found, source will be "none" and counts will be 0.
+    """
     paths = paths or {}
 
     # 1. DB lookup (fastest, ground truth if available)
     values, db_desc = _try_db_lookup(condition)
     source = "db"
 
-    # 2. Scrape tool (adapters → DuckDuckGo + LLM-guided extraction)
+    # 2. Scrape tool (adapters → Tavily/Playwright → DuckDuckGo + httpx)
     if values is None:
         values = _try_scrape_tool(condition, config)
         source = "scrape_tool"
 
-    # 3. LLM synthesis (fallback)
-    if values is None:
-        values = _llm_synthesize(condition, config)
-        source = "llm"
-
+    # No LLM fallback — if neither source provides data we return empty
     if not values:
-        logger.error("Agent 1: no data collected from any source")
+        logger.warning(
+            "Agent 1: no data from DB or scraper for '%s' — "
+            "pipeline will proceed with policy-only regex generation",
+            condition,
+        )
         return {"total": 0, "train": 0, "test": 0, "source": "none"}
 
     stats = _split_and_write(values, source, paths)

@@ -56,7 +56,7 @@ def extract_visible_text(html: str) -> str:
 def extract_by_regex(html: str, pattern: re.Pattern) -> list[str]:
     """Scan the visible page text for all matches of a compiled regex."""
     text = extract_visible_text(html)
-    return list(set(pattern.findall(text)))
+    return list({m.group(0) for m in pattern.finditer(text)})
 
 
 def _looks_like_pdf(content: str) -> bool:
@@ -100,7 +100,7 @@ def extract_all_values(html: str, value_regex: Optional[re.Pattern] = None) -> l
             return []
         logger.info("[parser] extracted %d chars of text from PDF", len(pdf_text))
         if value_regex:
-            return list(set(value_regex.findall(pdf_text)))
+            return list({m.group(0) for m in value_regex.finditer(pdf_text)})
         return [line.strip() for line in pdf_text.splitlines() if line.strip()]
 
     candidates: list[str] = []
@@ -114,8 +114,7 @@ def extract_all_values(html: str, value_regex: Optional[re.Pattern] = None) -> l
     if value_regex:
         matched = []
         for c in candidates:
-            found = value_regex.findall(c)
-            matched.extend(found)
+            matched.extend(m.group(0) for m in value_regex.finditer(c))
         if not matched:
             matched = extract_by_regex(html, value_regex)
         return matched

@@ -5,9 +5,15 @@ Usage:
     python main.py --condition "California ZIP code"
     python main.py --condition "US Medicare number"
 
-Simplified pipeline (no data collection or validation):
-    1. Policy Researcher — finds format rules from web
-    2. Regex Generator — creates regex from policies
+Pipeline (data + policy, policy-weighted):
+    1. Data Collector + Policy Researcher  (parallel)
+    2. Pattern Analyzer                    (only when real data is available)
+    3. Regex Generator                     (policy-weighted: policies are primary,
+                                            data patterns are supplementary)
+
+Data is fetched from DB or web scraping only — no LLM synthesis.
+If no data is found, the pipeline falls back to policy-only generation
+(same as the feature/improvements branch).
 """
 
 import argparse
@@ -85,11 +91,11 @@ def main() -> None:
 
     config = load_config(args.config)
 
+    os.makedirs("data", exist_ok=True)
     os.makedirs("results", exist_ok=True)
 
     paths = build_paths(args.condition)
 
-    # Install per-run debug log — every DEBUG message for this run goes here.
     run_log_handler = _install_run_log_handler(paths["debug_log"])
     logger.info("Per-run debug log → %s", paths["debug_log"])
     for key, path in paths.items():
@@ -97,20 +103,36 @@ def main() -> None:
 
     start = time.time()
 
+    # ── Step 1: Data Collector + Policy Researcher (parallel) ──
     logger.info("=" * 60)
-    logger.info("STEP 1/2 — Policy Researcher")
+    logger.info("STEP 1 — Data Collector + Policy Researcher (parallel)")
     logger.info("=" * 60)
+    from concurrent.futures import ThreadPoolExecutor
+    from agents.data_collector import collect_data
     from agents.policy_researcher import research_policies
-    policies = research_policies(args.condition, config)
-    policy_count = len(policies.get("policies", []))
-    logger.info("Policy Researcher: %d rules found (authority: %s)",
-                policy_count, policies.get("numbering_authority", "unknown"))
 
-    # Save source of truth
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        data_future = pool.submit(collect_data, args.condition, config, paths)
+        policy_future = pool.submit(research_policies, args.condition, config)
+
+    stats = data_future.result()
+    policies = policy_future.result()
+    data_source = stats.get("source", "none")
+    has_data = stats.get("total", 0) > 0
+    policy_count = len(policies.get("policies", []))
+
+    logger.info(
+        "Data: source=%s, %d values | Policies: %d rules (authority: %s)",
+        data_source, stats.get("total", 0),
+        policy_count, policies.get("numbering_authority", "unknown"),
+    )
+
     from utils.paths import slugify
     slug = slugify(args.condition)
     sot = {
         "condition": args.condition,
+        "data_source": data_source,
+        "total_values": stats.get("total", 0),
         "policies": policies.get("policies", []),
         "numbering_authority": policies.get("numbering_authority", ""),
         "vendor_patterns": policies.get("vendor_patterns", []),
@@ -122,8 +144,31 @@ def main() -> None:
         json.dump(sot, f, indent=2)
     logger.info("Source-of-truth saved → %s", sot_path)
 
+    # ── Step 2: Pattern Analyzer (only when real data exists) ──
+    data_patterns = None
+    if has_data:
+        logger.info("=" * 60)
+        logger.info("STEP 2 — Pattern Analyzer (real data available)")
+        logger.info("=" * 60)
+        from agents.pattern_analyzer import analyze_patterns
+        data_patterns = analyze_patterns(
+            args.condition, config, paths, policies=policies,
+        )
+        logger.info(
+            "Discovered %d format rules from data",
+            len(data_patterns.get("format_rules", [])),
+        )
+    else:
+        logger.info("=" * 60)
+        logger.info("STEP 2 — Pattern Analyzer SKIPPED (no real data collected)")
+        logger.info("=" * 60)
+
+    # ── Step 3: Regex Generator (policy-weighted) ──
     logger.info("=" * 60)
-    logger.info("STEP 2/2 — Regex Generator")
+    if has_data:
+        logger.info("STEP 3 — Regex Generator (policy-weighted: data + policy)")
+    else:
+        logger.info("STEP 3 — Regex Generator (policy-only, no data available)")
     logger.info("=" * 60)
     from agents.regex_generator import generate_regex
     regex_result = generate_regex(
@@ -131,12 +176,16 @@ def main() -> None:
         config,
         paths,
         policies=policies,
+        data_patterns=data_patterns,
     )
     logger.info("Generated %d regex patterns", len(regex_result.get("patterns", [])))
 
     elapsed = time.time() - start
     logger.info("=" * 60)
-    logger.info("DONE in %.1fs", elapsed)
+    logger.info(
+        "DONE in %.1fs | Data: %s (%d values) | Policies: %d rules",
+        elapsed, data_source, stats.get("total", 0), policy_count,
+    )
     logger.info("Regex patterns saved → %s", paths["regex_patterns"])
     logger.info("=" * 60)
 
