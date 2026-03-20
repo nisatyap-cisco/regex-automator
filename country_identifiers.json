@@ -1,0 +1,450 @@
+[
+  {
+    "value": "Colombia Social Security Number",
+    "regex": "\\d{3}[ -]?\\d{2}[ -]?\\d{4} , (?i)(?:n[\u00fau]mero de la seguridad social|n[\u00fau]mero de seguridad social|n.[\u00b0o] seguridad social|SSN|SSID)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia National ID Number",
+    "regex": "(?:\\d{8}[. -]?\\d{8}|\\d{6}|\\d{1,2}[. -]?\\d{3}[. -]?(?:\\d{3}[. -])?\\d{3,4}) , (?i)(?:NIN\\#?|NUIP|CC|n[\u00fau]mero de tarjeta de identidad nacional|n[\u00fau]mero de tarjeta nacional|n[\u00fau]mero [\u00fau]nico de identidad personal|n[\u00fau]mero de identificaci[\u00f3o]n nacional|tarjeta de identidad|cedula de ciudadan[\u00edi]a|cedula|identificaci[\u00f3o]n nacional|Documento nacional de identidad)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia Passport Number",
+    "regex": "(?:[A-Z]{1,2}[ -]?\\d{5,6}|COL\\d{6}) , (?i)(?:identificaci[\u00f3o]n para viajes internacionales|detalles del pasaporte|visa|documento nacional de identidad|n[\u00fau]mero de pasaporte|documento de viaje|autoridad emisora|prueba de identificaci[\u00f3o]n|ID de pasaporte|n.[\u00b0o] de pasaporte|pasaporte)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia Driver's License Number",
+    "regex": "(?:\\d{11,12}|\\d{7}) , (?i)(?:licencia de tarjeta con foto|licencia estudiante|titulares de licencia|titular de licencia|n[\u00fau]mero de licencia|licencias de conducir|licencia de conducci[\u00f3o]n|licencia del conductor|licencia de conducir|carnet de conducir) , \\d{10}"
+  },
+  {
+    "value": "Colombia Social Insurance Number - SIN",
+    "regex": "(?i)(?:sin.[\u00b0o]|EPS|entidad promotora de salud|n[\u00fau]mero de seguro social|n.[\u00b0o] de seguro social|seguro social)(?:\\b|(?<=[\u00b0.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia Tax ID Number",
+    "regex": "\\d{3}[. -]?\\d{3}[. -]?\\d{3}[. -\\/]?\\d , (?i)(?:NIT|numero de identificacion tributaria|n[\u00fau]mero de identificaci[\u00f3o]n fiscal|n[\u00fau]mero de identidad fiscal|c[\u00f3o]digo de identificaci[\u00f3o]n fiscal|archivo fiscal|n.[\u00b0o] de identificaci[\u00f3o]n fiscal|n[\u00fau]mero de registro fiscal|n.[\u00b0o] de ID fiscal|n.[\u00b0o] fiscal|n[\u00fau]mero fiscal|ID fiscal|ID del NIF|n.[\u00b0o] del NIF|NIF)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia VAT ID Number",
+    "regex": "(?:\\d{8,9}[A-Z]|\\d{9,10}) , (?i)(?:n[\u00fau]mero de impuesto sobre el valor agregado|impuesto sobre el valor agregado|n[\u00fau]mero de IVA|n.[\u00b0o] de IVA|IVA)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia Phone Number",
+    "regex": "(?:\\+?57|0057|0[1-9]|00)?[- ]?\\d{3}[- ]?\\d{3,4}[- ]?\\d{3,5} , (?i)(?:n[\u00fau]mero de tel[\u00e9e]fono m[\u00f3o]vil|numero de celular|telefono fijo|n[\u00fau]mero de tel[\u00e9e]fono|n[\u00fau]mero de m[\u00f3o]vil)"
+  },
+  {
+    "value": "Colombia Postcode",
+    "regex": "\\d{6} , (?i)(?:direcci[\u00f3o]n|distrito de c[\u00f3o]digo postal|[\u00e1a]rea de c[\u00f3o]digo postal|unidad de c[\u00f3o]digo postal|sector de c[\u00f3o]digo postal|codigo postal)"
+  },
+  {
+    "value": "Colombia License Plate Number",
+    "regex": "[A-Z0-9]{1,3}[. -]?([A-Z0-9]{1,2}[. -]?)?[A-Z0-9]{2,3} , (?i)(?:placas de los vehiculos|placa del vehiculo|n.[\u00b0o] de registro|n.[\u00b0o] de matr[\u00edi]cula|n[\u00fau]mero de l[\u00e1a]mina licencia|n[\u00fau]mero de matr[\u00edi]cula|matr[\u00edi]cula|n[\u00fau]mero de registro)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia Person Name",
+    "regex": "[A-Z]{4}[ -]?(CO)[ -]?[A-Z0-9]{2}[ -]?([A-Z0-9]{3})?"
+  },
+  {
+    "value": "Colombia International Bank Account Number - IBAN",
+    "regex": "(?i)(?:n[\u00fau]mero de cuenta bancaria internacional|n.[\u00b0o] de IBAN|IBAN|SWIFT Code|codigo swift|n.[\u00b0o] de cuenta bancaria internacional)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Colombia Bank Account Number",
+    "regex": "(?:\\d{16,18}|\\d{4}[ -]?\\d{2}[ -]?\\d{4}[ -]?\\d{6}) , (?i)(?:n[\u00fau]mero de cuenta bancaria|detalles bancarios|n[\u00fau]mero de banco|c[\u00f3o]digo de cuenta|ID de cuenta|cuenta de ahorros|cuenta corriente|n[\u00fau]mero de cuenta|cuenta numerada)"
+  },
+  {
+    "value": "Colombia Routing Number",
+    "regex": "\\d{9} , (?i)(?:n.[\u00b0o] de routing bancario|n[\u00fau]mero de routing|routing bancario|n.[\u00b0o] de routing|RTN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Czech Republic Health Insurance Number",
+    "regex": "\\d{10}|\\d{5}[ -]?(?:VZP) , (?i)(?:z[\u00e1a]kon o zdravotn[\u00edi]ch informac[\u00edi]ch|kryt[\u00edi] zdravotn[\u00edi] p[\u00e9e][\u010dc]e|[\u010dc][\u00edi]slo zdravotn[\u00edi]ho poji[\u0161s]t[\u011be]n[\u00edi]|osobn[\u00edi] zdravotn[\u00edi] [\u010dc][\u00edi]slo|zdravotn[\u00edi] registrace|zdravotn[\u00edi] poji[\u0161s]t[\u011be]n[\u00edi]|zdravotn[\u00edi] d[\u00e1a]vky)"
+  },
+  {
+    "value": "Czech Republic License Plate Number",
+    "regex": "([1-9][A-z]{2}[ -]?\\d{4}|[1-9][A-z]{2}[ -]?[A-z]\\d{3}|\\d[A-z][ -]\\d{4}) , (?i)(?:st[\u00e1a]tn[\u00edi] pozn[\u00e1a]vac[\u00edi] zna[\u010dc]ka|registra[\u010dc]n[\u00edi] [\u010dc][\u00edi]slo|registra[\u010dc]n[\u00edi] [\u010dc].|[\u010dc]. zna[\u010dc]ky|SPZ)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Czech Republic Bank Account Number",
+    "regex": "\\d{16} , (?i)(?:[\u010dc][\u00edi]slo bankovn[\u00edi]ho [\u00fau][\u010dc]tu|bankovn[\u00edi] [\u00fau]daje|k[\u00f3o]d [\u00fau][\u010dc]tu|id [\u00fau][\u010dc]tu|[\u010dc][\u00edi]slo [\u00fau][\u010dc]tu)"
+  },
+  {
+    "value": "Czech Republic Business Number",
+    "regex": "\\d{8,10} , (?i)(?:registra[\u010dc]n[\u00edi] [\u010dc][\u00edi]slo obchodn[\u00edi]|identifika[\u010dc]n[\u00edi] [\u010dc][\u00edi]slo obchodn[\u00edi]|id.obchodn[\u00edi]|[\u010dc][\u00edi]slo obchodn[\u00edi])(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Czech Republic Company Number",
+    "regex": "\\d{3}[ ]?\\d{2}[ ]?\\d{3} , (?i)(?:Identifika[\u010dc]n[\u00edi] [\u010dc][\u00edi]slo spole[\u010dc]nosti|registra[\u010dc]n[\u00edi] [\u010dc][\u00edi]slo spole[\u010dc]nosti|[\u010dc][\u00edi]slo spole[\u010dc]nosti)"
+  },
+  {
+    "value": "Finland Social Security Number",
+    "regex": "(?:(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])\\d{2}[ -]?[0-9]?\\d{3}[0-9A-Z]|(0[1-9]|[12][0-9]|3[01])(0[1-9]|[1][0-2])\\d{2}([-]|A)\\d{3}[A-Z]) , (?i)(?:sosiaaliturvatunnus\\#?|sosiaaliturvanro|sosiaaliturvanumero|SSN\\#?|SSID)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Finland License Plate Number",
+    "regex": "[A-Z0-9]{1,3}[. -]?\\d{2,4} , (?i)(?:auton rekisterinumero|rekister[\u00f6o]intinumero|rekisterikilven numero|rekisterinumero|rekisterinro|rekisterikilpi)"
+  },
+  {
+    "value": "Finland Bank Account Number",
+    "regex": "\\d{7} , (?i)(?:pankkitilin numero|pankkitilinumero|pankkitiedot|pankkitilin nro|pankkitili|tilinumero|tilinro)"
+  },
+  {
+    "value": "Finland Business Number",
+    "regex": "\\d{7,8}[ -]?[0-9] , (?i)(?:liiketoimintaa rekister[\u00f6o]intinumero|liiketoimintaanumero|liiketoimintaa ja yksik[\u00f6o]n tunnus|tunnus-liiketoimintaa|yritystunniste|yritystunnus)"
+  },
+  {
+    "value": "Guatemala National ID Number",
+    "regex": "[A-Z]?\\d{2,4}[ -]?\\d{5,6}[ -]?\\d{4} , (?i)(?:NIN\\#?|DPI|n[\u00fau]mero de tarjeta de identidad nacional|n[\u00fau]mero de tarjeta nacional|n[\u00fau]mero de identificaci[\u00f3o]n nacional|identificaci[\u00f3o]n nacional|Documento personal de identificaci\u00f3n|Documento nacional de identidad)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Guatemala Passport Number",
+    "regex": "\\d{9,10} , (?i)(?:identificaci[\u00f3o]n para viajes internacionales|detalles del pasaporte|visa|documento nacional de identidad|n[\u00fau]mero de pasaporte|documento de viaje|autoridad emisora|prueba de identificaci[\u00f3o]n|ID de pasaporte|n.[\u00b0o] de pasaporte|pasaporte)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Guatemala Driver's License Number",
+    "regex": "(?:\\d{13,15}|\\d[ -]?\\d{6,7}) , (?i)(?:licencia de tarjeta con foto|licencia estudiante|titulares de licencia|titular de licencia|n[\u00fau]mero de licencia|licencias de conducir|licencia del conductor|licencia de conducir|carnet de conducir)"
+  },
+  {
+    "value": "Guatemala Tax ID Number",
+    "regex": "(GT)?[ -]?(NIT)?[ -]?\\d{6,7}[ -]?[A-Z0-9] , (?i)(?:n[\u00fau]mero de identificaci[\u00f3o]n fiscal|n[\u00fau]mero de identidad fiscal|c[\u00f3o]digo de identificaci[\u00f3o]n fiscal|archivo fiscal|n.[\u00b0o] de identificaci[\u00f3o]n fiscal|n[\u00fau]mero de registro fiscal|n.[\u00b0o] de ID fiscal|n.[\u00b0o] fiscal|n[\u00fau]mero fiscal|ID fiscal|ID del NIF|n.[\u00b0o] del NIF|NIF)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Guatemala Health Insurance Number",
+    "regex": "[A-Z0-9]{3}[- ]?\\d{6}[- ]?[A-Z0-9]{3} , (?i)(?:cobertura m[\u00e9e]dica|beneficios para la salud|cobertura de atenci[\u00f3o]n m[\u00e9e]dica|n[\u00fau]mero de salud personal|registro sanitario|n[\u00fau]mero de seguro m[\u00e9e]dico|ley de informaci[\u00f3o]n de salud)"
+  },
+  {
+    "value": "Guatemala Phone Number",
+    "regex": "(\\d{3})?[ -]?(?:\\+?502|00502|00)?[ -]?\\d{3,4}[ -]?\\d{4,5} , (?i)(?:n[\u00fau]mero de tel[\u00e9e]fono m[\u00f3o]vil|n[\u00fau]mero de tel[\u00e9e]fono|n[\u00fau]mero de m[\u00f3o]vil)"
+  },
+  {
+    "value": "Guatemala Postcode",
+    "regex": "\\d{5} , (?i)(?:direcci[\u00f3o]n|distrito de c[\u00f3o]digo postal|[\u00e1a]rea de c[\u00f3o]digo postal|unidad de c[\u00f3o]digo postal|sector de c[\u00f3o]digo postal)"
+  },
+  {
+    "value": "Guatemala License Plate Number",
+    "regex": "[A-Z]{1,3}[. -]?(?:\\d{3,4})?[. -]?[A-Z0-9]{3,4} , (?i)(?:n.[\u00b0o] de registro|n.[\u00b0o] de matr[\u00edi]cula|n[\u00fau]mero de l[\u00e1a]mina licencia|n[\u00fau]mero de matr[\u00edi]cula|matr[\u00edi]cula|n[\u00fau]mero de registro)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Guatemala International Bank Account Number - IBAN",
+    "regex": "(GT)\\d{2}[ ]?[A-Z0-9]{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4} , (?i)(?:n[\u00fau]mero de cuenta bancaria internacional|n.[\u00b0o] de IBAN|IBAN|n.[\u00b0o] de cuenta bancaria internacional)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Guatemala Bank Account Number",
+    "regex": "\\d{20} , (?i)(?:n[\u00fau]mero de cuenta bancaria|detalles bancarios|n[\u00fau]mero de banco|c[\u00f3o]digo de cuenta|ID de cuenta|n[\u00fau]mero de cuenta|cuenta numerada)"
+  },
+  {
+    "value": "Iceland National ID Number",
+    "regex": "(?:(0[1-9]|[12][0-9]|3[01])(0[1-9]|[1][0-2])\\d{2}[- ]?\\d{3}(9|0)) , (?i)(?:NIN\\#?|Kennitala|national identity card number|national card number|national card no|national identification number|national id)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland Passport Number",
+    "regex": "(?:[A-Z]{1,2})?\\d{7} , (?i)(?:identification for international travel|passport details|visa|passport number|travel document|issuing authority|proof of identification|passportid|passportno.|passport)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland Driver's License Number",
+    "regex": "(?:\\d{9}|\\d{5}) , (?i)(?:photocard licence|learner drivers|licence holders|licence holder|licence number|license number|driving licences|driving licenses|driving licence|driving license|driver'?s licence|driver'?s license)"
+  },
+  {
+    "value": "Iceland Tax ID Number",
+    "regex": "(0[1-9]|[12][0-9]|3[01])(0[1-9]|[1][0-2])\\d{2}[ -]?\\d{4} , (?i)(?:tax identification number|tax identity number|tax identification code|tax identification no|tax registration number|tax id number|taxidnumber\\#?|tax number\\#?|taxidno\\#?|tax id\\#?|tax no\\#?|tin id|tin no|tin\\#?|TIN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland VAT ID Number",
+    "regex": "(?:\\d{6}[ -]?\\d{4}|\\d{5,6}) , (?i)(?:value added tax number|value added tax|vat no.|vat number|vat no|vat\\#?|VAT)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland Phone Number",
+    "regex": "(?:(\\d{3})?(\\+?354|00354|00)?[ -]?\\d{3}[ -]?\\d{3,4}|\\d{3}[ -]?\\d{3}[ -]?\\d{3}) , (?i)(?:mobile[ ]?phone number|mobile[ ]?phone no.|mobile[ ]?number|mobile[ ]?no.|mobile|contact number|contact no.|contact|fax number|fax no.|cell[ ]?phone number|cell[ ]?phone no.|cell[ ]?phone|cell[ ]?number|cell[ ]?no.|whatsapp number|whatsapp no.|whatsapp|phone number|phone no.|phone num|telephonic number|telephone number|telephone no.|telephone|landline number|landline no.|landline num)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland Postcode",
+    "regex": "\\d{3} , (?i)(?:address|postcode district|postcode area|postcode unit|postcode sector|postcode)"
+  },
+  {
+    "value": "Iceland License Plate Number",
+    "regex": "[A-Z0-9]{1,3}[- .]?[A-Z0-9]{2,5} , (?i)(?:license plate number|registration. no.|plate. no.|licence plate|registration number)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland International Bank Account Number - IBAN",
+    "regex": "(IS)\\d{2}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{2} , (?i)(?:Interntional Bank Account Number|IBAN\\#?|Interntional bank account no)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Iceland Bank Account Number",
+    "regex": "\\d{6} , (?i)(?:bank account number|bank details|bank number|account code|account id|account number|numbered account)"
+  },
+  {
+    "value": "Jordan National ID Number",
+    "regex": "(?:\\d{16}|\\d{10}) , (?i)(?:NIN#\u200e|NIN|\u0631\u0642\u0645 \u0628\u0637\u0627\u0642\u0629 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0631\u0642\u0645 \u0627\u0644\u0628\u0637\u0627\u0642\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0631\u0642\u0645 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Jordan Passport Number",
+    "regex": "[A-Z]\\d{6,7} , (?i)(?:\u0627\u0644\u0647\u0648\u064a\u0629 \u0644\u0644\u0633\u0641\u0631 \u0627\u0644\u062f\u0648\u0644\u064a|\u062a\u0641\u0627\u0635\u064a\u0644 \u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631|\u0627\u0644\u062a\u0623\u0634\u064a\u0631\u0629|\u0628\u0637\u0627\u0642\u0629 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0631\u0642\u0645 \u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631|\u0648\u062b\u064a\u0642\u0629 \u0627\u0644\u0633\u0641\u0631|\u0633\u0644\u0637\u0629 \u0627\u0644\u0625\u0635\u062f\u0627\u0631|\u0625\u062b\u0628\u0627\u062a \u0627\u0644\u0647\u0648\u064a\u0629|\u0645\u0639\u0631\u0651\u0641 \u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631|\u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631)"
+  },
+  {
+    "value": "Jordan Driver's License Number",
+    "regex": "\\d{8,9} , (?i)(?:\u0631\u062e\u0635\u0629 \u0628\u0628\u0637\u0627\u0642\u0629 \u062a\u062d\u0645\u0644 \u0635\u0648\u0631\u0629|\u0631\u062e\u0635\u0629 \u0633\u0648\u0642|\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0634\u062e\u0635\u064a|\u0642\u064a\u0627\u062f\u0629 \u0645\u062a\u0639\u0644\u0651\u0645|\u062d\u0627\u0645\u0644\u0648 \u0627\u0644\u0631\u062e\u0635|\u0631\u0642\u0645 \u0627\u0644\u0631\u062e\u0635\u0629|\u062d\u0627\u0645\u0644 \u0627\u0644\u0631\u062e\u0635\u0629|\u0631\u062e\u0635 \u0627\u0644\u0642\u064a\u0627\u062f\u0629|\u0631\u062e\u0635\u0629 \u0627\u0644\u0642\u064a\u0627\u062f\u0629)"
+  },
+  {
+    "value": "Jordan Tax ID Number",
+    "regex": "(?:\\d{12}|\\d{7}) , (?i)(?:taxidnumber#|taxidnumber|taxidno#|taxidno|taxid#|taxid|taxnumber#|taxnumber|taxno#|taxno|tin|\u0631\u0642\u0645 \u0645\u0639\u0631\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u0629|\u0631\u0642\u0645 \u0627\u0644\u062a\u0639\u0631\u064a\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u064a|\u0631\u0645\u0632 \u0645\u0639\u0631\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u0629|\u0645\u0644\u0641 \u0636\u0631\u064a\u0628\u064a|\u0631\u0642\u0645 \u0627\u0644\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0636\u0631\u064a\u0628\u064a|\u0631\u0642\u0645 \u0627\u0644\u0636\u0631\u064a\u0628\u0629|\u0627\u0644\u0645\u0639\u0631\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u064a)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Jordan VAT ID Number",
+    "regex": "\\d{8} , (?i)(?:VAT number|vat no.|vat no#|VAT|\u0631\u0642\u0645 \u0636\u0631\u064a\u0628\u0629 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629|\u0636\u0631\u064a\u0628\u0629 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629\u200e|\u0631\u0642\u0645 vat\u200f)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Jordan Phone Number",
+    "regex": "(?:0|00|\\+?962|00962)?[ ]?\\d{1,2}[ ]?\\d{3}[ ]?\\d{4} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641|\u0631\u0642\u0645 \u0627\u0644\u062a\u0644\u064a\u0641\u0648\u0646|\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641 \u0627\u0644\u0645\u062d\u0645\u0648\u0644|\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641 \u0627\u0644\u062e\u0644\u0648\u064a)"
+  },
+  {
+    "value": "Jordan Postcode",
+    "regex": "\\d{5} , (?i)(?:\u0627\u0644\u0639\u0646\u0648\u0627\u0646|\u062d\u064a \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0645\u0646\u0637\u0642\u0629 \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0648\u062d\u062f\u0629 \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0642\u0637\u0627\u0639 \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a)"
+  },
+  {
+    "value": "Jordan License Plate Number",
+    "regex": "\\d{1,2}[. -]?(?:[ ]{1,4})?\\d{1,5} , (?i)(?:\u0631\u0642\u0645 \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u0631\u062e\u064a\u0635|\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062d\u0629|\u0631\u0642\u0645 \u0627\u0644\u062a\u0631\u062e\u064a\u0635|\u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u0631\u062e\u064a\u0635|\u0631\u0642\u0645 \u0627\u0644\u062a\u0633\u062c\u064a\u0644)"
+  },
+  {
+    "value": "Jordan International Bank Account Number - IBAN",
+    "regex": "(JO)\\d{2}[ ]?[A-Z0-9]{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{2} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0628\u0646\u0643\u064a \u0627\u0644\u062f\u0648\u0644\u064a|IBAN#|IBAN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Jordan Bank Account Number",
+    "regex": "\\d{18} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0628\u0646\u0643\u064a|\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u0628\u0646\u0643|\u0631\u0642\u0645 \u0627\u0644\u0628\u0646\u0643|\u0643\u0648\u062f \u0627\u0644\u062d\u0633\u0627\u0628|\u0645\u0639\u0631\u0651\u0641 \u0627\u0644\u062d\u0633\u0627\u0628|\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628|\u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0645\u064f\u0631\u0642\u0651\u064e\u0645)"
+  },
+  {
+    "value": "Jordan Business Number",
+    "regex": "\\d{9} , (?i)(?:CRN|Commercial Registration Number|\u0631\u0642\u0645 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a|#\u0645\u0639\u0631\u0641 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a|\u0645\u0639\u0631\u0641 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a#)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Jordan Company Number",
+    "regex": "(JO)?[- ]?(CCD)?[- ]?\\d{9} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a|\u0645\u0639\u0631\u0641 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a)"
+  },
+  {
+    "value": "Kuwait National ID Number",
+    "regex": "(?:\\d{12}|\\d[ -]?\\d{2}(0[1-9]|[1][0-2])(0[1-9]|[12][0-9]|3[01])[ -]?\\d{5}) , (?i)(?:NIN#\u200e|NIN|\u0631\u0642\u0645 \u0628\u0637\u0627\u0642\u0629 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0631\u0642\u0645 \u0627\u0644\u0628\u0637\u0627\u0642\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0631\u0642\u0645 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Kuwait Passport Number",
+    "regex": "(?:[A-Z]{1,2}\\d{7,8}|KWT[ -][A-Z]{2}[ -]\\d{5}) , (?i)(?:\u0627\u0644\u0647\u0648\u064a\u0629 \u0644\u0644\u0633\u0641\u0631 \u0627\u0644\u062f\u0648\u0644\u064a|\u062a\u0641\u0627\u0635\u064a\u0644 \u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631|\u0627\u0644\u062a\u0623\u0634\u064a\u0631\u0629|\u0628\u0637\u0627\u0642\u0629 \u0627\u0644\u0647\u0648\u064a\u0629 \u0627\u0644\u0648\u0637\u0646\u064a\u0629|\u0631\u0642\u0645 \u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631|\u0648\u062b\u064a\u0642\u0629 \u0627\u0644\u0633\u0641\u0631|\u0633\u0644\u0637\u0629 \u0627\u0644\u0625\u0635\u062f\u0627\u0631|\u0625\u062b\u0628\u0627\u062a \u0627\u0644\u0647\u0648\u064a\u0629|\u0645\u0639\u0631\u0651\u0641 \u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631|\u062c\u0648\u0627\u0632 \u0627\u0644\u0633\u0641\u0631)"
+  },
+  {
+    "value": "Kuwait Driver's License Number",
+    "regex": "(?:\\d{12}|\\d{8}) , (?i)(?:\u0631\u062e\u0635\u0629 \u0628\u0628\u0637\u0627\u0642\u0629 \u062a\u062d\u0645\u0644 \u0635\u0648\u0631\u0629|\u0631\u062e\u0635\u0629 \u0633\u0648\u0642|\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0634\u062e\u0635\u064a|\u0642\u064a\u0627\u062f\u0629 \u0645\u062a\u0639\u0644\u0651\u0645|\u062d\u0627\u0645\u0644\u0648 \u0627\u0644\u0631\u062e\u0635|\u0631\u0642\u0645 \u0627\u0644\u0631\u062e\u0635\u0629|\u062d\u0627\u0645\u0644 \u0627\u0644\u0631\u062e\u0635\u0629|\u0631\u062e\u0635 \u0627\u0644\u0642\u064a\u0627\u062f\u0629|\u0631\u062e\u0635\u0629 \u0627\u0644\u0642\u064a\u0627\u062f\u0629)"
+  },
+  {
+    "value": "Kuwait Tax ID Number",
+    "regex": "\\d{12} , (?i)(?:taxidnumber#|taxidnumber|taxidno#|taxidno|taxid#|taxid|taxnumber#|taxnumber|taxno#|taxno|tin|\u0631\u0642\u0645 \u0645\u0639\u0631\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u0629|\u0631\u0642\u0645 \u0627\u0644\u062a\u0639\u0631\u064a\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u064a|\u0631\u0645\u0632 \u0645\u0639\u0631\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u0629|\u0645\u0644\u0641 \u0636\u0631\u064a\u0628\u064a|\u0631\u0642\u0645 \u0627\u0644\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0636\u0631\u064a\u0628\u064a|\u0631\u0642\u0645 \u0627\u0644\u0636\u0631\u064a\u0628\u0629|\u0627\u0644\u0645\u0639\u0631\u0641 \u0627\u0644\u0636\u0631\u064a\u0628\u064a)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Kuwait VAT ID Number",
+    "regex": "(KW)?[A-Z0-9]{4}\\d{6} , (?i)(?:VAT number|vat no.|vat no#|VAT|\u0631\u0642\u0645 \u0636\u0631\u064a\u0628\u0629 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629|\u0636\u0631\u064a\u0628\u0629 \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629\u200e|\u0631\u0642\u0645 vat\u200f)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Kuwait Health Insurance Number",
+    "regex": "(KWI)?\\d{5}[ -]?\\d{4} , (?i)(?:\u062a\u063a\u0637\u064a\u0629 \u0627\u0644\u0631\u0639\u0627\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u0629|\u0627\u0644\u062a\u063a\u0637\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u0629|\u0627\u0644\u0645\u0632\u0627\u064a\u0627 \u0627\u0644\u0635\u062d\u064a\u0629|\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0635\u062d\u064a \u0627\u0644\u0634\u062e\u0635\u064a|\u0627\u0644\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0635\u062d\u064a|\u0631\u0642\u0645 \u0627\u0644\u062a\u0623\u0645\u064a\u0646 \u0627\u0644\u0635\u062d\u064a|\u0642\u0627\u0646\u0648\u0646 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u0627\u0644\u0635\u062d\u064a\u0629)"
+  },
+  {
+    "value": "Kuwait Phone Number",
+    "regex": "(?:\\+?965|00965|00)?[- ]?\\d{3,4}[- ]?\\d{3,4} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641|\u0631\u0642\u0645 \u0627\u0644\u062a\u0644\u064a\u0641\u0648\u0646|\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641 \u0627\u0644\u0645\u062d\u0645\u0648\u0644|\u0631\u0642\u0645 \u0627\u0644\u0647\u0627\u062a\u0641 \u0627\u0644\u062e\u0644\u0648\u064a)"
+  },
+  {
+    "value": "Kuwait Postcode",
+    "regex": "\\d{5} , (?i)(?:\u0627\u0644\u0639\u0646\u0648\u0627\u0646|\u062d\u064a \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0645\u0646\u0637\u0642\u0629 \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0648\u062d\u062f\u0629 \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0642\u0637\u0627\u0639 \u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a|\u0627\u0644\u0631\u0645\u0632 \u0627\u0644\u0628\u0631\u064a\u062f\u064a)"
+  },
+  {
+    "value": "Kuwait License Plate Number",
+    "regex": "\\d{1,2}[- .]?\\d{5} , (?i)(?:\u0631\u0642\u0645 \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u0631\u062e\u064a\u0635|\u0631\u0642\u0645 \u0627\u0644\u0644\u0648\u062d\u0629|\u0631\u0642\u0645 \u0627\u0644\u062a\u0631\u062e\u064a\u0635|\u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u0631\u062e\u064a\u0635|\u0631\u0642\u0645 \u0627\u0644\u062a\u0633\u062c\u064a\u0644)"
+  },
+  {
+    "value": "Kuwait International Bank Account Number - IBAN",
+    "regex": "(KW)\\d{2}[ ]?[A-Z0-9]{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{4}[ ]?\\d{2} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0628\u0646\u0643\u064a \u0627\u0644\u062f\u0648\u0644\u064a|IBAN#|IBAN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Kuwait Bank Account Number",
+    "regex": "\\d{22} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0628\u0646\u0643\u064a|\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u0628\u0646\u0643|\u0631\u0642\u0645 \u0627\u0644\u0628\u0646\u0643|\u0643\u0648\u062f \u0627\u0644\u062d\u0633\u0627\u0628|\u0645\u0639\u0631\u0651\u0641 \u0627\u0644\u062d\u0633\u0627\u0628|\u0631\u0642\u0645 \u0627\u0644\u062d\u0633\u0627\u0628|\u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0645\u064f\u0631\u0642\u0651\u064e\u0645)"
+  },
+  {
+    "value": "Kuwait Business Number",
+    "regex": "(CR)?\\d{7} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a|#\u0645\u0639\u0631\u0641 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a|\u0645\u0639\u0631\u0641 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a#)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Kuwait Company Number",
+    "regex": "\\d{5}[- ]?\\d{4} , (?i)(?:\u0631\u0642\u0645 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a|\u0645\u0639\u0631\u0641 \u0627\u0644\u0646\u0634\u0627\u0637 \u0627\u0644\u062a\u062c\u0627\u0631\u064a)"
+  },
+  {
+    "value": "Malaysia Driver's License Number",
+    "regex": "([A-Za-z]{2}|\\d{2})[ ]?\\d{3}[ ]?\\d{3}|\\d{12}) , (?i)(?:lesen kad foto|pemandu pelajar|pemegang lesen|nombor lesen|license holder|learner driver|driver's license|lesen memandu|lesen pemandu)"
+  },
+  {
+    "value": "Malaysia Tax ID Number",
+    "regex": "((SG|OG)[ ]\\d{11})|([A-Z]{1,2}[ ]\\d{10}) , (?i)(?:nombor pengenalan cukai|nombor identiti cukai|kod pengenalan cukai|nombor pendaftaran cukai|no pengenalan cukai|fail cukai|nombor id cukai|nomborcukai\\#?|noidcukai\\#?|nocukai\\#?|idcukai\\#?|id tin|no tin|tin\\#?|TIN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia VAT ID Number",
+    "regex": "(MYW)?\\d{14} , (?i)(?:nombor cukai nilai tambah|cukai nilai tambah|sales and service Tax|SST|GST|Cukai jualan dan Perkhidmatan|nombor vat|no. vat|no vat|vat\\#?|VAT)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia Phone Number",
+    "regex": "\\d{2}[ -]?\\d{8}|\\d{3}[- ]?\\d{7} , (?i)(?:nombor telefon mudah alih|nombor telefon bimbit|nombor telefon|no telefon)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia Postcode",
+    "regex": "\\d{5} , (?i)(?:alamat|daerah poskod|kawasan poskod|unit poskod|sektor poskod|Post code|poskod)"
+  },
+  {
+    "value": "Malaysia License Plate Number",
+    "regex": "(?:[A-Z0-9]{1,3}[ -]?\\d{2,4}[ -]?[A-Z0-9]{1,2}|[A-Z0-9]{1,3}[ -]?\\d{3,4}) , (?i)(?:nombor plat lesen|nombor lesen|plat lesen|plate number|registration number|vehicle registration number|vehicle plate number|pendaftaran kenderaan|no. pendaftaran.|no. plat.|nombor pendaftaran)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia Person Name",
+    "regex": "[A-Z]{4}(MY)[A-Z0-9]{2}(\\d{3})?"
+  },
+  {
+    "value": "Malaysia International Bank Account Number - IBAN",
+    "regex": "(?i)(?:Nombor Akaun Bank Antarabangsa|No akaun bank antarabangsa|SWIFT Code|BIC code|IBAN\\#?)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia Bank Account Number",
+    "regex": "\\d{7,20} , (?i)(?:nombor akaun bank|butiran bank|nombor bank|kod bank|id akaun|nombor akaun|akaun bernombor)"
+  },
+  {
+    "value": "Malaysia Routing Number",
+    "regex": "(?:\\d{9}|[A-Z]{6}\\d{2}[A-Z]{3}) , (?i)(?:nombor penghalaan|penghalaan bank\\#?|no penghalaan|penghalaan\\#?|BIC code|IBG routing|RTN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia Business Number",
+    "regex": "(?:\\d{7}[ -]?[A-Z]|\\d{4}[ -]?\\d{2}[ -]?\\d{6}) , (?i)(?:Business registration number|nombor pendaftaran perniagaan|nombor perniagaan|no perniagaan|ID perniagaan|idperniagaan\\#?|noperniagaan\\#?)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malaysia Company Number",
+    "regex": "(?:\\d{7}[ -]?[A-Z]|\\d{4}[ -]?\\d{2}[ -]?\\d{6}) , (?i)(?:Company registration number|nombor pengenalan korporat|nombor pendaftaran syarikat|nombor korporat|nombor syarikat|no syarikat\\#?)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malta Social Security Number",
+    "regex": "[A-Z]\\d{6} , (?i)(?:numru tas-sigurt[\u00e0a] so[\u010bc]jali|nru tas-sigurt[\u00e0a] so[\u010bc]jali\\#?|sigurt[\u00e0a] so[\u010bc]jali\\#?|department of social security|DSS|SSN\\#?|SSID)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malta License Plate Number",
+    "regex": "(?:[A-Z]{1,4}[. -]?\\d{3,5}[A-Z]?|\\d{5,6}) , (?i)(?:numru tal-pjan[\u010bc]a tal-li[\u010bc]enzja|re[\u0121g]istrazzjoni. Nru.|pjan[\u010bc]a. Nru.|pjan[\u010bc]a tal-li[\u010bc]enzja|numru tar-re[\u0121g]istrazzjoni)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malta Bank Account Number",
+    "regex": "(?:\\d{7}[A-Z0-9]{11}|\\d{18}) , (?i)(?:numru tal-kont bankarju|dettalji tal-bank|numru tal-bank|kodi[\u010bc]i tal-kont|id tal-kont|numru tal-kont|kont numerat)"
+  },
+  {
+    "value": "Malta Business Number",
+    "regex": "[A-Z]{1,2}\\d{8} , (?i)(?:numru tan-negozju|nru tan-negozju|ID tan-negozju|in-negozju\\#?|n-negozju\\#?)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Malta Company Number",
+    "regex": "[A-Z]{1,2}\\d{5} , (?i)(?:numru tar-re[\u0121g]istrazzjoni tal-kumpanija|numru tal-kumpanija\\#?|numru ta identifikazzjoni korporattiva|numru korporattiv)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama National ID Number",
+    "regex": "(?:\\d{8,9}|\\d{6}) , (?i)(?:NIN\\#?|n[\u00fau]mero de tarjeta de identidad nacional|n[\u00fau]mero de tarjeta nacional|n[\u00fau]mero de identificaci[\u00f3o]n nacional|identificaci[\u00f3o]n nacional|Documento nacional de identidad)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama Passport Number",
+    "regex": "(?:[A-Z]{2})?\\d{7} , (?i)(?:identificaci[\u00f3o]n para viajes internacionales|detalles del pasaporte|visa|documento nacional de identidad|n[\u00fau]mero de pasaporte|documento de viaje|autoridad emisora|prueba de identificaci[\u00f3o]n|ID de pasaporte|n.[\u00b0o] de pasaporte|pasaporte)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama Driver's License Number",
+    "regex": "(?:[A-Z]{1,2}\\d{2}[- ]?\\d{6}|\\d{1,2}[- ]?\\d{3,4}[- ]?\\d{3,4}) , (?i)(?:licencia de tarjeta con foto|licencia estudiante|titulares de licencia|titular de licencia|n[\u00fau]mero de licencia|licencias de conducir|licencia del conductor|licencia de conducir|carnet de conducir)"
+  },
+  {
+    "value": "Panama Tax ID Number",
+    "regex": "[A-Z0-9]{1,2}[- ]?\\d{1,3}[- ]?\\d{3,5} , (?i)(?:Registro [\u00fau]nico del contribuyente|RUC|n[\u00fau]mero de identificaci[\u00f3o]n fiscal|n[\u00fau]mero de identidad fiscal|c[\u00f3o]digo de identificaci[\u00f3o]n fiscal|archivo fiscal|n.[\u00b0o] de identificaci[\u00f3o]n fiscal|n[\u00fau]mero de registro fiscal|n.[\u00b0o] de ID fiscal|n.[\u00b0o] fiscal|n[\u00fau]mero fiscal|ID fiscal|ID del NIF|n.[\u00b0o] del NIF|NIF)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama Phone Number",
+    "regex": "(?:\\+?507)?[- ]?[6]?\\d{3}[- ]?\\d{4} , (?i)(?:n[\u00fau]mero de tel[\u00e9e]fono m[\u00f3o]vil|n[\u00fau]mero de tel[\u00e9e]fono|n[\u00fau]mero de m[\u00f3o]vil)"
+  },
+  {
+    "value": "Panama Postcode",
+    "regex": "\\d{4} , (?i)(?:direcci[\u00f3o]n|distrito de c[\u00f3o]digo postal|[\u00e1a]rea de c[\u00f3o]digo postal|unidad de c[\u00f3o]digo postal|sector de c[\u00f3o]digo postal)"
+  },
+  {
+    "value": "Panama License Plate Number",
+    "regex": "[A-Z0-9]{1,3}[. -]?\\d{3,5} , (?i)(?:n.[\u00b0o] de registro|n.[\u00b0o] de matr[\u00edi]cula|n[\u00fau]mero de l[\u00e1a]mina licencia|n[\u00fau]mero de matr[\u00edi]cula|matr[\u00edi]cula|n[\u00fau]mero de registro)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama International Bank Account Number - IBAN",
+    "regex": "[A-Z]{4}(PA)[A-Z0-9]{2}([A-Z0-9]{3})? , (?i)(?:n[\u00fau]mero de cuenta bancaria internacional|n.[\u00b0o] de IBAN|IBAN|n.[\u00b0o] de cuenta bancaria internacional)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama Bank Account Number",
+    "regex": "\\d{18} , (?i)(?:n[\u00fau]mero de cuenta bancaria|detalles bancarios|n[\u00fau]mero de banco|c[\u00f3o]digo de cuenta|ID de cuenta|n[\u00fau]mero de cuenta|cuenta numerada)"
+  },
+  {
+    "value": "Panama Routing Number",
+    "regex": "\\d{9} , (?i)(?:n.[\u00b0o] de routing bancario|n[\u00fau]mero de routing|routing bancario|n.[\u00b0o] de routing|RTN)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama Business Number",
+    "regex": "\\d{10} , (?i)(?:n[\u00fau]mero de la negocios|n[\u00fau]mero de negocios|n.[\u00b0o] de ID de la negocios|n.[\u00b0o] de la negocios|ID de la negocios)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Panama Company Number",
+    "regex": "\\d{4}[- ]?\\d{6}[- ]?\\d{6} , (?i)(?:n[\u00fau]mero de identificaci[\u00f3o]n corporativo|n[\u00fau]mero de registro de la empresa|n.[\u00b0o] de la empresa|n[\u00fau]mero de la empresa|n[\u00fau]mero corporativo)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Slovakia License Plate Number",
+    "regex": "[A-Z0-9]{1,2}[ -]?([A-Z0-9]{1,2})?[ -]?[A-Z0-9]{3,5} , (?i)(?:registra[\u010dc]n[\u00e9e] [\u010dc].|[\u010dc][\u00edi]slo pozn[\u00e1a]vacej zna[\u010dc]ky|[\u010dc]. pozn[\u00e1a]vacej zna[\u010dc]ky|[\u010dc][\u00edi]slo zna[\u010dc]ky|registra[\u010dc]n[\u00e9e] [\u010dc][\u00edi]slo)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Slovakia Bank Account Number",
+    "regex": "(?:\\d{16}|\\d{12}) , (?i)(?:[\u010dc][\u00edi]slo bankov[\u00e9e]ho [\u00fau][\u010dc]tu|bankov[\u00e9e] [\u00fau]daje|bankov[\u00e9e] [\u010dc][\u00edi]slo|k[\u00f3o]d [\u00fau][\u010dc]tu|id [\u00fau][\u010dc]tu|[\u010dc][\u00edi]slo [\u00fau][\u010dc]tu|o[\u010dc][\u00edi]slovan[\u00fdy] [\u00fau][\u010dc]et)"
+  },
+  {
+    "value": "Slovakia Business Number",
+    "regex": "\\d{8,10} , (?i)(?:registra[\u010dc]n[\u00e9e] [\u010dc][\u00edi]slo obchodn[\u00e9e]|obchodn[\u00e9e] [\u010dc][\u00edi]slo|obchodn[\u00e9e] [\u010dc].|obchodn[\u00e9e] ID)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Slovakia Company Number",
+    "regex": "\\d{2}[ ]?\\d{3}[ ]?\\d{3} , (?i)(?:[\u010dc]. identifika[\u010dc]n[\u00e9e] [\u010dc][\u00edi]slo spolo[\u010dc]nosti|identifika[\u010dc]n[\u00e9e] [\u010dc][\u00edi]slo organiz[\u00e1a]cie|I[\u010dc]O spolo[\u010dc]nosti|[\u010dc][\u00edi]slo spolo[\u010dc]nosti)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine National ID Number",
+    "regex": "(?:\\d{8}[ -]?\\d{5}|\\d{9,10}) , (?i)(?:\u043f\u0435\u0440\u0441. \u043d\u043e\u043c\u0435\u0440\\#?|\u043d\u043e\u043c\u0435\u0440 \u043e\u0431\u043b\u0456\u043a\u043e\u0432\u043e\u0457 \u043a\u0430\u0440\u0442\u043a\u0438|\u043d\u0430\u0446\u0456\u043e\u043d\u0430\u043b\u044c\u043d\u0438\u0439 \u0456\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440|\u043d\u043e\u043c\u0435\u0440 \u043d\u0430\u0446\u0456\u043e\u043d\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f \u043e\u0441\u043e\u0431\u0438|\u043d\u0430\u0446. \u043f\u043e\u0441\u0432. \u043e\u0441\u043e\u0431\u0438)(?:\\b|(?<=[.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine Passport Number",
+    "regex": "[A-Z]{2}\\d{6} , (?i)(?:\u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f \u043e\u0441\u043e\u0431\u0438 \u0434\u043b\u044f \u043c\u0456\u0436\u043d\u0430\u0440\u043e\u0434\u043d\u0438\u0445 \u043f\u043e\u0457\u0437\u0434\u043e\u043a|\u043f\u0430\u0441\u043f\u043e\u0440\u0442\u043d\u0456 \u0434\u0430\u043d\u0456|\u0432\u0456\u0437\u0430|\u043d\u043e\u043c\u0435\u0440 \u043f\u0430\u0441\u043f\u043e\u0440\u0442\u0430|\u043f\u0440\u043e\u0457\u0437\u043d\u0438\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442|\u043e\u0440\u0433\u0430\u043d \u0432\u0438\u0434\u0430\u0447\u0456|\u043f\u0456\u0434\u0442\u0432\u0435\u0440\u0434\u0436\u0435\u043d\u043d\u044f \u043e\u0441\u043e\u0431\u0438|\u043f\u0430\u0441\u043f\u043e\u0440\u0442\u043d\u0438\u0439 \u0434\u043e\u043a.|\u043f\u0430\u0441\u043f\u043e\u0440\u0442 \u2116|\u043f\u0430\u0441\u043f\u043e\u0440\u0442)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine Driver's License Number",
+    "regex": "[A-Z]{3}[ ]?\\d{6} , (?i)(?:\u0410\u0433\u0435\u043d\u0442\u0441\u0442\u0432\u043e \u0437 \u043f\u0438\u0442\u0430\u043d\u044c \u043b\u0456\u0446\u0435\u043d\u0437\u0443\u0432\u0430\u043d\u043d\u044f \u0432\u043e\u0434\u0456\u0457\u0432 \u0442\u0430 \u0442\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442\u043d\u0438\u0445 \u0437\u0430\u0441\u043e\u0431\u0456\u0432|\u043d\u043e\u043c\u0435\u0440 \u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f \u0432\u043e\u0434\u0456\u044f|\u0444\u043e\u0442\u043e\u043a\u0430\u0440\u0442\u043a\u0430 \u0432\u043e\u0434\u0456\u044f|\u0432\u043e\u0434\u0456\u0439-\u0443\u0447\u0435\u043d\u044c|\u0432\u043b\u0430\u0441\u043d\u0438\u043a\u0438 \u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u044c|\u0432\u043b\u0430\u0441\u043d\u0438\u043a \u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f|\u043d\u043e\u043c\u0435\u0440 \u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f|\u0432\u043e\u0434\u0456\u0439\u0441\u044c\u043a\u0435 \u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f|\u0432\u043e\u0434\u0456\u0439\u0441\u044c\u043a\u0430 \u043b\u0456\u0446\u0435\u043d\u0437\u0456\u044f|\u043f\u043e\u0441\u0432\u0456\u0434\u0447\u0435\u043d\u043d\u044f \u0432\u043e\u0434\u0456\u044f|\u043b\u0456\u0446\u0435\u043d\u0437\u0456\u044f \u0432\u043e\u0434\u0456\u044f)"
+  },
+  {
+    "value": "Ukraine Tax ID Number",
+    "regex": "\\d{8,12} , (?i)(?:\u0456\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u043f\u043b\u0430\u0442\u043d\u0438\u043a\u0430 \u043f\u043e\u0434\u0430\u0442\u043a\u0456\u0432|\u0456\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0438\u0439 \u043d\u043e\u043c\u0435\u0440|\u0456\u0434\u0435\u043d\u0442\u0438\u0444\u0456\u043a\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0438\u0439 \u043a\u043e\u0434|\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u043f\u043b\u0430\u0442\u043d\u0438\u043a\u0430 \u043f\u043e\u0434\u0430\u0442\u043a\u0456\u0432|\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0438\u0439 \u043d\u043e\u043c\u0435\u0440\\#?|\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0438\u0439 \u2116\\#?|\u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0430 \u0441\u043f\u0440\u0430\u0432\u0430|\u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0438\u0439 \u043d\u043e\u043c\u0435\u0440\\#?|\u043f\u043e\u0434\u0430\u0442\u043a\u043e\u0432\u0438\u0439 \u2116\\#?|\u0406\u041f\u041d \u2116|\u0406\u041f\u041d\\#?)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine VAT ID Number",
+    "regex": "(?:\\d{12}|\\d{10}) , (?i)(?:\u043d\u043e\u043c\u0435\u0440 \u043f\u043b\u0430\u0442\u043d\u0438\u043a\u0430 \u043f\u043e\u0434\u0430\u0442\u043a\u0443 \u043d\u0430 \u0434\u043e\u0434\u0430\u043d\u0443 \u0432\u0430\u0440\u0442\u0456\u0441\u0442\u044c|\u043f\u043e\u0434\u0430\u0442\u043e\u043a \u043d\u0430 \u0434\u043e\u0434\u0430\u043d\u0443 \u0432\u0430\u0440\u0442\u0456\u0441\u0442\u044c|\u043d\u043e\u043c\u0435\u0440 \u041f\u0414\u0412|\u041f\u0414\u0412 \u2116|\u041f\u0414\u0412\\#?)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine Phone Number",
+    "regex": "(?:\\+?38|0038|0800)?[0]?[ -]?(\\d{2,3}[ -]?\\d{2,3}[ -]?\\d{3,5}|\\d{2}[ -]?\\d{2,3}[ -]?\\d{2}[ -]?\\d{2}) , (?i)(?:\u043c\u043e\u0431\u0456\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443|\u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443|\u0442\u0435\u043b\u0435\u0444\u043e\u043d \u2116|\u0442\u0435\u043b. \u2116|\u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b.|\u043c\u043e\u0431. \u043d\u043e\u043c.)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine Postcode",
+    "regex": "\\d{5} , (?i)(?:\u0430\u0434\u0440\u0435\u0441\u0430|\u043f\u043e\u0448\u0442\u043e\u0432\u0438\u0439 \u043a\u043e\u0434 \u0440\u0430\u0439\u043e\u043d\u0443|\u043f\u043e\u0448\u0442\u043e\u0432\u0438\u0439 \u043a\u043e\u0434 \u043e\u0431\u043b\u0430\u0441\u0442\u0456|\u043f\u043e\u0448\u0442\u043e\u0432\u0438\u0439 \u043a\u043e\u0434 \u0440\u043e\u0437\u0434\u0456\u043b\u0443|\u043f\u043e\u0448\u0442\u043e\u0432\u0438\u0439 \u043a\u043e\u0434 \u0441\u0435\u043a\u0442\u043e\u0440\u0430|\u043f\u043e\u0448\u0442\u043e\u0432\u0438\u0439 \u043a\u043e\u0434)"
+  },
+  {
+    "value": "Ukraine License Plate Number",
+    "regex": "[A-z0-9]{1,2}[- .]?\\d{3,4}[- .]?[A-Z0-9]{2,4} , (?i)(?:\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u0437\u043d\u0430\u043a \u043d\u043e\u043c\u0435\u0440|\u043d\u043e\u043c\u0435\u0440\u043d\u0438\u0439 \u0437\u043d\u0430\u043a \u043d\u043e\u043c\u0435\u0440|\u0430\u0432\u0442\u043e\u043c\u043e\u0431\u0456\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440\u043d\u0438\u0439 \u0437\u043d\u0430\u043a|\u0430\u0432\u0442\u043e\u043c\u043e\u0431\u0456\u043b\u044c\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440|\u043d\u043e\u043c\u0435\u0440\u043d\u0438\u0439 \u0437\u043d\u0430\u043a|\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u0437\u043d\u0430\u043a|\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440)"
+  },
+  {
+    "value": "Ukraine International Bank Account Number - IBAN",
+    "regex": "(UA)\\d{2}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d{4}[ -]?\\d , (?i)(?:\u043d\u043e\u043c\u0435\u0440 \u043c\u0456\u0436\u043d\u0430\u0440\u043e\u0434\u043d\u043e\u0433\u043e \u0431\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u043e\u0433\u043e \u0440\u0430\u0445\u0443\u043d\u043a\u0443|IBAN\\#?|\u043c\u0456\u0436\u043d\u0430\u0440\u043e\u0434\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0431\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u043e\u0433\u043e \u0440\u0430\u0445\u0443\u043d\u043a\u0443)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine Bank Account Number",
+    "regex": "\\d{19} , (?i)(?:\u043d\u043e\u043c\u0435\u0440 \u0431\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u043e\u0433\u043e \u0440\u0430\u0445\u0443\u043d\u043a\u0443|\u0431\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0456 \u0440\u0435\u043a\u0432\u0456\u0437\u0438\u0442\u0438|\u0456\u0434. \u043d\u043e\u043c\u0435\u0440 \u0440\u0430\u0445\u0443\u043d\u043a\u0443|\u043d\u043e\u043c\u0435\u0440 \u0431\u0430\u043d\u043a\u0443|\u043d\u043e\u043c\u0435\u0440 \u0440\u0430\u0445\u0443\u043d\u043a\u0443|\u043d\u043e\u043c\u0435\u0440 \u0440\u0430\u0445.|\u0440\u0430\u0445\u0443\u043d\u043e\u043a \u2116)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  },
+  {
+    "value": "Ukraine Business Number",
+    "regex": "\\d{8} , (?i)(?:\u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0439\u043d\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u043f\u0456\u0434\u043f\u0440\u0438\u0454\u043c\u0441\u0442\u0432\u0430|\u043d\u043e\u043c\u0435\u0440 \u043f\u0456\u0434\u043f\u0440\u0438\u0454\u043c\u0441\u0442\u0432\u0430|\u043f\u0456\u0434\u043f\u0440\u0438\u0454\u043c\u0441\u0442\u0432\u043e \u2116|\u043d\u043e\u043c. \u043f\u0456\u0434\u043f\u0440.\\#?|\u0456\u0434. \u043d\u043e\u043c. \u043f\u0456\u0434\u043f\u0440\u0438\u0454\u043c\u0441\u0442\u0432\u0430\\#?|\u043d\u043e\u043c. \u043f\u0456\u0434\u043f\u0440\u0438\u0454\u043c\u0441\u0442\u0432\u0430\\#?)(?:\\b|(?<=[\u2116.#])(?=\\W|$))"
+  }
+]

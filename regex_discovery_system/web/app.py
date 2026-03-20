@@ -113,10 +113,7 @@ def _get_run_files(slug: str) -> dict:
     """Gather all output files for a given run slug."""
     files = {}
     mapping = {
-        "patterns": f"{slug}_patterns.json",
         "regex_patterns": f"{slug}_regex_patterns.json",
-        "validation_report": f"{slug}_validation_report.json",
-        "final_report": f"{slug}_final_report.md",
         "source_of_truth": f"{slug}_source_of_truth.json",
     }
     for key, fname in mapping.items():
@@ -173,62 +170,15 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         _runs[run_id]["debug_log"] = str(run_log_path.relative_to(ROOT))
         logger.info("Per-run debug log → %s", run_log_path)
 
-        try:
-            import tools.search_tool as _st
-            _st.tavily_exhausted = False
-            _st.tavily_exhausted_msg = ""
-        except ImportError:
-            pass
-
-        try:
-            from tools.scraper.browser import reset_circuit_breaker
-            reset_circuit_breaker()
-        except ImportError:
-            pass
-
-        _runs[run_id]["step"] = "Step 1/4 — Data Collector + Policy Researcher"
-        _log(run_id, "Step 1/4: Data Collector + Policy Researcher (parallel)")
-        from concurrent.futures import ThreadPoolExecutor
-        from agents.data_collector import collect_data
+        _runs[run_id]["step"] = "Step 1/2 — Policy Researcher"
+        _log(run_id, "Step 1/2: Policy Researcher")
         from agents.policy_researcher import research_policies
-
-        with ThreadPoolExecutor(max_workers=2) as pool:
-            data_future = pool.submit(collect_data, condition, config, paths)
-            policy_future = pool.submit(research_policies, condition, config)
-
-        stats = data_future.result()
-        policies = policy_future.result()
-        source = stats.get("source", "unknown")
+        policies = research_policies(condition, config)
         policy_count = len(policies.get("policies", []))
-        _log(run_id, f"  Source: {source} | {stats['total']} values collected")
         _log(run_id, f"  Policy Researcher: {policy_count} rules (authority: {policies.get('numbering_authority', 'unknown')})")
 
-        try:
-            from tools.search_tool import tavily_exhausted as _tav_flag, tavily_exhausted_msg as _tav_msg
-            if _tav_flag:
-                _log(run_id, "  *** TAVILY QUOTA EXHAUSTED — Step 1 used DuckDuckGo fallback ***")
-                _log(run_id, "  Pipeline paused. Click 'Continue' to proceed with collected data, or stop and top up your Tavily credits.")
-                _runs[run_id]["status"] = "paused_tavily"
-                _runs[run_id]["step"] = "⏸ Paused — Tavily quota exhausted after Step 1"
-                _runs[run_id]["warning"] = (
-                    "Tavily quota exhausted — Step 1 used DuckDuckGo fallback. "
-                    "Click Continue to proceed with collected data, or stop to top up credits first."
-                )
-                evt = threading.Event()
-                _resume_events[run_id] = evt
-                evt.wait()          # blocks until /api/resume is called
-                del _resume_events[run_id]
-                _runs[run_id]["status"] = "running"
-                _runs[run_id]["warning"] = ""
-                _log(run_id, "  Resuming pipeline (Steps 2–4)...")
-        except ImportError:
-            pass
-
         sot = {
-            "data_source": source,
-            "total_values": stats.get("total", 0),
-            "train_count": stats.get("train", 0),
-            "test_count": stats.get("test", 0),
+            "condition": condition,
             "policies": policies.get("policies", []),
             "numbering_authority": policies.get("numbering_authority", ""),
             "vendor_patterns": policies.get("vendor_patterns", []),
@@ -239,27 +189,20 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         sot_path.write_text(json.dumps(sot, indent=2))
         _log(run_id, f"  Source-of-truth saved → {sot_path.name}")
 
-        _runs[run_id]["step"] = "Step 2/4 — Pattern Analyzer"
-        _log(run_id, "Step 2/4: Pattern Analyzer")
-        from agents.pattern_analyzer import analyze_patterns
-        patterns = analyze_patterns(condition, config, paths, policies=policies)
-        _log(run_id, f"  Found {len(patterns.get('format_rules', []))} rules")
-
-        _runs[run_id]["step"] = "Step 3/4 — Regex Generator"
-        _log(run_id, "Step 3/4: Regex Generator")
+        _runs[run_id]["step"] = "Step 2/2 — Regex Generator"
+        _log(run_id, "Step 2/2: Regex Generator")
         from agents.regex_generator import generate_regex
-        regex_result = generate_regex(config, paths, policies=policies)
+        regex_result = generate_regex(
+            condition,
+            config,
+            paths,
+            policies=policies,
+        )
         _log(run_id, f"  Generated {len(regex_result.get('patterns', []))} patterns")
 
-        _runs[run_id]["step"] = "Step 4/4 — Validator"
-        _log(run_id, "Step 4/4: Validator")
-        from agents.validator import validate
-        report = validate(config, paths, data_source=source, policies=policies)
-        _log(run_id, f"  Overall: {report['overall_status']} (mode: {report.get('validation_mode', 'unknown')})")
-
         _runs[run_id]["status"] = "done"
-        _runs[run_id]["step"] = f"Done — {report['overall_status']}"
-        _runs[run_id]["overall"] = report["overall_status"]
+        _runs[run_id]["step"] = "Done"
+        _runs[run_id]["overall"] = "COMPLETE"
         _log(run_id, "Pipeline complete.")
 
     except Exception as exc:
@@ -482,25 +425,24 @@ def _llm_compare(slug: str, scored: list[dict], sys_kw: str, user_kw: str, confi
 
     condition = slug.replace("_", " ")
 
-    # Load the discovered format rules so the LLM knows exactly what conditions
-    # the identifier is supposed to satisfy.
+    # Load the policy rules from source_of_truth (Pattern Analyzer bypassed)
     known_rules: list[str] = []
     range_restrictions: list[str] = []
-    patterns_path = RESULTS_DIR / f"{slug}_patterns.json"
-    if patterns_path.exists():
+    sot_path = RESULTS_DIR / f"{slug}_source_of_truth.json"
+    if sot_path.exists():
         try:
-            pd = json.loads(patterns_path.read_text())
-            for r in pd.get("format_rules", []):
-                known_rules.append(f"[{r.get('rule_id','')}] {r.get('description','')}")
-            for rr in pd.get("range_restrictions", []):
-                range_restrictions.append(
-                    f"position {rr.get('position','')} → {rr.get('allowed_values','')} ({rr.get('source','')})"
-                )
+            sot = json.loads(sot_path.read_text())
+            for r in sot.get("policies", []):
+                known_rules.append(f"[policy] {r}")
+            for vp in sot.get("vendor_patterns", []):
+                vendor = vp.get("vendor", "Unknown")
+                for vrule in vp.get("rules", []):
+                    known_rules.append(f"[{vendor}] {vrule}")
         except Exception:
             pass
 
     rules_block = "\n".join(f"  - {r}" for r in known_rules) if known_rules else "  (not available)"
-    ranges_block = "\n".join(f"  - {r}" for r in range_restrictions) if range_restrictions else "  (none)"
+    ranges_block = "  (Pattern Analyzer bypassed - no position constraints)"
 
     regex_block_lines = []
     for s in scored:

@@ -310,22 +310,63 @@ def _strip_anchors_add_boundaries(regex_str: str) -> str:
 
 
 def generate_regex(
+    condition: str,
     config: dict,
     paths: dict[str, str] | None = None,
     policies: dict | None = None,
 ) -> dict:
-    patterns_path = (paths or {}).get("patterns", "results/patterns.json")
+    """Generate regex patterns directly from policies.
+    
+    Args:
+        condition: The identifier type (e.g. "India Bank Account Number")
+        config: Configuration dict
+        paths: Path dict for output files
+        policies: Policy Researcher output containing policies, vendor_patterns, etc.
+    """
     regex_path = (paths or {}).get("regex_patterns", "results/regex_patterns.json")
 
-    with open(patterns_path) as f:
-        patterns = json.load(f)
+    # Build format_rules from policies
+    # Each policy rule becomes a format rule
+    format_rules: list[dict] = []
+    if policies and policies.get("policies"):
+        for i, rule in enumerate(policies["policies"]):
+            format_rules.append({
+                "rule_id": f"policy-rule-{i+1}",
+                "description": rule,
+                "applies_to": "all",
+                "example_matches": [],
+            })
 
-    condition = patterns.get("condition", "unknown")
-    format_rules = patterns.get("format_rules", [])
-    range_restrictions = patterns.get("range_restrictions", [])
-    keywords = patterns.get("contextual_keywords", [])
-    proximity = patterns.get("keyword_proximity", 10)
-    numbering_policy = patterns.get("numbering_policy", "").strip()
+    # Extract vendor regex as additional format rules
+    if policies and policies.get("vendor_patterns"):
+        for vp in policies["vendor_patterns"]:
+            vendor = vp.get("vendor", "Unknown")
+            vendor_regex = vp.get("regex")
+            vendor_rules = vp.get("rules", [])
+            
+            if vendor_rules:
+                for j, vrule in enumerate(vendor_rules):
+                    format_rules.append({
+                        "rule_id": f"vendor-{vendor.lower().replace(' ', '-')}-{j+1}",
+                        "description": f"[{vendor}] {vrule}",
+                        "applies_to": "all",
+                        "example_matches": [],
+                    })
+
+    # No range_restrictions without Pattern Analyzer
+    range_restrictions: list[dict] = []
+    
+    # Get keywords from vendor patterns
+    keywords: list[str] = []
+    if policies and policies.get("vendor_keywords"):
+        keywords = policies["vendor_keywords"]
+    elif policies and policies.get("vendor_patterns"):
+        for vp in policies["vendor_patterns"]:
+            keywords.extend(vp.get("keywords", []))
+        keywords = list(dict.fromkeys(keywords))  # dedupe
+    
+    proximity = 10
+    numbering_policy = ""
 
     # Build an enriched policy string that also includes the raw policy rules and
     # vendor DLP patterns discovered by Agent 1P.  Agent 2 only captures what it
@@ -373,6 +414,17 @@ def generate_regex(
         logger.warning("Agent 3: no numbering_policy found in patterns — per-position constraints may be missed")
 
     logger.info("Agent 3: generating regex for %d rules + keyword pattern", len(format_rules))
+
+    # If no format_rules were extracted, create a single rule asking LLM to generate
+    # a regex directly for the condition based on policies
+    if not format_rules:
+        logger.info("Agent 3: no format_rules from policies, creating direct condition rule")
+        format_rules = [{
+            "rule_id": "direct-condition",
+            "description": f"Match valid {condition} values",
+            "applies_to": "all",
+            "example_matches": [],
+        }]
 
     range_lookup: dict[str, dict] = {}
     for rr in range_restrictions:
