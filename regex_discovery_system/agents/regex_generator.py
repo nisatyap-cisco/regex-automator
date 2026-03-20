@@ -20,55 +20,66 @@ NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here
 {numbering_policy}
 
 Requirements:
-- Use raw string notation.
 - Do NOT use ^ or $ anchors. The regex will be used for search within text.
-- Use \\b (word boundary) at the start and end of the pattern to prevent
-  partial matches within longer strings.
+- Use \\b (word boundary) at the start and end of the pattern.
 - Avoid catastrophic backtracking.
 - Prefer character classes and quantifiers over alternation where possible.
-- CRITICAL: If the numbering policy states a per-position restriction
-  (e.g. "first digit cannot be 0 or 1", "first digit is always 6"),
-  you MUST encode it as an explicit character class at that position
-  (e.g. [2-9] instead of \\d, or [6] instead of \\d).
-- NEVER include literal placeholder strings like "XXX" or "NNN" in the regex.
-  If an optional part can be any characters, use the appropriate character
-  class (e.g. [A-Z0-9]{{3}} not XXX).
-- If the rule involves check digits, encode the structural pattern only
-  (check-digit validation is done in code, not regex).
+- CRITICAL per-position restrictions: use explicit character classes, never \\d or .
+  where a stricter class applies (e.g. [2-9] not \\d when first digit cannot be 0 or 1).
+- REDUNDANCY: if the pattern has a fixed length through explicit quantifiers,
+  do NOT add a length lookahead — it is redundant.
+- NEVER include literal placeholder strings like "XXX" or "NNN".
+- If the rule involves check digits, encode the structural pattern only.
 
-Return ONLY the regex string, no explanation."""
+Return ONLY the regex string, no explanation, no markdown."""
 
-COMBINED_PROMPT_TEMPLATE = """You are a regex engineering expert.
+COMBINED_PROMPT_TEMPLATE = """You are a regex engineering expert tasked with producing the mathematically minimal unified regex.
 
-Write a SINGLE Python-compatible regex that matches values satisfying ALL of the following rules SIMULTANEOUSLY (AND logic, not OR):
+Given the individual rules and their regexes below, produce ONE unified Python-compatible regex with ZERO duplicated constraints.
 
-RULES:
+INDIVIDUAL RULES:
 {rules_list}
 
 RANGE CONSTRAINTS: {range_restrictions}
 EXAMPLE MATCHES: {example_matches}
 
-NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here):
+NUMBERING POLICY (authoritative — encode ALL structural constraints here):
 {numbering_policy}
 
-Requirements:
-- The regex must enforce ALL rules at the same time — a value must satisfy every rule to match.
-- Use lookahead assertions ((?=...)) to layer simultaneous constraints where needed.
-- Do NOT use ^ or $ anchors. The regex will be used for search within text.
-- Use \\b (word boundary) at the start and end of the pattern to prevent partial matches.
-- Avoid catastrophic backtracking.
-- Prefer the most specific structural pattern that naturally satisfies all constraints over a
-  chain of lookaheads when possible.
-- CRITICAL: If the numbering policy states a per-position restriction
-  (e.g. "first digit cannot be 0 or 1", "second character must be a letter"),
-  you MUST encode it as an explicit character class at that position
-  (e.g. [2-9]\\d{{3}} \\d{{4}} \\d{{4}} instead of \\d{{4}} \\d{{4}} \\d{{4}}).
-  Do NOT substitute \\d where a restricted character class applies.
-- NEVER use alternation (|) to join the individual rule regexes — that would be OR logic.
-- NEVER include literal placeholder strings like "XXX" or "NNN".
-- If a rule involves check digits, encode the structural pattern only.
+MINIMALITY RULES — follow strictly:
 
-Return ONLY the regex string, no explanation."""
+1. MERGE first: encode every constraint directly into the positional pattern where possible.
+   A constraint that fits into the character class at a specific position must go there —
+   NOT in a lookahead. Example: "first char is a letter" → [A-Z] at position 0, not (?=[A-Z]).
+
+2. LOOKAHEADS only for cross-position constraints that CANNOT be expressed positionally
+   (e.g. "total digit count across non-contiguous segments must equal N").
+   If a lookahead only re-asserts something already guaranteed by the main pattern, DELETE it.
+
+3. REMOVE redundant length assertions: if the final pattern has a fixed length through
+   explicit quantifiers (e.g. [A-Z]{{2}}\\d{{4}}[A-Z]{{2}} = exactly 8 chars), do NOT also
+   add (?=.{{8}}) or (?=\\S{{8}}) — that is redundant.
+
+4. REMOVE general patterns subsumed by stricter ones: if one rule says \\d{{10}} and another
+   says [2-9]\\d{{9}}, use only [2-9]\\d{{9}} — the general form is made redundant by the strict one.
+
+5. NEVER use alternation (|) across the individual rule regexes — that would be OR logic.
+
+6. NEVER use ^ or $ anchors. Use \\b at start and end for word boundary.
+
+7. NEVER include literal placeholders like XXX or NNN.
+
+8. If a rule involves check digits, encode the structural pattern only (not the check algorithm).
+
+9. CRITICAL per-position restrictions: always use explicit character classes, never \\d or .
+   where a stricter class applies (e.g. [2-9] not \\d when first digit cannot be 0 or 1).
+
+Before writing the final regex, mentally verify:
+- Is every constraint from the rules encoded exactly once?
+- Does any lookahead duplicate what the main pattern already guarantees? If yes, remove it.
+- Does the pattern have a fixed length through quantifiers? If yes, remove any length lookahead.
+
+Return ONLY the final unified regex string. No explanation, no markdown, no comments."""
 
 REFINEMENT_TEMPLATE = """The regex you provided failed to compile in Python.
 
