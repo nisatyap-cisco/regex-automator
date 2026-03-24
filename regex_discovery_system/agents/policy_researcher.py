@@ -188,6 +188,9 @@ def research_policies(condition: str, config: dict) -> dict:
         logger.info("Agent 1P: no web results — asking LLM from its own knowledge")
         result = _llm_fallback(condition, config, result)
 
+    # Phase 4: Extract separator/grouping spec from vendor regexes and policies
+    result["separator_spec"] = extract_separator_spec(result)
+
     return result
 
 
@@ -307,6 +310,244 @@ def _html_to_text(html: str) -> str:
         return "\n".join(lines)
     except Exception:
         return ""
+
+
+# ── Separator spec extraction ─────────────────────────────────────────────────
+
+import re as _re
+
+# Regex tokens that consume digits in a vendor regex pattern.
+_DIGIT_TOKEN_RE = _re.compile(
+    r'\\d(?:\{(\d+)\})?'          # \d or \d{N}
+    r'|\[([0-9][0-9\-]*)\]'        # [0-9], [2-9], [0-8], etc.
+    r'(?:\{(\d+)\})?',             # optional {N} after char class
+    _re.VERBOSE,
+)
+
+# Tokens that look like separators between digit groups in a vendor regex.
+_SEPARATOR_TOKEN_RE = _re.compile(
+    r'\\[.]'                       # \.
+    r'|\\s[?+*]?'                  # \s, \s?, \s+
+    r'|\[([^\]]*(?:(?:\\s|\\-|\s|-|\.))[^\]]*)\][?+*]?'  # [\s-]?, [.\s-]?, etc.
+    r'|-'                           # literal hyphen
+    r'|\s',                        # literal space
+)
+
+
+def _parse_vendor_regex_for_groups(regex_str: str) -> dict | None:
+    """Parse a vendor DLP regex string to extract digit-group structure.
+
+    Scans the regex left-to-right, identifies digit-consuming tokens and
+    separator tokens between them.  Returns a separator_spec dict or None
+    if no group structure is found.
+
+    Examples:
+        \\d{4}\\s?\\d{4}\\s?\\d{4}  →  groups=[4,4,4], seps=[" "]
+        \\d{2}\\.\\d{3}\\.\\d{3}      →  groups=[2,3,3], seps=["."]  
+        [2-9]\\d{3}\\d{4}\\d{4}       →  groups=[4,4,4], seps=[]  (no seps)
+    """
+    if not regex_str:
+        return None
+
+    # Tokenize: walk the regex and classify each token as digit or separator.
+    tokens: list[dict] = []  # {"type": "digit"|"sep", "width": int, "chars": set}
+    pos = 0
+    while pos < len(regex_str):
+        # Try digit token
+        md = _DIGIT_TOKEN_RE.match(regex_str, pos)
+        if md:
+            raw = md.group(0)
+            # Calculate width: \d{4} → 4, \d → 1, [2-9] → 1, [2-9]{3} → 3
+            width = 1
+            # Check for {N} quantifier
+            quant_match = _re.search(r'\{(\d+)\}$', raw)
+            if quant_match:
+                width = int(quant_match.group(1))
+            tokens.append({"type": "digit", "width": width})
+            pos = md.end()
+            continue
+
+        # Try separator token
+        ms = _SEPARATOR_TOKEN_RE.match(regex_str, pos)
+        if ms:
+            raw = ms.group(0)
+            # Extract which separator characters are allowed
+            chars: set[str] = set()
+            if '\\s' in raw or '\\s' in raw or raw.strip() == ' ':
+                chars.add(' ')
+            if '\\.' in raw or raw == '\\.':
+                chars.add('.')
+            if '-' in raw and raw != '-':
+                chars.add('-')
+            elif raw == '-':
+                chars.add('-')
+            if '.' in raw and '\\.' not in raw:
+                chars.add('.')
+            # If we couldn't identify specific chars, add generic space+hyphen
+            if not chars:
+                chars = {' ', '-'}
+            tokens.append({"type": "sep", "chars": chars})
+            pos = ms.end()
+            continue
+
+        # Skip non-digit, non-separator tokens (anchors, lookaheads, groups, etc.)
+        pos += 1
+
+    # Now extract group_lengths: accumulate digit widths, split at separator tokens.
+    if not tokens:
+        return None
+
+    group_lengths: list[int] = []
+    current_group = 0
+    observed_separators: set[str] = set()
+    found_separator = False
+
+    for tok in tokens:
+        if tok["type"] == "digit":
+            current_group += tok["width"]
+        elif tok["type"] == "sep":
+            if current_group > 0:
+                group_lengths.append(current_group)
+                current_group = 0
+            observed_separators.update(tok["chars"])
+            found_separator = True
+
+    # Append the last group
+    if current_group > 0:
+        group_lengths.append(current_group)
+
+    if not found_separator or len(group_lengths) < 2:
+        return None
+
+    return {
+        "has_separators": True,
+        "observed_separators": sorted(observed_separators),
+        "group_lengths": group_lengths,
+        "source": "vendor_regex",
+    }
+
+
+def _parse_policy_text_for_groups(policy_text: str) -> dict | None:
+    """Extract group structure from policy prose or display format patterns.
+
+    Looks for patterns like:
+        "XXXX XXXX XXXX", "NNNN-NNNN-NNNN", "NN.NNN.NNN",
+        "displayed in groups of 4 separated by spaces"
+    """
+    if not policy_text:
+        return None
+
+    # Pattern 1: Explicit display format like XXXX XXXX XXXX, NNNN-NNNN-NNNN, etc.
+    fmt_match = _re.search(
+        r'["\']?([NXD0-9#]{2,}(?:[\s.\-/][NXD0-9#]{2,})+)["\']?',
+        policy_text,
+        _re.IGNORECASE,
+    )
+    if fmt_match:
+        fmt_str = fmt_match.group(1)
+        # Split on non-alphanumeric separators
+        groups = _re.split(r'[^A-Z0-9NXD#]+', fmt_str, flags=_re.IGNORECASE)
+        groups = [g for g in groups if g]
+        if len(groups) >= 2:
+            # Find which separator chars are used
+            sep_chars = set(_re.findall(r'[\s.\-/]', fmt_str))
+            if ' ' in sep_chars or '\t' in sep_chars:
+                sep_chars.discard('\t')
+                sep_chars.add(' ')
+            return {
+                "has_separators": True,
+                "observed_separators": sorted(sep_chars) if sep_chars else [" "],
+                "group_lengths": [len(g) for g in groups],
+                "source": "policy_text",
+            }
+
+    # Pattern 2: Prose like "groups of 4 separated by spaces"
+    prose_match = _re.search(
+        r'groups?\s+of\s+(\d+)\s+(?:digits?\s+)?(?:separated|delimited|split)\s+by\s+(\w+)',
+        policy_text,
+        _re.IGNORECASE,
+    )
+    if prose_match:
+        group_size = int(prose_match.group(1))
+        sep_word = prose_match.group(2).lower()
+        sep_char_map = {
+            "spaces": " ", "space": " ", "hyphens": "-", "hyphen": "-",
+            "dashes": "-", "dash": "-", "dots": ".", "dot": ".",
+            "periods": ".", "period": ".",
+        }
+        sep_char = sep_char_map.get(sep_word, " ")
+        return {
+            "has_separators": True,
+            "observed_separators": [sep_char],
+            "group_lengths": [group_size],  # only know the group size, not count
+            "source": "policy_prose",
+        }
+
+    return None
+
+
+def extract_separator_spec(result: dict) -> dict:
+    """Extract separator/grouping spec from vendor regexes and policy rules.
+
+    Priority:
+      1. Vendor regex patterns (deterministic parse — most reliable)
+      2. Policy rule text (LLM-extracted prose — good fallback)
+
+    Returns a dict with keys:
+      - has_separators: bool
+      - observed_separators: list[str]  (e.g. [" ", "-"])
+      - group_lengths: list[int]        (e.g. [4, 4, 4])
+      - source: str
+    """
+    # Source 1: parse vendor regex strings (most reliable)
+    all_specs: list[dict] = []
+    for vp in result.get("vendor_patterns", []):
+        regex = vp.get("regex")
+        if regex:
+            spec = _parse_vendor_regex_for_groups(regex)
+            if spec:
+                all_specs.append(spec)
+                logger.debug(
+                    "Agent 1P [separator]: vendor %s regex → groups=%s seps=%s",
+                    vp.get("vendor", "?"), spec["group_lengths"], spec["observed_separators"],
+                )
+
+    # If multiple vendors agree on group_lengths, high confidence
+    if all_specs:
+        # Pick the most common group_lengths
+        from collections import Counter
+        gl_counts = Counter(tuple(s["group_lengths"]) for s in all_specs)
+        best_gl = list(gl_counts.most_common(1)[0][0])
+        # Merge all observed separators across vendors
+        merged_seps: set[str] = set()
+        for s in all_specs:
+            if s["group_lengths"] == best_gl:
+                merged_seps.update(s["observed_separators"])
+        spec = {
+            "has_separators": True,
+            "observed_separators": sorted(merged_seps),
+            "group_lengths": best_gl,
+            "source": "vendor_regex",
+            "vendor_count": gl_counts.most_common(1)[0][1],
+        }
+        logger.info(
+            "Agent 1P [separator]: extracted from %d vendor regex(es) → groups=%s seps=%s",
+            len(all_specs), spec["group_lengths"], spec["observed_separators"],
+        )
+        return spec
+
+    # Source 2: parse policy rule text
+    for policy_text in result.get("policies", []):
+        spec = _parse_policy_text_for_groups(policy_text)
+        if spec:
+            logger.info(
+                "Agent 1P [separator]: extracted from policy text → groups=%s seps=%s",
+                spec["group_lengths"], spec["observed_separators"],
+            )
+            return spec
+
+    logger.info("Agent 1P [separator]: no separator structure found")
+    return {"has_separators": False}
 
 
 def _parse_json(text: str) -> dict:

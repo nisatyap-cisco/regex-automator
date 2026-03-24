@@ -30,6 +30,10 @@ Requirements:
   do NOT add a length lookahead — it is redundant.
 - NEVER include literal placeholder strings like "XXX" or "NNN".
 - If the rule involves check digits, encode the structural pattern only.
+- SEPARATOR HANDLING: If the numbering policy or vendor patterns indicate this
+  identifier is commonly displayed with separators (spaces, hyphens, periods)
+  between digit groups, include optional separator groups like [\s-]? between
+  each digit group so both the separated and contiguous forms match.
 
 Return ONLY the regex string, no explanation, no markdown."""
 
@@ -73,6 +77,12 @@ MINIMALITY RULES — follow strictly:
 
 9. CRITICAL per-position restrictions: always use explicit character classes, never \\d or .
    where a stricter class applies (e.g. [2-9] not \\d when first digit cannot be 0 or 1).
+
+10. SEPARATOR HANDLING: If the numbering policy or vendor patterns indicate this
+    identifier is commonly displayed with separators (spaces, hyphens, periods)
+    between digit groups, include optional separator groups like [\s-]? between
+    each digit group. The contiguous (no-separator) form MUST also match.
+    Do NOT drop separators during merging — they are NOT redundancy.
 
 Before writing the final regex, mentally verify:
 - Is every constraint from the rules encoded exactly once?
@@ -320,6 +330,222 @@ def _strip_anchors_add_boundaries(regex_str: str) -> str:
     return r
 
 
+# ── Separator injection ───────────────────────────────────────────────────────
+
+# Regex that matches digit-consuming tokens in a regex string.
+_DIGIT_TOKEN_PATTERN = re.compile(
+    r'(?:'
+    r'\\d(?:\{\d+\})?'              # \d or \d{N}
+    r'|\[[0-9][0-9\-]*\](?:\{\d+\})?'  # [2-9], [0-9]{3}, etc.
+    r')'
+)
+
+# Regex that matches existing rigid separator tokens between digit groups.
+_RIGID_SEP_PATTERN = re.compile(
+    r'(?:'
+    r'\\[.]'                        # \.
+    r'|\\s[?]?'                     # \s or \s?
+    r'|\[(?:[^\]]*(?:\\s|\\\-|\s|\-|\.)[^\]]*)\][?]?'  # [\s-]?, etc.
+    r'|(?<!\\)-'                    # literal hyphen (not escaped \-)
+    r')'
+)
+
+
+def _digit_token_width(token: str) -> int:
+    """Return how many digits a single regex token consumes.
+
+    Examples: \\d{4} → 4, \\d → 1, [2-9] → 1, [0-9]{3} → 3.
+    """
+    m = re.search(r'\{(\d+)\}$', token)
+    if m:
+        return int(m.group(1))
+    return 1
+
+
+def _build_separator_class(observed_separators: list[str]) -> str:
+    """Build an optional separator character class from observed separator chars.
+
+    Examples:
+        [" ", "-"]   → "[\\s\\-]?"
+        ["."]        → "[.]?"
+        [" "]        → "\\s?"
+        [".", " ", "-"] → "[.\\s\\-]?"
+    """
+    if not observed_separators:
+        return "[\\s\\-]?"  # safe default
+
+    parts: list[str] = []
+    for sep in observed_separators:
+        if sep == " ":
+            parts.append("\\s")
+        elif sep == "-":
+            parts.append("\\-")
+        elif sep == ".":
+            parts.append(".")
+        else:
+            parts.append(re.escape(sep))
+
+    if len(parts) == 1 and parts[0] == "\\s":
+        return "\\s?"
+    return "[" + "".join(parts) + "]?"
+
+
+def _inject_optional_separators(regex_str: str, separator_spec: dict) -> str:
+    """Deterministic post-processing: inject optional separators between digit groups.
+
+    Uses the separator_spec (from vendor/policy analysis) to know:
+      - group_lengths: e.g. [4, 4, 4] for Aadhaar
+      - observed_separators: e.g. [" ", "-"]
+
+    Walks the regex, accumulates digit-token widths into "buckets" defined
+    by group_lengths, and inserts separator character classes at each
+    bucket boundary.  Existing rigid separators (like \\.) are replaced
+    with flexible ones (like [.\\s\\-]?).
+
+    If the regex already has correct flexible separators, it is returned
+    unchanged.  If injection breaks compilation, the original is returned.
+    """
+    if not separator_spec.get("has_separators"):
+        return regex_str
+
+    group_lengths = separator_spec.get("group_lengths", [])
+    observed_seps = separator_spec.get("observed_separators", [" ", "-"])
+
+    if not group_lengths or len(group_lengths) < 2:
+        return regex_str
+
+    sep_class = _build_separator_class(observed_seps)
+
+    # Strip \b boundaries for processing, re-add later.
+    core = regex_str
+    prefix = ""
+    suffix = ""
+    if core.startswith("\\b"):
+        prefix = "\\b"
+        core = core[2:]
+    if core.endswith("\\b"):
+        suffix = "\\b"
+        core = core[:-2]
+
+    # Tokenize the core regex into digit tokens, existing separators, and "other" chunks.
+    segments: list[dict] = []  # {"type": "digit"|"sep"|"other", "text": str, "width": int}
+    pos = 0
+    while pos < len(core):
+        # Try digit token
+        md = _DIGIT_TOKEN_PATTERN.match(core, pos)
+        if md:
+            token_text = md.group(0)
+            segments.append({
+                "type": "digit",
+                "text": token_text,
+                "width": _digit_token_width(token_text),
+            })
+            pos = md.end()
+            continue
+
+        # Try existing separator token (between digit groups)
+        ms = _RIGID_SEP_PATTERN.match(core, pos)
+        if ms:
+            segments.append({"type": "sep", "text": ms.group(0), "width": 0})
+            pos = ms.end()
+            continue
+
+        # Other character (lookahead, anchor, group marker, etc.) — keep as-is
+        segments.append({"type": "other", "text": core[pos], "width": 0})
+        pos += 1
+
+    # Count total digit width in the regex
+    total_digit_width = sum(s["width"] for s in segments if s["type"] == "digit")
+    total_group_width = sum(group_lengths)
+
+    # If total digits in regex don't match group_lengths sum, we can't reliably
+    # align buckets — bail out to avoid breaking the regex.
+    if total_digit_width != total_group_width:
+        logger.warning(
+            "Agent 3 [separator]: digit width mismatch (regex=%d vs groups=%d), skipping injection",
+            total_digit_width, total_group_width,
+        )
+        return regex_str
+
+    # Walk segments, fill buckets, and insert separators at boundaries.
+    result_parts: list[str] = []
+    bucket_idx = 0
+    filled = 0
+
+    for seg in segments:
+        if seg["type"] != "digit":
+            # Existing separator between digit groups — replace with flexible class
+            if seg["type"] == "sep" and bucket_idx < len(group_lengths) and filled == 0:
+                # This separator is at a bucket boundary — replace it
+                result_parts.append(sep_class)
+            elif seg["type"] == "sep":
+                # Separator mid-bucket or at boundary — replace regardless
+                result_parts.append(sep_class)
+            else:
+                result_parts.append(seg["text"])
+            continue
+
+        # Digit token — fill the current bucket
+        remaining_width = seg["width"]
+
+        while remaining_width > 0 and bucket_idx < len(group_lengths):
+            space_in_bucket = group_lengths[bucket_idx] - filled
+
+            if remaining_width <= space_in_bucket:
+                # Token fits entirely in current bucket
+                if remaining_width == seg["width"]:
+                    # Emit the original token text (preserves [2-9] etc.)
+                    result_parts.append(seg["text"])
+                else:
+                    # We already emitted part of a split token; emit remainder
+                    result_parts.append(f"\\d{{{remaining_width}}}")
+                filled += remaining_width
+                remaining_width = 0
+
+                # Check if bucket is now full
+                if filled == group_lengths[bucket_idx]:
+                    bucket_idx += 1
+                    filled = 0
+                    # Insert separator if not the last bucket, and next segment
+                    # is not already a separator
+                    if bucket_idx < len(group_lengths):
+                        # Peek ahead to see if next segment is already a separator
+                        seg_idx = segments.index(seg)
+                        next_is_sep = (
+                            seg_idx + 1 < len(segments)
+                            and segments[seg_idx + 1]["type"] == "sep"
+                        )
+                        if not next_is_sep:
+                            result_parts.append(sep_class)
+            else:
+                # Token overflows current bucket — split it
+                take = space_in_bucket
+                if take == seg["width"] and remaining_width == seg["width"]:
+                    # First chunk — preserve original token if possible
+                    # But we need to split, so emit \d{take}
+                    result_parts.append(f"\\d{{{take}}}")
+                else:
+                    result_parts.append(f"\\d{{{take}}}")
+                filled += take
+                remaining_width -= take
+
+                # Bucket is full
+                bucket_idx += 1
+                filled = 0
+                if bucket_idx < len(group_lengths):
+                    result_parts.append(sep_class)
+
+    injected = prefix + "".join(result_parts) + suffix
+
+    # Safety: verify the injected regex still compiles
+    if _try_compile(injected) is None:
+        logger.warning("Agent 3 [separator]: injection broke regex, reverting to original")
+        return regex_str
+
+    logger.info("Agent 3 [separator]: %s → %s", regex_str, injected)
+    return injected
+
+
 def generate_regex(
     config: dict,
     paths: dict[str, str] | None = None,
@@ -383,6 +609,16 @@ def generate_regex(
     else:
         logger.warning("Agent 3: no numbering_policy found in patterns — per-position constraints may be missed")
 
+    # Extract separator spec from policies (vendor regex / policy text).
+    separator_spec = (policies or {}).get("separator_spec", {})
+    if separator_spec.get("has_separators"):
+        logger.info(
+            "Agent 3: separator_spec detected — groups=%s seps=%s (source: %s)",
+            separator_spec.get("group_lengths"),
+            separator_spec.get("observed_separators"),
+            separator_spec.get("source", "unknown"),
+        )
+
     logger.info("Agent 3: generating regex for %d rules + keyword pattern", len(format_rules))
 
     range_lookup: dict[str, dict] = {}
@@ -416,6 +652,7 @@ def generate_regex(
         response = invoke_claude(prompt, config)
         regex_str = _clean_regex_response(response)
         regex_str = _strip_anchors_add_boundaries(regex_str)
+        regex_str = _inject_optional_separators(regex_str, separator_spec)
 
         compiled = _try_compile(regex_str)
         if compiled is None:
@@ -429,6 +666,7 @@ def generate_regex(
             response2 = invoke_claude(refinement, config)
             regex_str = _clean_regex_response(response2)
             regex_str = _strip_anchors_add_boundaries(regex_str)
+            regex_str = _inject_optional_separators(regex_str, separator_spec)
 
             compiled = _try_compile(regex_str)
             if compiled is None:
@@ -463,6 +701,7 @@ def generate_regex(
         combined_response = invoke_claude(combined_prompt, config)
         combined_regex = _clean_regex_response(combined_response)
         combined_regex = _strip_anchors_add_boundaries(combined_regex)
+        combined_regex = _inject_optional_separators(combined_regex, separator_spec)
 
         compiled = _try_compile(combined_regex)
         if compiled is None:
@@ -475,6 +714,7 @@ def generate_regex(
             combined_response2 = invoke_claude(refinement, config)
             combined_regex = _clean_regex_response(combined_response2)
             combined_regex = _strip_anchors_add_boundaries(combined_regex)
+            combined_regex = _inject_optional_separators(combined_regex, separator_spec)
             compiled = _try_compile(combined_regex)
 
         if compiled is not None:
