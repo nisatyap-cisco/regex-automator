@@ -14,8 +14,6 @@ Write a single Python-compatible regex that matches values satisfying this rule:
 
 RULE: {rule_description}
 HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
-STATISTICAL OBSERVATIONS (sample-derived — for context only, do NOT use for
-per-position character restrictions): {statistical_observations}
 EXAMPLE MATCHES: {example_matches}
 
 NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here):
@@ -34,10 +32,8 @@ Requirements:
 - CRITICAL: Encode HARD CONSTRAINTS (from policy or vendor sources) as explicit
   character classes at the specified positions (e.g. [2-9] not \\d when the policy
   says first digit cannot be 0 or 1).
-- STATISTICAL OBSERVATIONS are informational only — they describe what appeared
-  in samples.  Do NOT restrict character classes based on observations alone.
-  Use the full character class for that position type (\\d, [A-Z], etc.) unless
-  a HARD CONSTRAINT narrows it.
+- For positions WITHOUT a hard constraint, use the full character class for that
+  position type (\\d for digits, [A-Z] for letters, [A-Z0-9] for alphanumeric).
 - Consider optional separators (spaces, hyphens) between segments when the
   identifier might appear formatted in real documents.
 Return ONLY the regex string, no explanation, no markdown."""
@@ -50,21 +46,10 @@ INDIVIDUAL RULES:
 {rules_list}
 
 HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
-STATISTICAL OBSERVATIONS (sample-derived — for context only): {statistical_observations}
 EXAMPLE MATCHES: {example_matches}
 
 NUMBERING POLICY (authoritative — encode ALL structural constraints here):
 {numbering_policy}
-
-CONSTRAINT HIERARCHY — follow strictly:
-- HARD CONSTRAINTS come from official policy, vendor regex, or documented authority.
-  These MUST be encoded as explicit character classes at the specified positions.
-- STATISTICAL OBSERVATIONS describe what appeared in sample data.
-  These are informational context — do NOT use them to restrict character classes.
-  Use the full class for the position type (\\d, [A-Z], etc.) unless a HARD CONSTRAINT
-  says otherwise.
-- When a HARD CONSTRAINT and STATISTICAL OBSERVATION conflict, ALWAYS keep the
-  HARD CONSTRAINT and ignore the observation.
 
 MINIMALITY RULES — follow strictly:
 
@@ -80,7 +65,6 @@ MINIMALITY RULES — follow strictly:
 
 4. REMOVE general patterns subsumed by stricter HARD-CONSTRAINT ones: if one rule says
    \\d{{10}} and a hard constraint says [2-9]\\d{{9}}, use only [2-9]\\d{{9}}.
-   But do NOT narrow based on statistical observations — those are not authoritative.
 
 5. NEVER use alternation (|) across the individual rule regexes — that would be OR logic.
 
@@ -90,12 +74,14 @@ MINIMALITY RULES — follow strictly:
 
 8. If a rule involves check digits, encode the structural pattern only (not the check algorithm).
 
-9. Consider optional separators (spaces, hyphens) between segments when the identifier
-   commonly appears formatted in documents.
+9. For positions WITHOUT a hard constraint, use the full character class for that
+   position type (\\d for digits, [A-Z] for letters, [A-Z0-9] for alphanumeric).
+
+10. Consider optional separators (spaces, hyphens) between segments when the identifier
+    commonly appears formatted in documents.
 
 Before writing the final regex, mentally verify:
 - Is every HARD CONSTRAINT from policy/vendor encoded exactly once?
-- Have I avoided restricting positions based on statistical observations alone?
 - Does any lookahead duplicate what the main pattern already guarantees? If yes, remove it.
 
 Return ONLY the final unified regex string. No explanation, no markdown, no comments."""
@@ -406,7 +392,6 @@ def generate_regex(
     condition = patterns.get("condition", "unknown")
     format_rules = patterns.get("format_rules", [])
     range_restrictions = patterns.get("range_restrictions", [])
-    statistical_observations = patterns.get("statistical_observations", [])
     keywords = patterns.get("contextual_keywords", [])
     proximity = patterns.get("keyword_proximity", 10)
     numbering_policy = patterns.get("numbering_policy", "").strip()
@@ -475,12 +460,10 @@ def generate_regex(
         examples = rule.get("example_matches", [])
 
         range_text = json.dumps(range_restrictions, indent=2)
-        obs_text = json.dumps(statistical_observations, indent=2)
 
         prompt = PROMPT_TEMPLATE.format(
             rule_description=description,
             range_restrictions=range_text,
-            statistical_observations=obs_text,
             example_matches=", ".join(examples),
             numbering_policy=enriched_policy or "(none provided)",
         )
@@ -531,7 +514,6 @@ def generate_regex(
         combined_prompt = COMBINED_PROMPT_TEMPLATE.format(
             rules_list=rules_list,
             range_restrictions=json.dumps(range_restrictions, indent=2),
-            statistical_observations=json.dumps(statistical_observations, indent=2),
             example_matches=", ".join(unique_examples),
             numbering_policy=enriched_policy or "(none provided)",
         )

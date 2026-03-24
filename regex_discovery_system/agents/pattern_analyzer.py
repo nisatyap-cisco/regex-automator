@@ -14,16 +14,8 @@ PROMPT_TEMPLATE = """You are a pattern-analysis expert.
 
 CONDITION: {condition}
 
-STATISTICAL SUMMARY:
+STRUCTURAL SUMMARY (basic shape only — NOT to be used for per-position rules):
 {stats_json}
-
-NOTE ON STATISTICAL OBSERVATIONS: The "statistical_observations" field in the
-summary above describes what characters APPEAR at key positions across the sample
-data.  Use these observations to understand the structural FORMAT of the identifier
-(e.g. length, whether it starts with letters vs digits, fixed prefixes, delimiters).
-Do NOT convert per-position character observations into hard range_restrictions —
-only officially documented rules belong there.  Absence of a character in sample
-data does NOT mean it is invalid.
 
 SAMPLE VALUES (200 of {total}):
 {sample_values}
@@ -35,10 +27,12 @@ TASKS — return a JSON object with these keys:
    - "description": plain-English description of the structural rule
    - "applies_to": "all" | "subset"
    - "example_matches": [3+ examples from the sample]
-   Use statistical_observations to discover format rules like overall length,
-   character types (all-digit, alphanumeric), fixed prefixes, delimiter patterns,
-   and segment structures.  These are ADDITIVE patterns (what is present across
-   all values) — not per-position character restrictions.
+   Derive format rules ONLY from:
+   a) KNOWN POLICIES / RULES provided above (official numbering authority docs).
+   b) VENDOR DLP PATTERNS provided above (decode regex structure into rules).
+   c) The structural summary for basic shape (length, delimiter presence).
+   Do NOT infer format rules from per-position character patterns in sample data.
+   Do NOT restrict character classes based on what appears or is absent in samples.
 
 2. "range_restrictions": array of objects, each with:
    - "position": which digit(s) or segment (use 0-based index)
@@ -50,10 +44,11 @@ TASKS — return a JSON object with these keys:
    b) Every rule in KNOWN POLICIES that mentions a digit or character restriction
       (e.g. "first digit cannot be 0 or 1" → position 0, allowed_values "[2-9]").
    c) Officially documented enumerated values (e.g. state codes, country codes).
-   NEVER create a range_restriction from statistical observations alone.
+   NEVER create a range_restriction from sample data patterns.
    Absence of a character in sample data is NOT evidence of a real restriction.
    If no policy or vendor source documents a per-position restriction, use the
    full character class for that position type (e.g. [0-9] for digits, [A-Z] for letters).
+   If NO policies or vendor patterns are available, return an EMPTY array [].
 
 3. "contextual_keywords": array of strings — words/phrases that commonly
    appear near this identifier in documents (case-insensitive).
@@ -139,12 +134,20 @@ TASKS — return a JSON object with these keys:
 
 5. "numbering_policy": free-text summary of the real-world authority,
    allocation rules, check-digit algorithms, or geographic mapping that
-   governs this identifier.
+   governs this identifier.  Base this ONLY on the KNOWN POLICIES, VENDOR
+   PATTERNS, and your knowledge of the official numbering authority.
+   Do NOT derive policy statements from patterns observed in sample data.
 
 Return ONLY valid JSON, no markdown fences."""
 
 
 def _compute_stats(values: list[str]) -> dict:
+    """Compute minimal structural summary of sample values.
+
+    Only captures basic shape info (length, character class, delimiters)
+    that helps the LLM understand the identifier format.  All per-position
+    character analysis has been removed — rules must come exclusively from
+    Agent 1P policies and vendor patterns, not from sample data."""
     lengths = [len(v) for v in values]
     length_counts = Counter(lengths)
 
@@ -156,13 +159,6 @@ def _compute_stats(values: list[str]) -> dict:
         "has_spaces": any(" " in v for v in values),
         "has_slashes": any("/" in v for v in values),
     }
-
-    prefix_1 = Counter(v[:1] for v in values if len(v) >= 1).most_common(10)
-    prefix_2 = Counter(v[:2] for v in values if len(v) >= 2).most_common(10)
-    prefix_3 = Counter(v[:3] for v in values if len(v) >= 3).most_common(10)
-
-    suffix_1 = Counter(v[-1:] for v in values if len(v) >= 1).most_common(10)
-    suffix_2 = Counter(v[-2:] for v in values if len(v) >= 2).most_common(10)
 
     delimiters = [c for c in "-/ ." if any(c in v for v in values)]
     segment_structures: list[str] = []
@@ -182,75 +178,6 @@ def _compute_stats(values: list[str]) -> dict:
     except Exception:
         length_mode = lengths[0] if lengths else 0
 
-    # Per-position character observations (additive — what IS present).
-    # These are statistical observations for the LLM to learn structural
-    # patterns (e.g. "all values start with a letter", "position 4 is
-    # always a digit").  They are NOT hard constraints — only official
-    # policy or vendor sources can produce hard range_restrictions.
-    statistical_observations: list[dict] = []
-    all_digits = set("0123456789")
-    all_upper = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-    dominant_length = length_mode
-    check_positions = list(range(min(dominant_length, 6))) if dominant_length >= 2 else [0]
-    if dominant_length >= 2 and (dominant_length - 1) not in check_positions:
-        check_positions.append(dominant_length - 1)
-
-    for pos in check_positions:
-        if pos < 0:
-            continue
-        chars_at_pos = Counter(v[pos] for v in values if len(v) > pos)
-        observed = set(chars_at_pos.keys())
-        sample_count = sum(chars_at_pos.values())
-
-        if observed.issubset(all_digits):
-            char_type = "digits"
-        elif observed.issubset(all_upper):
-            char_type = "letters"
-        elif observed.issubset(all_digits | all_upper):
-            char_type = "alphanumeric"
-        else:
-            char_type = "mixed"
-
-        # Check for universally fixed characters (e.g. position 4 is ALWAYS '0')
-        if len(observed) == 1:
-            fixed_char = next(iter(observed))
-            statistical_observations.append({
-                "position": pos,
-                "char_type": char_type,
-                "observed_chars": sorted(observed),
-                "sample_count": sample_count,
-                "note": f"Position {pos} is always '{fixed_char}' across all {sample_count} samples.",
-                "confidence": "high" if sample_count >= 50 else "medium",
-            })
-        else:
-            statistical_observations.append({
-                "position": pos,
-                "char_type": char_type,
-                "observed_chars": sorted(observed),
-                "sample_count": sample_count,
-                "note": (
-                    f"Position {pos} contains {char_type}: "
-                    f"{sorted(observed)} across {sample_count} samples."
-                ),
-                "confidence": "high" if sample_count >= 200 else "low",
-            })
-
-    # Detect universal prefix patterns (e.g. "LV-", "+91 ", "784-")
-    common_prefixes: list[dict] = []
-    for plen in (2, 3, 4):
-        pfx_counter = Counter(v[:plen] for v in values if len(v) >= plen)
-        total = sum(pfx_counter.values())
-        for pfx, cnt in pfx_counter.most_common(3):
-            pct = cnt / total if total else 0
-            if pct >= 0.95:
-                common_prefixes.append({
-                    "prefix": pfx,
-                    "frequency": f"{pct:.1%}",
-                    "count": cnt,
-                    "note": f"'{pfx}' appears as prefix in {pct:.0%} of values — likely a fixed prefix.",
-                })
-
     return {
         "count": len(values),
         "length_min": min(lengths) if lengths else 0,
@@ -258,15 +185,8 @@ def _compute_stats(values: list[str]) -> dict:
         "length_mode": length_mode,
         "length_distribution": dict(length_counts.most_common(10)),
         "character_classes": char_classes,
-        "prefix_1_char": prefix_1,
-        "prefix_2_char": prefix_2,
-        "prefix_3_char": prefix_3,
-        "suffix_1_char": suffix_1,
-        "suffix_2_char": suffix_2,
         "delimiters_found": delimiters,
         "segment_structures": segment_structures,
-        "statistical_observations": statistical_observations,
-        "common_prefixes": common_prefixes,
     }
 
 
@@ -377,10 +297,8 @@ def analyze_patterns(
 
     patterns["condition"] = condition
 
-    # Attach statistical observations from pre-analysis so downstream agents
-    # can use them as soft context (but never as hard constraints).
-    patterns["statistical_observations"] = stats.get("statistical_observations", [])
-    patterns["common_prefixes"] = stats.get("common_prefixes", [])
+    # Strip any range_restriction whose source indicates statistical/sample origin.
+    patterns = _strip_statistical_range_restrictions(patterns)
 
     # Cross-check: mine numbering_policy free text for per-position constraints
     # that the LLM may have written correctly in prose but missed in range_restrictions.
@@ -392,12 +310,42 @@ def analyze_patterns(
     rule_count = len(patterns.get("format_rules", []))
     kw_count = len(patterns.get("contextual_keywords", []))
     rr_count = len(patterns.get("range_restrictions", []))
-    obs_count = len(patterns.get("statistical_observations", []))
     logger.info(
         "Agent 2 done: %d format rules, %d range restrictions (policy-only), "
-        "%d statistical observations, %d keywords discovered",
-        rule_count, rr_count, obs_count, kw_count,
+        "%d keywords discovered",
+        rule_count, rr_count, kw_count,
     )
+
+    return patterns
+
+
+_STAT_SOURCE_KEYWORDS = ("statistical", "sample", "observation", "observed", "frequency")
+
+
+def _strip_statistical_range_restrictions(patterns: dict) -> dict:
+    """Remove range_restrictions whose source indicates derivation from
+    sample data rather than an authoritative policy or vendor regex."""
+    rr_list: list[dict] = patterns.get("range_restrictions", [])
+    if not rr_list:
+        return patterns
+
+    kept: list[dict] = []
+    stripped = 0
+    for rr in rr_list:
+        src = (rr.get("source") or "").lower()
+        if any(kw in src for kw in _STAT_SOURCE_KEYWORDS):
+            logger.info(
+                "Agent 2 [guard]: stripped statistical range_restriction "
+                "pos=%s allowed=%s source='%s'",
+                rr.get("position"), rr.get("allowed_values"), rr.get("source"),
+            )
+            stripped += 1
+        else:
+            kept.append(rr)
+
+    if stripped:
+        logger.info("Agent 2 [guard]: removed %d statistical range_restriction(s), kept %d", stripped, len(kept))
+        patterns["range_restrictions"] = kept
 
     return patterns
 
