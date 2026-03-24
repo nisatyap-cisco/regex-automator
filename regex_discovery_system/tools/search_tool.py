@@ -9,7 +9,11 @@ import logging
 import os
 from typing import Optional
 
+from utils.cache import cache_get, cache_set
+
 logger = logging.getLogger(__name__)
+
+_SEARCH_TTL = 7 * 24 * 3600  # 7 days
 
 tavily_exhausted: bool = False
 tavily_exhausted_msg: str = ""
@@ -50,17 +54,16 @@ def search_data_urls(
 def search_policy_urls(
     condition: str,
     tavily_api_key: Optional[str] = None,
-    max_results: int = 6,
+    max_results: int = 20,
 ) -> list[str]:
     """Search for pages describing format rules / policies for *condition*.
 
-    Runs multiple query strategies to maximise coverage of format rules,
-    allocation policies, structural specs, and validation logic.
+    Casts a wide net with diverse query strategies (official specs, Wikipedia,
+    standards bodies, validators) to collect up to *max_results* candidate URLs.
+    Downstream ranking and deduplication happen in the policy researcher.
     """
     api_key = tavily_api_key or os.environ.get("TAVILY_API_KEY")
 
-    # Broad set of query angles targeting official specs, Wikipedia, validators,
-    # and format-guide references — more queries = more rule coverage.
     queries = [
         f"{condition} format specification rules official",
         f"{condition} numbering policy allocation government authority",
@@ -69,6 +72,9 @@ def search_policy_urls(
         f"{condition} validation rules structure format guide",
         f"{condition} format rules digits length example",
         f"{condition} official format documentation",
+        f"{condition} numbering system structure ISO standard",
+        f"{condition} regex pattern format definition",
+        f"{condition} identifier format allocation rules breakdown",
     ]
 
     if api_key:
@@ -83,8 +89,9 @@ def _check_tavily_exhaustion(exc: Exception) -> bool:
     """Detect Tavily quota/rate-limit errors and set the global flag."""
     global tavily_exhausted, tavily_exhausted_msg
     err = str(exc).lower()
-    if any(k in err for k in ("429", "rate limit", "quota", "exceeded", "limit reached",
-                               "too many requests", "insufficient credits", "api limit")):
+    if any(k in err for k in ("429", "rate limit", "quota", "exceeded", "exceeds",
+                               "limit reached", "usage limit", "too many requests",
+                               "insufficient credits", "api limit")):
         tavily_exhausted = True
         tavily_exhausted_msg = str(exc)
         logger.warning("=" * 60)
@@ -102,6 +109,13 @@ def _tavily_search(condition: str, api_key: str, max_results: int) -> list[str]:
     if tavily_exhausted:
         logger.info("[tavily] skipping — API quota previously exhausted")
         return []
+
+    cache_key = f"tavily_data|{condition}|{max_results}"
+    cached = cache_get("search", cache_key)
+    if cached is not None:
+        logger.info("[tavily] CACHE HIT for '%s' → %d URLs", condition, len(cached))
+        return cached
+
     try:
         from tavily import TavilyClient
         from tools.scraper.search import _detect_gov_domains
@@ -142,8 +156,10 @@ def _tavily_search(condition: str, api_key: str, max_results: int) -> list[str]:
                         break
 
         gov_first = sorted(urls, key=lambda u: (0 if ".gov" in u.lower() else 1))
-        logger.info("[tavily] '%s' → %d URLs (gov-prioritised)", condition, len(gov_first))
-        return gov_first[:max_results]
+        result = gov_first[:max_results]
+        logger.info("[tavily] '%s' → %d URLs (gov-prioritised)", condition, len(result))
+        cache_set("search", cache_key, result, ttl=_SEARCH_TTL)
+        return result
     except Exception as exc:
         if _check_tavily_exhaustion(exc):
             return []
@@ -156,6 +172,13 @@ def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> 
     if tavily_exhausted:
         logger.info("[tavily-multi] skipping — API quota previously exhausted")
         return []
+
+    cache_key = f"tavily_multi|{'|'.join(sorted(queries))}|{max_results}"
+    cached = cache_get("search", cache_key)
+    if cached is not None:
+        logger.info("[tavily-policy] CACHE HIT → %d URLs", len(cached))
+        return cached
+
     try:
         from tavily import TavilyClient
         client = TavilyClient(api_key)
@@ -166,7 +189,7 @@ def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> 
                 break
             resp = client.search(
                 query=q,
-                search_depth="advanced",   # deep search for richer rule pages
+                search_depth="advanced",
                 max_results=5,
             )
             for r in resp.get("results", []):
@@ -178,6 +201,7 @@ def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> 
                         break
             logger.debug("[tavily-policy] query=%r → %d total unique URLs so far", q, len(urls))
         logger.info("[tavily-policy] %d URLs collected from %d queries", len(urls), len(queries))
+        cache_set("search", cache_key, urls, ttl=_SEARCH_TTL)
         return urls
     except Exception as exc:
         if _check_tavily_exhaustion(exc):
@@ -187,19 +211,35 @@ def _tavily_search_multi(queries: list[str], api_key: str, max_results: int) -> 
 
 
 def _ddg_fallback(condition: str, max_results: int) -> list[str]:
+    cache_key = f"ddg_data|{condition}|{max_results}"
+    cached = cache_get("search", cache_key)
+    if cached is not None:
+        logger.info("[ddg] CACHE HIT for '%s' → %d URLs", condition, len(cached))
+        return cached
     try:
         from tools.scraper.search import search_urls, build_search_queries
         queries = build_search_queries(condition)
-        return search_urls(queries, max_total=max_results, condition=condition)
+        result = search_urls(queries, max_total=max_results, condition=condition)
+        if result:
+            cache_set("search", cache_key, result, ttl=_SEARCH_TTL)
+        return result
     except Exception as exc:
         logger.warning("[ddg-fallback] failed: %s", exc)
         return []
 
 
 def _ddg_fallback_multi(queries: list[str], max_results: int, condition: str = "") -> list[str]:
+    cache_key = f"ddg_multi|{condition}|{'|'.join(sorted(queries))}|{max_results}"
+    cached = cache_get("search", cache_key)
+    if cached is not None:
+        logger.info("[ddg-policy] CACHE HIT → %d URLs", len(cached))
+        return cached
     try:
         from tools.scraper.search import search_urls
-        return search_urls(queries, max_total=max_results, condition=condition)
+        result = search_urls(queries, max_total=max_results, condition=condition)
+        if result:
+            cache_set("search", cache_key, result, ttl=_SEARCH_TTL)
+        return result
     except Exception as exc:
         logger.warning("[ddg-fallback-policy] failed: %s", exc)
         return []

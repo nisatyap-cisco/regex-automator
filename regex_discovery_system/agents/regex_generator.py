@@ -13,7 +13,9 @@ PROMPT_TEMPLATE = """You are a regex engineering expert.
 Write a single Python-compatible regex that matches values satisfying this rule:
 
 RULE: {rule_description}
-RANGE CONSTRAINTS: {range_restrictions}
+HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
+STATISTICAL OBSERVATIONS (sample-derived — for context only, do NOT use for
+per-position character restrictions): {statistical_observations}
 EXAMPLE MATCHES: {example_matches}
 
 NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here):
@@ -24,13 +26,20 @@ Requirements:
 - Use \\b (word boundary) at the start and end of the pattern.
 - Avoid catastrophic backtracking.
 - Prefer character classes and quantifiers over alternation where possible.
-- CRITICAL per-position restrictions: use explicit character classes, never \\d or .
-  where a stricter class applies (e.g. [2-9] not \\d when first digit cannot be 0 or 1).
 - REDUNDANCY: if the pattern has a fixed length through explicit quantifiers,
   do NOT add a length lookahead — it is redundant.
 - NEVER include literal placeholder strings like "XXX" or "NNN".
 - If the rule involves check digits, encode the structural pattern only.
 
+- CRITICAL: Encode HARD CONSTRAINTS (from policy or vendor sources) as explicit
+  character classes at the specified positions (e.g. [2-9] not \\d when the policy
+  says first digit cannot be 0 or 1).
+- STATISTICAL OBSERVATIONS are informational only — they describe what appeared
+  in samples.  Do NOT restrict character classes based on observations alone.
+  Use the full character class for that position type (\\d, [A-Z], etc.) unless
+  a HARD CONSTRAINT narrows it.
+- Consider optional separators (spaces, hyphens) between segments when the
+  identifier might appear formatted in real documents.
 Return ONLY the regex string, no explanation, no markdown."""
 
 COMBINED_PROMPT_TEMPLATE = """You are a regex engineering expert tasked with producing the mathematically minimal unified regex.
@@ -40,28 +49,38 @@ Given the individual rules and their regexes below, produce ONE unified Python-c
 INDIVIDUAL RULES:
 {rules_list}
 
-RANGE CONSTRAINTS: {range_restrictions}
+HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
+STATISTICAL OBSERVATIONS (sample-derived — for context only): {statistical_observations}
 EXAMPLE MATCHES: {example_matches}
 
 NUMBERING POLICY (authoritative — encode ALL structural constraints here):
 {numbering_policy}
 
+CONSTRAINT HIERARCHY — follow strictly:
+- HARD CONSTRAINTS come from official policy, vendor regex, or documented authority.
+  These MUST be encoded as explicit character classes at the specified positions.
+- STATISTICAL OBSERVATIONS describe what appeared in sample data.
+  These are informational context — do NOT use them to restrict character classes.
+  Use the full class for the position type (\\d, [A-Z], etc.) unless a HARD CONSTRAINT
+  says otherwise.
+- When a HARD CONSTRAINT and STATISTICAL OBSERVATION conflict, ALWAYS keep the
+  HARD CONSTRAINT and ignore the observation.
+
 MINIMALITY RULES — follow strictly:
 
-1. MERGE first: encode every constraint directly into the positional pattern where possible.
+1. MERGE first: encode every HARD constraint directly into the positional pattern.
    A constraint that fits into the character class at a specific position must go there —
-   NOT in a lookahead. Example: "first char is a letter" → [A-Z] at position 0, not (?=[A-Z]).
+   NOT in a lookahead.
 
-2. LOOKAHEADS only for cross-position constraints that CANNOT be expressed positionally
-   (e.g. "total digit count across non-contiguous segments must equal N").
+2. LOOKAHEADS only for cross-position constraints that CANNOT be expressed positionally.
    If a lookahead only re-asserts something already guaranteed by the main pattern, DELETE it.
 
 3. REMOVE redundant length assertions: if the final pattern has a fixed length through
-   explicit quantifiers (e.g. [A-Z]{{2}}\\d{{4}}[A-Z]{{2}} = exactly 8 chars), do NOT also
-   add (?=.{{8}}) or (?=\\S{{8}}) — that is redundant.
+   explicit quantifiers, do NOT also add a length lookahead.
 
-4. REMOVE general patterns subsumed by stricter ones: if one rule says \\d{{10}} and another
-   says [2-9]\\d{{9}}, use only [2-9]\\d{{9}} — the general form is made redundant by the strict one.
+4. REMOVE general patterns subsumed by stricter HARD-CONSTRAINT ones: if one rule says
+   \\d{{10}} and a hard constraint says [2-9]\\d{{9}}, use only [2-9]\\d{{9}}.
+   But do NOT narrow based on statistical observations — those are not authoritative.
 
 5. NEVER use alternation (|) across the individual rule regexes — that would be OR logic.
 
@@ -71,13 +90,13 @@ MINIMALITY RULES — follow strictly:
 
 8. If a rule involves check digits, encode the structural pattern only (not the check algorithm).
 
-9. CRITICAL per-position restrictions: always use explicit character classes, never \\d or .
-   where a stricter class applies (e.g. [2-9] not \\d when first digit cannot be 0 or 1).
+9. Consider optional separators (spaces, hyphens) between segments when the identifier
+   commonly appears formatted in documents.
 
 Before writing the final regex, mentally verify:
-- Is every constraint from the rules encoded exactly once?
+- Is every HARD CONSTRAINT from policy/vendor encoded exactly once?
+- Have I avoided restricting positions based on statistical observations alone?
 - Does any lookahead duplicate what the main pattern already guarantees? If yes, remove it.
-- Does the pattern have a fixed length through quantifiers? If yes, remove any length lookahead.
 
 Return ONLY the final unified regex string. No explanation, no markdown, no comments."""
 
@@ -320,6 +339,59 @@ def _strip_anchors_add_boundaries(regex_str: str) -> str:
     return r
 
 
+# ── Deterministic optional-separator injection ────────────────────────────────
+#
+# Detects positions where one quantified group (ending with }) is directly
+# followed by another character group with no separator already present,
+# and inserts [\s\-]? at those boundaries.
+#
+# Examples:
+#   \d{4}\d{4}\d{4}             → \d{4}[\s\-]?\d{4}[\s\-]?\d{4}
+#   [2-9]\d{3}\d{4}\d{4}       → [2-9]\d{3}[\s\-]?\d{4}[\s\-]?\d{4}
+#   [A-Z0-9]{4}[A-Z0-9]{3}     → [A-Z0-9]{4}[\s\-]?[A-Z0-9]{3}
+#   \d{3}[\s\-]?\d{4}          → unchanged (separator already present)
+#   \d{3}-\d{2}-\d{4}          → unchanged (literal hyphen present)
+#   \d{12}                      → unchanged (single group, no boundary)
+
+_SEG_BOUNDARY = re.compile(
+    r'\}'                           # end of a quantifier like {4}
+    r'(?='                          # lookahead: next token is a new char group
+    r'(?:'
+    r'\\[dDwW]'                     # shorthand class: \d \D \w \W
+    r'|'
+    r'\[(?!\\s|\\-|\\S)'           # bracket class NOT starting with \s \- \S
+    r')'
+    r')'
+)
+
+_OPT_SEP = r'[\s\-]?'
+
+
+def _inject_optional_separators(regex_str: str) -> str:
+    r"""Insert ``[\s\-]?`` between adjacent quantified segments.
+
+    Purely deterministic — no LLM involved.  Only fires at boundaries
+    where ``}`` is followed directly by a new character group with no
+    existing separator.  Falls back to the original if injection causes
+    a compile error.
+    """
+    if '{' not in regex_str:
+        return regex_str
+
+    result = _SEG_BOUNDARY.sub(lambda m: '}' + _OPT_SEP, regex_str)
+    if result == regex_str:
+        return regex_str
+
+    try:
+        re.compile(result)
+    except re.error:
+        logger.debug("separator injection broke regex, reverting: %s", result)
+        return regex_str
+
+    logger.debug("separator injection: %s → %s", regex_str, result)
+    return result
+
+
 def generate_regex(
     config: dict,
     paths: dict[str, str] | None = None,
@@ -334,6 +406,7 @@ def generate_regex(
     condition = patterns.get("condition", "unknown")
     format_rules = patterns.get("format_rules", [])
     range_restrictions = patterns.get("range_restrictions", [])
+    statistical_observations = patterns.get("statistical_observations", [])
     keywords = patterns.get("contextual_keywords", [])
     proximity = patterns.get("keyword_proximity", 10)
     numbering_policy = patterns.get("numbering_policy", "").strip()
@@ -401,14 +474,13 @@ def generate_regex(
         description = rule.get("description", "")
         examples = rule.get("example_matches", [])
 
-        range_text = json.dumps(
-            [rr for rr in range_restrictions],
-            indent=2,
-        )
+        range_text = json.dumps(range_restrictions, indent=2)
+        obs_text = json.dumps(statistical_observations, indent=2)
 
         prompt = PROMPT_TEMPLATE.format(
             rule_description=description,
             range_restrictions=range_text,
+            statistical_observations=obs_text,
             example_matches=", ".join(examples),
             numbering_policy=enriched_policy or "(none provided)",
         )
@@ -416,6 +488,7 @@ def generate_regex(
         response = invoke_claude(prompt, config)
         regex_str = _clean_regex_response(response)
         regex_str = _strip_anchors_add_boundaries(regex_str)
+        regex_str = _inject_optional_separators(regex_str)
 
         compiled = _try_compile(regex_str)
         if compiled is None:
@@ -429,6 +502,7 @@ def generate_regex(
             response2 = invoke_claude(refinement, config)
             regex_str = _clean_regex_response(response2)
             regex_str = _strip_anchors_add_boundaries(regex_str)
+            regex_str = _inject_optional_separators(regex_str)
 
             compiled = _try_compile(regex_str)
             if compiled is None:
@@ -457,12 +531,14 @@ def generate_regex(
         combined_prompt = COMBINED_PROMPT_TEMPLATE.format(
             rules_list=rules_list,
             range_restrictions=json.dumps(range_restrictions, indent=2),
+            statistical_observations=json.dumps(statistical_observations, indent=2),
             example_matches=", ".join(unique_examples),
             numbering_policy=enriched_policy or "(none provided)",
         )
         combined_response = invoke_claude(combined_prompt, config)
         combined_regex = _clean_regex_response(combined_response)
         combined_regex = _strip_anchors_add_boundaries(combined_regex)
+        combined_regex = _inject_optional_separators(combined_regex)
 
         compiled = _try_compile(combined_regex)
         if compiled is None:
@@ -475,6 +551,7 @@ def generate_regex(
             combined_response2 = invoke_claude(refinement, config)
             combined_regex = _clean_regex_response(combined_response2)
             combined_regex = _strip_anchors_add_boundaries(combined_regex)
+            combined_regex = _inject_optional_separators(combined_regex)
             compiled = _try_compile(combined_regex)
 
         if compiled is not None:

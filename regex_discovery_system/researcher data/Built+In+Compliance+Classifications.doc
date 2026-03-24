@@ -1,0 +1,899 @@
+Date: Thu, 12 Mar 2026 10:32:55 +0000 (UTC)
+Message-ID: <1509591170.1.1773311575130@1c308cced103>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_0_1644600684.1773311575116"
+
+------=_Part_0_1644600684.1773311575116
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Built In Compliance Classifications</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Built In Compliance Classifications</h1>
+    <div class=3D"Section1">
+        <style type=3D"text/css">/*<![CDATA[*/
+div.rbtoc1773311575033 {padding: 0px;}
+div.rbtoc1773311575033 ul {list-style: none;margin-left: 0px;}
+div.rbtoc1773311575033 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style>
+<div class=3D"toc-macro rbtoc1773311575033">
+<ul class=3D"toc-indentation">
+<li><a href=3D"#BuiltInComplianceClassifications-BuiltInComplianceClassific=
+ations(US)">Built In Compliance Classifications (US)</a></li>
+<li><a href=3D"#BuiltInComplianceClassifications-RussianFederalLawonPersona=
+lData(No.152-FZ)">Russian Federal Law on Personal Data (No. 152-FZ)</a></li=
+>
+</ul>
+</div>
+<h2 local-id=3D"e479aa299eff" id=3D"BuiltInComplianceClassifications-BuiltI=
+nComplianceClassifications(US)">Built In Compliance Classifications (US)</h=
+2>
+<div class=3D"table-wrap">
+<table data-table-width=3D"1315" data-layout=3D"center" data-local-id=3D"c2=
+722866-bf5a-49ae-9250-605887faa910" class=3D"confluenceTable">
+<tbody>
+<tr data-local-id=3D"06dda3e5621e">
+<th data-local-id=3D"f1aea119631c" class=3D"confluenceTh">
+<p local-id=3D"3036eff43bcb"><strong>Identifier name</strong></p></th>
+<th data-local-id=3D"965b228c0b01" class=3D"confluenceTh">
+<p local-id=3D"665554704b92"><strong>Descriptions</strong></p></th>
+<th data-local-id=3D"055da944937a" class=3D"confluenceTh">
+<p local-id=3D"586a19229811"><strong>Regex</strong></p></th>
+<th data-local-id=3D"f56f474d314a" class=3D"confluenceTh">
+<p local-id=3D"da4715fd1f4b"><strong>Notes</strong></p></th>
+</tr>
+<tr data-local-id=3D"02562b97422f">
+<th rowspan=3D"2" data-local-id=3D"7d48bbef8bd9" class=3D"confluenceTh">
+<p local-id=3D"7d4450eee44e"><strong>Zip code (California)</strong></p></th=
+>
+<td rowspan=3D"2" data-local-id=3D"d5dfb5f1fb82" class=3D"confluenceTd">
+<p local-id=3D"f959be4f443d">California Zip code matches a valid California=
+ zip code combined with any of the following keywords within a proximity of=
+ 10 terms: address, place of residence, postcode district, postcode area, p=
+ostcode unit, postcode sector, postcode, Zip code, Zip (or) Postal code. (A=
+ll terms case insensitive.)</p></td>
+<td data-local-id=3D"0552f5db7b52" class=3D"confluenceTd">
+<p local-id=3D"f0aed3954bf4">(9[0-5]\d{3}|96[0-5]\d{2})</p></td>
+<td rowspan=3D"2" data-local-id=3D"4056273faec1" class=3D"confluenceTd">
+<p local-id=3D"476665c4f583">92335</p></td>
+</tr>
+<tr data-local-id=3D"d33c7a16b1a3">
+<th data-local-id=3D"bb84f530f6e4" class=3D"confluenceTh">
+<p local-id=3D"3578aae8f4fa">(?i)(?:address|place of residence|postcode dis=
+trict|postcode area|postcode unit|postcode sector|postcode|Zip code|Zip|Pos=
+tal code)</p></th>
+</tr>
+<tr data-local-id=3D"15697085a001">
+<th rowspan=3D"2" data-local-id=3D"5b079e0d-ce6d-41c3-b8e6-4f3f0f21eb6d" cl=
+ass=3D"confluenceTh">
+<p local-id=3D"79f31cbbab1d"><strong>Medicare number (US)</strong></p></th>
+<td rowspan=3D"2" data-local-id=3D"053efd001dd9" class=3D"confluenceTd">
+<p local-id=3D"8bd178275f77">US Medicare Number matches a valid medicare nu=
+mber combined with any of the following keywords within a proximity of 10 t=
+erms: MBI, Medicare Beneficiary Identifier, Medicare ID, Medicare number, M=
+edicare card number, Medicare policy number (or) Medicare claim number. (Al=
+l terms case insensitive.)</p></td>
+<td data-local-id=3D"2b3a23dd-6932-4d29-a241-8821f86ff5a9" class=3D"conflue=
+nceTd">
+<p local-id=3D"1501a132383e">([1-9][AC-HJ-NP-RT-aVWXY][0-9AC-HJ-NP-RT-VWXY]=
+[0-9](?:[-\s]?)[AC-HJ-NP-RT-VWXY][0-9AC-HJ-NP-RT-VWXY][0-9](?:[-\s]?)[AC-HJ=
+-NP-RT-VWXY]{2}\d{2})</p></td>
+<td rowspan=3D"2" data-local-id=3D"2e8cefad68ac" class=3D"confluenceTd">
+<p local-id=3D"5af4e00f48e8">1EG4-TE5-MK73</p></td>
+</tr>
+<tr data-local-id=3D"d324a2a3d885">
+<th data-local-id=3D"ca86b1b72d28" class=3D"confluenceTh">
+<p local-id=3D"0cb51ff2e089">(?i)(?:MBI|Medicare Beneficiary Identifier|Med=
+icare ID|Medicare number|Medicare card number|Medicare policy number|Medica=
+re claim number)</p></th>
+</tr>
+<tr data-local-id=3D"416ececd0f83">
+<th rowspan=3D"2" data-local-id=3D"af205f64-b05e-43b4-b738-d98bab8be302" cl=
+ass=3D"confluenceTh">
+<p local-id=3D"96c7304f5490"><strong>Medicaid number (US)</strong></p></th>
+<td rowspan=3D"2" data-local-id=3D"9a1b287b3242" class=3D"confluenceTd">
+<p local-id=3D"2350c5f6c0ae">US Medicaid Number matches a valid medicaid nu=
+mber combined with any of the following keywords within a proximity of 10 t=
+erms: Medicaid ID, Medicaid number, Medicaid recipient ID, Recipient ID, Me=
+dicaid beneficiary number, Medicaid member ID, Medicaid card number (or) Me=
+dicaid policy number. (All terms case insensitive.)</p></td>
+<td data-local-id=3D"cf023b36-0038-400a-ad12-f07fbf3eaf79" class=3D"conflue=
+nceTd">
+<p local-id=3D"deb868ba874f">(?:(?:10|11)\d{7}|[A-CE-HJ-NP-RT-VWXYZ]\d{7}[A=
+-CE-HJ-NP-RT-VWXYZ]|[A-CE-HJ-NP-RT-VWXYZ]{2}\d{10}|[A-CE-HJ-NP-RT-VWXYZ]{2}=
+\d{5}[A-CE-HJ-NP-RT-VWXYZ]|[A-HJ-NP-Z]{2}\d{9}|\d{8,9}[A-CE-HJ-NP-RT-VWXYZ]=
+|\d{7,13})</p></td>
+<td rowspan=3D"2" data-local-id=3D"14f20fc70cd9" class=3D"confluenceTd">
+<p local-id=3D"c3bb29b9f062">12345678A or AB12345C<br></p></td>
+</tr>
+<tr data-local-id=3D"5b0f3c04107b">
+<th data-local-id=3D"48e00320ddbe" class=3D"confluenceTh">
+<p local-id=3D"7a6debbe7555">(?i)(?:Medicaid ID|Medicaid number|Medicaid re=
+cipient ID|Recipient ID|Medicaid beneficiary number|Medicaid member ID|Medi=
+caid card number|Medicaid policy number)</p></th>
+</tr>
+<tr data-local-id=3D"968a599c7fbd">
+<th rowspan=3D"2" data-local-id=3D"ca50237b0827" class=3D"confluenceTh">
+<p local-id=3D"4fc928193ec9"><strong>North American Electric Reliability Co=
+rporation (NERC)</strong></p></th>
+<td rowspan=3D"2" data-local-id=3D"2978edeae897" class=3D"confluenceTd">
+<p local-id=3D"974be0339df1">US North American Electric Reliability Corpora=
+tion - NERC (US) matches a valid North American electric reliability corpor=
+ation code matches with any of the following keywords CIP, Critical Infrast=
+ructure and a code combined with any of the following keywords within a pro=
+ximity of 10 terms: North American Electric Reliability Corporation, NERC, =
+Vulnerability and Risk Assessment, Security Management Controls, Personnel =
+&amp; Training, Electronic Security Perimeters, Physical Security, System S=
+ecurity, Incident Reporting, Response Planning, Vulnerability Assessment, S=
+upply Chain Risk Management, Information Protection, Change Management, Rec=
+overy Plans for BES Cyber Systems, NERC security, NERC security guidelines,=
+ CIP Security, CIP Security Guidelines, NERC cyber security, NERC cyber sec=
+urity guidelines, NERC physical security, NERC physical security guidelines=
+, NERC supply chain, NERC supply chain guidelines, Electricity sector secur=
+ity, Electricity sector security guidelines, Bulk electric system security,=
+ Bulk electric system security guidelines, Bulk Electric System (or) BES.</=
+p></td>
+<td data-local-id=3D"3dd37625-82c3-43fb-907a-c51c96c84580" class=3D"conflue=
+nceTd">
+<p local-id=3D"46d0304d2edb">(?i)((CIP|Critical Infrastructure Protection)-=
+(00[2-9]|0[1-9]\d|[1-9]\d{2})(-\d{1,2}[a-z]?)?)</p></td>
+<td rowspan=3D"2" data-local-id=3D"53581212d5e6" class=3D"confluenceTd">
+<p local-id=3D"2e28be67fe41"></p></td>
+</tr>
+<tr data-local-id=3D"c5241cbc6ddb">
+<th data-local-id=3D"383a6d3fdf42" class=3D"confluenceTh">
+<p local-id=3D"fcd8c351dac8">(?i)(?:North American Electric Reliability Cor=
+poration|NERC|Vulnerability and Risk Assessment|Security Management Control=
+s|Personnel &amp; Training|Electronic Security Perimeters|Physical Security=
+|System Security|Incident Reporting|Response Planning|Vulnerability Assessm=
+ent|Supply Chain Risk Management|Information Protection|Change Management|R=
+ecovery Plans for BES Cyber Systems|NERC security( guidelines?)?|CIP Securi=
+ty( Guidelines?)?|NERC cyber security( guidelines?)?|NERC physical security=
+( guidelines?)?|NERC supply chain( guidelines?)?|Electricity sector securit=
+y( guidelines?)?|Bulk electric system security( guidelines?)?|Bulk Electric=
+ System|BES)</p></th>
+</tr>
+<tr data-local-id=3D"34a693845ca9">
+<th data-local-id=3D"8631de09bccb" class=3D"confluenceTh">
+<p local-id=3D"fda4d9c6a5eb"><strong>US Intelligence Control Markings (CAPC=
+O) &amp; DCID 1/7</strong></p></th>
+<td data-local-id=3D"58e3609dbddd" class=3D"confluenceTd">
+<p local-id=3D"e52f88ed062c">US Intelligence Control Markings (CAPCO) &amp;=
+ DCID 1/7 correspond to any of the following formats: Classification only, =
+Classification + SCI, Classification + Dissemination, or Classification + S=
+CI + Dissemination. For example: TOP SECRET//SI//TK//NOFORN.</p></td>
+<td data-local-id=3D"c5497006-be80-4c6e-b73f-5f69c4046274" class=3D"conflue=
+nceTd">
+<p local-id=3D"dd627477f288">((?:TOP SECRET|SECRET|CONFIDENTIAL|UNCLASSIFIE=
+D|TS|[USC](?=3D\/\/(?:SI|TK|HCS|GAMMA|GCK|SAP|SCI|FISA|IMC|NOFORN|NF|RELIDO=
+|ORCON|OC|PROPIN|PR|IMCON|RSEN|DISPLAY ONLY|CUI|FOUO|LIMDIS|EXDIS|NODIS|EYE=
+S ONLY|WNINTEL|NSI|FVEY|NATO|REL TO(?: [A-Z, ]+)?)))(?:(?:\/\/(?:SI|TK|HCS|=
+GAMMA|GCK|SAP|SCI|FISA|IMC))+)?(?:(?:\/\/(?:NOFORN|NF|RELIDO|ORCON|OC|PROPI=
+N|PR|IMCON|RSEN|DISPLAY ONLY|CUI|FOUO|LIMDIS|EXDIS|NODIS|EYES ONLY|WNINTEL|=
+NSI|FVEY|NATO|REL TO(?: [A-Z, ]+)?))+)?)</p></td>
+<td data-local-id=3D"c94cc73f8221" class=3D"confluenceTd">
+<p local-id=3D"b30b726b0cb8">Examples :<br>
+TOP SECRET<br>
+TOP SECRET//SI<br>
+TOP SECRET//SI//TK<br>
+TOP SECRET//SI//TK//NOFORN<br>
+TOP SECRET//NOFORN<br>
+TOP SECRET//SI//TK//HCS//GAMMA//NOFORN</p>
+<p local-id=3D"61e80e884652"></p></td>
+</tr>
+<tr data-local-id=3D"83c99f4ded43">
+<th rowspan=3D"2" data-local-id=3D"ebffce86e142" class=3D"confluenceTh">
+<p local-id=3D"68b0f90a5fc8"><strong>Swift Code</strong></p></th>
+<td rowspan=3D"2" data-local-id=3D"fb4f35f517cc" class=3D"confluenceTd">
+<p local-id=3D"4a7593c61ae9"></p></td>
+<th data-local-id=3D"6c5b158bba5f" class=3D"confluenceTh">
+<p local-id=3D"7f378aef6ad4">[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?</p><=
+/th>
+<td rowspan=3D"2" data-local-id=3D"9d4a96191209" class=3D"confluenceTd">
+<p local-id=3D"9d5491fcc73d">Already exists</p></td>
+</tr>
+<tr data-local-id=3D"6908d348d7ff">
+<th data-local-id=3D"f6c3a60b6b81" class=3D"confluenceTh">
+<p local-id=3D"8f34e0e2c4f7">(?i)(?:Swift code|International Routing Number=
+|bank association routing number|bank routing|routing no|routing|Bank Ident=
+ification Number|BIC|RTN|SWIFT Address|Sort Code|Swift)</p></th>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 local-id=3D"4dc62064726a" id=3D"BuiltInComplianceClassifications-Russia=
+nFederalLawonPersonalData(No.152-FZ)">Russian Federal Law on Personal Data =
+(No. 152-FZ)</h2>
+<p local-id=3D"30d956546928"><strong>Russia</strong></p>
+<div class=3D"table-wrap">
+<table data-table-width=3D"1315" data-layout=3D"center" data-local-id=3D"03=
+529165-bcd7-487a-8a33-f3a259259d9f" class=3D"confluenceTable">
+<tbody>
+<tr data-local-id=3D"b6ce8bace240">
+<th data-local-id=3D"2d273095-cb79-45bf-8dbf-0f79d0a2c585" class=3D"conflue=
+nceTh">
+<p local-id=3D"0eb69ffc8796"><strong>Identifier name</strong></p></th>
+<th data-local-id=3D"40b578c5-4308-4426-9f58-2b34bd387713" class=3D"conflue=
+nceTh">
+<p local-id=3D"3ce9fc506e8e"><strong>Descriptions</strong></p></th>
+<th data-local-id=3D"42352d17-e8e5-4c44-b756-0c181aa09a1d" class=3D"conflue=
+nceTh">
+<p local-id=3D"ac78101525ab"><strong>Regex</strong></p></th>
+<th data-local-id=3D"e7c8e6e5-ebee-4788-bcdf-4d2fcd6ef346" class=3D"conflue=
+nceTh">
+<p local-id=3D"0ece2db79ce5"><strong>Notes</strong></p></th>
+</tr>
+<tr data-local-id=3D"77c49c544f7d">
+<td rowspan=3D"2" data-local-id=3D"09b89c09-c7d0-4390-ab56-9352de9c1e00" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"902036fdee1c"><strong>Email</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"12de2ac70edb" class=3D"confluenceTd">
+<p local-id=3D"562cb9e36486"></p></td>
+<td data-local-id=3D"1ab87ded-d919-4ab3-8810-d8655e2cfeef" class=3D"conflue=
+nceTd">
+<p local-id=3D"214d6504958b">(?i)[A-Z0-9._%+-]{1,64}\@[A-Z0-9.-]{1,63}\.((?=
+:[A-Z]{1,63})|=D1=80=D1=84)</p></td>
+<td rowspan=3D"2" data-local-id=3D"657ab2fe062a" class=3D"confluenceTd">
+<p local-id=3D"44ada5ee2b97"></p></td>
+</tr>
+<tr data-local-id=3D"b69f9a22413e">
+<td data-local-id=3D"8c8d5f010c20" class=3D"confluenceTd">
+<p local-id=3D"6af22e670dd5"></p></td>
+</tr>
+<tr data-local-id=3D"246e265cf8c2">
+<td rowspan=3D"2" data-local-id=3D"69df4210-8524-4dec-9a8c-21f66e70086e" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"94e10681c1b4"><strong>Bank account number</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"b0de5ad83687" class=3D"confluenceTd">
+<p local-id=3D"bee5a4a9a61d"></p></td>
+<td data-local-id=3D"e0f863de-6137-4b22-be5c-95e27bea167f" class=3D"conflue=
+nceTd">
+<p local-id=3D"4f93219e9542">(\d{5}\s?\d{5}\s?\d{5}\s?\d{5})</p></td>
+<td rowspan=3D"2" data-local-id=3D"f1c736a4841e" class=3D"confluenceTd">
+<p local-id=3D"f67744ab5b37"></p></td>
+</tr>
+<tr data-local-id=3D"605f464e81f1">
+<td data-local-id=3D"a1bd10ce08e4" class=3D"confluenceTd">
+<p local-id=3D"a3aa7c9d4fb9"></p></td>
+</tr>
+<tr data-local-id=3D"0047ea89503e">
+<td data-local-id=3D"71bdeec9-bddf-4353-992e-a3e428ce6701" class=3D"conflue=
+nceTd">
+<p local-id=3D"9f78b3a7e142"><strong>Credit card information</strong></p></=
+td>
+<td data-local-id=3D"655e37ce60e5" class=3D"confluenceTd">
+<p local-id=3D"0c8c11462ac2"></p></td>
+<td data-local-id=3D"af8660d24544" class=3D"confluenceTd">
+<p local-id=3D"33d6c630604c"></p></td>
+<td data-local-id=3D"2cbc03880890" class=3D"confluenceTd">
+<p local-id=3D"ed498d9e13dd">Already exists</p></td>
+</tr>
+<tr data-local-id=3D"df6e419dcdb2">
+<td rowspan=3D"2" data-local-id=3D"75e849b5-d3d6-4284-9c6d-892898b09d5c" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"a19707385b02"><strong>Phone Number</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"1e22d95f40ac" class=3D"confluenceTd">
+<p local-id=3D"3c9ff86fdba0"></p></td>
+<td data-local-id=3D"4e2f45db-24db-4a75-95fb-9e924f15cfe4" class=3D"conflue=
+nceTd">
+<p local-id=3D"7a2b0c93d93e">(\+?(7|8)[ -]?\(?\d{3}\)?[ -]?\d{3}[ -]?\d{2}[=
+ -]?\d{2})</p></td>
+<td rowspan=3D"2" data-local-id=3D"eace34f00f18" class=3D"confluenceTd">
+<p local-id=3D"ae8a963afdf7"></p></td>
+</tr>
+<tr data-local-id=3D"9c83f53d2a56">
+<td data-local-id=3D"8bd4eac88365" class=3D"confluenceTd">
+<p local-id=3D"9fa07baebe92"></p></td>
+</tr>
+<tr data-local-id=3D"6292a0a8321d">
+<td data-local-id=3D"120e15e4-66b3-4143-bde1-9a9048891ee5" class=3D"conflue=
+nceTd">
+<p local-id=3D"e70405b733ac"><strong>IP address</strong></p></td>
+<td data-local-id=3D"96c14c186b87" class=3D"confluenceTd">
+<p local-id=3D"eabe203adfd1"></p></td>
+<td data-local-id=3D"1d0591408a6e" class=3D"confluenceTd">
+<p local-id=3D"329c8d430367"></p></td>
+<td data-local-id=3D"81a8a0cf91a0" class=3D"confluenceTd">
+<p local-id=3D"c03e9e5af518">Already exists</p></td>
+</tr>
+<tr data-local-id=3D"ac8e357bb828">
+<td data-local-id=3D"f6ba985e-369e-4b4a-9584-109f2e2debaf" class=3D"conflue=
+nceTd">
+<p local-id=3D"f49e950b75cf"><strong>Date of birth</strong></p></td>
+<td data-local-id=3D"fae6e9b2d47f" class=3D"confluenceTd">
+<p local-id=3D"44fd98537a14"></p></td>
+<td data-local-id=3D"0da0b77d355e" class=3D"confluenceTd">
+<p local-id=3D"5d2692824c6c"></p></td>
+<td data-local-id=3D"45418f9fb1c4" class=3D"confluenceTd">
+<p local-id=3D"b6283b85058d">Already exists</p></td>
+</tr>
+<tr data-local-id=3D"238c08f458cf">
+<td rowspan=3D"2" data-local-id=3D"baec39b1-023d-47f6-b72e-e45c2503433b" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"d2543ce59518"><strong>Place of birth</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"223bc740960a" class=3D"confluenceTd">
+<p local-id=3D"a8a6a206310b"></p></td>
+<td data-local-id=3D"6f970d190fd6" class=3D"confluenceTd">
+<p local-id=3D"7b8c4aa64b91"></p></td>
+<td rowspan=3D"2" data-local-id=3D"ebc9f2e3b89e" class=3D"confluenceTd">
+<p local-id=3D"fa93b9647612"></p></td>
+</tr>
+<tr data-local-id=3D"92e91de151fb">
+<td data-local-id=3D"8eff3e5d1377" class=3D"confluenceTd">
+<p local-id=3D"ae3e2df326fc"></p></td>
+</tr>
+<tr data-local-id=3D"7c1768d47606">
+<td rowspan=3D"2" data-local-id=3D"0f8373ec-af2b-4bff-993d-c024d40936b4" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"2992f36b1efe"><strong>Date of issue</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"c7a6c51e95c9" class=3D"confluenceTd">
+<p local-id=3D"2f3d8544361e"></p></td>
+<td data-local-id=3D"2bb6f601-6f96-4055-b2ca-b2ba15f813b9" class=3D"conflue=
+nceTd">
+<p local-id=3D"2c0d221efba8">(?:(0[1-9]|[12][0-9]|3[01])[.\/-]?(0[1-9]|1[0-=
+2])[.\/-]?(19\d{2}|20\d{2})|(19\d{2}|20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][=
+0-9]|3[01]))</p></td>
+<td rowspan=3D"2" data-local-id=3D"735d0af33f45" class=3D"confluenceTd">
+<p local-id=3D"7571087b9018"></p></td>
+</tr>
+<tr data-local-id=3D"64abb0509349">
+<td data-local-id=3D"a11099102581" class=3D"confluenceTd">
+<p local-id=3D"bf74e852903e"></p></td>
+</tr>
+<tr data-local-id=3D"da0124ddbc80">
+<td rowspan=3D"2" data-local-id=3D"b89bf89c-f8de-4e28-81b1-69a501e859cb" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"bc8cf7e4110c"><strong>Issuing authority</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"ab58b08e982e" class=3D"confluenceTd">
+<p local-id=3D"a5a2b0ee3041"></p></td>
+<td data-local-id=3D"ec81714bb1b9" class=3D"confluenceTd">
+<p local-id=3D"aa9f27684b7c"></p></td>
+<td rowspan=3D"2" data-local-id=3D"41f3594bf2aa" class=3D"confluenceTd">
+<p local-id=3D"407d99a3424a"></p></td>
+</tr>
+<tr data-local-id=3D"c0e1f6c48023">
+<td data-local-id=3D"1ad5100a5aa7" class=3D"confluenceTd">
+<p local-id=3D"635ad9f7ec17"></p></td>
+</tr>
+<tr data-local-id=3D"b8f9b7bad284">
+<td rowspan=3D"2" data-local-id=3D"e38d3cce-97a8-4635-96d7-6b63dae8c9f9" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"02720624dbde"><strong>Residence registration number</strong>=
+</p></td>
+<td rowspan=3D"2" data-local-id=3D"84eea3ec2a40" class=3D"confluenceTd">
+<p local-id=3D"3e8d96541da6"></p></td>
+<td data-local-id=3D"798e7ba6-f4c1-4f3d-834b-94447971d250" class=3D"conflue=
+nceTd">
+<p local-id=3D"576ef5f5ce8c">([A-Z0-9]{7,12}|\d{9,12}|\d{8,15}|\d{6,12})</p=
+></td>
+<td rowspan=3D"2" data-local-id=3D"460d9fedaa69" class=3D"confluenceTd">
+<p local-id=3D"cbffe7c09b6c"></p></td>
+</tr>
+<tr data-local-id=3D"925df0bff529">
+<td data-local-id=3D"c4e5230433e4" class=3D"confluenceTd">
+<p local-id=3D"177c8bf150cd"></p></td>
+</tr>
+<tr data-local-id=3D"798da6875006">
+<td rowspan=3D"2" data-local-id=3D"30f85a95-8966-4885-bda4-dd5ece5721b5" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"765a3504492b"><strong>Passport Identification Number</strong=
+></p></td>
+<td rowspan=3D"2" data-local-id=3D"df47f80e7ad0" class=3D"confluenceTd">
+<p local-id=3D"39491f3f1b09"></p></td>
+<td data-local-id=3D"a98b1429-a828-43d7-a553-40bfd54bcbbc" class=3D"conflue=
+nceTd">
+<p local-id=3D"a9b76112b5f7">(\d{4}( )?\d{6})</p></td>
+<td rowspan=3D"2" data-local-id=3D"6f167bc7eb41" class=3D"confluenceTd">
+<p local-id=3D"d9971588ff5e"></p></td>
+</tr>
+<tr data-local-id=3D"326e65adaab9">
+<td data-local-id=3D"09eb8e7c67c0" class=3D"confluenceTd">
+<p local-id=3D"8e2ee4363f36"></p></td>
+</tr>
+<tr data-local-id=3D"028de5e0ec84">
+<td rowspan=3D"2" data-local-id=3D"ea0b6407-6cff-4315-892e-6bb431ce06cf" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"ee2662b524c0"><strong>Insurance Account Number (SNILS)</stro=
+ng></p></td>
+<td rowspan=3D"2" data-local-id=3D"68b048efb9a6" class=3D"confluenceTd">
+<p local-id=3D"b412f8e378f2"></p></td>
+<td data-local-id=3D"423f0397-2f1c-4405-b994-1a6bf6b2b042" class=3D"conflue=
+nceTd">
+<p local-id=3D"c037d9dfc264">(?!000-000-000 ?00)\d{3}[- ]?\d{3}[- ]?\d{3}[-=
+ ]?\d{2}</p></td>
+<td rowspan=3D"2" data-local-id=3D"a402dbc5bd8a" class=3D"confluenceTd">
+<p local-id=3D"5d2c273e86b3"></p></td>
+</tr>
+<tr data-local-id=3D"40b428be23e5">
+<td data-local-id=3D"e34ba2794914" class=3D"confluenceTd">
+<p local-id=3D"b90d6c1036a5"></p></td>
+</tr>
+<tr data-local-id=3D"93f4cf6155bd">
+<td rowspan=3D"2" data-local-id=3D"b589fa1a-cafa-49ba-bd36-3ecf52f828d2" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"9ce79159bbd1"><strong>Military Identity Number</strong></p><=
+/td>
+<td rowspan=3D"2" data-local-id=3D"cd30acf53977" class=3D"confluenceTd">
+<p local-id=3D"5d174693011c"></p></td>
+<td data-local-id=3D"62077696-6626-4c86-a022-8bea7c8c520a" class=3D"conflue=
+nceTd">
+<p local-id=3D"ce3f8ea6bf65">(?:[A-Z]{2}( )?\d{6,8}|\d{7,10})</p></td>
+<td rowspan=3D"2" data-local-id=3D"407766d5f95a" class=3D"confluenceTd">
+<p local-id=3D"408b54705577"></p></td>
+</tr>
+<tr data-local-id=3D"53e110e6c4a7">
+<td data-local-id=3D"79c0667aa872" class=3D"confluenceTd">
+<p local-id=3D"596e6162b94f"></p></td>
+</tr>
+<tr data-local-id=3D"4cf81b31bcde">
+<td rowspan=3D"2" data-local-id=3D"6bc6a959-ca97-4baa-916b-1204a28eba83" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"802076444d27"><strong>Cargo Customs Declaration</strong></p>=
+</td>
+<td rowspan=3D"2" data-local-id=3D"9759564f25d5" class=3D"confluenceTd">
+<p local-id=3D"86bf63575b41"></p></td>
+<td data-local-id=3D"585da198-5a97-4ce2-bb9d-a5c4e8fd9b71" class=3D"conflue=
+nceTd">
+<p local-id=3D"47db6529ec26">(\d{8}(\/)?( )?(0[1-9]|[12][0-9]|3[01])(0[1-9]=
+|1[0-2])\d{2}(\/)?( )?\d{7})</p></td>
+<td rowspan=3D"2" data-local-id=3D"22e369b1c622" class=3D"confluenceTd">
+<p local-id=3D"0c704a179251"></p></td>
+</tr>
+<tr data-local-id=3D"80439259d8c6">
+<td data-local-id=3D"e782d484382d" class=3D"confluenceTd">
+<p local-id=3D"97af7546630f"></p></td>
+</tr>
+<tr data-local-id=3D"978a50f5580a">
+<td rowspan=3D"2" data-local-id=3D"80d24221-949d-4caf-ad85-fa92973b3529" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"a0a0d805c0a3"><strong>Taxpayer Identification Number</strong=
+></p></td>
+<td rowspan=3D"2" data-local-id=3D"f42378455698" class=3D"confluenceTd">
+<p local-id=3D"6d2a02236ab0"></p></td>
+<td data-local-id=3D"22c6198b-7739-4447-a2b0-8621e8776adf" class=3D"conflue=
+nceTd">
+<p local-id=3D"aeeccb1eddce">((?:\d{10}|\d{12}))</p></td>
+<td rowspan=3D"2" data-local-id=3D"0f947c3e199a" class=3D"confluenceTd">
+<p local-id=3D"e9bca89c9d34"></p></td>
+</tr>
+<tr data-local-id=3D"6ae24da79996">
+<td data-local-id=3D"7a38dc6ed1b6" class=3D"confluenceTd">
+<p local-id=3D"da5ec26ab563"></p></td>
+</tr>
+<tr data-local-id=3D"993b45af03bb">
+<td rowspan=3D"2" data-local-id=3D"86c401f3-581b-45a0-93cc-cefd0a784837" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"ac74cea72f67"><strong>License plate Number</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"c70547d3158a" class=3D"confluenceTd">
+<p local-id=3D"2448c21cf6b4"></p></td>
+<td data-local-id=3D"a73780dc-0acb-4728-ae04-4289a2d7a99c" class=3D"conflue=
+nceTd">
+<p local-id=3D"03d250480402">([A-HJ-NPR-Z0-9]{17}|(?:XTA|XTB|XTC|XTT|Z8N|Z9=
+4)[A-HJ-NPR-Z0-9]{14}|([=D0=90=D0=92=D0=95=D0=9A=D0=9C=D0=9D=D0=9E=D0=A0=D0=
+=A1=D0=A2=D0=A3=D0=A5]\d{3}[=D0=90=D0=92=D0=95=D0=9A=D0=9C=D0=9D=D0=9E=D0=
+=A0=D0=A1=D0=A2=D0=A3=D0=A5]{2}\d{2,3})|(\d{4}[=D0=90=D0=92=D0=95=D0=9A=D0=
+=9C=D0=9D=D0=9E=D0=A0=D0=A1=D0=A2=D0=A3=D0=A5]{2}\d{2,3})|([=D0=90=D0=92=D0=
+=95=D0=9A=D0=9C=D0=9D=D0=9E=D0=A0=D0=A1=D0=A2=D0=A3=D0=A5]{2}\d{4}\d{2,3}))=
+</p></td>
+<td rowspan=3D"2" data-local-id=3D"2ac0a40f0d30" class=3D"confluenceTd">
+<p local-id=3D"ac185acc6a16"></p></td>
+</tr>
+<tr data-local-id=3D"3a6d5cc7feb2">
+<td data-local-id=3D"456e70c205fb" class=3D"confluenceTd">
+<p local-id=3D"1d7b85d472d7"></p></td>
+</tr>
+<tr data-local-id=3D"d7e0d2caa1fa">
+<td rowspan=3D"2" data-local-id=3D"75dd421f-4557-4623-bea4-5936025e7f42" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"954bc4a835c4"><strong>Employment Record</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"5336bc610793" class=3D"confluenceTd">
+<p local-id=3D"93177d01099a"></p></td>
+<td data-local-id=3D"aecd310f7c74" class=3D"confluenceTd">
+<p local-id=3D"73ddf403bc95"></p></td>
+<td rowspan=3D"2" data-local-id=3D"a088d9ef84b5" class=3D"confluenceTd">
+<p local-id=3D"be471553d219"></p></td>
+</tr>
+<tr data-local-id=3D"98f50706ea4f">
+<td data-local-id=3D"9f1ca9069fa9" class=3D"confluenceTd">
+<p local-id=3D"57b13968a914"></p></td>
+</tr>
+<tr data-local-id=3D"eb61046c59b5">
+<td rowspan=3D"2" data-local-id=3D"a5079a2b-cd14-45af-b931-a14aee57ec78" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"df05dde591fc"><strong>OMS Number</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"254be7be19a3" class=3D"confluenceTd">
+<p local-id=3D"3e697c04827a"></p></td>
+<td data-local-id=3D"03fe4c8b-dafa-47c6-a32d-3b67567c020f" class=3D"conflue=
+nceTd">
+<p local-id=3D"a066ed20f6ab">(\d{16}|\d{10})</p></td>
+<td rowspan=3D"2" data-local-id=3D"b3af7c1bd8c8" class=3D"confluenceTd">
+<p local-id=3D"7693ba7a6ded"></p></td>
+</tr>
+<tr data-local-id=3D"aab15c1f2975">
+<td data-local-id=3D"cea3d9188719" class=3D"confluenceTd">
+<p local-id=3D"f0bcc3926a1a"></p></td>
+</tr>
+<tr data-local-id=3D"33b407c00622">
+<td rowspan=3D"2" data-local-id=3D"da4f3732-2d43-49a3-821f-210db3a3db24" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"29d2ce248ccd"><strong>Race</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"ca06179cbcd0" class=3D"confluenceTd">
+<p local-id=3D"294c99cb80e1"></p></td>
+<td data-local-id=3D"5b62346935f1" class=3D"confluenceTd">
+<p local-id=3D"9873649ff4d3"></p></td>
+<td rowspan=3D"2" data-local-id=3D"5fa476ca3a99" class=3D"confluenceTd">
+<p local-id=3D"074484ec6826"></p></td>
+</tr>
+<tr data-local-id=3D"2def11210f36">
+<td data-local-id=3D"c4f1e1edeb58" class=3D"confluenceTd">
+<p local-id=3D"9834270802bf"></p></td>
+</tr>
+<tr data-local-id=3D"7e190f16742c">
+<td rowspan=3D"2" data-local-id=3D"8fc22c63-a8a3-4a8e-a90d-972f04391185" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"266b265e8af4"><strong>Ethnicity</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"cf75357c6943" class=3D"confluenceTd">
+<p local-id=3D"2a45e840eeac"></p></td>
+<td data-local-id=3D"ecf4eb385ac8" class=3D"confluenceTd">
+<p local-id=3D"f4257089034a"></p></td>
+<td rowspan=3D"2" data-local-id=3D"ecf8f8bf9421" class=3D"confluenceTd">
+<p local-id=3D"565ba77df86a"></p></td>
+</tr>
+<tr data-local-id=3D"6cbedcb32e77">
+<td data-local-id=3D"7421640bcef9" class=3D"confluenceTd">
+<p local-id=3D"77862dafea5b"></p></td>
+</tr>
+<tr data-local-id=3D"cad6151a63c3">
+<td rowspan=3D"2" data-local-id=3D"f0eb48bd-bd5d-42fc-aca6-eb9982399701" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"d057ad521bb8"><strong>Religion</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"2ec3fadbae3a" class=3D"confluenceTd">
+<p local-id=3D"d2f9dfc8f526"></p></td>
+<td data-local-id=3D"a269634c1533" class=3D"confluenceTd">
+<p local-id=3D"8cb906ff6dfd"></p></td>
+<td rowspan=3D"2" data-local-id=3D"0865abeb96fb" class=3D"confluenceTd">
+<p local-id=3D"d969c6a456d8"></p></td>
+</tr>
+<tr data-local-id=3D"2f7c65f89b1a">
+<td data-local-id=3D"a2eeddba1abf" class=3D"confluenceTd">
+<p local-id=3D"b700e81bdb3b"></p></td>
+</tr>
+<tr data-local-id=3D"452a3d773e5e">
+<td rowspan=3D"2" data-local-id=3D"48ca9d99-6b8a-4a29-9fe5-654d04ad57fa" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"eb6149226bf5"><strong>Political opinions</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"90dcb3832d29" class=3D"confluenceTd">
+<p local-id=3D"49acc2a092a6"></p></td>
+<td data-local-id=3D"80110f71bcd7" class=3D"confluenceTd">
+<p local-id=3D"c09bea479b64"></p></td>
+<td rowspan=3D"2" data-local-id=3D"0d739cc65221" class=3D"confluenceTd">
+<p local-id=3D"4cc551f42e79"></p></td>
+</tr>
+<tr data-local-id=3D"dde371800506">
+<td data-local-id=3D"b5b2c5f73e92" class=3D"confluenceTd">
+<p local-id=3D"4ea9a699b9e8"></p></td>
+</tr>
+<tr data-local-id=3D"8d345ca49ae1">
+<td rowspan=3D"2" data-local-id=3D"051111b8-b3a9-446b-b1f8-15271a687009" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"15786a26c453"><strong>Health conditions</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"8de2bfc861cb" class=3D"confluenceTd">
+<p local-id=3D"75931b244633"></p></td>
+<td data-local-id=3D"fa441d2c7426" class=3D"confluenceTd">
+<p local-id=3D"a0bde24c666a"></p></td>
+<td rowspan=3D"2" data-local-id=3D"11367f425698" class=3D"confluenceTd">
+<p local-id=3D"fd7adba8ec2a"></p></td>
+</tr>
+<tr data-local-id=3D"1477f9dbd2ec">
+<td data-local-id=3D"8c26a5e7ceae" class=3D"confluenceTd">
+<p local-id=3D"ac6939224391"></p></td>
+</tr>
+<tr data-local-id=3D"874bc6948d6b">
+<td rowspan=3D"2" data-local-id=3D"a0cfae87-241b-4f0c-af86-a7927e3bee9f" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"a101b30f44de"><strong>Criminal records</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"8cd6ee2c9cf3" class=3D"confluenceTd">
+<p local-id=3D"7dc76f0c2979"></p></td>
+<td data-local-id=3D"b659f53ce9dd" class=3D"confluenceTd">
+<p local-id=3D"7bf2f57872eb"></p></td>
+<td rowspan=3D"2" data-local-id=3D"326c8478460f" class=3D"confluenceTd">
+<p local-id=3D"aa2eb232dc34"></p></td>
+</tr>
+<tr data-local-id=3D"6987d40bfc14">
+<td data-local-id=3D"fd0b32e34920" class=3D"confluenceTd">
+<p local-id=3D"01b4762bad6c"></p></td>
+</tr>
+<tr data-local-id=3D"a2e0d9e80907">
+<td rowspan=3D"2" data-local-id=3D"c4f1f3f0-d87d-4539-af18-7e82c018cac4" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"22b84e3e8f75"><strong>Post code</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"b1229175b027" class=3D"confluenceTd">
+<p local-id=3D"1b2f548d0f35"></p></td>
+<td data-local-id=3D"e146cc7b-c080-494d-8172-c6c275beca91" class=3D"conflue=
+nceTd">
+<p local-id=3D"654f6c4c1fd7">([1-9]\d{5})</p></td>
+<td rowspan=3D"2" data-local-id=3D"966f47134478" class=3D"confluenceTd">
+<p local-id=3D"eb463516c552"></p></td>
+</tr>
+<tr data-local-id=3D"ab624334c9a3">
+<td data-local-id=3D"74e6984d8a97" class=3D"confluenceTd">
+<p local-id=3D"0d2a346482c8"></p></td>
+</tr>
+<tr data-local-id=3D"266cb7dc5dc6">
+<td rowspan=3D"2" data-local-id=3D"592c0286-2618-4a7f-baf0-ff999ac74295" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"417d255f9d84"><strong>Real estate ownership</strong></p></td=
+>
+<td rowspan=3D"2" data-local-id=3D"1b8fda6d3f94" class=3D"confluenceTd">
+<p local-id=3D"d140eeede0df"></p></td>
+<td data-local-id=3D"821446d5-21b1-4436-97fc-c784910d7741" class=3D"conflue=
+nceTd">
+<p local-id=3D"f184bd733fb2">((\d{2}:\d{2}:\d{6,7}:\d{1,7})|(\d{2}-\d{2}-\d=
+{2}\/\d+\/\d{4}-\d+))</p></td>
+<td rowspan=3D"2" data-local-id=3D"8c5914d5fc90" class=3D"confluenceTd">
+<p local-id=3D"cf795aafac1c"></p></td>
+</tr>
+<tr data-local-id=3D"e5ab3b3fe1e9">
+<td data-local-id=3D"e5a777d464b0" class=3D"confluenceTd">
+<p local-id=3D"d427747dd7ce"></p></td>
+</tr>
+<tr data-local-id=3D"4484c7d850e9">
+<td rowspan=3D"2" data-local-id=3D"0efcee52-4ce5-4a3b-860a-8051122ee41c" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"3ef363774f1c"><strong>Disability status</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"51f855242bd9" class=3D"confluenceTd">
+<p local-id=3D"2d277cf4decd"></p></td>
+<td data-local-id=3D"b8319a26-2d72-4052-bde2-e5a2afae5fd2" class=3D"conflue=
+nceTd">
+<p local-id=3D"15d003b399d2"></p></td>
+<td rowspan=3D"2" data-local-id=3D"ae4ddaa2659f" class=3D"confluenceTd">
+<p local-id=3D"27d64cf1d9ac"></p></td>
+</tr>
+<tr data-local-id=3D"696cfb72d933">
+<td data-local-id=3D"91c61adacb4c" class=3D"confluenceTd">
+<p local-id=3D"0d8d22d83bbc"></p></td>
+</tr>
+<tr data-local-id=3D"13a0fdbfb8d1">
+<td rowspan=3D"2" data-local-id=3D"989424d9-a7d2-4868-bd88-94d05cc09f3e" cl=
+ass=3D"confluenceTd">
+<p local-id=3D"abcf9d55bf2f"><strong>Salary information</strong></p></td>
+<td rowspan=3D"2" data-local-id=3D"7dc90a67c88f" class=3D"confluenceTd">
+<p local-id=3D"e3bcbd52bc35"></p></td>
+<td data-local-id=3D"f661b9c5-a4a7-47cf-b1f8-37123c06c5f4" class=3D"conflue=
+nceTd">
+<p local-id=3D"97093eeb2526">(?i)((?:[1-9]\d{2,6}(?:[ ,]\d{3})*|\d{4,9})( )=
+?(?:RUB|=E2=82=BD|rubles?))</p></td>
+<td rowspan=3D"2" data-local-id=3D"32f9a3424875" class=3D"confluenceTd">
+<p local-id=3D"5666278761f7"></p></td>
+</tr>
+<tr data-local-id=3D"f7fb6193b5a3">
+<td data-local-id=3D"3d2395f00338" class=3D"confluenceTd">
+<p local-id=3D"f90708b9a795"></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+    </div>
+</body>
+</html>
+------=_Part_0_1644600684.1773311575116--

@@ -1,0 +1,4176 @@
+Date: Mon, 9 Dec 2024 13:03:33 +0000 (UTC)
+Message-ID: <3421092.1669132.1733749413446@rtp-apl-conf2>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_1669131_1909598044.1733749413446"
+
+------=_Part_1669131_1909598044.1733749413446
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Batch 3 Countries</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: #fff !important;
+        color: #000 !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: #000;
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Batch 3 Countries</h1>
+    <div class=3D"Section1">
+        <p><style type=3D"text/css">/*<![CDATA[*/
+div.rbtoc1733749413376 {padding: 0px;}
+div.rbtoc1733749413376 ul {margin-left: 0px;}
+div.rbtoc1733749413376 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style></p>
+<div class=3D"toc-macro rbtoc1733749413376">
+<ul class=3D"toc-indentation">
+<li><a href=3D"#Batch3Countries-Portugal">Portugal</a></li>
+<li><a href=3D"#Batch3Countries-Qatar">Qatar</a></li>
+<li><a href=3D"#Batch3Countries-UnitedArabEmirates">United Arab Emirates</a=
+></li>
+<li><a href=3D"#Batch3Countries-SaudiArabia">Saudi Arabia</a></li>
+<li><a href=3D"#Batch3Countries-Belgium">Belgium</a></li>
+<li><a href=3D"#Batch3Countries-Austria">Austria</a></li>
+<li><a href=3D"#Batch3Countries-HongKong">Hong Kong</a></li>
+<li><a href=3D"#Batch3Countries-Singapore">Singapore</a></li>
+<li><a href=3D"#Batch3Countries-China">China</a></li>
+<li><a href=3D"#Batch3Countries-Romania">Romania</a></li>
+</ul>
+</div>
+<p></p>
+<p class=3D"auto-cursor-target"><strong>Note:</strong></p>
+<p class=3D"auto-cursor-target"><span style=3D"color: rgb(0,0,0);"><strong>=
+White colour (or) blank space</strong><span>&nbsp;</span>in the table indic=
+ates that we have done research and added new identifiers data in the follo=
+wing page.<br></span><span style=3D"color: rgb(0,128,0);"><strong>Green</st=
+rong></span><span style=3D"color: rgb(23,43,77);">&nbsp;</span><span style=
+=3D"color: rgb(23,43,77);">colour in the table indicates that we already ha=
+ve them in-built identifiers in UI.</span><br><span style=3D"color: rgb(255=
+,0,0);"><strong>Red</strong></span><span style=3D"color: rgb(23,43,77);">&n=
+bsp;</span><span style=3D"color: rgb(23,43,77);">colour in the table indica=
+te that we are not creating regex for it.</span><br><strong><span style=3D"=
+color: rgb(0,0,255);">Blue</span></strong><span style=3D"color: rgb(23,43,7=
+7);">&nbsp;</span><span style=3D"color: rgb(23,43,77);">colour in the table=
+ indicates that identifier is not used in the countries.</span><br><strong>=
+<span style=3D"color: rgb(255,153,0);">Orange</span></strong><span style=3D=
+"color: rgb(23,43,77);"><span>&nbsp;</span>c</span><span style=3D"color: rg=
+b(23,43,77);">olour in the table indicates that identifiers data is availab=
+le for the countries.</span></p>
+<div class=3D"table-wrap">
+<table class=3D"wrapped confluenceTable">
+<colgroup>
+<col style=3D"width: 92.0px;">
+<col style=3D"width: 75.0px;">
+<col style=3D"width: 78.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 78.0px;">
+<col style=3D"width: 75.0px;">
+<col style=3D"width: 84.0px;">
+<col style=3D"width: 80.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 84.0px;">
+<col style=3D"width: 57.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 74.0px;">
+<col style=3D"width: 53.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 66.0px;">
+<col style=3D"width: 55.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 73.0px;">
+<col style=3D"width: 77.0px;">
+<col style=3D"width: 83.0px;">
+</colgroup>
+<tbody>
+<tr>
+<th class=3D"confluenceTh">Countries</th>
+<th class=3D"confluenceTh"><p>Social Security Number</p></th>
+<th class=3D"confluenceTh"><p>National Identity Card Number</p></th>
+<th class=3D"confluenceTh">CPF number</th>
+<th class=3D"confluenceTh"><p>Passport number</p></th>
+<th class=3D"confluenceTh"><p>Driver License Number</p></th>
+<th class=3D"confluenceTh">Social Insurance Number</th>
+<th class=3D"confluenceTh"><p>Tax ID number (i.e. Taxpayer ID number)</p></=
+th>
+<th class=3D"confluenceTh">VAT number</th>
+<th class=3D"confluenceTh">Health service number</th>
+<th class=3D"confluenceTh">Health Insurance number</th>
+<th colspan=3D"1" class=3D"confluenceTh"><p>Date of birth&nbsp;</p></th>
+<th colspan=3D"1" class=3D"confluenceTh"><p>Phone number</p></th>
+<th colspan=3D"1" class=3D"confluenceTh">Physical address</th>
+<th colspan=3D"1" class=3D"confluenceTh"><p>Post code</p></th>
+<th colspan=3D"1" class=3D"confluenceTh"><p>License plate number (i.e. vehi=
+cle)</p></th>
+<th colspan=3D"1" class=3D"confluenceTh">Person name</th>
+<th colspan=3D"1" class=3D"confluenceTh">IBAN</th>
+<th colspan=3D"1" class=3D"confluenceTh">Bank account number</th>
+<th colspan=3D"1" class=3D"confluenceTh">Credit card number</th>
+<th colspan=3D"1" class=3D"confluenceTh">Routing number</th>
+<th colspan=3D"1" class=3D"confluenceTh">Business number</th>
+<th colspan=3D"1" class=3D"confluenceTh">Company number</th>
+</tr>
+<tr>
+<th colspan=3D"1" class=3D"confluenceTh">Portugal</th>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+</tr>
+<tr>
+<th colspan=3D"1" class=3D"confluenceTh">Qatar&nbsp;</th>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+</tr>
+<tr>
+<th colspan=3D"1" class=3D"confluenceTh">United Arab Emirates&nbsp;&nbsp;</=
+th>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+</tr>
+<tr>
+<th colspan=3D"1" class=3D"confluenceTh">Saudi Arabia&nbsp;</th>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Belgium&nbsp;</th>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;" title=3D"Background color : Medium green =
+100%">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;" title=3D"Background color : Medium green =
+100%">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Austria&nbsp;</th>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;">Yes</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;" title=3D"Background color : Medium green =
+100%">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;" title=3D"Background color : Medium green =
+100%">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Hong Kong&nbsp;</th>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Singapore&nbsp;</th>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#ffab00 confluenceTd" data-highlight-colour=3D"#ffab=
+00" style=3D"text-align: center;" title=3D"Background color : Medium orange=
+ 100%">A</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#36b37e confluenceTd" data-highlight-colour=3D"#36b3=
+7e" style=3D"text-align: center;" title=3D"Background color : Medium green =
+100%">Yes</td>
+<td class=3D"highlight-#ffab00 confluenceTd" data-highlight-colour=3D"#ffab=
+00" style=3D"text-align: center;" title=3D"Background color : Medium orange=
+ 100%">A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#ffab00 confluenceTd" data-highlight-colour=3D"#ffab=
+00" style=3D"text-align: center;" title=3D"Background color : Medium orange=
+ 100%">A</td>
+<td class=3D"highlight-#ffab00 confluenceTd" data-highlight-colour=3D"#ffab=
+00" style=3D"text-align: center;" title=3D"Background color : Medium orange=
+ 100%">A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#ffab00 confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#ffab00" style=3D"text-align: center;" title=3D"Background color :=
+ Medium orange 100%">A</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#ffab00 confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#ffab00" style=3D"text-align: center;" title=3D"Background color :=
+ Medium orange 100%">A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">China&nbsp;</th>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td style=3D"text-align: center;" class=3D"confluenceTd"><br></td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" data-highlight-colour=3D"#0065=
+ff" style=3D"text-align: center;" title=3D"Background color : Medium blue 1=
+00%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+</tr>
+<tr>
+<th colspan=3D"1" class=3D"confluenceTh">Romania</th>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#de350b confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#de350b" style=3D"text-align: center;" title=3D"Background color :=
+ Dark red 85%">No</td>
+<td class=3D"highlight-#36b37e confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#36b37e" style=3D"text-align: center;" title=3D"Background color :=
+ Medium green 100%">Yes</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td colspan=3D"1" style=3D"text-align: center;" class=3D"confluenceTd"><br>=
+</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+<td class=3D"highlight-#0065ff confluenceTd" colspan=3D"1" data-highlight-c=
+olour=3D"#0065ff" style=3D"text-align: center;" title=3D"Background color :=
+ Medium blue 100%">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-Portugal"><strong>Po=
+rtugal</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 22.1754%;">
+<col style=3D"width: 35.0439%;">
+<col style=3D"width: 31.3938%;">
+<col style=3D"width: 11.3869%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Social Security Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">National Identity Card N=
+umber</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">not available</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Passport number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Driver License Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">not available</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Tax ID number (i.e. Taxp=
+ayer ID number)</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">VAT number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%"><p title=3D"">Health serv=
+ice number</p></th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Phone number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Post code</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Portugal License Plate Number matc=
+hes a valid license plate number combined with any of the following keyword=
+s within a proximity of 10 terms: n=C3=BAmero de matr=C3=ADcula, n=C3=BAmer=
+o da matr=C3=ADcula, chapas de matr=C3=ADcula, chapa de matricula, n=C3=BAm=
+ero da placa, n=C3=BAmero do registo, n.=C2=BA registo, n.=C2=BA matricula =
+(or) matr=C3=ADcula. (All terms case insensitive; diacritics are optional.)=
+</td>
+<td class=3D"confluenceTd">([A-Z]{2}[- .]\d{2}[- .]\d{2}|\d{2}[- .]\d{2}[- =
+.][A-Z]{2}|\d{2}[- .][A-Z]{2}[- .]\d{2}|[A-Z]{2}[- .]\d{2}[- .][A-Z]{2}|\d{=
+3}[- .][A-Z]{2}\d{3}|GNR[- .][A-Z][- .]\d{4}|[A-Z]{1,2}[- .]\d{6})</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:n[=C3=BAu]mero de matr[=C3=ADi]cula|n[=C3=
+=BAu]mero da matr[=C3=ADi]cula|chapas de matr[=C3=ADi]cula|chapa de matricu=
+la|n[=C3=BAu]mero da placa|n[=C3=BAu]mero do registo|n\.[=C2=BAO] registo|n=
+\.[=C2=BAO] matricula|matr[=C3=ADi]cula)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td=
+>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">00.AA.00,AA.00.AA,200-CD530,GNR J.2558,L.186880<=
+/td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">IBAN</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Portugal Bank Account Number match=
+es a valid bank account number combined with any of the following keywords =
+within a proximity of 10 terms: n=C3=BAmero de conta banc=C3=A1ria, detalhe=
+s banc=C3=A1rios, n=C3=BAmero banc=C3=A1rio, c=C3=B3digo de conta, ID de co=
+nta, n=C3=BAmero de conta (or) conta numerada. <span style=3D"color: rgb(23=
+,43,77);">(All terms case insensitive; diacritics are optional.)</span></td=
+>
+<td class=3D"confluenceTd">\d{11}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:n[=C3=BAu]mero de conta banc[=C3=A1a]ria|=
+detalhes banc[=C3=A1a]rios|n[=C3=BAu]mero banc[=C3=A1a]rio|c[=C3=B3o]digo d=
+e conta|ID de conta|n[=C3=BAu]mero de conta|conta numerada)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">12345678901</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Routing number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">IBAN</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%"><p title=3D"">Business nu=
+mber</p></th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIPC number/TIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Company number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIPC number/TIN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-Qatar"><strong>Qatar=
+</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 22.2499%;">
+<col style=3D"width: 35.0439%;">
+<col style=3D"width: 31.6913%;">
+<col style=3D"width: 11.0149%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff">Social Security Number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">not available</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">National Identity Card Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar National ID Number matches a=
+ valid National Identity Card Number combined with any of the following key=
+words within a proximity of 10 terms: NIN#, NIN, =D8=B1=D9=82=D9=85 =D8=A7=
+=D9=84=D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=
+=D8=A9, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=
+=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9=D8=B1, =D9=82=D9=85 =D8=A8=D8=B7=D8=A7=D9=
+=82=D8=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 (or) =D8=A7=D9=84=D9=87=D9=
+=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9. (All terms case=
+ insensitive.)</td>
+<td class=3D"confluenceTd">[23]\d{10}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><p><br></p></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:NIN\#?=E2=80=8E|=D8=B1=D9=82=D9=85 =D8=A7=
+=D9=84=D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=
+=D8=A9|=D8=B1=D9=82=D9=85 =D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=87=
+=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9|=D8=B1=D9=82=
+=D9=85 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=
+=D9=8A=D8=A9|=D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=
+=D9=86=D9=8A=D8=A9)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">21234567890</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">not available</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Passport number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Passport Number matches a va=
+lid passport number combined with any of the following keywords within a pr=
+oximity of 10 terms: =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D9=84=D9=84=D8=
+=B3=D9=81=D8=B1 =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A, =D8=AA=D9=81=D8=A7=D8=
+=B5=D9=8A=D9=84 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1, =
+=D8=A7=D9=84=D8=AA=D8=A3=D8=B4=D9=8A=D8=B1=D8=A9, =D8=A8=D8=B7=D8=A7=D9=82=
+=D8=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=
+=D9=8A=D8=A9, =D8=B1=D9=82=D9=85 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=
+=B3=D9=81=D8=B1, =D9=88=D8=AB=D9=8A=D9=82=D8=A9 =D8=A7=D9=84=D8=B3=D9=81=D8=
+=B1, =D8=B3=D9=84=D8=B7=D8=A9 =D8=A7=D9=84=D8=A5=D8=B5=D8=AF=D8=A7=D8=B1, =
+=D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9, =D8=A5=D8=AB=D8=A8=D8=A7=D8=AA =D8=A7=
+=D9=84=D9=87=D9=88=D9=8A=D8=A9, =D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=AC=D9=88=
+=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1 (or) =D8=AC=D9=88=D8=A7=D8=B2 =
+=D8=A7=D9=84=D8=B3=D9=81=D8=B1.</td>
+<td class=3D"confluenceTd">(\d{8}|<span style=3D"color: rgb(0,51,102);">QAT=
+-[A-z]{2}-\d{5})</span></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D9=
+=84=D9=84=D8=B3=D9=81=D8=B1 =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A|=D8=AA=D9=
+=81=D8=A7=D8=B5=D9=8A=D9=84 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=
+=81=D8=B1|=D8=A7=D9=84=D8=AA=D8=A3=D8=B4=D9=8A=D8=B1=D8=A9|=D8=A8=D8=B7=D8=
+=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=
+=B7=D9=86=D9=8A=D8=A9|=D8=B1=D9=82=D9=85 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=
+=84=D8=B3=D9=81=D8=B1|=D9=88=D8=AB=D9=8A=D9=82=D8=A9 =D8=A7=D9=84=D8=B3=D9=
+=81=D8=B1|=D8=B3=D9=84=D8=B7=D8=A9 =D8=A7=D9=84=D8=A5=D8=B5=D8=AF=D8=A7=D8=
+=B1|=D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9|=D8=A5=D8=AB=D8=A8=D8=A7=D8=AA =D8=
+=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9|=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=AC=D9=
+=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1|=D8=AC=D9=88=D8=A7=D8=B2 =D8=
+=A7=D9=84=D8=B3=D9=81=D8=B1)</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">12345778, <span style=3D"color: rgb(0,51,102);">=
+QAT-AO-03001</span></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Driver License Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Driver's License Number matc=
+hes a valid license number combined with any of the following keywords with=
+in a proximity of 10 terms: =D8=B1=D8=AE=D8=B5=D8=A9 =D8=A8=D8=A8=D8=B7=D8=
+=A7=D9=82=D8=A9 =D8=AA=D8=AD=D9=85=D9=84 =D8=B5=D9=88=D8=B1=D8=A9, =D8=AF=
+=D9=88=D9=84=D8=A9 =D9=82=D8=B7=D8=B1 =D9=88=D8=B2=D8=A7=D8=B1=D8=A9 =D8=A7=
+=D9=84=D8=AF=D8=A7=D8=AE=D9=84=D9=8A=D8=A9 =D8=A5=D8=AF=D8=A7=D8=B1=D8=A9 =
+=D8=A7=D9=84=D9=85=D8=B1=D9=88=D8=B1, =D8=B1=D8=AE=D8=B5=D8=A9 =D8=B3=D9=88=
+=D9=82, =D8=A7=D9=84=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B4=D8=AE=D8=B5=D9=8A=
+, =D8=A7=D9=84=D8=A7=D8=B3=D9=85 =D8=A7=D9=84=D8=AC=D9=86=D8=B3=D9=8A=D8=A9=
+ =D8=A8=D8=B1=D9=8A=D8=B7=D8=A7=D9=86=D9=8A=D8=A7 =D8=AA=D8=A7=D8=B1=D9=8A=
+=D8=AE =D8=A7=D9=84=D9=85=D9=8A=D9=84=D8=A7=D8=AF, =D9=81=D8=B5=D9=8A=D9=84=
+=D8=A9 =D8=A7=D9=84=D8=AF=D9=85, =D9=82=D9=8A=D8=A7=D8=AF=D8=A9 =D9=85=D8=
+=AA=D8=B9=D9=84=D9=91=D9=85, =D8=AD=D8=A7=D9=85=D9=84=D9=88 =D8=A7=D9=84=D8=
+=B1=D8=AE=D8=B5, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9, =
+=D8=AD=D8=A7=D9=85=D9=84 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9, =D8=B1=D8=AE=
+=D8=B5 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=A9 (or) =D8=B1=D8=AE=D8=B5=
+=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=A9. (All terms case insensit=
+ive.)</td>
+<td class=3D"confluenceTd">\d{11}</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D8=AE=D8=B5=D8=A9 =D8=A8=D8=A8=D8=
+=B7=D8=A7=D9=82=D8=A9 =D8=AA=D8=AD=D9=85=D9=84 =D8=B5=D9=88=D8=B1=D8=A9|=D8=
+=AF=D9=88=D9=84=D8=A9 =D9=82=D8=B7=D8=B1 =D9=88=D8=B2=D8=A7=D8=B1=D8=A9 =D8=
+=A7=D9=84=D8=AF=D8=A7=D8=AE=D9=84=D9=8A=D8=A9 =D8=A5=D8=AF=D8=A7=D8=B1=D8=
+=A9 =D8=A7=D9=84=D9=85=D8=B1=D9=88=D8=B1=D8=B1=D8=AE=D8=B5=D8=A9 =D8=B3=D9=
+=88=D9=82|=D8=A7=D9=84=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B4=D8=AE=D8=B5=D9=
+=8A|=D8=A7=D9=84=D8=A7=D8=B3=D9=85 =D8=A7=D9=84=D8=AC=D9=86=D8=B3=D9=8A=D8=
+=A9 =D8=A8=D8=B1=D9=8A=D8=B7=D8=A7=D9=86=D9=8A=D8=A7 =D8=AA=D8=A7=D8=B1=D9=
+=8A=D8=AE =D8=A7=D9=84=D9=85=D9=8A=D9=84=D8=A7=D8=AF|=D9=81=D8=B5=D9=8A=D9=
+=84=D8=A9 =D8=A7=D9=84=D8=AF=D9=85|=D9=82=D9=8A=D8=A7=D8=AF=D8=A9 =D9=85=D8=
+=AA=D8=B9=D9=84=D9=91=D9=85|=D8=AD=D8=A7=D9=85=D9=84=D9=88 =D8=A7=D9=84=D8=
+=B1=D8=AE=D8=B5|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9|=D8=
+=AD=D8=A7=D9=85=D9=84 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9| =D8=B1=D8=AE=D8=
+=B5 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=A9|=D8=B1=D8=AE=D8=B5=D8=A9 =D8=
+=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=A9)</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">12345678901</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff">Social Insurance Number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Tax ID number (i.e. Taxpayer ID number)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Tax ID Number matches a vali=
+d Tax Identification Number combined with any of the following keywords wit=
+hin a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D9=85=D8=B9=D8=B1=D9=81 =
+=D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=
+=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B9=
+=D8=B1=D9=8A=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A =D8=B1=D9=85=
+=D8=B2 =D9=85=D8=B9=D8=B1=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9,=
+ =D9=85=D9=84=D9=81 =D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, =D8=B1=D9=82=D9=85 =D8=
+=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=
+=A8=D9=8A, taxidno#, taxidno, taxidnumber#, taxidnumber, taxid#, taxid, tax=
+no# , taxnumber#, taxnumber, tin# (or) =D8=A7=D9=84=D9=85=D8=B9=D8=B1=D9=81=
+ =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A. (All terms case insensitive.)<=
+/td>
+<td class=3D"confluenceTd">5\d{9}</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D9=85=D8=B9=D8=B1=D9=
+=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=
+=B9=D8=B1=D9=8A=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|=D8=B1=D9=
+=85=D8=B2 =D9=85=D8=B9=D8=B1=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=
+=A9|=D9=85=D9=84=D9=81 =D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|=D8=B1=D9=82=D9=85 =
+=D8=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=
+=D8=A8=D9=8A|taxidno\#?|taxidno|taxidnumber\#?|taxidnumber|taxid\#?|taxid|t=
+axno\#?|taxnumber\#?|taxnumber|tin\#?|=D8=A7=D9=84=D9=85=D8=B9=D8=B1=D9=81 =
+=D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))<=
+/td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">5234567890</td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">VAT number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd">&nbsp;&nbsp;</td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Phone number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Phone Number matches a valid=
+ phone number combined with any of the following keywords within a proximit=
+y of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=84=D9=8A=D9=81=D9=
+=88=D9=86, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=AA=D9=81 =D8=A7=
+=D9=84=D9=85=D8=AD=D9=85=D9=88=D9=84 (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=84=
+=D9=87=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=D8=AE=D9=84=D9=88=D9=8A.</td>
+<td class=3D"confluenceTd">(00)?(\+?974)?[ -]?((31)|(33)|(44)|(55)|(66)|(77=
+))\d{2}[ -]?\d{4}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=
+=84=D9=8A=D9=81=D9=88=D9=86|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=
+=AA=D9=81 =D8=A7=D9=84=D9=85=D8=AD=D9=85=D9=88=D9=84|=D8=B1=D9=82=D9=85 =D8=
+=A7=D9=84=D9=87=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=D8=AE=D9=84=D9=88=D9=8A)</td=
+>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">974 3134 1345</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Post code</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Postcode matches a valid pos=
+tcode combined with any of the following keywords within a proximity of 10 =
+terms: =D8=A7=D9=84=D8=B9=D9=86=D9=88=D8=A7=D9=86, =D8=AD=D9=8A =D8=A7=D9=
+=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=85=D9=
+=86=D8=B7=D9=82=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A, =D9=88=D8=AD=D8=AF=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=
+=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=82=D8=B7=D8=A7=D8=B9 =
+=D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A (=
+or) =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=
+=8A.</td>
+<td class=3D"confluenceTd">(00000)</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=A7=D9=84=D8=B9=D9=86=D9=88=D8=A7=D9=
+=86|=D8=AD=D9=8A =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=
+=8A=D8=AF=D9=8A|=D9=85=D9=86=D8=B7=D9=82=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=
+=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A|=D9=88=D8=AD=D8=AF=D8=A9 =D8=
+=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A|=D9=
+=82=D8=B7=D8=A7=D8=B9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A|=D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">00000</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar License Plate Number matches=
+ a valid license plate number combined with any of the following keywords w=
+ithin a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D9=84=D9=88=D8=AD=D8=A9 =
+=D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5, =D9=84=D9=88=D8=AD=D8=A9 =D8=A7=
+=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=
+=D8=B3=D8=AC=D9=8A=D9=84, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=84=D9=88=D8=AD=
+=D8=A9 (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5.<=
+/td>
+<td class=3D"confluenceTd">\d{3,6}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D9=84=D9=88=D8=AD=D8=
+=A9 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5|=D9=84=D9=88=D8=AD=D8=A9 =D8=
+=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=
+=AA=D8=B3=D8=AC=D9=8A=D9=84|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=84=D9=88=D8=
+=AD=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5)</t=
+d>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">IBAN</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar International Bank Account N=
+umber =E2=80=93 IBAN matches a valid IBAN combined with any of the followin=
+g keywords within a proximity of 10 terms: IBAN, IBAN#=E2=80=8E (or) =D8=B1=
+=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D8=B5=
+=D8=B1=D9=81=D9=8A =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A. (All terms case in=
+sensitive.)</td>
+<td class=3D"confluenceTd">QA\d{2}[ -]?[A-Z]{4}[ ]?\d{4}[ ]?\d{4}[ ]?\d{4}[=
+ ]?\d{2}[A-Z]{2}[ ]?[A-Z]{4}[ ]?[A-Z]</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:IBAN\#?=E2=80=8E|=D8=B1=D9=82=D9=85 =D8=
+=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D8=B5=D8=B1=D9=81=D9=
+=8A =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</t=
+d>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);">QA58 DOHB =
+0000 1234 5678 90AB CDEF G</span></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Bank Account Number matches =
+a valid bank account number combined with any of the following keywords wit=
+hin a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=
+=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A, =D8=AA=D9=81=D8=A7=D8=B5=D9=
+=8A=D9=84 =D8=A7=D9=84=D8=A8=D9=86=D9=83, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=
+=D8=A8=D9=86=D9=83, =D9=83=D9=88=D8=AF =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8=
+, =D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8, =D8=
+=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 (or) =D8=A7=D9=84=D8=
+=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D9=8F=D8=B1=D9=82=D9=91=D9=8E=D9=
+=85.</td>
+<td class=3D"confluenceTd">\d{4}[ ]?\d{4}[ ]?\d{4}[ ]?\d{2}[A-Z]{2}[ ]?[A-Z=
+]{4}[ ]?[A-Z]</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A|=D8=AA=D9=81=D8=A7=D8=
+=B5=D9=8A=D9=84 =D8=A7=D9=84=D8=A8=D9=86=D9=83|=D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=A8=D9=86=D9=83|=D9=83=D9=88=D8=AF =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=
+=A8|=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8|=D8=
+=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8|=D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D9=8F=D8=B1=D9=82=D9=91=D9=8E=D9=85)</td=
+>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);"> 0000 1234=
+ 5678 90AB CDEF G</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Routing number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Qatar Routing Number matches a val=
+id routing number combined with any of the following keywords within a prox=
+imity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=88=D8=AC=D9=8A=
+=D9=87, bankassociationrouting#, bankassociationrouting, bankrouting#, bank=
+routing, routing#, routing# (or) RTN. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">QNBAQAQA([A-Z]{3})?</td>
+<td rowspan=3D"3" class=3D"confluenceTd">Routing number</td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=
+=88=D8=AC=D9=8A=D9=87|bankassociationrouting\#?|bankrouting\#?|routing\#?|R=
+TN)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">QNBAQAQASLB</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Business number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Company number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-UnitedArabEmirates">=
+<strong>United Arab Emirates</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 22.2499%;">
+<col style=3D"width: 35.0439%;">
+<col style=3D"width: 31.6913%;">
+<col style=3D"width: 11.0149%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">National Identity Card Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates National ID N=
+umber matches a valid National Identity Card Number combined with any of th=
+e following keywords within a proximity of 10 terms: NIN#, NIN, =D8=B1=D9=
+=82=D9=85 =D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=
+=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9, =D8=B1=D9=82=D9=85 =D8=A7=
+=D9=84=D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=
+=D8=A9, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=
+=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9 (or) =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9=
+ =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9. (All terms case insensitive.)<=
+/td>
+<td class=3D"confluenceTd">784[- .]?\d{4}[. -]?\d{7}[ .-]?\d{1}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:NIN\#?=E2=80=8E|=D8=B1=D9=82=D9=85 =D8=A8=
+=D8=B7=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=
+=D9=88=D8=B7=D9=86=D9=8A=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=A8=D8=B7=
+=D8=A7=D9=82=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=D8=A9|=D8=B1=D9=82=
+=D9=85 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=
+=D9=8A=D8=A9|=D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=
+=D9=86=D9=8A=D8=A9)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">784234523456788</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Passport number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Passport Numb=
+er matches a valid passport number combined with any of the following keywo=
+rds within a proximity of 10 terms: =D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=
+=D8=B3=D9=81=D8=B1 =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A, =D8=AA=D9=81=D8=A7=
+=D8=B5=D9=8A=D9=84 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1,=
+ =D8=A7=D9=84=D8=AA=D8=A3=D8=B4=D9=8A=D8=B1=D8=A9, =D8=A8=D8=B7=D8=A7=D9=82=
+=D8=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=
+=D9=8A=D8=A9, =D9=88=D8=AB=D9=8A=D9=82=D8=A9 =D8=A7=D9=84=D8=B3=D9=81=D8=B1=
+, =D8=AC=D9=87=D8=A9 =D8=A7=D9=84=D8=A5=D8=B5=D8=AF=D8=A7=D8=B1, =D8=A5=D8=
+=AB=D8=A8=D8=A7=D8=AA =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9, =D8=A7=D9=84=D9=
+=87=D9=88=D9=8A=D8=A9, =D9=85=D8=B9=D8=B1=D9=81 =D8=AC=D9=88=D8=A7=D8=B2 =
+=D8=A7=D9=84=D8=B3=D9=81=D8=B1, =D8=B1=D9=82=D9=85 =D8=AC=D9=88=D8=A7=D8=B2=
+ =D8=A7=D9=84=D8=B3=D9=81=D8=B1 (or) =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=
+=D8=B3=D9=81=D8=B1.</td>
+<td class=3D"confluenceTd">[0-9CFGHJKLMNPRTVWXYZ]{9}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D8=
+=B3=D9=81=D8=B1 =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A|=D8=AA=D9=81=D8=A7=D8=
+=B5=D9=8A=D9=84 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1|=D8=
+=A7=D9=84=D8=AA=D8=A3=D8=B4=D9=8A=D8=B1=D8=A9|=D8=A8=D8=B7=D8=A7=D9=82=D8=
+=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=
+=8A=D8=A9|=D9=88=D8=AB=D9=8A=D9=82=D8=A9 =D8=A7=D9=84=D8=B3=D9=81=D8=B1|=D8=
+=AC=D9=87=D8=A9 =D8=A7=D9=84=D8=A5=D8=B5=D8=AF=D8=A7=D8=B1|=D8=A5=D8=AB=D8=
+=A8=D8=A7=D8=AA =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9|=D8=A7=D9=84=D9=87=D9=
+=88=D9=8A=D8=A9|=D9=85=D8=B9=D8=B1=D9=81 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=
+=84=D8=B3=D9=81=D8=B1|=D8=B1=D9=82=D9=85 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=
+=84=D8=B3=D9=81=D8=B1|=D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=
+=B1)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">ZK8K81404</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Driver License Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Driver's Lice=
+nse Number matches a valid license number combined with any of the followin=
+g keywords within a proximity of 10 terms: =D8=B1=D8=AE=D8=B5=D8=A9 =D8=A8=
+=D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =D8=AA=D8=AD=D9=85=D9=84 =D8=B5=D9=88=D8=B1=
+=D8=A9, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9, =D8=A7=D9=
+=84=D8=A7=D8=B3=D9=85 =D8=AC=D9=86=D8=B3=D9=8A=D8=A9 =D8=AA=D8=A7=D8=B1=DB=
+=8C=D8=AE=D8=A7=D9=84=D8=A3=D9=85=D8=A7=D8=B1=D8=A7=D8=AA =D8=A7=D9=84=D8=
+=B9=D8=B1=D8=A8=D9=8A=D8=A9 =D8=A7=D9=84=D9=85=D8=AA=D8=AD=D8=AF=D8=A9 ,=D8=
+=B1=D8=AE=D8=B5=D8=A9 =D9=82=D9=8A=D8=A7=D8=AF=D8=A9, =D8=A7=D9=85=DB=8C=D9=
+=84=D8=A7=D8=AF, =D8=AA=D8=A7=D8=B1=D9=8A=D8=AE =D8=A7=D9=84=D8=A7=D8=B5=D8=
+=AF=D8=A7=D8=B1=D8=AA=D8=A7=D8=B1=D9=8A=D8=AE =D8=A7=D9=84=D8=A7=D9=86=D8=
+=AA=D9=87=D8=A7=D8=A1, =D8=AC=D9=87=D8=A9 =D8=A7=D9=84=D8=A7=D8=B5=D8=AF=D8=
+=A7=D8=B1, =D9=82=D9=8A=D8=A7=D8=AF=D8=A9 =D9=85=D8=AA=D8=B9=D9=84=D9=91=D9=
+=85, =D8=AD=D8=A7=D9=85=D9=84 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9, =D8=AD=
+=D8=A7=D9=85=D9=84=D9=88 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5, =D8=B1=D9=82=D9=85=
+ =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9, =D8=B1=D8=AE=D8=B5 =D8=A7=D9=84=D9=
+=82=D9=8A=D8=A7=D8=AF=D8=A9 (or) =D8=B1=D8=AE=D8=B5=D8=A9 =D8=A7=D9=84=D9=
+=82=D9=8A=D8=A7=D8=AF=D8=A9.</td>
+<td class=3D"confluenceTd">\d{6,8}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D8=AE=D8=B5=D8=A9 =D8=A8=D8=A8=D8=
+=B7=D8=A7=D9=82=D8=A9 =D8=AA=D8=AD=D9=85=D9=84 =D8=B5=D9=88=D8=B1=D8=A9|=D8=
+=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9|=D8=A7=D9=84=D8=A7=D8=
+=B3=D9=85|=D8=AC=D9=86=D8=B3=D9=8A=D8=A9=D8=AA=D8=A7=D8=B1=DB=8C=D8=AE=D8=
+=A7=D9=84=D8=A3=D9=85=D8=A7=D8=B1=D8=A7=D8=AA =D8=A7=D9=84=D8=B9=D8=B1=D8=
+=A8=D9=8A=D8=A9 =D8=A7=D9=84=D9=85=D8=AA=D8=AD=D8=AF=D8=A9|=D8=B1=D8=AE=D8=
+=B5=D8=A9 =D9=82=D9=8A=D8=A7=D8=AF=D8=A9|=D8=A7=D9=85=DB=8C=D9=84=D8=A7=D8=
+=AF|=D8=AA=D8=A7=D8=B1=D9=8A=D8=AE =D8=A7=D9=84=D8=A7=D8=B5=D8=AF=D8=A7=D8=
+=B1=D8=AA=D8=A7=D8=B1=D9=8A=D8=AE =D8=A7=D9=84=D8=A7=D9=86=D8=AA=D9=87=D8=
+=A7=D8=A1|=D8=AC=D9=87=D8=A9 =D8=A7=D9=84=D8=A7=D8=B5=D8=AF=D8=A7=D8=B1|=D9=
+=82=D9=8A=D8=A7=D8=AF=D8=A9 =D9=85=D8=AA=D8=B9=D9=84=D9=91=D9=85|=D8=AD=D8=
+=A7=D9=85=D9=84 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9|=D8=AD=D8=A7=D9=85=D9=
+=84=D9=88 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=
+=B1=D8=AE=D8=B5=D8=A9|=D8=B1=D8=AE=D8=B5 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=
+=AF=D8=A9|=D8=B1=D8=AE=D8=B5=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=
+=A9)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123456</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Tax ID number (i.e. Taxpayer ID number)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Tax ID Number=
+ matches a valid Tax Identification Number combined with any of the followi=
+ng keywords within a proximity of 10 terms: =D8=B1=D9=85=D8=B2 =D8=A7=D9=84=
+=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, =
+=D8=A7=D9=84=D9=85=D9=84=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, =
+=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84 =D8=A7=D9=84=
+=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, =D8=A7=D9=84=D8=B1=D9=82=D9=85 =D8=A7=D9=84=
+=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, taxidno#, taxidno, taxidnumber#, taxidnumbe=
+r, taxid#, taxid, taxno#, &nbsp;taxno, taxnumber#, taxnumber, tin# , =D8=B1=
+=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B9=D8=B1=D9=8A=D9=81 =D8=A7=D9=84=D8=B6=
+=D8=B1=D9=8A=D8=A8=D9=8A (or) =D8=A7=D9=84=D9=85=D8=B9=D8=B1=D9=81 =D8=A7=
+=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">\d{15}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D9=85=D8=
+=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|=D8=A7=D9=
+=84=D9=85=D9=84=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|=D8=B1=D9=
+=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84 =D8=A7=D9=84=D8=B6=D8=
+=B1=D9=8A=D8=A8=D9=8A=D8=A7=D9=84=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B6=D8=
+=B1=D9=8A=D8=A8=D9=8A|taxidno\#?|taxidno|taxidnumber\#?|taxidnumber|taxid\#=
+?|taxid|taxno\#?|taxno|taxnumber\#?|taxnumber|tin\#?|=D8=B1=D9=82=D9=85 =D8=
+=A7=D9=84=D8=AA=D8=B9=D8=B1=D9=8A=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=
+=A8=D9=8A|=D8=A7=D9=84=D9=85=D8=B9=D8=B1=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=
+=8A=D8=A8=D9=8A)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">100047714900003</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">VAT number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates VAT ID Number=
+ matches a valid value added tax identification number combined with any of=
+ the following keywords within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =
+=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=D8=A9 =D8=A7=
+=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9, =D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=
+=D9=84=D9=82=D9=8A=D9=85=D8=A9 =D8=A7=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9# =
+(or) =D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=D8=A9 =
+=D8=A7=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9.</td>
+<td class=3D"confluenceTd">\d{15}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=B6=D8=B1=D9=8A=D8=
+=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=D8=A9 =D8=A7=D9=84=D9=85=D8=B6=D8=
+=A7=D9=81=D8=A9|=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=
+=85=D8=A9 =D8=A7=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9\#?|=D8=B6=D8=B1=D9=8A=
+=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=D8=A9 =D8=A7=D9=84=D9=85=D8=B6=
+=D8=A7=D9=81=D8=A9)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(0,0,0);">1000477149000=
+03</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Phone number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Phone Number =
+matches a valid phone number combined with any of the following keywords wi=
+thin a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=
+=D8=AA=D9=81, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=AA=D9=81 =D8=
+=A7=D9=84=D9=85=D8=AD=D9=85=D9=88=D9=84 (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D9=87=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=D8=AE=D9=84=D9=8A=D9=88=D9=8A.</td=
+>
+<td class=3D"confluenceTd">(\+?971)?[ ]?([1-9]|5[024568])[ ]?\d{3}[ ]\d{4}<=
+/td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=
+=A7=D8=AA=D9=81|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=AA=D9=81 =D8=
+=A7=D9=84=D9=85=D8=AD=D9=85=D9=88=D9=84|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=
+=87=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=D8=AE=D9=84=D9=8A=D9=88=D9=8A)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">+971 4 567 8901,<br>
+ +971 50 567 8901</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Post code</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Postcode matc=
+hes a valid postcode combined with any of the following keywords within a p=
+roximity of 10 terms: =D8=A7=D9=84=D8=B9=D9=86=D9=88=D8=A7=D9=86, =D8=AD=D9=
+=8A =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=
+=8A, =D9=85=D9=86=D8=B7=D9=82=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=
+=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=88=D8=AD=D8=AF=D8=A9 =D8=A7=D9=84=
+=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=82=D8=B7=
+=D8=A7=D8=B9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=
+=D8=AF=D9=8A (or) =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=
+=D9=8A=D8=AF=D9=8A.</td>
+<td class=3D"confluenceTd">(00000)</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=A7=D9=84=D8=B9=D9=86=D9=88=D8=A7=D9=
+=86|=D8=AD=D9=8A =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=
+=8A=D8=AF=D9=8A|=D9=85=D9=86=D8=B7=D9=82=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=
+=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A|=D9=88=D8=AD=D8=AF=D8=A9 =D8=
+=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A|=D9=
+=82=D8=B7=D8=A7=D8=B9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A|=D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">00000</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates License Plate=
+ Number matches a valid license plate number combined with any of the follo=
+wing keywords within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D9=84=D9=
+=88=D8=AD=D8=A9 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5, =D9=84=D9=88=D8=
+=AD=D8=A9 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5, =D8=B1=D9=82=D9=85 =
+=D8=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=
+=D9=84=D9=88=D8=AD=D8=A9 (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B1=
+=D8=AE=D9=8A=D8=B5.</td>
+<td class=3D"confluenceTd">(([4-9]|1[0-8]?)[ ]?\d{5})|(([A-EH])[ ]?\d{5})|(=
+(A|AA)[ ]?\d{5})|([A-GKMPRST][ ]?\d{5})|([ACDIKMNSVY][ ]?\d{5})|([1-4][ ]?\=
+d{5})|([A-IX][ ]?\d{5})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D9=84=D9=88=D8=AD=D8=
+=A9 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5|=D9=84=D9=88=D8=AD=D8=A9 =D8=
+=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=
+=AA=D8=B3=D8=AC=D9=8A=D9=84|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=84=D9=88=D8=
+=AD=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5)</t=
+d>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">B 12345</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">IBAN</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates International=
+ Bank Account Number =E2=80=93 IBAN matches a valid IBAN combined with any =
+of the following keywords within a proximity of 10 terms: IBAN#=E2=80=8E, I=
+BAN (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=
+=84=D8=A8=D9=86=D9=83=D9=8A =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A.&nbsp;(All=
+ terms case insensitive.)</td>
+<td class=3D"confluenceTd">AE\d{2}[ ]?\d{4}[ ]?\d{4}[ ]?\d{4}[ ]?\d{4}[ ]?\=
+d{3}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:IBAN\#?=E2=80=8E|=D8=B1=D9=82=D9=85 =D8=
+=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A =D8=
+=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);">AE07 0331 =
+2345 6789 0123 456</span></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Bank Account =
+Number matches a valid bank account number combined with any of the followi=
+ng keywords within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=
+=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A, =D8=AA=D9=81=
+=D8=A7=D8=B5=D9=8A=D9=84 =D8=A7=D9=84=D8=A8=D9=86=D9=83, =D8=B1=D9=82=D9=85=
+ =D8=A7=D9=84=D8=A8=D9=86=D9=83, =D9=83=D9=88=D8=AF =D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8, =D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=AD=D8=B3=D8=
+=A7=D8=A8, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 (or) =D8=
+=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D9=8F=D8=B1=D9=82=D9=
+=91=D9=8E=D9=85.</td>
+<td class=3D"confluenceTd">\d{16}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A|=D8=AA=D9=81=D8=A7=D8=
+=B5=D9=8A=D9=84 =D8=A7=D9=84=D8=A8=D9=86=D9=83|=D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=A8=D9=86=D9=83|=D9=83=D9=88=D8=AF =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=
+=A8|=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8|=D8=
+=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8|=D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D9=8F=D8=B1=D9=82=D9=91=D9=8E=D9=85)</td=
+>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);">1234567890=
+123456</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Routing number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">United Arab Emirates Routing Numbe=
+r matches a valid routing number combined with any of the following keyword=
+s within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=
+=88=D8=AC=D9=8A=D9=87, uaeaassociationrouting#, uaeaassociationrouting, uae=
+bankrouting#, uaebankrouting, routing#, outing (or) RTN. (All terms case in=
+sensitive.)</td>
+<td class=3D"confluenceTd">\d{9}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=
+=88=D8=AC=D9=8A=D9=87|uaeaassociationrouting\#?|uaebankrouting\#?|routing\#=
+?|RTN)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">804020101</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Business number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Company number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-SaudiArabia"><strong=
+>Saudi Arabia</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 22.2499%;">
+<col style=3D"width: 35.0439%;">
+<col style=3D"width: 31.6913%;">
+<col style=3D"width: 11.0149%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">National Identity Card N=
+umber</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Passport number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Passport Number match=
+es a valid passport number combined with any of the following keywords with=
+in a proximity of 10 terms: =D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D8=B3=D9=
+=81=D8=B1 =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A, =D8=AA=D9=81=D8=A7=D8=B5=D9=
+=8A=D9=84 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1, =D8=A7=
+=D9=84=D8=AA=D8=A3=D8=B4=D9=8A=D8=B1=D8=A9, =D8=A8=D8=B7=D8=A7=D9=82=D8=A9 =
+=D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=8A=
+=D8=A9, =D9=88=D8=AB=D9=8A=D9=82=D8=A9 =D8=A7=D9=84=D8=B3=D9=81=D8=B1, =D8=
+=AC=D9=87=D8=A9 =D8=A7=D9=84=D8=A5=D8=B5=D8=AF=D8=A7=D8=B1, =D8=A5=D8=AB=D8=
+=A8=D8=A7=D8=AA =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9, =D8=A7=D9=84=D9=87=D9=
+=88=D9=8A=D8=A9, =D9=85=D8=B9=D8=B1=D9=81 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=
+=D9=84=D8=B3=D9=81=D8=B1, =D8=B1=D9=82=D9=85 =D8=AC=D9=88=D8=A7=D8=B2 =D8=
+=A7=D9=84=D8=B3=D9=81=D8=B1 (or) =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=
+=B3=D9=81=D8=B1.</td>
+<td class=3D"confluenceTd">\d{7}|<span style=3D"color: rgb(0,51,102);">[A-z=
+]{1,2}\d{5,6}</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D8=
+=B3=D9=81=D8=B1 =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A|=D8=AA=D9=81=D8=A7=D8=
+=B5=D9=8A=D9=84 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=B1|=D8=
+=A7=D9=84=D8=AA=D8=A3=D8=B4=D9=8A=D8=B1=D8=A9|=D8=A8=D8=B7=D8=A7=D9=82=D8=
+=A9 =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9 =D8=A7=D9=84=D9=88=D8=B7=D9=86=D9=
+=8A=D8=A9|=D9=88=D8=AB=D9=8A=D9=82=D8=A9 =D8=A7=D9=84=D8=B3=D9=81=D8=B1|=D8=
+=AC=D9=87=D8=A9 =D8=A7=D9=84=D8=A5=D8=B5=D8=AF=D8=A7=D8=B1|=D8=A5=D8=AB=D8=
+=A8=D8=A7=D8=AA =D8=A7=D9=84=D9=87=D9=88=D9=8A=D8=A9|=D8=A7=D9=84=D9=87=D9=
+=88=D9=8A=D8=A9|=D9=85=D8=B9=D8=B1=D9=81 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=
+=84=D8=B3=D9=81=D8=B1|=D8=B1=D9=82=D9=85 =D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=
+=84=D8=B3=D9=81=D8=B1|=D8=AC=D9=88=D8=A7=D8=B2 =D8=A7=D9=84=D8=B3=D9=81=D8=
+=B1)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">1234567, <span style=3D"color: rgb(0,51,102);">A=
+A01542, A479424</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Driver License Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Driver's License Numb=
+er matches a valid license number combined with any of the following keywor=
+ds within a proximity of 10 terms: =D8=B1=D8=AE=D8=B5=D8=A9 =D8=A8=D8=A8=D8=
+=B7=D8=A7=D9=82=D8=A9 =D8=AA=D8=AD=D9=85=D9=84 =D8=B5=D9=88=D8=B1=D8=A9, =
+=D9=82=D9=8A=D8=A7=D8=AF=D8=A9 =D9=85=D8=AA=D8=B9=D9=84=D9=91=D9=85, =D8=AD=
+=D8=A7=D9=85=D9=84 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5=D8=A9, =D8=AD=D8=A7=D9=85=
+=D9=84=D9=88 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5, =D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=B1=D8=AE=D8=B5=D8=A9 ,=D8=B1=D8=AE=D8=B5 =D8=A7=D9=84=D9=82=D9=8A=D8=
+=A7=D8=AF=D8=A9 (or) =D8=B1=D8=AE=D8=B5=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D8=
+=A7=D8=AF=D8=A9.</td>
+<td class=3D"confluenceTd">\d{10}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B5=D8=A9 =D8=A8=D8=A8=D8=B7=D8=A7=D9=
+=82=D8=A9 =D8=AA=D8=AD=D9=85=D9=84 =D8=B5=D9=88=D8=B1=D8=A9|=D9=82=D9=8A=D8=
+=A7=D8=AF=D8=A9 =D9=85=D8=AA=D8=B9=D9=84=D9=91=D9=85|=D8=AD=D8=A7=D9=85=D9=
+=84=D9=88 =D8=A7=D9=84=D8=B1=D8=AE=D8=B5|=D8=AD=D8=A7=D9=85=D9=84 =D8=A7=D9=
+=84=D8=B1=D8=AE=D8=B5=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=B1=D8=AE=D8=
+=B5=D8=A9|=D8=B1=D8=AE=D8=B5 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=A9|=D8=
+=B1=D8=AE=D8=B5=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D8=A7=D8=AF=D8=A9)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">2396661742</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Tax ID number (i.e. Taxpayer ID number)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Tax ID Number matches=
+ a valid Tax Identification Number combined with any of the following keywo=
+rds within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=85=
+=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, =D8=B1=
+=D9=82=D9=85 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9, =D8=B1=D9=85=D8=B2=
+ =D8=A7=D9=84=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=
+=D8=A8=D9=8A, =D8=A7=D9=84=D9=85=D9=84=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=
+=D8=A8=D9=8A, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84=
+ =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A, taxidno#, taxidno, taxidnumber=
+#, taxidnumber, taxid#, taxid, taxno#, &nbsp;taxno, taxnumber#, taxnumber, =
+=D9=85=D8=B9=D8=B1=D9=81 =D8=A7=D9=84=D9=82=D8=B5=D8=AF=D9=8A=D8=B1, =D8=B1=
+=D9=82=D9=85 =D8=A7=D9=84=D9=82=D8=B5=D8=AF=D9=8A=D8=B1, tin# , =D8=B1=D9=
+=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B9=D8=B1=D9=8A=D9=81 =D8=A7=D9=84=D8=B6=D8=
+=B1=D9=8A=D8=A8=D9=8A (or) =D8=A7=D9=84=D9=85=D8=B9=D8=B1=D9=81 =D8=A7=D9=
+=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A.</td>
+<td class=3D"confluenceTd">\d{10}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=85=D8=
+=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|=D8=B1=D9=
+=82=D9=85 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9|=D8=B1=D9=85=D8=B2 =D8=
+=A7=D9=84=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=
+=A8=D9=8A|=D8=A7=D9=84=D9=85=D9=84=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=
+=A8=D9=8A|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84 =D8=
+=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|taxidno\#?|taxidnumber\#?|taxno\#? =
+|taxid\#?|taxnumber\#?|taxnumber|=D9=85=D8=B9=D8=B1=D9=81 =D8=A7=D9=84=D9=
+=82=D8=B5=D8=AF=D9=8A=D8=B1|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=82=D8=B5=D8=
+=AF=D9=8A=D8=B1|tin\#? |=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B9=D8=B1=
+=D9=8A=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A|=D8=A7=D9=84=D9=85=
+=D8=B9=D8=B1=D9=81 =D8=A7=D9=84=D8=B6=D8=B1=D9=8A=D8=A8=D9=8A)(?:\b|(?&lt;=
+=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">1234567890</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">VAT number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia VAT ID Number matches=
+ a valid value added tax identification number combined with any of the fol=
+lowing keywords within a proximity of 10 terms: vat no., =D8=B1=D9=82=D9=85=
+ vat, vat#, =D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=
+=D8=A9 =D8=A7=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9, =D8=B1=D9=82=D9=85 =D8=
+=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=D8=A9 =D8=A7=D9=
+=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9, vat no (or) VAT. (All terms case insensi=
+tive.)</td>
+<td class=3D"confluenceTd">d{15}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:vat no\.=E2=80=8E|=D8=B1=D9=82=D9=85 vat=
+=E2=80=8F|vat\#?=E2=80=8E|=D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=
+=D9=8A=D9=85=D8=A9 =D8=A7=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9|=D8=B1=D9=82=
+=D9=85 =D8=B6=D8=B1=D9=8A=D8=A8=D8=A9 =D8=A7=D9=84=D9=82=D9=8A=D9=85=D8=A9 =
+=D8=A7=D9=84=D9=85=D8=B6=D8=A7=D9=81=D8=A9|vat no=E2=80=8F|VAT)(?:\b|(?&lt;=
+=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">312345678901234</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Phone number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Phone Number matches =
+a valid phone number combined with any of the following keywords within a p=
+roximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=AA=D9=
+=81, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=
+=D9=85=D8=AD=D9=85=D9=88=D9=84 (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=
+=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=D8=AE=D9=84=D9=8A=D9=88=D9=8A.</td>
+<td class=3D"confluenceTd">(\+?966)?[ ]?(0[1][1-467][ ]?\d{3}[ ]?\d{4})|(05=
+([013-9][ ]?\d{3}[ ]?\d{4}|[0-25-8][0-25-8][ ]?\d{2}[ ]?\d{4})|0811[ ]?\d{3=
+}[ ]?\d{4})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=
+=A7=D8=AA=D9=81|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=87=D8=A7=D8=AA=D9=81 =D8=
+=A7=D9=84=D9=85=D8=AD=D9=85=D9=88=D9=84|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=
+=87=D8=A7=D8=AA=D9=81 =D8=A7=D9=84=D8=AE=D9=84=D9=8A=D9=88=D9=8A)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">011 123 1234</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Post code</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Postcode matches a va=
+lid postcode combined with any of the following keywords within a proximity=
+ of 10 terms: =D8=A7=D9=84=D8=B9=D9=86=D9=88=D8=A7=D9=86, =D8=AD=D9=8A =D8=
+=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=
+=85=D9=86=D8=B7=D9=82=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=
+=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=88=D8=AD=D8=AF=D8=A9 =D8=A7=D9=84=D8=B1=D9=
+=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A, =D9=82=D8=B7=D8=A7=D8=
+=B9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=
+=8A (or) =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=
+=AF=D9=8A.</td>
+<td class=3D"confluenceTd">\d{5}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=A7=D9=84=D8=B9=D9=86=D9=88=D8=A7=D9=
+=86|=D8=AD=D9=8A =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=
+=8A=D8=AF=D9=8A|=D9=85=D9=86=D8=B7=D9=82=D8=A9 =D8=A7=D9=84=D8=B1=D9=85=D8=
+=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A|=D9=88=D8=AD=D8=AF=D8=A9 =D8=
+=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=B1=D9=8A=D8=AF=D9=8A|=D9=
+=82=D8=B7=D8=A7=D8=B9 =D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A|=D8=A7=D9=84=D8=B1=D9=85=D8=B2 =D8=A7=D9=84=D8=A8=D8=
+=B1=D9=8A=D8=AF=D9=8A)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">63879</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia License Plate Number =
+matches a valid license plate number combined with any of the following key=
+words within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D9=84=D9=88=D8=AD=
+=D8=A9 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5, =D9=84=D9=88=D8=AD=D8=A9=
+ =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5, =D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=AA=D8=B3=D8=AC=D9=8A=D9=84, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=84=D9=
+=88=D8=AD=D8=A9 (or) =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=
+=8A=D8=B5.</td>
+<td class=3D"confluenceTd">\d{4}[ ]?[A-Z]{3}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D9=84=D9=88=D8=AD=D8=
+=A9 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5|=D9=84=D9=88=D8=AD=D8=A9 =D8=
+=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=
+=AA=D8=B3=D8=AC=D9=8A=D9=84|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D9=84=D9=88=D8=
+=AD=D8=A9|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D8=B1=D8=AE=D9=8A=D8=B5)</t=
+d>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">7653 TNJ</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">IBAN</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia International Bank Ac=
+count Number =E2=80=93 IBAN matches a valid IBAN combined with any of the f=
+ollowing keywords within a proximity of 10 terms: IBAN#, IBAN, =D8=B1=D9=82=
+=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=
+=D9=8A =D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A# (or) =D8=B1=D9=82=D9=85 =D8=A7=
+=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D8=B5=D8=B1=D9=81=D9=8A =
+=D8=A7=D9=84=D8=AF=D9=88=D9=84=D9=8A.&nbsp;(All terms case insensitive.)</t=
+d>
+<td class=3D"confluenceTd">SA\d{2}[ ]?\d{4}[ ]?\d{4}[ ]?\d{4}[ ]?\d{4}[ ]?\=
+d{4}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:IBAN#|IBAN|=D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A =D8=A7=D9=
+=84=D8=AF=D9=88=D9=84=D9=8A|=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=
+=A7=D8=A8 =D8=A7=D9=84=D9=85=D8=B5=D8=B1=D9=81=D9=8A =D8=A7=D9=84=D8=AF=D9=
+=88=D9=84=D9=8A\#?)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);">SA03 8000 =
+0000 6080 1016 7519</span></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Bank Account Number m=
+atches a valid bank account number combined with any of the following keywo=
+rds within a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=
+=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A, =D8=AA=D9=81=D8=A7=
+=D8=B5=D9=8A=D9=84 =D8=A7=D9=84=D8=A8=D9=86=D9=83, =D8=B1=D9=82=D9=85 =D8=
+=A7=D9=84=D8=A8=D9=86=D9=83, =D9=83=D9=88=D8=AF =D8=A7=D9=84=D8=AD=D8=B3=D8=
+=A7=D8=A8, =D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=
+=A8, =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8 (or) =D8=A7=D9=
+=84=D8=AD=D8=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D9=8F=D8=B1=D9=82=D9=91=D9=
+=8E=D9=85.</td>
+<td class=3D"confluenceTd">\d{18}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8 =D8=A7=D9=84=D8=A8=D9=86=D9=83=D9=8A|=D8=AA=D9=81=D8=A7=D8=
+=B5=D9=8A=D9=84 =D8=A7=D9=84=D8=A8=D9=86=D9=83|=D8=B1=D9=82=D9=85 =D8=A7=D9=
+=84=D8=A8=D9=86=D9=83|=D9=83=D9=88=D8=AF =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=
+=A8|=D9=85=D8=B9=D8=B1=D9=91=D9=81 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8|=D8=
+=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AD=D8=B3=D8=A7=D8=A8|=D8=A7=D9=84=D8=AD=D8=
+=B3=D8=A7=D8=A8 =D8=A7=D9=84=D9=85=D9=8F=D8=B1=D9=82=D9=91=D9=8E=D9=85)</td=
+>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);">0000006080=
+10167519</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Routing number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Saudi Arabia Routing Number matche=
+s a valid routing number combined with any of the following keywords within=
+ a proximity of 10 terms: =D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=88=D8=AC=
+=D9=8A=D9=87, =D8=B1=D9=82=D9=85 =D8=AA=D9=88=D8=AC=D9=8A=D9=87 =D8=B1=D8=
+=A7=D8=A8=D8=B7=D8=A9 =D8=A7=D9=84=D8=A8=D9=86=D9=88=D9=83, bank routing#=
+=E2=80=8E=E2=80=8F, bank routing, routing #, routing (or) RTN. (All terms c=
+ase insensitive.)</td>
+<td class=3D"confluenceTd">[A-Z]{4}[ ]?[A-Z]{2}[ ]?[A-Z0-9]{2}([ ]?[A-Z0-9]=
+{3})?</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=D8=B1=D9=82=D9=85 =D8=A7=D9=84=D8=AA=D9=
+=88=D8=AC=D9=8A=D9=87|=D8=B1=D9=82=D9=85 =D8=AA=D9=88=D8=AC=D9=8A=D9=87 =D8=
+=B1=D8=A7=D8=A8=D8=B7=D8=A9 =D8=A7=D9=84=D8=A8=D9=86=D9=88=D9=83|bank routi=
+ng\#?=E2=80=8E=E2=80=8F|routing \#?=E2=80=8E|RTN)(?:\b|(?&lt;=3D[.#])(?=3D\=
+W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">BNPASARBWMI</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Business number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Company number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-Belgium"><strong>Bel=
+gium</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 20.8644%;">
+<col style=3D"width: 33.1595%;">
+<col style=3D"width: 35.3949%;">
+<col style=3D"width: 10.5812%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">National Identity Card N=
+umber</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#f4f5f7 confluenceTh" data-highlight-colour=3D"#f4f5=
+f7" rowspan=3D"2" title=3D"Background color : Light grey 100%">CPF number</=
+th>
+<td rowspan=3D"3" class=3D"confluenceTd">Belgium Central Provident Fund Num=
+ber matches a valid CPF number combined with any of the following keywords =
+within a proximity of 10 terms: Centraal pensioenfondsnummer, Beroepspensio=
+ennummer, Berufliche Vorsorgenummer, Berufliche Vorsorgenr., Vorsorgenummer=
+, Vorsorge-Nummer, Identificatienummer, CPF-nummer (or) CPF.&nbsp;(All term=
+s case insensitive.)</td>
+<td class=3D"confluenceTd">[0-9A-Z]{20}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:Centraal pensioenfondsnummer|Beroepspensi=
+oennummer|Berufliche Vorsorgenummer|Berufliche Vorsorgenr\.|Vorsorgenummer|=
+Vorsorge-Nummer|Identificatienummer|CPF-nummer|CPF)(?:\b|(?&lt;=3D[.#])(?=
+=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">5493003WYR6Z5RB8SY27</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Passport number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Driver License Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Tax ID number (i.e. Taxp=
+ayer ID number)</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">VAT number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">not available</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Phone number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Post code</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Belgium License Plate Number match=
+es a valid license plate number combined with any of the following keywords=
+ within a proximity of 10 terms: kentekenplaat, registratienummer, registra=
+tie. nr., nummerplaat, nummerbord (or) kenteken. (All terms case insensitiv=
+e.)</td>
+<td class=3D"confluenceTd">(?:[0-9A-Z]{1,3}[. -_][A-Z0-9]{1,3}[. -_][0-9A-Z=
+]{1,3}|[A-Z]{1,4}[. -_][0-9]{1,4}|[0-9]{1,4}[. -_][A-Z]{1,4})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:kentekenplaat|registratienummer|registrat=
+ie\. nr\.|nummerplaat|nummerbord|kenteken)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</=
+td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">1.AB.23,A.1234,1.A.234,1-ABC-123,Q-ABC-123,CD-AT=
+-119,CD_S970,12.AB.3</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">IBAN</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Belgium Bank Account Number matche=
+s a valid bank account number combined with any of the following keywords w=
+ithin a proximity of 10 terms: bankrekeningnummer, rekeningnummer, banknumm=
+er, BIC nummer (or) accountnummer. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">\d{3}[- ]?\d{7}[- ]?\d{2}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:bankrekeningnummer|rekeningnummer|banknum=
+mer|BIC nummer|accountnummer)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">539-0075470-34</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Routing number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">IBAN</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Business number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Belgium Business Number matches a =
+valid business number combined with any of the following keywords within a =
+proximity of 10 terms:zakelijk id-nummer, zakelijk nr#, bedrijfsregistratie=
+nummer (or) zakelijk nummer. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">\d{10}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:zakelijk id-nummer|zakelijk nr\#?|bedrijf=
+sregistratienummer|zakelijk nummer)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">3219854086</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Company number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Belgium Company Number matches a v=
+alid company number combined with any of the following keywords within a pr=
+oximity of 10 terms: Kruispuntbank voor Ondernemingen, Kruispuntbank van On=
+dernemingen, ondernemingsnummer, KBO-nummer (or) KBO. (All terms case insen=
+sitive.)</td>
+<td class=3D"confluenceTd">(?:BE)?\d{10}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:Kruispuntbank voor Ondernemingen|Kruispun=
+tbank van Ondernemingen|ondernemingsnummer|KBO-nummer|KBO)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">BE3219854086,4317254321</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-Austria"><strong>Aus=
+tria</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 22.2499%;">
+<col style=3D"width: 35.0439%;">
+<col style=3D"width: 31.6913%;">
+<col style=3D"width: 11.0149%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Social Security Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">National Identity Card N=
+umber</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">Not available</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Passport number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Driver License Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#f4f5f7 confluenceTh" data-highlight-colour=3D"#f4f5=
+f7" rowspan=3D"2" title=3D"Background color : Light grey 100%">Social Insur=
+ance Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Austria Social Insurance Number ma=
+tches a valid social insurance number combined with any of the following ke=
+ywords within a proximity of 10 terms: Sozialversicherungsnummer, Sozialver=
+sicherungs-Nr., Sozialversicherungen, Sozialversicherung, sin# (or) sin. (A=
+ll terms case insensitive.)</td>
+<td class=3D"confluenceTd">[1-9][0-9]{3} ?[0-9]{2} ?[0-9]{2} ?[0-9]{2}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:Sozialversicherungsnummer|Sozialversicher=
+ungs-Nr\.|Sozialversicherungen|Sozialversicherung|sin\#?)(?:\b|(?&lt;=3D[.#=
+])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">4357 65 78 80</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Tax ID number (i.e. Taxp=
+ayer ID number)</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">VAT number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Phone number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Post code</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Austria License Plate Number match=
+es a valid license plate number combined with any of the following keywords=
+ within a proximity of 10 terms: Registrierungsnummer, Kennzeichen-Nr., Ken=
+nzeichennummer, Registrierungsnr. (or) Kennzeichen. (All terms case insensi=
+tive.)</td>
+<td class=3D"confluenceTd">[A-Z]{1,2}[ ]?\d{2,5}[ ]?[A-Z]{0,2}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:Registrierungsnummer|Kennzeichen-Nr\.|Ken=
+nzeichennummer|Registrierungsnr\.|Kennzeichen)(?:\b|(?&lt;=3D[.#])(?=3D\W|$=
+))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">BP 70795</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">IBAN</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Austria Bank Account Number matche=
+s a valid bank account number combined with any of the following keywords w=
+ithin a proximity of 10 terms: Bankkontonummer, Bankverbindung, Banknummer,=
+ Konto-Code, Konto-ID, Kontonummer (or) Nummernkonto. (All terms case insen=
+sitive.)</td>
+<td class=3D"confluenceTd">\d{16}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:Bankkontonummer|Bankverbindung|Banknummer=
+|Konto-Code|Konto-ID|Kontonummer|Nummernkonto)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">1234567890123456</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Routing number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Business number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Austria Business Number matches a =
+valid business number combined with any of the following keywords within a =
+proximity of 10 terms: Gesch=C3=A4ftsnummer, Gesch=C3=A4ftsnr., Unternehmen=
+snr., Gesch=C3=A4fts-Nr. (or) Gesch=C3=A4ftskennzeichen.&nbsp;(All terms ca=
+se insensitive; diacritics are optional.)</td>
+<td class=3D"confluenceTd">\d{6}[A-Z]</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:Gesch[=C3=A4a]ftsnummer|Gesch[=C3=A4a]fts=
+nr\.|Unternehmensnr\.|Gesch[=C3=A4a]fts-Nr\.|Gesch[=C3=A4a]ftskennzeichen)(=
+?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123456A</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Company number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-HongKong"><strong>Ho=
+ng Kong</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 114=
+.371%;">
+<colgroup>
+<col style=3D"width: 6.77508%;">
+<col style=3D"width: 34.5944%;">
+<col style=3D"width: 54.5915%;">
+<col style=3D"width: 4.03899%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">National Identity Card Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong National ID Number match=
+es a valid National Identity Card Number combined with any of the following=
+ keywords within a proximity of 10 terms: HKID, =E8=BA=AB=E4=BB=BD=E8=AD=89=
+=E6=98=8E=E6=96=87=E4=BB=B6=E8=99=9F=E7=A2=BC, =E8=BA=AB=E4=BB=BD=E8=AD=89=
+=E8=99=9F=E7=A2=BC (or) =E8=BA=AB=E4=BB=BD=E8=AD=89 ID. (All terms case ins=
+ensitive.)</td>
+<td class=3D"confluenceTd">[A-Z]{1,2}\d{6}[ ]?\(?[0-9A]\)?</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:NIN\#?|=E8=BA=AB=E4=BB=BD=E8=AD=89=E6=98=
+=8E=E6=96=87=E4=BB=B6=E8=99=9F=E7=A2=BC|=E8=BA=AB=E4=BB=BD=E8=AD=89=E8=99=
+=9F=E7=A2=BC|=E8=BA=AB=E4=BB=BD=E8=AD=89 ID)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))=
+</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">A123456(A)</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Passport number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Passport Number matches =
+a valid passport number combined with any of the following keywords within =
+a proximity of 10 terms: =E5=9C=8B=E9=9A=9B=E6=97=85=E8=A1=8C=E8=BA=AB=E4=
+=BB=BD=E8=AD=89=E6=98=8E, =E8=AD=B7=E7=85=A7=E8=B3=87=E6=96=99, =E7=B0=BD=
+=E8=AD=89, =E8=BA=AB=E4=BB=BD=E8=AD=89, =E6=97=85=E8=A1=8C=E8=AD=89=E4=BB=
+=B6, =E8=BA=AB=E4=BB=BD=E8=AD=89=E6=98=8E=E6=96=87=E4=BB=B6, =E8=BA=AB=E4=
+=BB=BD=E8=AD=89=E6=98=8E, =E8=AD=B7=E7=85=A7=E8=99=9F=E7=A2=BC, =E8=AD=B7=
+=E7=85=A7 ID (or) =E8=AD=B7=E7=85=A7.</td>
+<td class=3D"confluenceTd">[A-Z]{1,2}\d{6}[A-Z0-9]{1,2}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E5=9C=8B=E9=9A=9B=E6=97=85=E8=A1=8C=E8=
+=BA=AB=E4=BB=BD=E8=AD=89=E6=98=8E|=E8=AD=B7=E7=85=A7=E8=B3=87=E6=96=99|=E7=
+=B0=BD=E8=AD=89|=E8=BA=AB=E4=BB=BD=E8=AD=89|=E6=97=85=E8=A1=8C=E8=AD=89=E4=
+=BB=B6|=E8=BA=AB=E4=BB=BD=E8=AD=89=E6=98=8E=E6=96=87=E4=BB=B6|=E8=BA=AB=E4=
+=BB=BD=E8=AD=89=E6=98=8E|=E8=AD=B7=E7=85=A7=E8=99=9F=E7=A2=BC|=E8=AD=B7=E7=
+=85=A7 ID|=E8=AD=B7=E7=85=A7)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">A123456A</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Driver License Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Driver's License Number =
+matches a valid license number combined with any of the following keywords =
+within a proximity of 10 terms: DVLA, =E9=A7=95=E9=A7=9B=E5=9F=B7=E7=85=A7=
+=E8=99=9F=E7=A2=BC, =E6=96=B0=E6=89=8B=E5=8F=B8=E6=A9=9F, =E9=A7=95=E9=A7=
+=9B=E5=9F=B7=E7=85=A7=E6=8C=81=E6=9C=89=E8=80=85, =E5=AE=9E=E4=B9=A0=E9=A9=
+=BE=E7=85=A7 (or) =E9=A7=95=E9=A7=9B=E5=9F=B7=E7=85=A7. (All terms case ins=
+ensitive.)</td>
+<td class=3D"confluenceTd">[A-Z]\d{6}[ ]?[A-Z0-9]</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:DVLA|=E9=A7=95=E9=A7=9B=E5=9F=B7=E7=85=A7=
+=E8=99=9F=E7=A2=BC|=E6=96=B0=E6=89=8B=E5=8F=B8=E6=A9=9F|=E9=A7=95=E9=A7=9B=
+=E5=9F=B7=E7=85=A7=E6=8C=81=E6=9C=89=E8=80=85|=E5=AE=9E=E4=B9=A0=E9=A9=BE=
+=E7=85=A7|=E9=A7=95=E9=A7=9B=E5=9F=B7=E7=85=A7)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">A123456 1</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Tax ID number (i.e. Taxpa=
+yer ID number)</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">VAT number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Phone number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Phone Number matches a v=
+alid phone number combined with any of the following keywords within a prox=
+imity of 10 terms: =E6=89=8B=E6=A9=9F=E8=99=9F=E7=A2=BC (or) =E9=9B=BB=E8=
+=A9=B1=E8=99=9F=E7=A2=BC.</td>
+<td class=3D"confluenceTd">(+?852)?[ ]?\d{4}[ ]?\d{4}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E6=89=8B=E6=A9=9F=E8=99=9F=E7=A2=BC|=E9=
+=9B=BB=E8=A9=B1=E8=99=9F=E7=A2=BC)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">+852 1234 1234</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Post code</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Postcode matches a valid=
+ postcode combined with any of the following keywords within a proximity of=
+ 10 terms: =E5=9C=B0=E5=9D=80, =E9=83=B5=E5=8D=80, =E9=83=B5=E5=9F=9F, =E9=
+=83=B5=E6=94=BF=E5=8D=80=E5=9F=9F (or) =E9=83=B5=E6=94=BF=E9=83=A8=E9=96=80=
+.</td>
+<td class=3D"confluenceTd">\d{6}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E5=9C=B0=E5=9D=80|=E9=83=B5=E5=8D=80|=E9=
+=83=B5=E5=9F=9F|=E9=83=B5=E6=94=BF=E5=8D=80=E5=9F=9F|=E9=83=B5=E6=94=BF=E9=
+=83=A8=E9=96=80)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">912345</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong License Plate Number mat=
+ches a valid license plate number combined with any of the following keywor=
+ds within a proximity of 10 terms: =E8=BB=8A=E7=89=8C=E8=99=9F=E7=A2=BC, =
+=E8=BB=8A=E7=89=8C, =E8=BB=8A=E8=BC=9B=E7=99=BB=E8=A8=98=E8=99=9F=E7=A2=BC =
+(or) =E7=99=BB=E8=A8=98=E8=99=9F=E7=A2=BC.</td>
+<td class=3D"confluenceTd">([A-Z]{1,2}[ ]?\d{3,4})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E8=BB=8A=E7=89=8C=E8=99=9F=E7=A2=BC|=E8=
+=BB=8A=E7=89=8C|=E8=BB=8A=E8=BC=9B=E7=99=BB=E8=A8=98=E8=99=9F=E7=A2=BC|=E7=
+=99=BB=E8=A8=98=E8=99=9F=E7=A2=BC)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">ZA 1234</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">IBAN</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Bank Account Number matc=
+hes a valid bank account number combined with any of the following keywords=
+ within a proximity of 10 terms: =E9=8A=80=E8=A1=8C=E6=88=B6=E5=8F=A3=E8=99=
+=9F=E7=A2=BC, =E9=8A=80=E8=A1=8C=E6=88=B6=E5=8F=A3, =E9=8A=80=E8=A1=8C=E8=
+=B3=87=E6=96=99, =E9=8A=80=E8=A1=8C=E8=99=9F=E7=A2=BC, =E5=B8=B3=E6=88=B6=
+=E4=BB=A3=E7=A2=BC, =E5=B8=B3=E6=88=B6 ID, =E5=B8=B3=E6=88=B6=E8=99=9F=E7=
+=A2=BC (or) =E7=B7=A8=E8=99=9F=E5=B8=B3=E6=88=B6.</td>
+<td class=3D"confluenceTd">(?:(00[3-9]|01[2568]|02[024578]|03[589]|04[01356=
+79]|05[0468]|06[013567]|07[1246]|08[01256]|09[27]|10[369]|11[389]|12[8]|13[=
+89]|14[57]|15[0-3]|16[145]|17[08]|18[03568]|19[89]|20[12356]|21[04]|22[0124=
+79]|23[03-9]|24[123-589]|25[014689]|26[0-9]|27[1-8]|30[789]|316|32[04]|33[7=
+89]|34[1245]|35[37]|36[08]|37[124789]|381)[ -]?\d{9})|<span style=3D"color:=
+ rgb(0,51,102);">\d{6}[- ]?\d{3}|\d{9}</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E9=8A=80=E8=A1=8C=E6=88=B6=E5=8F=A3=E8=
+=99=9F=E7=A2=BC|=E9=8A=80=E8=A1=8C=E6=88=B6=E5=8F=A3|=E9=8A=80=E8=A1=8C=E8=
+=B3=87=E6=96=99|=E9=8A=80=E8=A1=8C=E8=99=9F=E7=A2=BC|=E5=B8=B3=E6=88=B6=E4=
+=BB=A3=E7=A2=BC|=E5=B8=B3=E6=88=B6 ID|=E5=B8=B3=E6=88=B6=E8=99=9F=E7=A2=BC|=
+=E7=B7=A8=E8=99=9F=E5=B8=B3=E6=88=B6)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">263-005005007, <span style=3D"color: rgb(0,51,10=
+2);">852456-888</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Routing number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Routing Number matches a=
+ valid routing number combined with any of the following keywords within a =
+proximity of 10 terms: =E9=8A=80=E8=A1=8C=E5=8C=AF=E6=AC=BE=E8=B7=AF=E5=BE=
+=91#, =E9=8A=80=E8=A1=8C=E5=8C=AF=E6=AC=BE=E8=B7=AF=E5=BE=91, =E5=8C=AF=E6=
+=AC=BE=E8=B7=AF=E5=BE=91=E8=99=9F=E7=A2=BC, =E5=8C=AF=E6=AC=BE=E8=B7=AF=E5=
+=BE=91#, =E5=8C=AF=E6=AC=BE=E8=B7=AF=E5=BE=91 (or) RTN. (All terms case ins=
+ensitive.)</td>
+<td class=3D"confluenceTd"><span>HKNCC\d{3}</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E9=8A=80=E8=A1=8C=E5=8C=AF=E6=AC=BE=E8=
+=B7=AF=E5=BE=91\#?|=E5=8C=AF=E6=AC=BE=E8=B7=AF=E5=BE=91=E8=99=9F=E7=A2=BC|=
+=E5=8C=AF=E6=AC=BE=E8=B7=AF=E5=BE=91\#?|RTN)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))=
+</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span>HKNCC123</span></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Business number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Business Number matches =
+a valid business number combined with any of the following keywords within =
+a proximity of 10 terms: =E9=A6=99=E6=B8=AF=E5=95=86=E6=A5=AD=E8=99=9F=E7=
+=A2=BC, HKBN#, HKBN, =E5=95=86=E6=A5=ADID#, =E5=95=86=E6=A5=ADID, =E5=95=86=
+=E6=A5=AD=E8=99=9F=E7=A2=BC# (or) =E5=95=86=E6=A5=AD=E8=99=9F=E7=A2=BC.</td=
+>
+<td class=3D"confluenceTd">\d{8}[- ]<span style=3D"color: rgb(77,77,77);">\=
+d{4}[- ](0[1-9]|(1)[0-2])[ -](0[1-9]|[12][0-9]|3[01])[ -][A-Z]</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E9=A6=99=E6=B8=AF=E5=95=86=E6=A5=AD=E8=
+=99=9F=E7=A2=BC|HKBN\#?|=E5=95=86=E6=A5=ADID\#?|=E5=95=86=E6=A5=AD=E8=99=9F=
+=E7=A2=BC\#?)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">12345668-0000-04-17-A</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Company number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Hong Kong Company Number matches a=
+ valid company number combined with any of the following keywords within a =
+proximity of 10 terms: =E9=A6=99=E6=B8=AF=E5=85=AC=E5=8F=B8=E8=99=9F=E7=A2=
+=BC#, =E9=A6=99=E6=B8=AF=E5=85=AC=E5=8F=B8=E8=99=9F=E7=A2=BC, =E5=85=AC=E5=
+=8F=B8=E8=AD=98=E5=88=A5=E8=99=9F=E7=A2=BC, =E5=85=AC=E5=8F=B8=E8=A8=BB=E5=
+=86=8A=E8=99=9F=E7=A2=BC (or) =E5=85=AC=E5=8F=B8=E8=99=9F=E7=A2=BC.</td>
+<td class=3D"confluenceTd">\d{8}[- ]<span style=3D"color: rgb(77,77,77);">\=
+d{4}[- ](0[1-9]|(1)[0-2])[ -](0[1-9]|[12][0-9]|3[01])[ -][A-Z]</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E9=A6=99=E6=B8=AF=E5=85=AC=E5=8F=B8=E8=
+=99=9F=E7=A2=BC\#?|=E5=85=AC=E5=8F=B8=E8=AD=98=E5=88=A5=E8=99=9F=E7=A2=BC|=
+=E5=85=AC=E5=8F=B8=E8=A8=BB=E5=86=8A=E8=99=9F=E7=A2=BC|=E5=85=AC=E5=8F=B8=
+=E8=99=9F=E7=A2=BC)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">12345668-0000-04-17-A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-Singapore"><strong>S=
+ingapore</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 99.=
+9255%;">
+<colgroup>
+<col style=3D"width: 17.3128%;">
+<col style=3D"width: 33.9237%;">
+<col style=3D"width: 39.9481%;">
+<col style=3D"width: 8.77337%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">NIN</td>
+</tr>
+<tr>
+<th class=3D"highlight-#ff991f confluenceTh" data-highlight-colour=3D"#ff99=
+1f" rowspan=3D"2" title=3D"Background color : Dark orange 85%">National Ide=
+ntity Card Number</th>
+<td class=3D"confluenceTd">Singapore National ID Number matches a valid Nat=
+ional Identity Card number combined with any of the following keywords with=
+in a proximity of 10 terms: NIN, NRIC, national id, national card number, n=
+ational card no, Foreign Identification Number, FIN, national registration =
+Identity Card, national identification number (or) national identity card n=
+umber. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">[FGMST]\d{=
+7}[A-JZ]</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br><br><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:NIN\#?|NRIC|national id|national card num=
+ber|national card no|Foreign Identification Number|FIN|national registratio=
+n Identity Card|national identification number|national identity card numbe=
+r)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">S8076606H,=
+ S6963118A</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-#f4f5f7 confluenceTh" data-highlight-colour=3D"#f4f5=
+f7" rowspan=3D"2" title=3D"Background color : Light grey 100%">CPF number</=
+th>
+<td class=3D"confluenceTd">Singapore Central Provident Fund Number matches =
+a valid CPF number combined with any of the following keywords within a pro=
+ximity of 10 terms: ID CPF, CPF code, CPF number, central provident fund nu=
+mber, CPF identification number, CPF identification no, CPF ID, ID# CPF, CP=
+F account number, CPF account (or) NRIC. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">[A-Z]\d{7}[A-Z]|[ST][A-DF]\d{6}[A-Z]</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:CPF code|CPF number|central provident fun=
+d number|CPF identification number|CPF identification no|CPF ID\#?|ID#? CPF=
+|CPF account number|CPF account|NRIC)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">S1234567F,SA123456D,T1234567F</td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Passport number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#ff991f confluenceTh" data-highlight-colour=3D"#ff99=
+1f" rowspan=3D"2" title=3D"Background color : Dark orange 85%">Driver Licen=
+se Number</th>
+<td class=3D"confluenceTd">Singapore Driver=E2=80=99s License Number matche=
+s a valid license number combined with any of the following keywords within=
+ a proximity of 10 terms: photocard licence, learner drivers, licence holde=
+r, licence holders, licence number, license number, driving licences, drivi=
+ng licenses, driving licence, driving license, drivers licence (or) drivers=
+ license. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">([A-Z]{1}\=
+d{7}[A-Z]{1})</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br><br><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:photocard licence|learner drivers|licence=
+ holders?|licence number|license number|driving licences?|driving licenses?=
+|driver\'?s licence|driver\'?s license)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">G5397361U,=
+ S7569538A</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#ff991f confluenceTh" data-highlight-colour=3D"#ff99=
+1f" rowspan=3D"2" title=3D"Background color : Dark orange 85%">Tax ID numbe=
+r (i.e. Taxpayer ID number)</th>
+<td class=3D"confluenceTd">Singapore Tax ID Number matches a valid Tax Iden=
+tification Number combined with any of the following keywords within a prox=
+imity of 10 terms: id tin, no. tin, tin, tax identification number, Tax Ref=
+erence Number, tax id number, tax identity number, tax number, Tax Identifi=
+cation Code, tax file, tax identification no, tax no#, tax no, tax registra=
+tion number, taxid#, taxidno#, taxidnumber#, taxno#, taxnumber#, taxnumber,=
+ tin id, tin no (or) tax id. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">(\d{8}[A-Z=
+])|([F](( )|(000))\d{5}[A-Z])|(A\d{7}[A-Z])|(\d{10})</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br><br><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:id tin|no. tin|tin|tax identification num=
+ber|Tax Reference Number|tax id number|tax identity number|tax number|Tax I=
+dentification Code|tax file|tax identification no|tax no#|tax no|tax regist=
+ration number|taxid\#?|taxidno\#?|taxidnumber\#?|taxno\#?|taxnumber\#?|tin =
+id|tin no|tax id|tin\#?)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">75395146F<=
+/span></td>
+</tr>
+<tr>
+<th class=3D"highlight-#ff991f confluenceTh" data-highlight-colour=3D"#ff99=
+1f" rowspan=3D"2" title=3D"Background color : Dark orange 85%">VAT number</=
+th>
+<td class=3D"confluenceTd">Singapore VAT ID Number matches a valid value ad=
+ded tax identification number combined with any of the following keywords w=
+ithin a proximity of 10 terms: value added tax number, value added tax, vat=
+ no., vat number, vat#, vat no, GST (or) VAT. (All terms case insensitive.)=
+</td>
+<td class=3D"confluenceTd">(SG)?\d{9}[A-z]</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br><br><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:value added tax number|value added tax|va=
+t no.|vat number|vat\#|vat no|GST|VAT)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">SG20153392=
+0C</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#ff991f confluenceTh" data-highlight-colour=3D"#ff99=
+1f" rowspan=3D"2" title=3D"Background color : Dark orange 85%">Phone number=
+</th>
+<td class=3D"confluenceTd">Singapore Phone Number matches a valid phone num=
+ber combined with any of the following keywords within a proximity of 10 te=
+rms: mobilephone number, mobile phone no., mobilephone no., mobile number, =
+mobilenumber, mobile no., mobileno., mobile#, contact number, contact no., =
+contact, fax number, fax no., cell phone number, cellphone number, cell pho=
+ne no., cellphone no., cell phone, cellphone, cell number, cellnumber, cell=
+ no., cellno., whatsapp number, whatsapp no., whatsapp, phone number, phone=
+ no., phone num, telephonic number, telephone number, telephone no., teleph=
+one, landline number, landline no. (or) landline num. (All terms case insen=
+sitive.)</td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">\d{4}[- ]?=
+\d{4}|<span style=3D"color: rgb(0,51,102);">\+65[ -]?|(3|6|8|9)?\d{4}[ -]\d=
+{4}</span></span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br><br><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:mobilephone number|mobile phone no.|mobil=
+ephone no.|mobile number|mobilenumber|mobile no.|mobileno.|mobile#|contact =
+number|contact no.|contact|fax number|fax no.|cell phone number|cellphone n=
+umber|cell phone no.|cellphone no.|cell phone|cellphone|cell number|cellnum=
+ber|cell no.|cellno.|whatsapp number|whatsapp no.|whatsapp|phone number|pho=
+ne no.|phone num|telephonic number|telephone number|telephone no.|telephone=
+|landline number|landline no.|landline num)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))<=
+/td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">1234-5678,=
+ 1234 5678, <span style=3D"color: rgb(0,51,102);">+65-3423-2342</span></spa=
+n></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#ff991f confluenceTh" data-highlight-colour=3D"#ff99=
+1f" rowspan=3D"2" title=3D"Background color : Dark orange 85%">Post code</t=
+h>
+<td class=3D"confluenceTd">Singapore Postcode matches a valid postcode comb=
+ined with any of the following keywords within a proximity of 10 terms: pla=
+ce of residence, postcode district, postcode area, postcode unit, postcode =
+sector, Zip code, Postal code (or) postcode. (All terms case insensitive.)<=
+/td>
+<td class=3D"confluenceTd"><p class=3D"p1">((0[1-9]|[1-6][0-9]|7[0-8]|8[0-2=
+])[0-9]{4})</p></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br><br><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:place of residence|postcode district|post=
+code area|postcode unit|postcode sector|Zip codePostal code|postcode)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(23,43,77);">119077,188=
+065</span></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td class=3D"confluenceTd">Singapore License Plate Number matches a valid l=
+icense plate number combined with any of the following keywords within a pr=
+oximity of 10 terms: registration. no., plate. no., license number, license=
+ plate number, registration number (or) license plate. (All terms case inse=
+nsitive.)</td>
+<td class=3D"confluenceTd">(?!I|O)[A-Z]{1,3}[ .-]?\d{3,5}[ .-]?(?!I|O)[A-Z]=
+|[A-HJ-NP-Z]{1,3}[ .-]?\d{3,5}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:registration. no.|plate. no.|license numb=
+er|license plate number|registration number|license plate)(?:\b|(?&lt;=3D[.=
+#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">SBS 6216 G,MC 8018J,XE 2017D,A1234</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">IBAN</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td class=3D"confluenceTd">Singapore Bank Account Number matches a valid ba=
+nk account number combined with any of the following keywords within a prox=
+imity of 10 terms: bank account number, bank details, bank number, account =
+code, account id, account number (or) numbered account.(All terms case inse=
+nsitive.)</td>
+<td class=3D"confluenceTd">(\d{3})?\d{7}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:bank account number|bank details|bank num=
+ber|account code|account id|account number|numbered account)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">1461720024</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Routing number</th>
+<td class=3D"confluenceTd">Singapore Routing Number matches a valid routing=
+ number combined with any of the following keywords within a proximity of 1=
+0 terms: Singapore routing number, routing number, bankrouting#, routing#, =
+routing no (or) RTN. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">(\d{3,4}|\d{7})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">((?i)(?:Singapore routing number|routing number|=
+bankrouting#|routing#|routing no))|(RTN)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td=
+>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">1231234</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Business number</th>
+<td class=3D"confluenceTd">Singapore Business Number matches a valid busine=
+ss number combined with any of the following keywords within a proximity of=
+ 10 terms: corporate identification number, company registration number, co=
+rporate number, businessno#, businessid# (or) business ID. (All terms case =
+insensitive.)</td>
+<td class=3D"confluenceTd">(\d{9,10}[A-Z]?)</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:corporate identification number|company r=
+egistration number|corporate number|businessno#|businessid#|business ID)(?:=
+\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">123456782L</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Company number</th>
+<td class=3D"confluenceTd">Singapore Company Number matches a valid company=
+ number combined with any of the following keywords within a proximity of 1=
+0 terms: corporate identification number, company registration number, corp=
+orate number (or) company number.(All terms case insensitive.)</td>
+<td class=3D"confluenceTd">(\d{9,10}[A-Z]?)</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">(?i)(?:corporate identification number|company r=
+egistration number|corporate number|company number)(?:\b|(?&lt;=3D[.#])(?=
+=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd">1234123456A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-China"><strong>China=
+</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 21.875%;">
+<col style=3D"width: 33.9255%;">
+<col style=3D"width: 31.5162%;">
+<col style=3D"width: 12.8067%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">National Identity Card Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China National ID Number matches a=
+ valid National Identity Card Number combined with any of the following key=
+words within a proximity of 10 terms: NIN#, NIN, =E5=9B=BD=E6=B0=91=E8=BA=
+=AB=E4=BB=BD=E8=AF=81=E5=8F=B7=E7=A0=81 (or) =E8=BA=AB=E4=BB=BD=E8=AF=81=E5=
+=8F=B7. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">\d{6}[ ]?\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3=
+[01])\d{4}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:NIN\#?|=E5=9B=BD=E6=B0=91=E8=BA=AB=E4=BB=
+=BD=E8=AF=81=E5=8F=B7=E7=A0=81|=E8=BA=AB=E4=BB=BD=E8=AF=81=E5=8F=B7)(?:\b|(=
+?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123445123412129999</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Passport number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Passport Number matches a va=
+lid passport number combined with any of the following keywords within a pr=
+oximity of 10 terms: =E5=9B=BD=E9=99=85=E6=97=85=E8=A1=8C=E8=AF=81=E4=BB=B6=
+, =E6=8A=A4=E7=85=A7=E8=AF=A6=E7=BB=86=E4=BF=A1=E6=81=AF, =E7=AD=BE=E8=AF=
+=81, =E5=9B=BD=E6=B0=91=E8=BA=AB=E4=BB=BD=E8=AF=81, =E6=97=85=E8=A1=8C=E8=
+=AF=81=E4=BB=B6, =E5=8F=91=E8=AF=81=E6=9C=BA=E5=85=B3, =E8=BA=AB=E4=BB=BD=
+=E8=AF=81=E4=BB=B6, =E8=BA=AB=E4=BB=BD=E8=AF=81=E6=98=8E, =E6=8A=A4=E7=85=
+=A7 ID, =E6=8A=A4=E7=85=A7=E5=8F=B7=E7=A0=81 (or) =E6=8A=A4=E7=85=A7.</td>
+<td class=3D"confluenceTd">((0\d)|(1[0-2])|(2[1-9])|(3[0-2])|(6[1-9])|(7[01=
+2])|80)(\d{7})|<span style=3D"color: rgb(0,51,102);">[A-z]\d{8}|[A-z]{2}\d{=
+7}</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E5=9B=BD=E9=99=85=E6=97=85=E8=A1=8C=E8=
+=AF=81=E4=BB=B6|=E6=8A=A4=E7=85=A7=E8=AF=A6=E7=BB=86=E4=BF=A1=E6=81=AF|=E7=
+=AD=BE=E8=AF=81|=E5=9B=BD=E6=B0=91=E8=BA=AB=E4=BB=BD=E8=AF=81|=E6=97=85=E8=
+=A1=8C=E8=AF=81=E4=BB=B6|=E5=8F=91=E8=AF=81=E6=9C=BA=E5=85=B3|=E8=BA=AB=E4=
+=BB=BD=E8=AF=81=E4=BB=B6|=E8=BA=AB=E4=BB=BD=E8=AF=81=E6=98=8E|=E6=8A=A4=E7=
+=85=A7 ID|=E6=8A=A4=E7=85=A7=E5=8F=B7=E7=A0=81|=E6=8A=A4=E7=85=A7)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">011234567,<span style=3D"color: rgb(0,51,102);">=
+AB1234567</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Driver License Number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Driver's License Number matc=
+hes a valid license number combined with any of the following keywords with=
+in a proximity of 10 terms: DVLA, =E5=B8=A6=E7=85=A7=E7=89=87=E7=9A=84=E6=
+=89=A7=E7=85=A7, =E5=AE=9E=E4=B9=A0=E9=A9=BE=E7=85=A7, =E9=A9=BE=E7=85=A7=
+=E6=8C=81=E6=9C=89=E4=BA=BA, =E6=89=A7=E7=85=A7=E6=8C=81=E6=9C=89=E4=BA=BA,=
+ =E9=A9=BE=E7=85=A7=E5=8F=B7, =E6=89=A7=E7=85=A7=E5=8F=B7, =E6=AD=A3=E5=BC=
+=8F=E9=A9=BE=E7=85=A7, =E6=B1=BD=E8=BD=A6=E9=A9=BE=E7=85=A7, =E9=A9=BE=E7=
+=85=A7, =E6=B1=BD=E8=BD=A6=E9=A9=BE=E9=A9=B6=E6=89=A7=E7=85=A7 (or) =E9=A9=
+=BE=E9=A9=B6=E6=89=A7=E7=85=A7. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">(?:\d{6}[- ./][1-9]\d{3}[- ./]\d{2}[- ./]\d{2}[-=
+ ./]\d{3}[- .]?\d{1}|\d{6}[- ./]\d{2}[- ./]\d{2}[- ./]\d{2}[- .]\d{3})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:DVLA|=E5=B8=A6=E7=85=A7=E7=89=87=E7=9A=84=
+=E6=89=A7=E7=85=A7|=E5=AE=9E=E4=B9=A0=E9=A9=BE=E7=85=A7|=E9=A9=BE=E7=85=A7=
+=E6=8C=81=E6=9C=89=E4=BA=BA|=E6=89=A7=E7=85=A7=E6=8C=81=E6=9C=89=E4=BA=BA|=
+=E9=A9=BE=E7=85=A7=E5=8F=B7|=E6=89=A7=E7=85=A7=E5=8F=B7|=E6=AD=A3=E5=BC=8F=
+=E9=A9=BE=E7=85=A7|=E6=B1=BD=E8=BD=A6=E9=A9=BE=E7=85=A7|=E9=A9=BE=E7=85=A7|=
+=E6=B1=BD=E8=BD=A6=E9=A9=BE=E9=A9=B6=E6=89=A7=E7=85=A7|=E9=A9=BE=E9=A9=B6=
+=E6=89=A7=E7=85=A7)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">120214 2013-12-23 836 1,210486 43-08-16 298</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Tax ID number (i.e. Taxpayer ID number)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Tax ID Number matches a vali=
+d Tax Identification Number combined with any of the following keywords wit=
+hin a proximity of 10 terms: =E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=AB=E5=8F=B7,=
+ =E7=A8=8E=E5=8A=A1=E7=99=BB=E8=AE=B0=E5=8F=B7, =E7=A8=8E=E5=8A=A1=E8=AF=86=
+=E5=88=AB=E7=A0=81, =E7=A8=8E=E5=8A=A1=E6=96=87=E4=BB=B6, =E7=A8=8E=E5=8A=
+=A1=E5=8F=B7#, =E7=A8=8E=E5=8A=A1=E5=8F=B7, =E7=A8=8E=E5=8A=A1=E8=AF=86=E5=
+=88=AB=E5=8F=B7#, =E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=AB=E5=8F=B7, =E7=A8=8E=
+=E5=8A=A1ID#, =E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=AB=E7=A0=81, =E7=A8=8E=E5=
+=8A=A1=E8=AF=86=E5=88=ABID, =E7=A8=8E=E5=8A=A1=E8=BA=AB=E4=BB=BD=E8=AF=81=
+=E6=98=8E#, TIN (or) =E7=A8=8E=E5=8F=B7.<span style=3D"color: rgb(23,43,77)=
+;"> (All terms case insensitive.)</span></td>
+<td class=3D"confluenceTd">\d{15}|\d{18}|\d{17}[X]|[CWHMT]\d{17}|[CWHMT]\d{=
+16}[A-z]|J\d{14}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=AB=E5=
+=8F=B7|=E7=A8=8E=E5=8A=A1=E7=99=BB=E8=AE=B0=E5=8F=B7|=E7=A8=8E=E5=8A=A1=E8=
+=AF=86=E5=88=AB=E7=A0=81|=E7=A8=8E=E5=8A=A1=E6=96=87=E4=BB=B6|=E7=A8=8E=E5=
+=8A=A1=E8=AF=86=E5=88=AB=E5=8F=B7\#?|=E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=AB=
+=E5=8F=B7|=E7=A8=8E=E5=8A=A1ID\#?|=E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=AB=E7=
+=A0=81|=E7=A8=8E=E5=8A=A1=E8=AF=86=E5=88=ABID|=E7=A8=8E=E5=8A=A1=E8=BA=AB=
+=E4=BB=BD=E8=AF=81=E6=98=8E\#?|=E7=A8=8E=E5=8A=A1=E5=8F=B7\#?|=E7=A8=8E=E5=
+=8A=A1=E5=8F=B7|TIN|=E7=A8=8E=E5=8F=B7)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123456789012345</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">VAT number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China VAT ID Number matches a vali=
+d value added tax identification number combined with any of the following =
+keywords within a proximity of 10 terms: =E5=A2=9E=E5=80=BC=E7=A8=8E=E7=A8=
+=8E=E5=8F=B7, =E5=A2=9E=E5=80=BC=E7=A8=8E#, =E5=A2=9E=E5=80=BC=E7=A8=8E (or=
+) VAT. (All terms case insensitive.)</td>
+<td class=3D"confluenceTd">\d{18}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E5=A2=9E=E5=80=BC=E7=A8=8E=E7=A8=8E=E5=
+=8F=B7|=E5=A2=9E=E5=80=BC=E7=A8=8E\#?|VAT)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</=
+td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123456789987654321</td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Phone number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Phone Number matches a valid=
+ phone number combined with any of the following keywords within a proximit=
+y of 10 terms: =E6=89=8B=E6=9C=BA=E5=8F=B7=E7=A0=81 (or) =E7=94=B5=E8=AF=9D=
+=E5=8F=B7.</td>
+<td class=3D"confluenceTd">1[358]\d{9}|<span style=3D"color: rgb(0,51,102);=
+">\+86 1[358]\d[ ]?\d{4}[ ]?\d{4}</span></td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E6=89=8B=E6=9C=BA=E5=8F=B7=E7=A0=81|=E7=
+=94=B5=E8=AF=9D=E5=8F=B7)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">13123456789,<span style=3D"color: rgb(0,51,102);=
+">+86 139 1099 8888</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">Post code</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Postcode matches a valid pos=
+tcode combined with any of the following keywords within a proximity of 10 =
+terms: =E5=9C=B0=E5=9D=80, =E9=82=AE=E6=94=BF=E7=BC=96=E7=A0=81, =E9=82=AE=
+=E6=94=BF=E7=BC=96=E7=A0=81 =E5=9C=B0=E5=8C=BA (or) =E9=82=AE=E6=94=BF=E7=
+=BC=96=E7=A0=81.</td>
+<td class=3D"confluenceTd">(\d{2,3})?[ ]?\d{6}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E5=9C=B0=E5=9D=80|=E9=82=AE=E6=94=BF=E7=
+=BC=96=E7=A0=81|=E9=82=AE=E6=94=BF=E7=BC=96=E7=A0=81 =E5=9C=B0=E5=8C=BA|=E9=
+=82=AE=E6=94=BF=E7=BC=96=E7=A0=81)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">132 123456</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China License Plate Number matches=
+ a valid license plate number combined with any of the following keywords w=
+ithin a proximity of 10 terms: =E8=BD=A6=E7=89=8C=E5=8F=B7, =E8=BD=A6=E8=BE=
+=86=E7=99=BB=E8=AE=B0=E5=8F=B7=E7=A0=81, =E8=BD=A6=E5=8F=B7 (or) =E7=89=8C=
+=E7=85=A7.</td>
+<td class=3D"confluenceTd">([A-Z][.])([A-z0-9]{4,6})|WJ[ ](P[ ]|\d{2}[-]?)\=
+d{4}([A-z]|\d|[=E6=B2=AA=E4=BA=AC=E8=8B=8F=E6=B5=99=E7=B2=A4][A-Z]{1,2}[=C2=
+=B7. -]?[0-9A-Z]{3,5}[=E6=B8=AF]?|[A-Z]{1}[A-Z_0-9]{5}\d{1})</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E8=BD=A6=E7=89=8C=E5=8F=B7|=E8=BD=A6=E8=
+=BE=86=E7=99=BB=E8=AE=B0=E5=8F=B7=E7=A0=81|=E8=BD=A6=E5=8F=B7|=E7=89=8C=E7=
+=85=A7)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">A.10000,=E8=8B=8FA=C2=B71P234,=E6=B5=99B=C2=B7AB=
+987,=E7=B2=A4Z=C2=B77C59=E6=B8=AF</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey" ro=
+wspan=3D"2">IBAN</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China International Bank Account N=
+umber =E2=80=93 IBAN matches a valid IBAN combined with any of the followin=
+g keywords within a proximity of 10 terms: IBAN#, IBAN, =E5=9B=BD=E9=99=85=
+=E9=93=B6=E8=A1=8C=E8=B4=A6=E5=8F=B7 (or) =E5=9B=BD=E9=99=85=E9=93=B6=E8=A1=
+=8C=E8=B4=A6=E6=88=B7.<span style=3D"color: rgb(23,43,77);"> (All terms cas=
+e insensitive.)</span></td>
+<td class=3D"confluenceTd">\d{12}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:IBAN\#?|=E5=9B=BD=E9=99=85=E9=93=B6=E8=A1=
+=8C=E8=B4=A6=E5=8F=B7|=E5=9B=BD=E9=99=85=E9=93=B6=E8=A1=8C=E8=B4=A6=E6=88=
+=B7)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123456789012</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Bank Account Number matches =
+a valid bank account number combined with any of the following keywords wit=
+hin a proximity of 10 terms: =E9=93=B6=E8=A1=8C=E5=B8=90=E5=8F=B7, =E9=93=
+=B6=E8=A1=8C=E8=AF=A6=E7=BB=86=E4=BF=A1=E6=81=AF, =E8=B4=A6=E6=88=B7=E4=BB=
+=A3=E7=A0=81, =E8=B4=A6=E6=88=B7ID (or) =E8=B4=A6=E6=88=B7=E5=8F=B7=E7=A0=
+=81.</td>
+<td class=3D"confluenceTd">\d{11}|\d{15}|\d{19}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E9=93=B6=E8=A1=8C=E5=B8=90=E5=8F=B7|=E9=
+=93=B6=E8=A1=8C=E8=AF=A6=E7=BB=86=E4=BF=A1=E6=81=AF|=E8=B4=A6=E6=88=B7=E4=
+=BB=A3=E7=A0=81|=E8=B4=A6=E6=88=B7ID|=E8=B4=A6=E6=88=B7=E5=8F=B7=E7=A0=81)<=
+/td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">12345678901</td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Routing number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Routing Number matches a val=
+id routing number combined with any of the following keywords within a prox=
+imity of 10 terms: =E8=B7=AF=E7=94=B1=E5=8F=B7=E7=A0=81, =E8=B7=AF=E7=94=B1=
+=E5=8F=B7, =E8=B7=AF=E7=94=B1# (or) RTN.</td>
+<td class=3D"confluenceTd">\d{12}</td>
+<td rowspan=3D"3" class=3D"confluenceTd">Routing number</td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E8=B7=AF=E7=94=B1=E5=8F=B7=E7=A0=81|=E8=
+=B7=AF=E7=94=B1=E5=8F=B7|=E8=B7=AF=E7=94=B1#|RTN)(?:\b|(?&lt;=3D[.#])(?=3D\=
+W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">123456789012</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Business number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Business Number matches a va=
+lid business number combined with any of the following keywords within a pr=
+oximity of 10 terms: =E7=BB=9F=E4=B8=80=E7=A4=BE=E4=BC=9A=E4=BF=A1=E7=94=A8=
+=E4=BB=A3=E7=A0=81, =E4=B8=AD=E5=9B=BD=E5=95=86=E4=B8=9A=E5=8F=B7=E7=A0=81,=
+ =E5=95=86=E4=B8=9AID#, =E5=95=86=E4=B8=9AID, =E5=95=86=E4=B8=9A=E5=8F=B7=
+=E7=A0=81# (or) =E5=95=86=E4=B8=9A=E5=8F=B7=E7=A0=81. (All terms case insen=
+sitive.)</td>
+<td class=3D"confluenceTd">9[1-3]\d{16}|[A-z0-9]{18}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E7=BB=9F=E4=B8=80=E7=A4=BE=E4=BC=9A=E4=
+=BF=A1=E7=94=A8=E4=BB=A3=E7=A0=81|=E4=B8=AD=E5=9B=BD=E5=95=86=E4=B8=9A=E5=
+=8F=B7=E7=A0=81|=E5=95=86=E4=B8=9AID\#?|=E5=95=86=E4=B8=9AID|=E5=95=86=E4=
+=B8=9A=E5=8F=B7=E7=A0=81\#?|=E5=95=86=E4=B8=9A=E5=8F=B7=E7=A0=81)(?:\b|(?&l=
+t;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">911234567890123456</td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Company number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">China Company Number matches a val=
+id company number combined with any of the following keywords within a prox=
+imity of 10 terms: =E7=BB=9F=E4=B8=80=E7=A4=BE=E4=BC=9A=E4=BF=A1=E7=94=A8=
+=E4=BB=A3=E7=A0=81, =E4=B8=AD=E5=9B=BD=E5=85=AC=E5=8F=B8=E5=8F=B7=E7=A0=81#=
+, =E5=85=AC=E5=8F=B8=E8=AF=86=E5=88=AB=E5=8F=B7=E7=A0=81, =E5=85=AC=E5=8F=
+=B8=E6=B3=A8=E5=86=8C=E5=8F=B7=E7=A0=81 (or) =E5=85=AC=E5=8F=B8=E5=8F=B7=E7=
+=A0=81.</td>
+<td class=3D"confluenceTd">9[1-3]\d{16}|[A-z0-9]{18}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:=E7=BB=9F=E4=B8=80=E7=A4=BE=E4=BC=9A=E4=
+=BF=A1=E7=94=A8=E4=BB=A3=E7=A0=81|=E4=B8=AD=E5=9B=BD=E5=85=AC=E5=8F=B8=E5=
+=8F=B7=E7=A0=81\#?|=E5=85=AC=E5=8F=B8=E8=AF=86=E5=88=AB=E5=8F=B7=E7=A0=81|=
+=E5=85=AC=E5=8F=B8=E6=B3=A8=E5=86=8C=E5=8F=B7=E7=A0=81|=E5=85=AC=E5=8F=B8=
+=E5=8F=B7=E7=A0=81)(?:\b|(?&lt;=3D[.#])(?=3D\W|$))</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">911234567890123456</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 class=3D"auto-cursor-target" id=3D"Batch3Countries-Romania"><strong>Rom=
+ania</strong></h2>
+<div class=3D"table-wrap">
+<table class=3D"relative-table wrapped confluenceTable" style=3D"width: 100=
+.0%;">
+<colgroup>
+<col style=3D"width: 22.2499%;">
+<col style=3D"width: 35.0439%;">
+<col style=3D"width: 31.6913%;">
+<col style=3D"width: 11.0149%;">
+</colgroup>
+<tbody>
+<tr>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Identifiers</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Descriptions</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Regex</th>
+<th style=3D"text-align: center;" class=3D"confluenceTh">Note</th>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Security Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">National Identity Card N=
+umber</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">CPF number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Passport number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Driver License Number</t=
+h>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Social Insurance Number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Tax ID number (i.e. Taxp=
+ayer ID number)</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">VAT number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health service number</th=
+>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Health Insurance number</=
+th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Da=
+te of birth</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Phone number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Physical address</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">Post code</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">License plate number (i.e. vehicle=
+)</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Romania License Plate Number match=
+es a valid license plate number combined with any of the following keywords=
+ within a proximity of 10 terms: num=C4=83r pl=C4=83cu=C8=9B=C4=83 =C3=AEnm=
+atriculare, numar de inmatriculare, num=C4=83r =C3=AEnmatriculare, nr =C3=
+=AEnmatriculare, num=C4=83r auto, num=C4=83r vehicul, pl=C4=83cu=C8=9B=C4=
+=83 =C3=AEnmatriculare, placuta, matricula, masina (or) inregistrat. (All t=
+erms case insensitive; diacritics are optional.)</td>
+<td class=3D"confluenceTd">[A-Z]{1,2}[ ]?\d{2,3}[ ]?[A-Z]{3}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:num[=C4=83a]r pl[=C4=83a]cu[=C8=9Bt][=C4=
+=83a] [=C3=AEi]nmatriculare|numar de inmatriculare|num[=C4=83a]r [=C3=AEi]n=
+matriculare|nr [=C3=AEi]nmatriculare|num[=C4=83a]r auto|num[=C4=83a]r vehic=
+ul|pl[=C4=83a]cu[=C8=9Bt][=C4=83a] [=C3=AEi]nmatriculare|placuta|matricula|=
+masina|inregistrat)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd">A 12 ABC</td>
+</tr>
+<tr>
+<th class=3D"highlight-#de350b confluenceTh" data-highlight-colour=3D"#de35=
+0b" title=3D"Background color : Dark red 85%">Person name</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#36b37e confluenceTh" data-highlight-colour=3D"#36b3=
+7e" title=3D"Background color : Medium green 100%">IBAN</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th rowspan=3D"2" class=3D"confluenceTh">Bank account number</th>
+<td rowspan=3D"3" class=3D"confluenceTd">Romania Bank Account Number matche=
+s a valid bank account number combined with any of the following keywords w=
+ithin a proximity of 10 terms: num=C4=83r de cont bancar, detalii banc=C4=
+=83, num=C4=83r cont, cod cont, id cont, nr cont (or) cont bancar.&nbsp;(Al=
+l terms case insensitive; diacritics are optional.)</td>
+<td class=3D"confluenceTd">\d[A-Z]\d{14}</td>
+<td rowspan=3D"3" class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<td class=3D"confluenceTd">(?i)(?:num[=C4=83a]r de cont bancar|detalii banc=
+[=C4=83a]|num[=C4=83a]r cont|cod cont|id cont|nr cont|cont bancar)</td>
+</tr>
+<tr>
+<th class=3D"confluenceTh">Example:</th>
+<td class=3D"confluenceTd"><span style=3D"color: rgb(69,71,69);">1B31007593=
+840000</span></td>
+</tr>
+<tr>
+<th class=3D"highlight-grey confluenceTh" data-highlight-colour=3D"grey">Cr=
+edit card number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Routing number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Business number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+<tr>
+<th class=3D"highlight-#0065ff confluenceTh" data-highlight-colour=3D"#0065=
+ff" title=3D"Background color : Medium blue 100%">Company number</th>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+<td class=3D"confluenceTd"><br></td>
+</tr>
+</tbody>
+</table>
+</div>
+    </div>
+</body>
+</html>
+------=_Part_1669131_1909598044.1733749413446--

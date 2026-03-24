@@ -10,7 +10,11 @@ proxies:
   - "http://user:pass@proxy1.example.com:8080"
   - "http://user:pass@proxy2.example.com:8080"
 
+# ── Redis cache (optional — pipeline works without it) ──
+# Set REDIS_URL in .env or leave default: redis://localhost:6379/0
+# Cache TTLs: search=7d, scrape=7d, LLM=30d
+
 # ── Secrets are loaded from .env (see .env.example) ──
-# AWS_PROFILE, AWS_REGION, TAVILY_API_KEY, PROXIES
+# AWS_PROFILE, AWS_REGION, TAVILY_API_KEY, PROXIES, REDIS_URL
 # Set them in .env for local dev; on EC2/ECS leave AWS_PROFILE empty
 # to use the instance role automatically.

@@ -585,6 +585,34 @@ h3 { font-size: 15px; color: var(--text-0); margin-bottom: 8px; }
 .btn-rerun:hover { background: rgba(88,166,255,0.12); }
 .btn-rerun:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* ── Copy URL button ──────────────────────────────────────────── */
+.btn-copy-url {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 4px;
+  padding: 0;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.btn-copy-url:hover {
+  color: var(--accent);
+  background: rgba(88,166,255,0.1);
+  border-color: rgba(88,166,255,0.3);
+}
+.btn-copy-url.copied {
+  color: var(--green);
+  border-color: rgba(63,185,80,0.3);
+  background: rgba(63,185,80,0.1);
+}
+
 /* ── Utilities ────────────────────────────────────────────────── */
 .hidden { display: none !important; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

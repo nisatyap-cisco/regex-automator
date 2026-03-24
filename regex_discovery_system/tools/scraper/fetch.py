@@ -12,7 +12,11 @@ from tenacity import (
     wait_exponential,
 )
 
+from utils.cache import cache_get, cache_set
+
 logger = logging.getLogger(__name__)
+
+_SCRAPE_TTL = 7 * 24 * 3600  # 7 days
 
 DEFAULT_HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; regex-scraper/1.0)",
@@ -47,6 +51,11 @@ def _should_retry(exc: BaseException) -> bool:
     retry=_should_retry,
 )
 def fetch_text(client: httpx.Client, url: str) -> str:
+    cached = cache_get("scrape", url)
+    if cached is not None:
+        logger.debug("Scrape CACHE HIT %s", url)
+        return cached
+
     logger.debug("Fetching %s", url)
     resp = client.get(url, follow_redirects=True)
     if _is_non_retryable(resp.status_code):
@@ -55,8 +64,13 @@ def fetch_text(client: httpx.Client, url: str) -> str:
         raise FetchError(f"HTTP {resp.status_code} for {url}")
     content_type = resp.headers.get("content-type", "")
     if "pdf" in content_type.lower() or url.lower().endswith(".pdf"):
-        return resp.content.decode("latin-1")
-    return resp.text
+        text = resp.content.decode("latin-1")
+    else:
+        text = resp.text
+
+    if len(text) < 5_000_000:
+        cache_set("scrape", url, text, ttl=_SCRAPE_TTL)
+    return text
 
 
 def _make_legacy_ssl_context() -> ssl.SSLContext:

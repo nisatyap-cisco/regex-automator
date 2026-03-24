@@ -10,7 +10,11 @@ from typing import Optional
 import boto3
 import yaml
 
+from utils.cache import cache_get, cache_set
+
 logger = logging.getLogger(__name__)
+
+_LLM_TTL = 30 * 24 * 3600  # 30 days — LLM outputs are deterministic at low temp
 
 
 def _load_dotenv() -> None:
@@ -76,7 +80,18 @@ def invoke_claude(
     config: dict,
     system: str = "",
     max_retries: Optional[int] = None,
+    use_cache: bool = True,
 ) -> str:
+    model_id = config.get("model_id", "")
+    temperature = config.get("temperature", 0.2)
+
+    if use_cache:
+        cache_key = f"{model_id}|{temperature}|{system}|{prompt}"
+        cached = cache_get("llm", cache_key)
+        if cached is not None:
+            logger.info("LLM CACHE HIT (prompt %.60s…)", prompt[:60])
+            return cached
+
     retries = max_retries if max_retries is not None else config.get("max_retries", 3)
     session = _build_session(config)
     client = session.client("bedrock-runtime", region_name=config["region"])
@@ -86,7 +101,7 @@ def invoke_claude(
         "anthropic_version": "bedrock-2023-05-31",
         "messages": messages,
         "max_tokens": config.get("max_tokens", 4096),
-        "temperature": config.get("temperature", 0.2),
+        "temperature": temperature,
     }
     if system:
         body["system"] = system
@@ -94,11 +109,16 @@ def invoke_claude(
     for attempt in range(1, retries + 1):
         try:
             resp = client.invoke_model(
-                modelId=config["model_id"],
+                modelId=model_id,
                 body=json.dumps(body),
             )
-            result = json.loads(resp["body"].read())
-            return result["content"][0]["text"]
+            result_body = json.loads(resp["body"].read())
+            text = result_body["content"][0]["text"]
+
+            if use_cache:
+                cache_set("llm", cache_key, text, ttl=_LLM_TTL)
+
+            return text
         except Exception as exc:
             wait = 2 ** (attempt - 1)
             logger.warning(
