@@ -18,9 +18,10 @@ from utils.bedrock_client import invoke_claude, load_config
 from utils.paths import slugify
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-COMPARISON_FILE = os.path.join(SCRIPT_DIR, "results", "regex_comparison.json")
+COMPARISON_FILE = os.path.join(SCRIPT_DIR, "regex_comparison.json")
+RESEARCHER_FILE = os.path.join(os.path.dirname(SCRIPT_DIR), "researcher_regex_export.json")
 RESULTS_DIR = os.path.join(SCRIPT_DIR, "results")
-OUTPUT_HTML = os.path.join(RESULTS_DIR, "comparison_report_new.html")
+OUTPUT_HTML = os.path.join(RESULTS_DIR, "coverage_report.html")
 
 ANALYSIS_PROMPT = """You are a regex comparison analyst.  Given:
 - CONDITION: {condition}
@@ -49,23 +50,30 @@ Rules for analysis:
 
 def load_entries() -> list[dict]:
     with open(COMPARISON_FILE) as f:
-        return json.load(f)
+        mine_entries = json.load(f)
+
+    # Build slug → researcher_regex from researcher_regex_export.json
+    researcher_map = {}
+    if os.path.exists(RESEARCHER_FILE):
+        with open(RESEARCHER_FILE) as f:
+            researcher_entries = json.load(f)
+        for e in researcher_entries:
+            slug = e.get("slug", "")
+            rx = e.get("researcher_regex")
+            if slug and rx:
+                researcher_map[slug] = rx
+
+    # Merge researcher regex into each mine entry
+    for e in mine_entries:
+        slug = e.get("slug", "")
+        e["_researcher"] = researcher_map.get(slug)
+
+    return mine_entries
 
 
-def get_researcher_regex(slug: str) -> str | None:
-    """Extract the combined-value regex from researcher results."""
-    path = os.path.join(RESULTS_DIR, f"{slug}_regex_patterns.json")
-    if not os.path.exists(path):
-        return None
-    with open(path) as f:
-        data = json.load(f)
-    for p in data.get("patterns", []):
-        if p.get("rule_id") == "combined-value":
-            return p.get("regex", "")
-    patterns = data.get("patterns", [])
-    if patterns:
-        return patterns[-1].get("regex", "")
-    return None
+def get_researcher_regex(entry: dict) -> "str | None":
+    """Get researcher regex from the merged entry."""
+    return entry.get("_researcher")
 
 
 def strip_wb(regex_str: str) -> str:
@@ -280,10 +288,14 @@ def main() -> None:
         slug = entry["slug"]
         condition = entry["condition"]
         mine = entry["mine"]
-        researcher = get_researcher_regex(slug)
+        researcher = get_researcher_regex(entry)
 
-        if researcher is None:
-            print(f"  [{i}] {condition}: NO RESEARCHER REGEX FOUND — skipping")
+        if not researcher:
+            print(f"  [{i}] {condition}: NO RESEARCHER REGEX — skipping")
+            continue
+
+        if "java" in slug:
+            print(f"  [{i}] {condition}: skipping java")
             continue
 
         print(f"  [{i}] Analyzing: {condition}")

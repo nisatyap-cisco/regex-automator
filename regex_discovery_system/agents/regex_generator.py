@@ -339,32 +339,67 @@ def _strip_anchors_add_boundaries(regex_str: str) -> str:
 #   \d{3}-\d{2}-\d{4}          → unchanged (literal hyphen present)
 #   \d{12}                      → unchanged (single group, no boundary)
 
-_SEG_BOUNDARY = re.compile(
-    r'\}'                           # end of a quantifier like {4}
-    r'(?='                          # lookahead: next token is a new char group
-    r'(?:'
-    r'\\[dDwW]'                     # shorthand class: \d \D \w \W
-    r'|'
-    r'\[(?!\\s|\\-|\\S)'           # bracket class NOT starting with \s \- \S
-    r')'
-    r')'
+# Matches one quantified token: a char class or shorthand followed by {n} or {n,m}.
+# Captures: (token, quantifier_value_as_str)
+_QUANT_TOKEN = re.compile(
+    r'(?P<tok>(?:\\[dDwWsS]|\[[^\]]+\]|\.))\{(?P<q>\d+)(?:,\d+)?\}'
 )
 
 _OPT_SEP = r'[\s\-]?'
 
 
 def _inject_optional_separators(regex_str: str) -> str:
-    r"""Insert ``[\s\-]?`` between adjacent quantified segments.
+    r"""Insert ``[\s\-]?`` between adjacent quantified segments — but ONLY
+    when the LLM itself wrote multiple explicit equal-or-similar-sized groups,
+    indicating deliberate segmentation (e.g. \d{4}\d{4}\d{4}).
 
-    Purely deterministic — no LLM involved.  Only fires at boundaries
-    where ``}`` is followed directly by a new character group with no
-    existing separator.  Falls back to the original if injection causes
-    a compile error.
+    Rules that PREVENT injection:
+    1. Fewer than 2 quantified tokens found → nothing to segment.
+    2. All tokens have the same char class AND the total span collapses into one
+       contiguous block with a large single quantifier (e.g. \d{10}\d or \d{11})
+       → the LLM wrote a flat pattern, not segments.
+    3. The boundary already has a separator ([\s\-], literal -, space, etc.).
+
+    Injection is allowed when:
+    - There are ≥ 2 quantified tokens of the SAME char class with individual
+      quantifiers each ≤ 6  (e.g. \d{4}, \d{4}, \d{4} → clearly segments).
+    - OR the tokens have DIFFERENT char classes at boundaries
+      (e.g. [A-Z]{4}\d{6} → letter-to-digit boundary, safe to separate).
     """
     if '{' not in regex_str:
         return regex_str
 
-    result = _SEG_BOUNDARY.sub(lambda m: '}' + _OPT_SEP, regex_str)
+    tokens = _QUANT_TOKEN.findall(regex_str)
+    if len(tokens) < 2:
+        return regex_str
+
+    # Check if all tokens are the same char class (e.g. all \d)
+    classes = [tok for tok, _ in tokens]
+    quants  = [int(q) for _, q in tokens]
+
+    all_same_class = len(set(classes)) == 1
+
+    if all_same_class:
+        # Flat pattern: if any single quantifier is large (> 6), the LLM wrote
+        # a continuous block, not deliberate segments — skip injection entirely.
+        if max(quants) > 6:
+            logger.debug("separator injection skipped (flat pattern): %s", regex_str)
+            return regex_str
+
+    # Build the pattern for a segment boundary: } immediately followed by
+    # a new char group with NO existing separator between them.
+    seg_boundary = re.compile(
+        r'\}'
+        r'(?='
+        r'(?:'
+        r'\\[dDwW]'
+        r'|'
+        r'\[(?!\\s|\\-|\\S)'
+        r')'
+        r')'
+    )
+
+    result = seg_boundary.sub(lambda m: '}' + _OPT_SEP, regex_str)
     if result == regex_str:
         return regex_str
 
