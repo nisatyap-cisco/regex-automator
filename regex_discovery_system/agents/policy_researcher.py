@@ -22,7 +22,6 @@ from __future__ import annotations
 import json
 import logging
 import re as _re
-from typing import Optional
 from urllib.parse import urlparse
 
 from utils.bedrock_client import invoke_claude
@@ -32,21 +31,15 @@ logger = logging.getLogger(__name__)
 # ── Domain authority scoring tiers ────────────────────────────────────────────
 
 _AUTHORITY_TIERS: list[tuple[list[str], int]] = [
-    # Government / official regulatory
     ([".gov", ".gov."], 10),
-    # Standards bodies
     (["iso.org", "itu.int", "ietf.org", "iana.org", "w3.org"], 9),
-    # Wikipedia / major reference
     (["wikipedia.org", "wikidata.org"], 8),
-    # Educational
     ([".edu", ".ac."], 7),
-    # Well-known data/format reference sites
     ([
         "geeksforgeeks.org", "stackoverflow.com", "numbering.org",
         "geonames.org", "worldpostalcode.com", "postcodebase.com",
         "geopostcodes.com", "zipcodebase.com",
     ], 6),
-    # DLP/security vendors (useful but secondary)
     ([
         "microsoft.com", "learn.microsoft.com", "netskope.com",
         "broadcom.com", "zscaler.com", "skyhighsecurity.com",
@@ -79,13 +72,8 @@ def _score_url(url: str) -> int:
     return base + boost
 
 
-def _rank_and_dedupe(urls: list[str], max_per_domain: int = 2, top_n: int = 8) -> list[str]:
-    """Score, deduplicate, and return the top-N policy URLs.
-
-    - Scores each URL by domain authority tier + path keyword relevance.
-    - Limits to *max_per_domain* URLs per domain to avoid duplication.
-    - Returns the top *top_n* by score.
-    """
+def _rank_and_dedupe(urls: list[str], max_per_domain: int = 2, top_n: int = 15) -> list[str]:
+    """Score, deduplicate, and return the top-N URLs by domain authority."""
     domain_counts: dict[str, int] = {}
     scored: list[tuple[int, str]] = []
 
@@ -188,6 +176,7 @@ _VENDORS = [
 _VENDOR_REFERENCE_BASES = [
     "https://success.skyhighsecurity.com/Skyhigh_Data_Loss_Prevention/Data_Identifiers",
     "https://docs.trellix.com/bundle/data-loss-prevention-11.10.x-classification-definitions-reference-guide/page/GUID-3CFCC6AE-1709-43B7-B790-34E2D141ADB7.html",
+    https://learn.microsoft.com/en-us/purview/sit-sensitive-information-type-entity-definitions?view=o365-worldwide
 ]
 
 
@@ -195,9 +184,9 @@ def research_policies(condition: str, config: dict) -> dict:
     """Search → rank → scrape → extract → LLM for format rules and vendor patterns.
 
     Pipeline:
-      1. Search broadly for ~20 candidate policy URLs.
-      2. Score, rank, and deduplicate → top 8 URLs.
-      3. Scrape those 8 pages with structured rule-block extraction.
+      1. Search for policy URLs via Tavily (with DDG fallback).
+      2. Score, rank, and deduplicate → top 15 URLs.
+      3. Scrape those 15 pages with structured rule-block extraction.
       4. Feed focused text to LLM for policy extraction.
       5. (Secondary) Search vendor pages for corroboration.
       6. Fallback to LLM knowledge if web yields nothing.
@@ -208,21 +197,27 @@ def research_policies(condition: str, config: dict) -> dict:
         "numbering_authority": "unknown",
         "vendor_patterns": [],
         "sources": [],
+        "_url_discovery": {},
     }
 
     # ── Phase 1 (PRIMARY): Official policies ──────────────────────────────────
-    raw_policy_urls = _find_policy_urls(condition, config)
+    url_items = _find_policy_urls(condition, config)
     logger.info(
         "Agent 1P [search]: found %d raw policy URLs for '%s'",
-        len(raw_policy_urls), condition,
+        len(url_items), condition,
     )
 
-    if raw_policy_urls:
-        ranked_urls = _rank_and_dedupe(raw_policy_urls, max_per_domain=2, top_n=8)
+    if url_items:
+        ranked_urls = _rank_and_dedupe(url_items, max_per_domain=2, top_n=15)
+        result["_url_discovery"] = {
+            "total_raw": len(url_items),
+            "ranked_count": len(ranked_urls),
+        }
+
         result["sources"].extend(ranked_urls)
         logger.info(
             "Agent 1P [policy]: ranked %d → %d URLs to scrape",
-            len(raw_policy_urls), len(ranked_urls),
+            len(url_items), len(ranked_urls),
         )
 
         scraped = _scrape_and_extract(ranked_urls, config)
@@ -232,7 +227,7 @@ def research_policies(condition: str, config: dict) -> dict:
         )
 
         if scraped:
-            pages_to_use = scraped[:8]
+            pages_to_use = scraped[:15]
             capped = [text[:15_000] for _, text in pages_to_use]
             combined = "\n\n--- PAGE BREAK ---\n\n".join(capped)
             if len(combined) > 60_000:
@@ -303,12 +298,14 @@ def research_policies(condition: str, config: dict) -> dict:
 
 
 def _find_policy_urls(condition: str, config: dict) -> list[str]:
-    """Cast a wide net: aim for ~20 candidate policy URLs."""
+    """Discover policy URLs via Tavily (with DDG fallback)."""
+    tavily_key = config.get("tavily_api_key", "")
+
     try:
         from tools.search_tool import search_policy_urls
         return search_policy_urls(
             condition,
-            tavily_api_key=config.get("tavily_api_key"),
+            tavily_api_key=tavily_key,
             max_results=20,
         )
     except Exception as exc:
@@ -420,7 +417,7 @@ def _scrape_and_extract(urls: list[str], config: dict) -> list[tuple[str, str]]:
     from tools.scraper.browser import scrape_pages
 
     proxies = config.get("proxies", [])
-    page_results = scrape_pages(urls[:8], proxies=proxies or None, sleep_s=1.5)
+    page_results = scrape_pages(urls[:15], proxies=proxies or None, sleep_s=1.5)
 
     extracted: list[tuple[str, str]] = []
     for url, html in page_results:

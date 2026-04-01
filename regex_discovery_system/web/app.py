@@ -19,6 +19,7 @@ os.chdir(ROOT)
 
 from utils.bedrock_client import load_config
 from utils.paths import build_paths
+import utils.results_db as results_db
 
 app = Flask(
     __name__,
@@ -86,7 +87,13 @@ NOTES_DIR = ROOT / "notes"
 
 
 def _list_past_runs() -> list[dict]:
-    """Scan results/ for *_final_report.md to build run history."""
+    """Return run history from DynamoDB (primary) with file-system fallback."""
+    db_runs = results_db.list_runs()
+    if db_runs is not None and db_runs:
+        for r in db_runs:
+            r.setdefault("file", f"{r['slug']}_final_report.md")
+        return db_runs
+
     runs = []
     for p in sorted(RESULTS_DIR.glob("*_final_report.md"), reverse=True):
         slug = p.stem.replace("_final_report", "")
@@ -110,7 +117,11 @@ def _list_past_runs() -> list[dict]:
 
 
 def _get_run_files(slug: str) -> dict:
-    """Gather all output files for a given run slug."""
+    """Gather all output files from DynamoDB (primary) with file-system fallback."""
+    db_files = results_db.get_run_files(slug)
+    if db_files:
+        return db_files
+
     files = {}
     mapping = {
         "patterns": f"{slug}_patterns.json",
@@ -262,6 +273,42 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         _runs[run_id]["overall"] = report["overall_status"]
         _log(run_id, "Pipeline complete.")
 
+        # Persist to DynamoDB
+        try:
+            db_files = {}
+            file_map = {
+                "patterns": RESULTS_DIR / f"{slug}_patterns.json",
+                "regex_patterns": RESULTS_DIR / f"{slug}_regex_patterns.json",
+                "validation_report": RESULTS_DIR / f"{slug}_validation_report.json",
+                "source_of_truth": RESULTS_DIR / f"{slug}_source_of_truth.json",
+                "final_report": RESULTS_DIR / f"{slug}_final_report.md",
+            }
+            for key, fp in file_map.items():
+                if fp.exists():
+                    db_files[key] = fp.read_text(errors="replace")
+
+            debug_log_path = ROOT / paths["debug_log"]
+            if debug_log_path.exists():
+                db_files["debug_log"] = debug_log_path.read_text(errors="replace")
+
+            saved = results_db.save_run(
+                slug=slug,
+                condition=condition,
+                files_dict=db_files,
+                status="done",
+                overall=report["overall_status"],
+                logs=_logs.get(run_id),
+                data_source=source,
+                config=config,
+            )
+            if saved:
+                _log(run_id, "Results saved to DynamoDB.")
+            else:
+                _log(run_id, "DynamoDB save skipped (unavailable).")
+        except Exception as db_exc:
+            logger.warning("DynamoDB save failed: %s", db_exc)
+            _log(run_id, f"DynamoDB save failed: {db_exc}")
+
     except Exception as exc:
         _runs[run_id]["status"] = "error"
         _runs[run_id]["step"] = f"Error: {exc}"
@@ -387,6 +434,18 @@ def api_compare():
 
     compare_path = RESULTS_DIR / f"{slug}_compare.md"
     compare_path.write_text(md)
+
+    results_db.save_notes(slug, "")  # ensure item exists
+    try:
+        tbl = results_db._get_table()
+        if tbl:
+            tbl.update_item(
+                Key={"slug": slug},
+                UpdateExpression="SET compare = :c",
+                ExpressionAttributeValues={":c": md},
+            )
+    except Exception:
+        pass
 
     return jsonify({"compare_md": md, "scored": scored})
 
@@ -588,7 +647,7 @@ If neither is ideal, give an improved regex in a fenced code block (no explanati
 
 @app.route("/api/delete/<slug>", methods=["DELETE"])
 def api_delete(slug):
-    """Delete all files associated with a run slug."""
+    """Delete all files associated with a run slug (disk + DynamoDB)."""
     if not slug or "/" in slug or ".." in slug:
         return jsonify({"error": "invalid slug"}), 400
 
@@ -603,22 +662,28 @@ def api_delete(slug):
             except Exception as exc:
                 logger.warning("Failed to delete %s: %s", p, exc)
 
+    results_db.delete_run(slug)
+
     logger.info("Deleted %d files for slug '%s'", len(deleted), slug)
     return jsonify({"deleted": deleted, "count": len(deleted)})
 
 
 @app.route("/api/notes", methods=["GET", "POST"])
 def api_notes():
-    """Save/load user notes per slug."""
+    """Save/load user notes per slug (DynamoDB + disk)."""
     NOTES_DIR.mkdir(exist_ok=True)
     if request.method == "POST":
         data = request.json or {}
         slug = data.get("slug", "default")
         text = data.get("text", "")
         (NOTES_DIR / f"{slug}.txt").write_text(text)
+        results_db.save_notes(slug, text)
         return jsonify({"saved": True})
     else:
         slug = request.args.get("slug", "default")
+        db_text = results_db.get_notes(slug)
+        if db_text is not None:
+            return jsonify({"text": db_text})
         path = NOTES_DIR / f"{slug}.txt"
         text = path.read_text() if path.exists() else ""
         return jsonify({"text": text})
@@ -713,6 +778,36 @@ def api_rerun_all():
 @app.route("/api/rerun-all/status")
 def api_rerun_all_status():
     return jsonify(dict(_batch_state))
+
+
+@app.route("/api/import-from-disk", methods=["POST"])
+def api_import_from_disk():
+    """Bulk-import existing file-based results into DynamoDB (upsert — no duplicates)."""
+    stats = results_db.import_from_disk(
+        results_dir=RESULTS_DIR,
+        data_dir=DATA_DIR,
+        logs_dir=LOG_DIR,
+        notes_dir=NOTES_DIR,
+    )
+    logger.info("[import] %s", stats)
+    return jsonify(stats)
+
+
+@app.route("/api/db-status")
+def api_db_status():
+    """Check DynamoDB connectivity and item count."""
+    tbl = results_db._get_table()
+    if tbl is None:
+        return jsonify({"status": "unavailable", "table": TABLE_NAME, "items": 0})
+    try:
+        tbl.reload()
+        count = tbl.item_count
+        return jsonify({"status": "connected", "table": TABLE_NAME, "items": count})
+    except Exception as exc:
+        return jsonify({"status": "error", "table": TABLE_NAME, "error": str(exc)})
+
+
+TABLE_NAME = results_db.TABLE_NAME
 
 
 if __name__ == "__main__":

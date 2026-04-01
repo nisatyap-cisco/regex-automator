@@ -64,9 +64,9 @@ def fetch_text(client: httpx.Client, url: str) -> str:
         raise FetchError(f"HTTP {resp.status_code} for {url}")
     content_type = resp.headers.get("content-type", "")
     if "pdf" in content_type.lower() or url.lower().endswith(".pdf"):
-        text = resp.content.decode("latin-1")
-    else:
-        text = resp.text
+        logger.info("Skipping PDF content from %s", url)
+        return ""
+    text = resp.text
 
     if len(text) < 5_000_000:
         cache_set("scrape", url, text, ttl=_SCRAPE_TTL)

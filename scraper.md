@@ -317,3 +317,351 @@ theswiftcodes.com explicitly documents SWIFT structure and provides a paginated 
 bank-code.net also provides a paginated “List of all SWIFT / BIC codes…” and shows a disclaimer that the info should be verified for professional use.
 
 TheSwiftCodes robots file (as indexed) broadly allows crawling except certain query params.
+
+
+--
+gemeric scraper
+Recommended generic tech stack
+
+Python 3.11
+
+httpx + tenacity for fetch
+
+selectolax for parse
+
+pydantic for strong schemas (keeps it generic & safe)
+
+pandas + openpyxl for XLSX output
+
+typer for CLI
+
+requirements.txt
+httpx>=0.27.0
+selectolax>=0.3.21
+tenacity>=8.2.3
+pydantic>=2.7.0
+pandas>=2.2.0
+openpyxl>=3.1.2
+typer>=0.12.3
+rich>=13.7.1
+Generic implementation
+Folder layout
+generic_scraper/
+├── main.py
+├── requirements.txt
+├── registry.py
+├── core/
+│   ├── fetch.py
+│   ├── models.py
+│   ├── writer.py
+│   └── runner.py
+└── adapters/
+    ├── __init__.py
+    ├── swift_theswiftcodes.py
+    └── swift_bankcodenet.py
+1) Core models (core/models.py)
+from __future__ import annotations
+from typing import Dict, Any, Optional
+from pydantic import BaseModel, Field
+
+class Record(BaseModel):
+    """Generic scraped record (schema-flexible via fields dict)."""
+    identifier: str = Field(..., description="e.g., swift_bic")
+    source: str = Field(..., description="adapter/source name")
+    value: str = Field(..., description="the identifier value itself (e.g., BIC)")
+    fields: Dict[str, Any] = Field(default_factory=dict)
+    url: Optional[str] = None
+2) Fetch with retries (core/fetch.py)
+import httpx
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+class FetchError(Exception):
+    pass
+
+@retry(
+    reraise=True,
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=1, min=1, max=20),
+    retry=retry_if_exception_type((httpx.TimeoutException, httpx.TransportError, FetchError)),
+)
+def fetch_text(client: httpx.Client, url: str) -> str:
+    r = client.get(url, follow_redirects=True)
+    if r.status_code != 200:
+        raise FetchError(f"HTTP {r.status_code} for {url}")
+    return r.text
+3) Writer to XLSX (core/writer.py)
+from __future__ import annotations
+from pathlib import Path
+import pandas as pd
+from core.models import Record
+
+def write_xlsx(records: list[Record], out_path: Path) -> None:
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # flatten records to a tabular DataFrame
+    rows = []
+    for r in records:
+        row = {
+            "identifier": r.identifier,
+            "source": r.source,
+            "value": r.value,
+            "url": r.url,
+        }
+        # merge dynamic fields
+        for k, v in r.fields.items():
+            row[k] = v
+        rows.append(row)
+
+    df = pd.DataFrame(rows)
+    if df.empty:
+        # still write an empty file with headers
+        df = pd.DataFrame(columns=["identifier", "source", "value", "url"])
+
+    with pd.ExcelWriter(out_path, engine="openpyxl") as xw:
+        # one combined sheet
+        df.to_excel(xw, index=False, sheet_name="data")
+
+        # optional: per-source sheets
+        for src in sorted(df["source"].dropna().unique()):
+            df[df["source"] == src].to_excel(xw, index=False, sheet_name=src[:31])
+4) Adapter interface + runner (core/runner.py)
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from typing import Iterable, Optional
+import time
+import httpx
+from core.models import Record
+from core.fetch import fetch_text
+
+class Adapter(ABC):
+    """Pluggable source adapter."""
+    name: str
+
+    @abstractmethod
+    def supports(self, identifier: str, region: str) -> bool:
+        ...
+
+    @abstractmethod
+    def seed_urls(self, identifier: str, region: str) -> list[str]:
+        ...
+
+    @abstractmethod
+    def iter_page_urls(self, first_html: str, seed_url: str) -> Iterable[str]:
+        ...
+
+    @abstractmethod
+    def parse(self, html: str, url: str, identifier: str, region: str) -> list[Record]:
+        ...
+
+def run_scrape(
+    identifier: str,
+    region: str,
+    adapters: list[Adapter],
+    sleep_s: float = 1.0,
+) -> list[Record]:
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; generic-scraper/1.0)"}
+    out: list[Record] = []
+    seen = set()
+
+    with httpx.Client(headers=headers, timeout=httpx.Timeout(30.0)) as client:
+        for ad in adapters:
+            if not ad.supports(identifier, region):
+                continue
+
+            for seed in ad.seed_urls(identifier, region):
+                first_html = fetch_text(client, seed)
+                for page_url in ad.iter_page_urls(first_html, seed):
+                    html = first_html if page_url == seed else fetch_text(client, page_url)
+                    recs = ad.parse(html, page_url, identifier, region)
+
+                    for r in recs:
+                        key = (r.source, r.value, tuple(sorted(r.fields.items())))
+                        if key not in seen:
+                            seen.add(key)
+                            out.append(r)
+
+                    time.sleep(sleep_s)
+
+    return out
+5) SWIFT adapters
+adapters/swift_theswiftcodes.py
+from __future__ import annotations
+import re
+from typing import Iterable, Optional
+from selectolax.parser import HTMLParser
+from core.models import Record
+from core.runner import Adapter
+
+BIC_RE = re.compile(r"\b[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}(?:[A-Z0-9]{3})?\b")
+
+def clean(s: str) -> str:
+    return re.sub(r"\s+", " ", (s or "")).strip()
+
+class TheSwiftCodesUS(Adapter):
+    name = "theswiftcodes_us"
+
+    def supports(self, identifier: str, region: str) -> bool:
+        return identifier == "swift_bic" and region.lower() in {"usa", "us", "united_states", "united states"}
+
+    def seed_urls(self, identifier: str, region: str) -> list[str]:
+        return ["https://www.theswiftcodes.com/united-states/"]
+
+    def iter_page_urls(self, first_html: str, seed_url: str) -> Iterable[str]:
+        # infer /page/N/ links
+        tree = HTMLParser(first_html)
+        nums = []
+        for a in tree.css("a"):
+            href = a.attributes.get("href") or ""
+            m = re.search(r"/page/(\d+)/", href)
+            if m:
+                nums.append(int(m.group(1)))
+        last = max(nums) if nums else None
+
+        yield seed_url
+        if last:
+            for p in range(2, last + 1):
+                yield seed_url.rstrip("/") + f"/page/{p}/"
+        else:
+            p = 2
+            while True:
+                yield seed_url.rstrip("/") + f"/page/{p}/"
+                p += 1
+
+    def parse(self, html: str, url: str, identifier: str, region: str) -> list[Record]:
+        tree = HTMLParser(html)
+        lines = [clean(x) for x in tree.text(separator="\n").splitlines() if clean(x)]
+        out: list[Record] = []
+
+        for line in lines:
+            if not re.match(r"^\d+\s+", line):
+                continue
+            m = BIC_RE.search(line)
+            if not m:
+                continue
+
+            bic = m.group(0)
+            before = re.sub(r"^\d+\s+", "", line[:m.start()].strip())
+
+            # crude split bank/city/branch
+            bank = before
+            city = ""
+            branch = ""
+            m_city = re.search(r"(.+?,\s*[A-Z]{2})\b", before)
+            if m_city:
+                city = m_city.group(1).strip()
+                bank = before[:m_city.start()].strip()
+                branch = before[m_city.end():].strip()
+
+            out.append(Record(
+                identifier="swift_bic",
+                source=self.name,
+                value=bic,
+                url=url,
+                fields={"bank": bank, "city": city, "branch": branch, "country": "US"},
+            ))
+
+        return out
+adapters/swift_bankcodenet.py
+from __future__ import annotations
+import re
+from typing import Iterable
+from selectolax.parser import HTMLParser
+from core.models import Record
+from core.runner import Adapter
+
+BIC_RE = re.compile(r"\b[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}(?:[A-Z0-9]{3})?\b")
+
+def clean(s: str) -> str:
+    return re.sub(r"\s+", " ", (s or "")).strip()
+
+class BankCodeUS(Adapter):
+    name = "bank_code_us"
+
+    def supports(self, identifier: str, region: str) -> bool:
+        return identifier == "swift_bic" and region.lower() in {"usa", "us", "united_states", "united states"}
+
+    def seed_urls(self, identifier: str, region: str) -> list[str]:
+        return ["https://bank-code.net/country/UNITED-STATES-%28US%29/100"]
+
+    def iter_page_urls(self, first_html: str, seed_url: str) -> Iterable[str]:
+        # collect all /country/UNITED-STATES... links found on first page
+        tree = HTMLParser(first_html)
+        urls = {seed_url}
+        for a in tree.css("a"):
+            href = a.attributes.get("href") or ""
+            if "/country/UNITED-STATES-%28US%29" in href:
+                if href.startswith("http"):
+                    urls.add(href)
+                else:
+                    urls.add("https://bank-code.net" + href)
+        yield seed_url
+        for u in sorted(urls):
+            if u != seed_url:
+                yield u
+
+    def parse(self, html: str, url: str, identifier: str, region: str) -> list[Record]:
+        tree = HTMLParser(html)
+        lines = [clean(x) for x in tree.text(separator="\n").splitlines() if clean(x)]
+        out: list[Record] = []
+
+        for line in lines:
+            if not re.match(r"^\d+\s+", line):
+                continue
+            m = BIC_RE.search(line)
+            if not m:
+                continue
+
+            bic = m.group(0)
+            pre = re.sub(r"^\d+\s+", "", line[:m.start()].strip())
+
+            bank, city = pre, ""
+            if "-" in pre:
+                bank, city = [x.strip() for x in pre.split("-", 1)]
+
+            out.append(Record(
+                identifier="swift_bic",
+                source=self.name,
+                value=bic,
+                url=url,
+                fields={"bank": bank, "city": city, "country": "US"},
+            ))
+
+        return out
+6) Registry (registry.py)
+from adapters.swift_theswiftcodes import TheSwiftCodesUS
+from adapters.swift_bankcodenet import BankCodeUS
+
+ALL_ADAPTERS = [
+    TheSwiftCodesUS(),
+    BankCodeUS(),
+]
+7) CLI orchestrator (main.py)
+from __future__ import annotations
+from pathlib import Path
+import typer
+from rich import print as rprint
+
+from core.runner import run_scrape
+from core.writer import write_xlsx
+from registry import ALL_ADAPTERS
+
+app = typer.Typer(add_completion=False)
+
+@app.command()
+def scrape(
+    identifier: str = typer.Argument(..., help="e.g. swift_bic, pin_code"),
+    region: str = typer.Argument(..., help="e.g. usa, india"),
+    out: Path = typer.Option(Path("out.xlsx"), help="Output .xlsx path"),
+    sleep_s: float = typer.Option(1.0, help="Delay between requests"),
+):
+    records = run_scrape(identifier=identifier, region=region, adapters=ALL_ADAPTERS, sleep_s=sleep_s)
+    rprint(f"[green]Scraped[/green] {len(records)} records")
+    write_xlsx(records, out)
+    rprint(f"[bold]Wrote[/bold] {out}")
+
+if __name__ == "__main__":
+    app()
+
+Run:
+
+python main.py scrape swift_bic usa --out swift_usa.xlsx

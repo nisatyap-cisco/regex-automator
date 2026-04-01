@@ -20,6 +20,7 @@ from __future__ import annotations
 import logging
 import queue
 import random
+import re
 import threading
 from typing import Optional
 
@@ -203,6 +204,11 @@ def _httpx_fetch_all(urls: list[str]) -> list[tuple[str, str]]:
     return results
 
 
+def _is_pdf_url(url: str) -> bool:
+    path = url.split("?")[0].split("#")[0].lower().rstrip("/")
+    return path.endswith(".pdf")
+
+
 def scrape_pages(
     urls: list[str],
     proxies: Optional[list[str]] = None,
@@ -213,8 +219,17 @@ def scrape_pages(
 
     If the Camoufox circuit breaker is open, skips the browser entirely
     and goes straight to httpx — saving minutes of wasted retries.
+    PDF URLs are skipped to avoid pdfminer hangs on complex documents.
     """
     import time
+
+    non_pdf_urls = []
+    for u in urls:
+        if _is_pdf_url(u):
+            logger.info("[browser] skipping PDF URL: %s", u)
+        else:
+            non_pdf_urls.append(u)
+    urls = non_pdf_urls
 
     if _camoufox_circuit_open:
         logger.info(

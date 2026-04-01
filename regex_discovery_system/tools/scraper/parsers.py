@@ -15,6 +15,8 @@ from selectolax.parser import HTMLParser
 
 logger = logging.getLogger(__name__)
 
+logging.getLogger("pdfminer").setLevel(logging.WARNING)
+
 
 def _clean(s: str) -> str:
     return re.sub(r"\s+", " ", (s or "")).strip()
@@ -63,23 +65,51 @@ def _looks_like_pdf(content: str) -> bool:
     return content.lstrip()[:20].startswith("%PDF")
 
 
-def _extract_pdf_text(content: bytes | str) -> str:
-    """Try to extract readable text from raw PDF bytes."""
+def _extract_pdf_text(content: "bytes | str") -> str:
+    """Try to extract readable text from raw PDF bytes with a hard timeout."""
+    import signal
+    import io
+
     raw = content.encode("latin-1", errors="replace") if isinstance(content, str) else content
+
+    _PDF_TIMEOUT = 30  # seconds
+
+    class _PdfTimeout(Exception):
+        pass
+
+    def _alarm_handler(signum, frame):
+        raise _PdfTimeout("PDF parsing exceeded timeout")
+
+    old_handler = signal.signal(signal.SIGALRM, _alarm_handler)
+    signal.alarm(_PDF_TIMEOUT)
     try:
-        import io
+        return _do_extract_pdf(raw)
+    except _PdfTimeout:
+        logger.warning("[parser] PDF parsing timed out after %ds — skipping", _PDF_TIMEOUT)
+        return ""
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old_handler)
+
+
+def _do_extract_pdf(raw: bytes) -> str:
+    import io
+
+    for mod_name in ("pdfminer.high_level",):
+        logging.getLogger("pdfminer").setLevel(logging.WARNING)
+
+    try:
         import importlib
         pdfplumber = importlib.import_module("pdfplumber")
         with pdfplumber.open(io.BytesIO(raw)) as pdf:
-            pages_text = [p.extract_text() or "" for p in pdf.pages]
+            pages_text = [p.extract_text() or "" for p in pdf.pages[:20]]
         return "\n".join(pages_text)
     except Exception:
         pass
     try:
         from PyPDF2 import PdfReader
-        import io
         reader = PdfReader(io.BytesIO(raw))
-        return "\n".join(page.extract_text() or "" for page in reader.pages)
+        return "\n".join(page.extract_text() or "" for page in reader.pages[:20])
     except Exception:
         pass
     text_chunks = re.findall(rb"\(([^)]{2,80})\)", raw)

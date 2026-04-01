@@ -8,19 +8,51 @@ from utils.bedrock_client import invoke_claude
 
 logger = logging.getLogger(__name__)
 
-PROMPT_TEMPLATE = """You are a regex engineering expert.
+SINGLE_RULE_PROMPT_TEMPLATE = r"""You are a regex engineering expert.
 
-Write a single Python-compatible regex that matches values satisfying this rule:
+Write a single Python-compatible regex that tests ONLY whether a value
+satisfies this ONE condition — nothing else:
 
 RULE: {rule_description}
-HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
-EXAMPLE MATCHES: {example_matches}
 
-NUMBERING POLICY (authoritative real-world rules — encode ALL constraints here):
-{numbering_policy}
+CRITICAL INSTRUCTIONS — read carefully:
 
-Requirements:
-- Do NOT use ^ or $ anchors. The regex will be used for search within text.
+This regex must check ONLY the condition stated in the RULE above.
+Do NOT infer or encode any other structural pattern, format, segment
+layout, prefix/suffix, or character class that is not explicitly
+stated in the RULE text.
+
+Think of each rule as an independent boolean test:
+  - "exactly 9 characters long"     → \b[A-Za-z0-9]{{9}}\b
+  - "all digits"                    → \b\d+\b
+  - "alphanumeric characters"       → \b[A-Za-z0-9]+\b
+  - "length between 9 and 18 digits"→ \b\d{{9,18}}\b
+  - "starts with a letter"          → \b[A-Za-z][A-Za-z0-9]*\b
+  - "no delimiters"                 → \b[^\s\-\/]+\b
+  - "MUST contain both letters and digits" → \b(?=[A-Za-z0-9]*[A-Za-z])(?=[A-Za-z0-9]*\d)[A-Za-z0-9]+\b
+  - "MAY contain both letters and digits"  → \b[A-Za-z0-9]+\b
+    ← "may" means ALLOW both but do NOT force both; pure digits or pure letters also pass.
+  - "first character is L or U"     → \b[LU][A-Za-z0-9]+\b
+  - "may include a prefix of 3-4 letters" → \b(?:[A-Za-z]{{3,4}})?[A-Za-z0-9]+\b
+
+BAD examples (DO NOT do this):
+  - Rule says "exactly 9 characters" but you output \b[A-Z]{{3}}\d{{6}}\b
+    ← WRONG: that encodes letter/digit positions, not just length.
+  - Rule says "alphanumeric" but you output \b[A-Z]{{3}}\d{{6}}\b
+    ← WRONG: that encodes a specific segment structure.
+  - Rule says "MAY contain both letters and digits" but you output
+    \b(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]+\b
+    ← WRONG: "may" means optional — do NOT use lookaheads to force both.
+    Correct: \b[A-Za-z0-9]+\b (allows both, requires neither).
+
+Modality words — THIS IS CRITICAL:
+  - "must"/"exactly"/"always"/"contains" (no hedging) → mandatory constraint
+  - "may"/"can"/"often"/"typically" → ALLOW but do NOT force.
+    Just widen the character class. NEVER add lookaheads to enforce an optional trait.
+
+Other requirements:
+- Do NOT use ^ or $ anchors. Use \b word boundaries.
+- Do NOT force uppercase unless the rule explicitly says uppercase.
 - Use \\b (word boundary) at the start and end of the pattern.
 - Avoid catastrophic backtracking.
 - Prefer character classes and quantifiers over alternation where possible.
@@ -28,61 +60,79 @@ Requirements:
   do NOT add a length lookahead — it is redundant.
 - NEVER include literal placeholder strings like "XXX" or "NNN".
 - If the rule involves check digits, encode the structural pattern only.
+- NEVER include literal placeholders like "XXX" or "NNN".
 
-- CRITICAL: Encode HARD CONSTRAINTS (from policy or vendor sources) as explicit
-  character classes at the specified positions (e.g. [2-9] not \\d when the policy
-  says first digit cannot be 0 or 1).
-- For positions WITHOUT a hard constraint, use the full character class for that
-  position type (\\d for digits, [A-Z] for letters, [A-Z0-9] for alphanumeric).
-- Consider optional separators (spaces, hyphens) between segments when the
-  identifier might appear formatted in real documents.
 Return ONLY the regex string, no explanation, no markdown."""
 
-COMBINED_PROMPT_TEMPLATE = """You are a regex engineering expert tasked with producing the mathematically minimal unified regex.
+COMBINED_PROMPT_TEMPLATE = r"""You are a regex engineering expert. Produce ONE minimal unified
+Python-compatible regex that satisfies ALL individual rules simultaneously (AND logic).
 
-Given the individual rules and their regexes below, produce ONE unified Python-compatible regex with ZERO duplicated constraints.
-
-INDIVIDUAL RULES:
+INDIVIDUAL RULES (with their individual regexes as supplementary reference):
 {rules_list}
 
-HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
-EXAMPLE MATCHES: {example_matches}
+Use the individual regexes as a reference for what each rule checks, but derive the
+unified pattern PRIMARILY from the HARD CONSTRAINTS and NUMBERING POLICY below.
+Individual regexes may be imprecise — always prefer authoritative policy data.
 
-NUMBERING POLICY (authoritative — encode ALL structural constraints here):
+HARD CONSTRAINTS (policy/vendor-backed — MUST encode):
+{range_restrictions}
+
+NUMBERING POLICY (authoritative — encode ALL structural constraints stated here):
 {numbering_policy}
 
-MINIMALITY RULES — follow strictly:
+MODALITY — handle "optional" vs "mandatory" rules correctly:
+  - "must"/"exactly"/"always"/"consists of" → mandatory constraint
+  - "may"/"can"/"often"/"typically"/"usually" → INCLUDE as optional, do NOT drop.
+  Rules:
+  - If a policy says "may be prefixed with DK", INCLUDE it as (?:DK)? — do NOT omit it.
+  - If a rule says "Often includes a prefix", make it optional: (?:prefix)?
+  - If a rule says "May contain both letters and digits", just widen the character
+    class to [A-Za-z0-9]. Do NOT add lookaheads like (?=.*[A-Za-z])(?=.*\d)
+    to force both — "may" means pure digits or pure letters are also valid.
+  - NEVER use lookaheads to enforce an optional/may trait in the unified regex.
+  - CRITICAL: "optional" means wrap in (?:...)? — it does NOT mean "remove it".
 
-1. MERGE first: encode every HARD constraint directly into the positional pattern.
-   A constraint that fits into the character class at a specific position must go there —
+CONSTRUCTION RULES — follow strictly:
+
+1. MERGE first: encode every HARD CONSTRAINT directly into the positional pattern.
+   A constraint that fits into a character class at a specific position goes there,
    NOT in a lookahead.
 
 2. LOOKAHEADS only for cross-position constraints that CANNOT be expressed positionally.
-   If a lookahead only re-asserts something already guaranteed by the main pattern, DELETE it.
+   If a lookahead re-asserts something the main pattern already guarantees, DELETE it.
 
 3. REMOVE redundant length assertions: if the final pattern has a fixed length through
-   explicit quantifiers, do NOT also add a length lookahead.
+   explicit quantifiers, do NOT add a length lookahead.
 
-4. REMOVE general patterns subsumed by stricter HARD-CONSTRAINT ones: if one rule says
-   \\d{{10}} and a hard constraint says [2-9]\\d{{9}}, use only [2-9]\\d{{9}}.
+4. REMOVE general patterns subsumed by stricter ones: if one rule says \\d{{10}} and a
+   hard constraint says [2-9]\\d{{9}}, use only [2-9]\\d{{9}}.
 
-5. NEVER use alternation (|) across the individual rule regexes — that would be OR logic.
+5. Use alternation (|) ONLY when the identifier genuinely has two or more distinct
+   valid formats (e.g. a 5-digit number OR a country prefix followed by 6 digits).
+   Do NOT use alternation just to combine separate individual rules — those are AND
+   logic and must all be satisfied simultaneously.
 
-6. NEVER use ^ or $ anchors. Use \\b at start and end for word boundary.
+6. NEVER use ^ or $ anchors — not at the top level, not inside lookaheads, nowhere.
+   Use \\b at start and end for word boundary.
 
 7. NEVER include literal placeholders like XXX or NNN.
 
-8. If a rule involves check digits, encode the structural pattern only (not the check algorithm).
+8. If a rule involves check digits, encode the structural pattern only (not the algorithm).
 
-9. For positions WITHOUT a hard constraint, use the full character class for that
-   position type (\\d for digits, [A-Z] for letters, [A-Z0-9] for alphanumeric).
+9. For positions WITHOUT a hard constraint, use the broadest applicable character class
+   (\\d for digits, [A-Za-z] for letters, [A-Za-z0-9] for alphanumeric).
 
-10. Consider optional separators (spaces, hyphens) between segments when the identifier
-    commonly appears formatted in documents.
+10. Do NOT force uppercase [A-Z] unless the rules or policy EXPLICITLY require uppercase.
+    Use [A-Za-z] when case is not specified.
+
+11. Consider optional separators ([\\s\\-]?) between segments when the identifier commonly
+    appears formatted in documents.
 
 Before writing the final regex, mentally verify:
-- Is every HARD CONSTRAINT from policy/vendor encoded exactly once?
+- Is every HARD CONSTRAINT encoded exactly once?
 - Does any lookahead duplicate what the main pattern already guarantees? If yes, remove it.
+- Are optional rules wrapped in (?:...)? and not forced as mandatory?
+- Is there any $ anchor anywhere in the regex, including inside lookaheads? If yes, remove it.
 
 Return ONLY the final unified regex string. No explanation, no markdown, no comments."""
 
@@ -309,12 +359,13 @@ def _clean_regex_response(text: str) -> str:
 
 
 def _strip_anchors_add_boundaries(regex_str: str) -> str:
-    """Strip ^ and $ anchors, add \\b word boundaries."""
+    """Strip ^ and $ anchors (including $ inside lookaheads), add \\b word boundaries."""
     r = regex_str.strip()
     if r.startswith("^"):
         r = r[1:]
     if r.endswith("$"):
         r = r[:-1]
+    r = re.sub(r'\$(?=\))', '', r)
     r = r.strip()
     if "XXX" in r:
         r = r.replace("XXX", "[A-Z0-9]{3}")
@@ -323,6 +374,36 @@ def _strip_anchors_add_boundaries(regex_str: str) -> str:
     if not r.endswith("\\b"):
         r = r + "\\b"
     return r
+
+
+_OPTIONAL_MODALITY = re.compile(r'\b(?:may|can|often|typically|usually)\b', re.IGNORECASE)
+_FORCED_LOOKAHEAD = re.compile(r'\(\?=.*?\)')
+
+
+def _fix_optional_rule_regex(regex_str: str, description: str) -> str:
+    """If the rule description uses optional modality ('may', 'often', etc.)
+    but the LLM generated lookaheads that force a trait, strip those lookaheads.
+    The main character class already allows the trait; forcing it contradicts 'may'.
+    """
+    if not _OPTIONAL_MODALITY.search(description):
+        return regex_str
+    if '(?=' not in regex_str:
+        return regex_str
+
+    stripped = _FORCED_LOOKAHEAD.sub('', regex_str)
+    stripped = stripped.strip()
+    if not stripped or stripped == '\\b\\b':
+        return regex_str
+
+    if _try_compile(stripped) is None:
+        return regex_str
+
+    if stripped != regex_str:
+        logger.info(
+            "Agent 3: stripped forced lookaheads for optional rule: %s → %s",
+            regex_str, stripped,
+        )
+    return stripped
 
 
 # ── Deterministic optional-separator injection ────────────────────────────────
@@ -492,21 +573,15 @@ def generate_regex(
     for rule in format_rules:
         rule_id = rule.get("rule_id", "unnamed")
         description = rule.get("description", "")
-        examples = rule.get("example_matches", [])
 
-        range_text = json.dumps(range_restrictions, indent=2)
-
-        prompt = PROMPT_TEMPLATE.format(
+        prompt = SINGLE_RULE_PROMPT_TEMPLATE.format(
             rule_description=description,
-            range_restrictions=range_text,
-            example_matches=", ".join(examples),
-            numbering_policy=enriched_policy or "(none provided)",
         )
 
         response = invoke_claude(prompt, config)
         regex_str = _clean_regex_response(response)
         regex_str = _strip_anchors_add_boundaries(regex_str)
-        regex_str = _inject_optional_separators(regex_str)
+        regex_str = _fix_optional_rule_regex(regex_str, description)
 
         compiled = _try_compile(regex_str)
         if compiled is None:
@@ -520,7 +595,7 @@ def generate_regex(
             response2 = invoke_claude(refinement, config)
             regex_str = _clean_regex_response(response2)
             regex_str = _strip_anchors_add_boundaries(regex_str)
-            regex_str = _inject_optional_separators(regex_str)
+            regex_str = _fix_optional_rule_regex(regex_str, description)
 
             compiled = _try_compile(regex_str)
             if compiled is None:
@@ -536,20 +611,16 @@ def generate_regex(
 
     # Build combined/unified value regex satisfying ALL individual rules simultaneously (AND logic)
     value_patterns = [p for p in output_patterns if p["type"] == "value"]
-    all_examples = []
-    for rule in format_rules:
-        all_examples.extend(rule.get("example_matches", []))
-    unique_examples = list(dict.fromkeys(all_examples))
 
     if len(value_patterns) > 1:
         rules_list = "\n".join(
-            f"{i + 1}. [{vp['rule_id']}] {vp['description']}"
+            f"{i + 1}. [{vp['rule_id']}] {vp['description']}\n"
+            f"   Individual regex: {vp['regex']}"
             for i, vp in enumerate(value_patterns)
         )
         combined_prompt = COMBINED_PROMPT_TEMPLATE.format(
             rules_list=rules_list,
             range_restrictions=json.dumps(range_restrictions, indent=2),
-            example_matches=", ".join(unique_examples),
             numbering_policy=enriched_policy or "(none provided)",
         )
         combined_response = invoke_claude(combined_prompt, config)
