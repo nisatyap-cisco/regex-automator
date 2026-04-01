@@ -176,7 +176,7 @@ _VENDORS = [
 _VENDOR_REFERENCE_BASES = [
     "https://success.skyhighsecurity.com/Skyhigh_Data_Loss_Prevention/Data_Identifiers",
     "https://docs.trellix.com/bundle/data-loss-prevention-11.10.x-classification-definitions-reference-guide/page/GUID-3CFCC6AE-1709-43B7-B790-34E2D141ADB7.html",
-    https://learn.microsoft.com/en-us/purview/sit-sensitive-information-type-entity-definitions?view=o365-worldwide
+    "https://learn.microsoft.com/en-us/purview/sit-sensitive-information-type-entity-definitions?view=o365-worldwide"
 ]
 
 
