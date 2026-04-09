@@ -1,0 +1,2474 @@
+[
+  {
+    "identifier": "Argentina passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://trustdochub.com/en/verify-argentine-passport/?srsltid=AfmBOorcCnC5SLW8eDWz_vPxkWq1HqyYrSXmbUZnc3ICNz-As98yrgKM",
+        "https://trustdochub.com/en/verify-argentine-passport/?srsltid=AfmBOooNgAMocijg_vlC5dmBy-It8LJ-3GZEFK6_jfV_KZHnylt4ruA3"
+      ],
+      "policies": [
+        "Document number is exactly 9 characters in length (Source: scraped text describing MRZ structure)",
+        "Document number appears in two locations: top right of the data page and at the beginning of the second MRZ line (Source: scraped text on information consistency)",
+        "Document number is followed by a 1-character check digit in the MRZ calculated using ICAO algorithm with weightings 7, 3, and 1 (Source: scraped text on check digits)",
+        "The MRZ is two lines and compliant with ICAO standards (Source: scraped text on MRZ structure)",
+        "The MRZ contains 5 check digits total that validate document number, date of birth, and a composite field (Source: scraped text stating 'An Argentine passport includes 5 check digits')",
+        "Personal number field in MRZ is 8 digits (Source: scraped text describing MRZ line 2 structure)",
+        "Issuing country code in MRZ is 'ARG' per ISO 3166-1 alpha-3 standard (Source: scraped text on issuing country field)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Dirección Nacional de Migraciones (National Directorate of Migrations) - Argentina",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "arg-passport-length",
+          "regex": "(?<![:\\w])[A-Z0-9]{9}(?![:\\w])",
+          "description": "Document number is exactly 9 characters in length"
+        },
+        {
+          "rule_id": "arg-passport-mrz-checkdigit",
+          "regex": "(?<![:\\w])[A-Z0-9]{9}[0-9](?![:\\w])",
+          "description": "Document number is followed by a 1-character check digit in the MRZ calculated using ICAO algorithm with weightings 7, 3, and 1"
+        },
+        {
+          "rule_id": "arg-passport-mrz-structure",
+          "regex": "(?<![:\\w])P<ARG[A-Z<]{39}\\r?\\n[A-Z0-9<]{9}[\\s\\-]?[0-9]ARG[0-9]{6}[\\s\\-]?[0-9][MF<][0-9]{6}[\\s\\-]?[0-9][A-Z0-9<]{8}[\\s\\-]?[0-9]{2}(?![:\\w])",
+          "description": "The MRZ is two lines and compliant with ICAO standards with issuing country code 'ARG'"
+        },
+        {
+          "rule_id": "arg-passport-mrz-checkdigits",
+          "regex": "(?<![:\\w])[A-Z0-9]{9}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}[\\s\\-]?[MF<]\\d{6}[\\s\\-]?\\d{8}[\\s\\-]?\\d(?![:\\w])",
+          "description": "The MRZ contains 5 check digits total that validate document number, date of birth, and a composite field"
+        },
+        {
+          "rule_id": "arg-passport-personal-number",
+          "regex": "\\b\\d{8}\\b",
+          "description": "Personal number field in MRZ is 8 digits"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])(?:[A-Z0-9]{9}[\\s\\-]?\\d|[A-Z0-9]{9}|P<ARG[A-Z<]{39}[\\s\\-]?[A-Z0-9]{9}[\\s\\-]?\\d[A-Z]{3}[\\s\\-]?\\d{6}[\\s\\-]?\\d[MF<]\\d{6}[\\s\\-]?\\d\\d{8}[\\s\\-]?\\d|\\d{8})(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:pasaporte argentino|pasaporte de Argentina|Documento Nacional de Identidad|Direcci[oó]n Nacional de Migraciones|n[uú]mero de pasaporte|n[uú]mero de documento|DNM Argentina|RENAPER|Registro Nacional de las Personas|documento de viaje|identificaci[oó]n argentina|Argentina passport|Argentine passport|Argentina travel document|passport ARG|MRZ Argentina)",
+        "keywords_readable": "pasaporte argentino, pasaporte de Argentina, Documento Nacional de Identidad, Dirección Nacional de Migraciones, número de pasaporte, número de documento, DNM Argentina, RENAPER, Registro Nacional de las Personas, documento de viaje, identificación argentina, Argentina passport, Argentine passport, Argentina travel document, passport ARG, MRZ Argentina"
+      }
+    }
+  },
+  {
+    "identifier": "Austria post code",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geopostcodes.com/country/austria/address-format/",
+        "https://www.postgrid.com/global-address-format/austria-address-format/",
+        "https://www.melissa.com/global-address-formatting-examples/austria",
+        "https://help.pingen.com/en/templates-and-postal-requirements/address-requirements-osterreichische-post"
+      ],
+      "policies": [
+        "Austrian postcodes consist of exactly 4 digits (source: multiple references including GeoPostcodes, Melissa, Österreichische Post)",
+        "The first digit represents a federal state or region (source: Melissa)",
+        "The remaining three digits specify the delivery zone or town (source: Melissa)",
+        "Postcodes are placed to the left of the locality name with a space separator (source: Melissa, Österreichische Post)",
+        "No delimiter or special characters are used within the 4-digit postcode (source: Melissa)",
+        "Postcodes with fewer or more than 4 digits are considered invalid (source: Österreichische Post via Pingen)",
+        "The postcode must appear before the city name in the address line (source: Österreichische Post)",
+        "No comma or hyphen is permitted between the postcode and city name, only a space (source: Österreichische Post)",
+        "Austrian postcodes are called 'Postleitzahlen' or 'PLZ' in German (source: GeoPostcodes, PostGrid)",
+        "Each city and town has its own postcode (source: PostGrid)",
+        "There are approximately 2,500+ postal codes in Austria (source: Melissa)",
+        "The postal code format is represented as '9999' indicating four numeric digits (source: GeoPostcodes)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Österreichische Post (Austrian Post)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "exactly-four-digits",
+          "regex": "\\b\\d{4}\\b",
+          "description": "Austrian postcodes consist of exactly 4 numeric digits with no delimiters or special characters"
+        },
+        {
+          "rule_id": "first-digit-region",
+          "regex": "(?<![:\\w])[1-9]\\d{3}(?![:\\w])",
+          "description": "The first digit represents a federal state or region"
+        },
+        {
+          "rule_id": "last-three-digits-zone",
+          "regex": "\\b\\d{4}\\b",
+          "description": "The remaining three digits specify the delivery zone or town"
+        },
+        {
+          "rule_id": "space-before-locality",
+          "regex": "(?<![:\\w])\\d{4} [A-ZÄÖÜ][a-zäöüß]+(?:[ -][A-ZÄÖÜ][a-zäöüß]+)*(?![:\\w])",
+          "description": "Postcode is placed to the left of the locality name with a space separator, no comma or hyphen permitted"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])\\d{4}(?:\\s+[A-Z][a-z]+(?:\\s+[A-Z][a-z]+)*)?(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Postleitzahl|Postleitzahlen|PLZ|[oö]sterreichische Post|[OÖ]sterreichische Post|Austrian postcode|Austrian postal code|Austria postcode|Austria postal code|Zustellzone|Lieferadresse|Postadresse|Versandadresse|Empf[aä]ngeradresse|Absenderadresse)",
+        "keywords_readable": "Postleitzahl, Postleitzahlen, PLZ, österreichische Post, Österreichische Post, Austrian postcode, Austrian postal code, Austria postcode, Austria postal code, Zustellzone, Lieferadresse, Postadresse, Versandadresse, Empfängeradresse, Absenderadresse"
+      }
+    }
+  },
+  {
+    "identifier": "California zipcode",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [],
+      "policies": [
+        "California ZIP codes range from 90001 to 96162",
+        "Standard 5-digit format: NNNNN where N is a numeric digit",
+        "Extended ZIP+4 format: NNNNN-NNNN (9 digits total with hyphen separator)",
+        "All California ZIP codes begin with 9",
+        "Second digit is 0, 1, 2, 3, 4, 5, or 6",
+        "No check digit algorithm",
+        "Leading zeros are significant and must be preserved",
+        "Specific ranges: 90001-96162 (includes some gaps for unallocated codes)",
+        "Major city ranges: Los Angeles 900xx-908xx, San Francisco 941xx, San Diego 919xx-921xx, Sacramento 942xx-959xx",
+        "No alphabetic characters allowed",
+        "Hyphen required only in ZIP+4 format between 5th and 6th digits"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "\\b(9[0-6]\\d{3})(?:-\\d{4})?\\b",
+          "keywords": [
+            "zip",
+            "zip code",
+            "zipcode",
+            "postal code",
+            "postcode",
+            "CA",
+            "California"
+          ],
+          "rules": [
+            "Must be 5 digits starting with 9",
+            "Second digit must be 0-6",
+            "Optional 4-digit extension after hyphen",
+            "Requires proximity to California-related keywords for higher confidence"
+          ]
+        },
+        {
+          "vendor": "Netskope",
+          "regex": "\\b9[0-6][0-9]{3}\\b",
+          "keywords": [
+            "zip",
+            "zipcode",
+            "postal",
+            "CA",
+            "California",
+            "address"
+          ],
+          "rules": [
+            "5-digit pattern starting with 9[0-6]",
+            "Context-based detection using surrounding address fields",
+            "May require multiple identifiers in proximity"
+          ]
+        },
+        {
+          "vendor": "Broadcom/Symantec",
+          "regex": "\\b9[0-6]\\d{3}(-\\d{4})?\\b",
+          "keywords": [
+            "zip",
+            "zip code",
+            "postal code",
+            "California",
+            "CA"
+          ],
+          "rules": [
+            "Pattern match for 9[0-6]XXX format",
+            "Optional ZIP+4 extension",
+            "Keyword proximity detection",
+            "May validate against known California ZIP ranges"
+          ]
+        },
+        {
+          "vendor": "Zscaler",
+          "regex": null,
+          "keywords": [
+            "zip",
+            "zipcode",
+            "postal",
+            "California",
+            "CA",
+            "address"
+          ],
+          "rules": [
+            "Uses predefined dictionaries of valid California ZIP codes",
+            "Context-aware detection with address patterns",
+            "May combine with other PII elements for classification"
+          ]
+        },
+        {
+          "vendor": "Forcepoint",
+          "regex": "\\b9[0-6][0-9]{3}\\b",
+          "keywords": [
+            "zip",
+            "zip code",
+            "postal code",
+            "postcode",
+            "CA",
+            "California"
+          ],
+          "rules": [
+            "5-digit numeric pattern validation",
+            "First digit must be 9, second digit 0-6",
+            "Contextual analysis with nearby location indicators",
+            "Confidence scoring based on keyword proximity"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "zip",
+        "zip code",
+        "zipcode",
+        "ZIP",
+        "postal code",
+        "postcode",
+        "postal",
+        "mail code",
+        "mailing code",
+        "CA",
+        "California",
+        "Calif",
+        "address",
+        "mailing address",
+        "shipping address",
+        "billing address",
+        "location",
+        "city",
+        "state",
+        "delivery address",
+        "residence",
+        "ZIP+4",
+        "extended zip",
+        "full zip",
+        "9-digit zip",
+        "5-digit zip"
+      ],
+      "numbering_authority": "United States Postal Service (USPS)",
+      "policy_confidence": "low",
+      "policy_confidence_reason": "No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "length-5-digits",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+          "description": "California ZIP codes are exactly 5 digits in standard format"
+        },
+        {
+          "rule_id": "all-numeric",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+          "description": "ZIP codes contain only numeric digits 0-9, no alphabetic characters"
+        },
+        {
+          "rule_id": "no-delimiters-standard",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?![:\\w])",
+          "description": "Standard 5-digit ZIP codes contain no hyphens, spaces, or other delimiters"
+        },
+        {
+          "rule_id": "zip-plus-4-optional",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+          "description": "Extended ZIP+4 format adds hyphen and 4 additional digits: NNNNN-NNNN (not present in sample but valid per USPS policy)"
+        },
+        {
+          "rule_id": "leading-zeros-preserved",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+          "description": "Leading zeros are significant and must be preserved in all positions"
+        },
+        {
+          "rule_id": "first-digit-nine",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+          "description": "All California ZIP codes begin with digit 9 (position 0)"
+        },
+        {
+          "rule_id": "second-digit-range",
+          "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+          "description": "Second digit (position 1) must be 0, 1, 2, 3, 4, 5, or 6"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])9[0-6]\\d{3}(?:-\\d{4})?(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:zip|zip code|zipcode|ZIP|postal code|postcode|postal|mail code|mailing code|CA|California|Calif|address|mailing address|shipping address|billing address|delivery address|residence|location|city|state|ZIP\\+4|extended zip|full zip|9-digit zip|5-digit zip|Los Angeles|San Francisco|San Diego|Sacramento)",
+        "keywords_readable": "zip, zip code, zipcode, ZIP, postal code, postcode, postal, mail code, mailing code, CA, California, Calif, address, mailing address, shipping address, billing address, delivery address, residence, location, city, state, ZIP\\+4, extended zip, full zip, 9-digit zip, 5-digit zip, Los Angeles, San Francisco, San Diego, Sacramento"
+      }
+    }
+  },
+  {
+    "identifier": "Indian aadhar card number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-india-unique-identification-number",
+        "https://aadhaar-check.com/articles/aadhaar-number-format"
+      ],
+      "policies": [
+        "Total length is exactly 12 digits (Source: Microsoft DLP documentation and Aadhaar validation reference)",
+        "First digit cannot be 0 or 1 (Source: Microsoft DLP pattern specification and Aadhaar validation reference)",
+        "No alphabetic characters or special characters are allowed, only digits (Source: Aadhaar validation reference)",
+        "The 12th digit (final digit) is a checksum digit calculated using the Verhoeff algorithm (Source: Microsoft DLP documentation and Aadhaar validation reference)",
+        "Digits 1-11 are randomly generated numbers (Source: Aadhaar validation reference)",
+        "The Verhoeff algorithm checksum helps detect single-digit mistakes and transposition errors (Source: Aadhaar validation reference)",
+        "Optional spaces or dashes may be used for formatting: after digit 4 and after digit 8 (Source: Microsoft DLP pattern specification)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "UIDAI (Unique Identification Authority of India)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length-12",
+          "regex": "(?<![:\\w])[2-9]\\d{3}[\\s\\-]?[ -]?\\d{4}[\\s\\-]?[ -]?\\d{4}(?![:\\w])",
+          "description": "Total length is exactly 12 digits"
+        },
+        {
+          "rule_id": "first-digit-not-0-or-1",
+          "regex": "(?<![:\\w])[2-9]\\d{3}[\\s-]?\\d{4}[\\s-]?\\d{4}(?![:\\w])",
+          "description": "First digit cannot be 0 or 1, must be in range 2-9"
+        },
+        {
+          "rule_id": "digits-only",
+          "regex": "(?<![:\\w])[2-9]\\d{3}[\\s-]?\\d{4}[\\s-]?\\d{4}(?![:\\w])",
+          "description": "Only numeric digits are allowed, no alphabetic characters or special characters"
+        },
+        {
+          "rule_id": "verhoeff-checksum",
+          "regex": "(?<![:\\w])[2-9]\\d{3}[\\s\\-]?[ -]?\\d{4}[\\s\\-]?[ -]?\\d{4}(?![:\\w])",
+          "description": "The 12th digit (final digit) is a checksum digit calculated using the Verhoeff algorithm"
+        },
+        {
+          "rule_id": "optional-formatting",
+          "regex": "(?<![:\\w])[2-9]\\d{3}[\\s\\-]?[ -]?\\d{4}[\\s\\-]?[ -]?\\d{4}(?![:\\w])",
+          "description": "Optional spaces or dashes may be used for formatting after digit 4 and after digit 8 (e.g. XXXX-XXXX-XXXX or XXXX XXXX XXXX)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[2-9]\\d{3}[\\s\\-]?\\d{4}[\\s\\-]?\\d{4}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Aadhaar|Aadhar|आधार|आधार नंबर|आधार संख्या|UIDAI|Aadhaar number|Aadhar number|Aadhaar card|Aadhar card|UID number|Unique Identification Number|Aadhaar enrollment|Aadhaar enrolment|आधार कार्ड|यूआईडी|Aadhaar authentication|e-Aadhaar|eAadhaar|Aadhaar verification|Aadhaar validation)",
+        "keywords_readable": "Aadhaar, Aadhar, आधार, आधार नंबर, आधार संख्या, UIDAI, Aadhaar number, Aadhar number, Aadhaar card, Aadhar card, UID number, Unique Identification Number, Aadhaar enrollment, Aadhaar enrolment, आधार कार्ड, यूआईडी, Aadhaar authentication, e-Aadhaar, eAadhaar, Aadhaar verification, Aadhaar validation"
+      }
+    }
+  },
+  {
+    "identifier": "Indian bank account number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://blinkx.in/banking/indian-bank-account-number"
+      ],
+      "policies": [
+        "No specific format rules can be extracted from the provided scraped text as it contains only a webpage header and promotional content without technical details about Indian bank account number structure"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Reserve Bank of India (RBI)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "length-9-18",
+          "regex": "\\b\\d{9,18}\\b",
+          "description": "Indian bank account numbers typically range from 9 to 18 digits in length, varying by bank and account type"
+        },
+        {
+          "rule_id": "numeric-only",
+          "regex": "\\b\\d{9,18}\\b",
+          "description": "Account numbers consist entirely of numeric digits with no letters, spaces, or special characters"
+        },
+        {
+          "rule_id": "no-standard-format",
+          "regex": "\\b\\d{9,18}\\b",
+          "description": "Unlike IFSC codes, Indian bank account numbers have no standardized format across banks; each bank uses its own numbering scheme"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "\\b\\d{9,18}\\b",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:bank account number|Indian bank account|account number|खाता संख्या|बैंक खाता|खाता नंबर|savings account number|current account number|IFSC code|beneficiary account|account holder|bank details|NEFT transfer|RTGS transfer|IMPS transfer|UPI linked account|passbook number|cheque book|account statement)",
+        "keywords_readable": "bank account number, Indian bank account, account number, खाता संख्या, बैंक खाता, खाता नंबर, savings account number, current account number, IFSC code, beneficiary account, account holder, bank details, NEFT transfer, RTGS transfer, IMPS transfer, UPI linked account, passbook number, cheque book, account statement"
+      }
+    }
+  },
+  {
+    "identifier": "Indian bank routing number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geeksforgeeks.org/dsa/how-to-validate-ifsc-code-using-regular-expression/",
+        "https://razorpay.com/blog/decoding-ifsc-codes-meaning-importance/",
+        "https://razorpay.com/blog/bank-routing-number-india-explained/"
+      ],
+      "policies": [
+        "IFSC code must be exactly 11 characters long (Source: GeeksforGeeks, multiple banking sources)",
+        "First four characters must be uppercase alphabetic letters representing the bank code (e.g., SBIN for State Bank of India, HDFC for HDFC Bank, ICIC for ICICI Bank)",
+        "Fifth character must always be '0' (zero), reserved as a separator for future use",
+        "Last six characters (positions 6-11) represent the unique branch code and are alphanumeric (can be numeric or alphabetic, typically numeric)",
+        "The format follows the regular expression pattern: ^[A-Z]{4}0[A-Z0-9]{6}$ (Source: GeeksforGeeks validation examples)",
+        "Each bank branch in India has a unique IFSC code - no two branches share the same code",
+        "IFSC codes are used exclusively for domestic electronic fund transfers within India via NEFT, RTGS, and IMPS systems",
+        "Currently approximately 130,000 IFSC codes have been assigned by RBI to various banks and branches across India",
+        "All characters must be in uppercase format - lowercase letters are not valid",
+        "The code structure is: Bank Code (4 chars) + '0' (1 char) + Branch Code (6 chars) = 11 total characters"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Reserve Bank of India (RBI)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "ifsc-total-length",
+          "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+          "description": "IFSC code must be exactly 11 characters long"
+        },
+        {
+          "rule_id": "ifsc-bank-code",
+          "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+          "description": "First four characters must be uppercase alphabetic letters representing the bank code"
+        },
+        {
+          "rule_id": "ifsc-separator-zero",
+          "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+          "description": "Fifth character (position 4) must always be '0' (zero), reserved as a separator for future use"
+        },
+        {
+          "rule_id": "ifsc-branch-code",
+          "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+          "description": "Last six characters (positions 5-10) represent the unique branch code and are alphanumeric (can be numeric or alphabetic)"
+        },
+        {
+          "rule_id": "ifsc-uppercase-only",
+          "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+          "description": "All characters must be in uppercase format - lowercase letters are not valid"
+        },
+        {
+          "rule_id": "ifsc-regex-pattern",
+          "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+          "description": "The format follows the pattern: Bank Code (4 uppercase letters) + '0' + Branch Code (6 alphanumeric characters)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:IFSC|IFSC code|Indian Financial System Code|bank IFSC|branch IFSC|NEFT|RTGS|IMPS|Reserve Bank of India|RBI code|bank routing|branch code India|Indian bank code|fund transfer code|बैंक कोड|आईएफएससी|शाखा कोड|भारतीय वित्तीय प्रणाली कोड)",
+        "keywords_readable": "IFSC, IFSC code, Indian Financial System Code, bank IFSC, branch IFSC, NEFT, RTGS, IMPS, Reserve Bank of India, RBI code, bank routing, branch code India, Indian bank code, fund transfer code, बैंक कोड, आईएफएससी, शाखा कोड, भारतीय वित्तीय प्रणाली कोड"
+      }
+    }
+  },
+  {
+    "identifier": "Indian corporate identification number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geeksforgeeks.org/dsa/validate-corporate-identification-number-cin-using-regular-expression/",
+        "https://blog.instafinancials.com/2018/07/06/all-about-cin-and-its-structure/",
+        "https://cleartax.in/s/cin-corporate-identification-number",
+        "https://taxguru.in/company-law/understanding-corporate-identification-number-cin.html",
+        "https://www.taxtmi.com/article/detailed?id=13878"
+      ],
+      "policies": [
+        "CIN is exactly 21 characters in length (alphanumeric) - Source: Multiple sources including GeeksforGeeks, InstaFinancials, and TaxGuru",
+        "Position 1: Single letter 'L' (Listed company) or 'U' (Unlisted company) indicating stock market listing status - Source: All scraped sources",
+        "Positions 2-6: Five numeric digits (0-9) representing the industry/economic activity code based on National Industrial Classification (NIC) - Source: GeeksforGeeks, InstaFinancials, TaxGuru",
+        "Positions 7-8: Two alphabetic letters (A-Z) representing the state code where company is registered (e.g., KA=Karnataka, MH=Maharashtra, DL=Delhi, RJ=Rajasthan) - Source: All scraped sources",
+        "Positions 9-12: Four numeric digits (0-9) representing the year of incorporation - Source: All scraped sources",
+        "Positions 13-15: Three alphabetic letters representing company classification/ownership type (e.g., PTC=Private Limited Company, PLC=Public Limited Company, GOI=Government of India owned, FTC=Foreign Company Subsidiary, OPC=One Person Company, NPL=Section 8 Not-for-Profit, SGC=State Government Company, ULL=Public Unlimited Liability, ULT=Private Unlimited Liability, FLC=Financial Lease Company Public, GAP=General Association Public, GAT=General Association Private) - Source: InstaFinancials, TaxGuru, YAGAY andSUN",
+        "Positions 16-21: Six numeric digits (0-9) representing the unique registration number assigned by the specific Registrar of Companies (ROC) - Source: All scraped sources",
+        "CIN must not contain any special characters or whitespaces - Source: GeeksforGeeks",
+        "CIN is assigned at the time of company incorporation and appears on the Certificate of Incorporation - Source: InstaFinancials, TaxGuru",
+        "CIN must be displayed on all official company documents including invoices, bills, receipts, letterheads, notices, memos, annual reports, e-forms to MCA, and official publications - Source: Section 12(3)(c) Companies Act 2013, cited in multiple sources",
+        "CIN can change in cases of: change in listing status, change in state of registered office, change in economic activity/industry sector, change in company type, or change in ROC - Source: InstaFinancials, TaxGuru",
+        "Penalty for non-compliance in displaying CIN is INR 1,000 per day (maximum INR 1,00,000) on the company and every officer in default - Source: InstaFinancials, TaxGuru"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Registrar of Companies (ROC) under the Ministry of Corporate Affairs (MCA), Government of India",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "cin-length",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "CIN must be exactly 21 characters in length"
+        },
+        {
+          "rule_id": "cin-alphanumeric-only",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "CIN must contain only alphanumeric characters with no special characters or whitespaces"
+        },
+        {
+          "rule_id": "cin-listing-status",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Position 1 must be a single letter 'L' (Listed company) or 'U' (Unlisted company) indicating stock market listing status"
+        },
+        {
+          "rule_id": "cin-industry-code",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Positions 2-6 must be five numeric digits (0-9) representing the industry/economic activity code based on National Industrial Classification (NIC)"
+        },
+        {
+          "rule_id": "cin-state-code",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Positions 7-8 must be two alphabetic letters (A-Z) representing the state code where company is registered"
+        },
+        {
+          "rule_id": "cin-incorporation-year",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Positions 9-12 must be four numeric digits (0-9) representing the year of incorporation"
+        },
+        {
+          "rule_id": "cin-company-type",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Positions 13-15 must be three alphabetic letters representing company classification/ownership type (e.g., PTC, PLC, GOI, FTC, OPC, NPL, SGC, ULL, ULT, FLC, GAP, GAT)"
+        },
+        {
+          "rule_id": "cin-registration-number",
+          "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Positions 16-21 must be six numeric digits (0-9) representing the unique registration number assigned by the specific Registrar of Companies (ROC)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[LU]\\d{5}[\\s\\-]?[A-Z]{2}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]{3}[\\s\\-]?\\d{6}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Corporate Identification Number|Company Identification Number|Indian CIN|India CIN|Registrar of Companies|Ministry of Corporate Affairs|Certificate of Incorporation|कॉर्पोरेट पहचान संख्या|कंपनी पहचान संख्या|निगमन प्रमाणपत्र|कंपनी रजिस्ट्रार|कॉर्पोरेट मामलों का मंत्रालय|Listed company number|Unlisted company number|ROC registration|MCA portal|company registration number India)",
+        "keywords_readable": "Corporate Identification Number, Company Identification Number, Indian CIN, India CIN, Registrar of Companies, Ministry of Corporate Affairs, Certificate of Incorporation, कॉर्पोरेट पहचान संख्या, कंपनी पहचान संख्या, निगमन प्रमाणपत्र, कंपनी रजिस्ट्रार, कॉर्पोरेट मामलों का मंत्रालय, Listed company number, Unlisted company number, ROC registration, MCA portal, company registration number India"
+      }
+    }
+  },
+  {
+    "identifier": "Indian driving license number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geeksforgeeks.org/dsa/how-to-validate-indian-driving-license-number-using-regular-expression/",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-india-drivers-license-number",
+        "https://learn.microsoft.com/id-id/purview/sit-defn-india-drivers-license-number"
+      ],
+      "policies": [
+        "Total length is 16 characters including optional space or hyphen separator (source: GeeksforGeeks tutorial)",
+        "Positions 1-2: Two uppercase alphabetic characters representing the state code (source: GeeksforGeeks and Microsoft DLP documentation)",
+        "Positions 3-4: Two digits representing the RTO (Regional Transport Office) code (source: GeeksforGeeks tutorial)",
+        "Positions 5-8: Four digits representing the year of license issuance, constrained to years 1900-2099 (source: GeeksforGeeks regex pattern)",
+        "Positions 9-15: Seven digits (0-9) forming a unique serial number (source: GeeksforGeeks and Microsoft DLP documentation)",
+        "Format allows optional separator after state code and RTO code: either a space or hyphen (source: GeeksforGeeks examples HR-0619850034761 or UP14 20160034761)",
+        "State code must be valid two-letter abbreviation (e.g., HR for Haryana, UP for Uttar Pradesh, MH for Maharashtra, GJ for Gujarat) (source: GeeksforGeeks test cases)",
+        "The year portion follows pattern (19|20)[0-9][0-9] ensuring only 20th and 21st century years are valid (source: GeeksforGeeks regex)",
+        "Microsoft documentation describes it as 15 character alphanumeric pattern with optional spaces or dashes between segments (source: Microsoft Purview DLP entity definition)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_india_driving_license",
+          "keywords": [
+            "driverlic",
+            "driverlics",
+            "driverlicense",
+            "driverlicenses",
+            "driverlicence",
+            "driverlicences",
+            "driver lic",
+            "driver lics",
+            "driver license",
+            "driver licenses",
+            "driver licence",
+            "driver licences",
+            "driverslic",
+            "driverslics",
+            "driverslicence",
+            "driverslicences",
+            "driverslicense",
+            "driverslicenses",
+            "drivers lic",
+            "drivers lics",
+            "drivers license",
+            "drivers licenses",
+            "drivers licence",
+            "drivers licences",
+            "driver'lic",
+            "driver'lics",
+            "driver'license",
+            "driver'licenses",
+            "driver'licence",
+            "driver'licences",
+            "driver' lic",
+            "driver' lics",
+            "driver' license",
+            "driver' licenses",
+            "driver' licence",
+            "driver' licences",
+            "driver'slic",
+            "driver'slics",
+            "driver'slicense",
+            "driver'slicenses",
+            "driver'slicence",
+            "driver'slicences",
+            "driver's lic",
+            "driver's lics",
+            "driver's license",
+            "driver's licenses",
+            "driver's licence",
+            "driver's licences",
+            "dl#",
+            "dls#",
+            "driverlic#",
+            "driverlics#",
+            "driverlicense#",
+            "driverlicenses#",
+            "driverlicence#",
+            "driverlicences#",
+            "driver lic#",
+            "driver lics#",
+            "driver license#",
+            "driver licenses#",
+            "driver licences#",
+            "driverslic#",
+            "driverslics#",
+            "driverslicense#",
+            "driverslicenses#",
+            "driverslicence#",
+            "driverslicences#",
+            "drivers lic#",
+            "drivers lics#",
+            "drivers license#",
+            "drivers licenses#",
+            "drivers licence#",
+            "drivers licences#",
+            "driver'lic#",
+            "driver'lics#",
+            "driver'license#",
+            "driver'licenses#",
+            "driver'licence#",
+            "driver'licences#",
+            "driver' lic#",
+            "driver' lics#",
+            "driver' license#",
+            "driver' licenses#",
+            "driver' licence#",
+            "driver' licences#",
+            "driver'slic#",
+            "driver'slics#",
+            "driver'slicense#",
+            "driver'slicenses#",
+            "driver'slicence#",
+            "driver'slicences#",
+            "driver's lic#",
+            "driver's lics#",
+            "driver's license#",
+            "driver's licenses#",
+            "driver's licence#",
+            "driver's licences#",
+            "driving licence",
+            "driving license",
+            "dlno#",
+            "driv lic",
+            "driv licen",
+            "driv license",
+            "driv licenses",
+            "driv licence",
+            "driv licences",
+            "driver licen",
+            "drivers licen",
+            "driver's licen",
+            "driving lic",
+            "driving licen",
+            "driving licenses",
+            "driving licence",
+            "driving licences",
+            "driving permit",
+            "dl no",
+            "dlno",
+            "dl number"
+          ],
+          "rules": [
+            "15 character alphanumeric pattern",
+            "Two letters indicating state code",
+            "Optional space or dash",
+            "Two digits indicating city code",
+            "Optional space or dash",
+            "Four digits indicating year of issue",
+            "Optional space or dash",
+            "Seven digits",
+            "High confidence (85%): Pattern match + keyword within 300 characters proximity",
+            "Medium confidence (75%): Pattern match only within 300 characters proximity"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "driverlic",
+        "driverlics",
+        "driverlicense",
+        "driverlicenses",
+        "driverlicence",
+        "driverlicences",
+        "driver lic",
+        "driver lics",
+        "driver license",
+        "driver licenses",
+        "driver licence",
+        "driver licences",
+        "driverslic",
+        "driverslics",
+        "driverslicence",
+        "driverslicences",
+        "driverslicense",
+        "driverslicenses",
+        "drivers lic",
+        "drivers lics",
+        "drivers license",
+        "drivers licenses",
+        "drivers licence",
+        "drivers licences",
+        "driver'lic",
+        "driver'lics",
+        "driver'license",
+        "driver'licenses",
+        "driver'licence",
+        "driver'licences",
+        "driver' lic",
+        "driver' lics",
+        "driver' license",
+        "driver' licenses",
+        "driver' licence",
+        "driver' licences",
+        "driver'slic",
+        "driver'slics",
+        "driver'slicense",
+        "driver'slicenses",
+        "driver'slicence",
+        "driver'slicences",
+        "driver's lic",
+        "driver's lics",
+        "driver's license",
+        "driver's licenses",
+        "driver's licence",
+        "driver's licences",
+        "dl#",
+        "dls#",
+        "driverlic#",
+        "driverlics#",
+        "driverlicense#",
+        "driverlicenses#",
+        "driverlicence#",
+        "driverlicences#",
+        "driver lic#",
+        "driver lics#",
+        "driver license#",
+        "driver licenses#",
+        "driver licences#",
+        "driverslic#",
+        "driverslics#",
+        "driverslicense#",
+        "driverslicenses#",
+        "driverslicence#",
+        "driverslicences#",
+        "drivers lic#",
+        "drivers lics#",
+        "drivers license#",
+        "drivers licenses#",
+        "drivers licence#",
+        "drivers licences#",
+        "driver'lic#",
+        "driver'lics#",
+        "driver'license#",
+        "driver'licenses#",
+        "driver'licence#",
+        "driver'licences#",
+        "driver' lic#",
+        "driver' lics#",
+        "driver' license#",
+        "driver' licenses#",
+        "driver' licence#",
+        "driver' licences#",
+        "driver'slic#",
+        "driver'slics#",
+        "driver'slicense#",
+        "driver'slicenses#",
+        "driver'slicence#",
+        "driver'slicences#",
+        "driver's lic#",
+        "driver's lics#",
+        "driver's license#",
+        "driver's licenses#",
+        "driver's licence#",
+        "driver's licences#",
+        "driving licence",
+        "driving license",
+        "dlno#",
+        "driv lic",
+        "driv licen",
+        "driv license",
+        "driv licenses",
+        "driv licence",
+        "driv licences",
+        "driver licen",
+        "drivers licen",
+        "driver's licen",
+        "driving lic",
+        "driving licen",
+        "driving licenses",
+        "driving licence",
+        "driving licences",
+        "driving permit",
+        "dl no",
+        "dlno",
+        "dl number"
+      ],
+      "numbering_authority": "Regional Transport Offices (RTOs) under the Ministry of Road Transport and Highways, Government of India",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length",
+          "regex": "(?<![:\\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?\\d{2}[- ]?(?:19|20)\\d{2}[- ]?\\d{7}(?![:\\w])",
+          "description": "Total length is 15 characters (alphanumeric) with optional separators (space or hyphen) making it up to 16-18 characters when separators are included"
+        },
+        {
+          "rule_id": "state-code",
+          "regex": "(?<![:\\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?\\d{2}[- ]?(?:19|20)\\d{2}[- ]?\\d{7}(?![:\\w])",
+          "description": "Positions 0-1: Two uppercase alphabetic characters representing the state code (e.g., HR for Haryana, UP for Uttar Pradesh, MH for Maharashtra, GJ for Gujarat)"
+        },
+        {
+          "rule_id": "rto-code",
+          "regex": "(?<![:\\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[0-9]{2}[ -]?(?:19|20)[0-9]{2}[0-9]{7}(?![:\\w])",
+          "description": "Positions 2-3 (after state code): Two digits representing the Regional Transport Office (RTO) code"
+        },
+        {
+          "rule_id": "year-issuance",
+          "regex": "(?<![:\\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?[0-9]{2}[- ]?(?:19|20)[0-9]{2}[- ]?[0-9]{7}(?![:\\w])",
+          "description": "Positions 4-7 (after RTO code): Four digits representing the year of license issuance, constrained to years 1900-2099 following pattern (19|20)[0-9][0-9]"
+        },
+        {
+          "rule_id": "serial-number",
+          "regex": "(?<![:\\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[0-9]{2}[ -]?(?:19|20)[0-9]{2}[ -]?[0-9]{7}(?![:\\w])",
+          "description": "Positions 8-14 (after year): Seven digits (0-9) forming a unique serial number"
+        },
+        {
+          "rule_id": "optional-separators",
+          "regex": "(?<![:\\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?\\d{2}[- ]?(?:19|20)\\d{2}[- ]?\\d{7}(?![:\\w])",
+          "description": "Optional separator (space or hyphen) allowed after state code (position 2) and after RTO code (position 4) and optionally after year (position 8)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?[ -]?\\d{2}[\\s\\-]?[ -]?(?:19|20)\\d{2}[\\s\\-]?[ -]?\\d{7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:driving licence|driving license|driver's license|driver's licence|driver license|driver licence|DL number|DL no|driving permit|Indian driving license|Indian driving licence|ड्राइविंग लाइसेंस|चालक अनुज्ञप्ति|वाहन चालक लाइसेंस|RTO license|RTO licence|Regional Transport Office|Ministry of Road Transport|transport license|vehicle license|motor vehicle license|permanent driving license|learner's license|license number|licence number)",
+        "keywords_readable": "driving licence, driving license, driver's license, driver's licence, driver license, driver licence, DL number, DL no, driving permit, Indian driving license, Indian driving licence, ड्राइविंग लाइसेंस, चालक अनुज्ञप्ति, वाहन चालक लाइसेंस, RTO license, RTO licence, Regional Transport Office, Ministry of Road Transport, transport license, vehicle license, motor vehicle license, permanent driving license, learner's license, license number, licence number"
+      }
+    }
+  },
+  {
+    "identifier": "Indian license plate number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geeksforgeeks.org/dsa/validating-indian-vehicle-number-plate-using-regualr-expression/",
+        "https://www.godigit.com/traffic-rules/different-types-of-number-plates",
+        "https://www.hdfcergo.com/blogs/car-insurance/rules-for-number-plates-in-india",
+        "https://www.tataaig.com/knowledge-center/two-wheeler-insurance/rto-number-plate-rules"
+      ],
+      "policies": [
+        "Format consists of 4 parts: 2 letters (state code) + 2 digits (district RTO code) + 1-2 letters (series) + 4 digits (unique number). Example: MH-05-DL-9023 (Source: GeeksforGeeks, TATA AIG, HDFC ERGO)",
+        "First two letters indicate the state or Union Territory where the vehicle is registered (e.g., MH for Maharashtra, DL for Delhi, TN for Tamil Nadu, GJ for Gujarat). (Source: GeeksforGeeks, TATA AIG, HDFC ERGO)",
+        "Next two digits represent the Regional Transport Office (RTO) or district sequential number within the state (e.g., 05 for a specific district). (Source: GeeksforGeeks, TATA AIG)",
+        "Third component consists of 1 or 2 alphabetic characters serving as a series identifier. If numbers are unavailable, a letter may be used instead of the second digit. (Source: GeeksforGeeks regex pattern, TATA AIG)",
+        "Final component is exactly 4 digits representing the unique vehicle registration number. (Source: GeeksforGeeks regex pattern: [0-9]{4}$)",
+        "Private vehicles (two-wheelers and light motor vehicles like cars) must have white background number plates with black text. (Source: Motor Vehicles Act Rules 50 and 51, cited by HDFC ERGO and TATA AIG)",
+        "Commercial vehicles must have yellow background number plates with black text. (Source: Motor Vehicles Act Rules 50 and 51, cited by HDFC ERGO and TATA AIG)",
+        "Electric vehicles use green number plates. (Source: Multiple sources including HDFC ERGO)",
+        "Number plate size for two and three-wheelers: 200 x 100 mm. (Source: Motor Vehicles Act, cited by HDFC ERGO and TATA AIG)",
+        "Number plate size for light motor vehicles (passenger cars): 340 x 200 mm or 500 x 120 mm. (Source: Motor Vehicles Act, cited by HDFC ERGO and TATA AIG)",
+        "Number plate size for medium or heavy commercial vehicles: 340 x 200 mm. (Source: Motor Vehicles Act, cited by HDFC ERGO and TATA AIG)",
+        "Character size specifications: 65 mm height, 10 mm thickness, 10 mm spacing between characters (applicable to all motor vehicles except two and three-wheelers). (Source: Central Motors Vehicles Rules update by Ministry of Road Transport and Highways)",
+        "Separators between components can be space or hyphen (optional): regex pattern shows [\\-]{0,1} meaning 0 or 1 occurrence of space or hyphen. (Source: GeeksforGeeks regex validation)",
+        "All vehicles must display the 'IND' logo with chromium hologram (Ashoka Chakra) as part of High-Security Registration Plates (HSRP). (Source: TATA AIG, introduced in 2005)",
+        "Number plates must be displayed on both front and rear of the vehicle. (Source: Motor Vehicles Act Section 39, cited by multiple sources)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Regional Transport Office (RTO) under the Ministry of Road Transport and Highways (MoRTH), Government of India",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "four-part-structure",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?(?:\\d{2}|[0-9][A-Z])[\\s\\-]?[A-Z]{1,2}[\\s\\-]?\\d{4}(?![:\\w])",
+          "description": "License plate consists of 4 parts: 2 letters (state code) + 2 digits (district RTO code) + 1-2 letters (series) + 4 digits (unique number)"
+        },
+        {
+          "rule_id": "state-code-prefix",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?[0-9]{2}[\\s\\-]?[A-Z]{1,2}[\\s\\-]?[0-9]{4}(?![:\\w])",
+          "description": "First two letters indicate the state or Union Territory where the vehicle is registered (e.g., MH for Maharashtra, DL for Delhi, TN for Tamil Nadu, GJ for Gujarat)"
+        },
+        {
+          "rule_id": "rto-district-code",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?(?:\\d{2}|\\d[A-Z])[\\s\\-]?[A-Z]{1,2}[\\s\\-]?\\d{4}(?![:\\w])",
+          "description": "Next two digits represent the Regional Transport Office (RTO) or district sequential number within the state"
+        },
+        {
+          "rule_id": "series-identifier",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?(?:\\d{2}|\\d[A-Z])[\\s\\-]?[A-Z]{1,2}[\\s\\-]?\\d{4}(?![:\\w])",
+          "description": "Third component consists of 1 or 2 alphabetic characters serving as a series identifier"
+        },
+        {
+          "rule_id": "unique-four-digit-number",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?(?:\\d{2}|[0-9][A-Z])[\\s\\-]?[A-Z]{1,2}[\\s\\-]?\\d{4}(?![:\\w])",
+          "description": "Final component is exactly 4 digits representing the unique vehicle registration number"
+        },
+        {
+          "rule_id": "optional-separators",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?[ -]?(?:[0-9]{2}|[0-9][A-Z])[ -]?[A-Z]{1,2}[\\s\\-]?[ -]?[0-9]{4}(?![:\\w])",
+          "description": "Separators between components can be space or hyphen (optional): 0 or 1 occurrence of space or hyphen between each part"
+        },
+        {
+          "rule_id": "alternative-letter-for-second-digit",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?[0-9][0-9A-Z][\\s\\-]?[A-Z]{1,2}[\\s\\-]?[0-9]{4}(?![:\\w])",
+          "description": "If numbers are unavailable, a letter may be used instead of the second digit in the RTO code position"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?[ -]?[0-9](?:[0-9]|[A-Z])[ -]?[A-Z]{1,2}[\\s\\-]?[ -]?[0-9]{4}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Indian license plate|Indian registration number|vehicle registration number|registration plate|number plate|RTO registration|Regional Transport Office|वाहन पंजीकरण संख्या|पंजीकरण प्लेट|आरटीओ पंजीकरण|High-Security Registration Plate|HSRP|IND logo|Ashoka Chakra|state code|district RTO code|vehicle number|registration certificate|RC number|motor vehicle registration)",
+        "keywords_readable": "Indian license plate, Indian registration number, vehicle registration number, registration plate, number plate, RTO registration, Regional Transport Office, वाहन पंजीकरण संख्या, पंजीकरण प्लेट, आरटीओ पंजीकरण, High-Security Registration Plate, HSRP, IND logo, Ashoka Chakra, state code, district RTO code, vehicle number, registration certificate, RC number, motor vehicle registration"
+      }
+    }
+  },
+  {
+    "identifier": "Indian phone number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.vitelglobal.com/blog/india-phone-number-format/",
+        "https://diallink.com/blog/india-number-format",
+        "https://www.immihelp.com/phone-numbering-scheme-in-india/",
+        "https://www.qoli.ai/blogs/indian-phone-number-format",
+        "https://callhippo.com/blog/general/indian-phone-number-format"
+      ],
+      "policies": [
+        "Indian mobile numbers are exactly 10 digits long (source: multiple scraped pages)",
+        "Mobile numbers always start with 9, 8, 7, or 6 as the first digit (source: immihelp.com, CallHippo)",
+        "Mobile numbers never start with 0, 1, 2, 3, 4, or 5 (source: immihelp.com)",
+        "The international format is +91 followed by the 10-digit number (source: multiple sources)",
+        "Landline numbers use STD (Subscriber Trunk Dialing) codes that are 2, 3, or 4 digits long (source: immihelp.com)",
+        "When STD code is 2 digits, the local number is 8 digits (2+8=10 total) (source: immihelp.com)",
+        "When STD code is 3 digits, the local number is 7 digits (3+7=10 total) (source: immihelp.com)",
+        "When STD code is 4 digits, the local number is 6 digits (4+6=10 total) (source: immihelp.com)",
+        "Metropolitan cities use 2-digit STD codes: Delhi (11), Mumbai (22), Kolkata (33), Chennai (44), Hyderabad (40), Bengaluru (80), Ahmedabad (79), Pune (20) (source: immihelp.com, CallHippo)",
+        "The leading zero in domestic format must be removed when dialing internationally (source: multiple sources)",
+        "Domestic landline format includes a leading 0 before the STD code (source: immihelp.com)",
+        "Toll-free numbers begin with 1800 or 1860 (source: Vitel Global, CallHippo)",
+        "Telemarketing numbers use the 140 series (source: CallHippo)",
+        "Emergency numbers use short codes: 100 (Police), 101 (Fire), 108 (Ambulance), 112 (National emergency) (source: Vitel Global)",
+        "Mobile number format for cellular services: 2-digit access code (98 or 94) + 3-digit provider code + 5-digit subscriber number (source: immihelp.com)",
+        "First digit of landline subscriber number will not be 0, 1, 7, 8, or 9 (source: immihelp.com)",
+        "Country code for India is +91 (source: all sources)",
+        "Total national numbering format is 10 digits for both landline and mobile (source: immihelp.com)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Department of Telecommunications (DoT), Ministry of Communications, Government of India / Telecom Regulatory Authority of India (TRAI)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "mobile-10-digits",
+          "regex": "(?<![:\\w])[6-9]\\d{9}(?![:\\w])",
+          "description": "Mobile numbers are exactly 10 digits long with no separators"
+        },
+        {
+          "rule_id": "mobile-first-digit",
+          "regex": "(?<![:\\w])[6-9]\\d{9}(?![:\\w])",
+          "description": "Mobile numbers always start with 9, 8, 7, or 6"
+        },
+        {
+          "rule_id": "international-format",
+          "regex": "(?<![:\\w])\\+91[ -]?(?:[6-9]\\d{9}|(?:11|22|33|44|40|80|79|20)[ -]?[2-6]\\d{7}|[2-9]\\d{2}[ -]?[2-6]\\d{6}|[2-9]\\d{3}[ -]?[2-6]\\d{5})(?![:\\w])",
+          "description": "International format is +91 followed by 10-digit number"
+        },
+        {
+          "rule_id": "landline-std-2digit",
+          "regex": "(?<![:\\w])0[6-9]\\d[ -]?[2-6]\\d{7}(?![:\\w])",
+          "description": "Landline with 2-digit STD code followed by 8-digit local number (total 10 digits)"
+        },
+        {
+          "rule_id": "landline-std-3digit",
+          "regex": "(?<![:\\w])0[0-9]{2}[\\s\\-]?[ -]?[2-6]\\d{6}(?![:\\w])",
+          "description": "Landline with 3-digit STD code followed by 7-digit local number (total 10 digits)"
+        },
+        {
+          "rule_id": "landline-std-4digit",
+          "regex": "(?<![:\\w])0[0-9]{3}[\\s\\-]?[2-6]\\d{5}(?![:\\w])",
+          "description": "Landline with 4-digit STD code followed by 6-digit local number (total 10 digits)"
+        },
+        {
+          "rule_id": "domestic-landline-leading-zero",
+          "regex": "(?<![:\\w])0(?:[2-9]\\d[2-6]\\d{7}|[2-9]\\d{2}[2-6]\\d{6}|[2-9]\\d{3}[2-6]\\d{5})(?![:\\w])",
+          "description": "Domestic landline format includes a leading 0 before the STD code"
+        },
+        {
+          "rule_id": "toll-free-1800",
+          "regex": "(?<![:\\w])1800[6-9]\\d{5,6}(?![:\\w])",
+          "description": "Toll-free numbers begin with 1800 followed by 6 or 7 digits"
+        },
+        {
+          "rule_id": "toll-free-1860",
+          "regex": "(?<![:\\w])1860[6-9]\\d{5}(?:\\d{1})?\\b\n\nHowever, looking at the constraints more carefully, the toll-free number starts with 1860 followed by 6 or 7 digits. The hard constraint about position 0 being [6-9] applies to mobile numbers, not toll-free numbers. Let me reconsider:\n\n\\b1860\\d{6,7}(?![:\\w])",
+          "description": "Toll-free numbers begin with 1860 followed by 6 or 7 digits"
+        },
+        {
+          "rule_id": "telemarketing-140",
+          "regex": "\\b140\\d{7}\\b",
+          "description": "Telemarketing numbers use the 140 series"
+        },
+        {
+          "rule_id": "emergency-short-codes",
+          "regex": "(?<![:\\w])(?:1(?:0[018]|12)|1800\\d{6}|1860\\d{6}|140\\d{7}|[6-9]\\d{9}|0(?:[2-9]\\d(?:[ -]?[2-6]\\d{6})|[2-9]\\d{2}(?:[ -]?[2-6]\\d{5})|[2-9]\\d{3}(?:[ -]?[2-6]\\d{4})))(?![:\\w])",
+          "description": "Emergency numbers use short codes: 100, 101, 108, 112"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])(?:\\+91[6-9]\\d{9}|(?:1800|1860)\\d{6,7}|140\\d{4,7}|10[018]|112|0(?:[2-9]\\d[2-6]\\d{7}|[2-9]\\d{2}[2-6]\\d{6}|[2-9]\\d{3}[2-6]\\d{5})|[6-9]\\d{9})(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Indian mobile number|Indian phone number|India contact number|mobile number|phone number|contact number|मोबाइल नंबर|फ़ोन नंबर|संपर्क नंबर|STD code|subscriber number|toll-free number|landline number|telecom number|cellular number|DoT registered|TRAI approved|Indian telephone|भारतीय फ़ोन|दूरभाष संख्या)",
+        "keywords_readable": "Indian mobile number, Indian phone number, India contact number, mobile number, phone number, contact number, मोबाइल नंबर, फ़ोन नंबर, संपर्क नंबर, STD code, subscriber number, toll-free number, landline number, telecom number, cellular number, DoT registered, TRAI approved, Indian telephone, भारतीय फ़ोन, दूरभाष संख्या"
+      }
+    }
+  },
+  {
+    "identifier": "Indian post code",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geopostcodes.com/blog/international-zip-code-validation/",
+        "https://www.geeksforgeeks.org/dsa/how-to-validate-pin-code-of-india-using-regular-expression/"
+      ],
+      "policies": [
+        "Indian PIN code must be exactly 6 digits long (source: GeeksforGeeks validation rules)",
+        "First digit must be from 1 to 9, cannot start with zero (source: GeeksforGeeks validation rules)",
+        "Positions 2-3 can be any digit from 0 to 9 (source: GeeksforGeeks regex pattern)",
+        "Positions 4-6 can be any digit from 0 to 9 (source: GeeksforGeeks regex pattern)",
+        "Optional single whitespace is allowed after the first three digits (source: GeeksforGeeks validation rules)",
+        "Valid regex pattern is ^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$ (source: GeeksforGeeks)",
+        "PIN code format is 6 numeric digits, no letters allowed (source: GeeksforGeeks validation rules)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "India Post",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "exactly-six-digits",
+          "regex": "(?<![:\\w])[1-9][0-9]{2}\\s?[0-9]{3}(?![:\\w])",
+          "description": "Indian PIN code must be exactly 6 digits long"
+        },
+        {
+          "rule_id": "no-letters-allowed",
+          "regex": "(?<![:\\w])[1-9]\\d{2}\\s?\\d{3}(?![:\\w])",
+          "description": "PIN code format is 6 numeric digits, no letters allowed"
+        },
+        {
+          "rule_id": "optional-space-after-third-digit",
+          "regex": "(?<![:\\w])[1-9][0-9]{2} ?[0-9]{3}(?![:\\w])",
+          "description": "Optional single whitespace is allowed after the first three digits"
+        },
+        {
+          "rule_id": "regex-pattern",
+          "regex": "(?<![:\\w])[1-9][0-9]{2}\\s?[0-9]{3}(?![:\\w])",
+          "description": "Valid regex pattern is ^[1-9]{1}[0-9]{2}\\s{0,1}[0-9]{3}$"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[1-9]\\d{2}\\s?\\d{3}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:PIN code|pincode|postal index number|India PIN|Indian postal code|पिन कोड|पिनकोड|डाक सूचकांक संख्या|पोस्टल कोड|India Post|postal address India|delivery PIN|mailing PIN|पता|डाक पता)",
+        "keywords_readable": "PIN code, pincode, postal index number, India PIN, Indian postal code, पिन कोड, पिनकोड, डाक सूचकांक संख्या, पोस्टल कोड, India Post, postal address India, delivery PIN, mailing PIN, पता, डाक पता"
+      }
+    }
+  },
+  {
+    "identifier": "Indian taxpayer id",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://taxdo.com/resources/global-tax-id-validation-guide/india"
+      ],
+      "policies": [
+        "PAN format: exactly 10 characters - first 5 are letters, next 4 are digits, last character is a letter (Source: Income Tax Department)",
+        "PAN structure: fourth character represents entity status (e.g. 'P' for individuals, 'C' for companies) (Source: Income Tax Department)",
+        "PAN structure: fifth character indicates the first letter of the surname for individuals (Source: Income Tax Department)",
+        "PAN structure: last character is a checksum character (Source: Income Tax Department)",
+        "GSTIN format: exactly 15 characters - first 2 are state code, next 10 are the PAN of the business entity, next digit is entity type, last character is checksum (Source: Central Board of Indirect Taxes and Customs)",
+        "TAN format: exactly 10 characters - first 4 are letters, next 5 are digits, last character is a letter (Source: Income Tax Department)",
+        "TIN (VAT) format: 11 digits - first 2 digits indicate state code as per VAT/GST rules, next 9 digits are unique business identification number (Source: Central Board of Indirect Taxes and Customs)",
+        "GSTIN serves as the VAT number for businesses registered under GST in India (Source: Central Board of Indirect Taxes and Customs)",
+        "GSTIN structure: first two characters represent the state code according to GST rules (Source: Central Board of Indirect Taxes and Customs)",
+        "PAN is mandatory for individuals and businesses engaging in various financial transactions and all types of tax filings (Source: Income Tax Department)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Income Tax Department (ITD) for PAN and TAN; Central Board of Indirect Taxes and Customs (CBIC) for GSTIN",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "pan-format",
+          "regex": "(?<![:\\w])[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z](?![:\\w])",
+          "description": "PAN (Permanent Account Number) is exactly 10 characters: first 5 are uppercase letters, next 4 are digits, last character is an uppercase letter"
+        },
+        {
+          "rule_id": "pan-entity-status",
+          "regex": "(?<![:\\w])(?:[0-9]{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z][0-9][A-Z][A-Z0-9]|[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z]|[A-Z]{4}[\\s\\-]?[0-9]{5}[\\s\\-]?[A-Z]|[0-9]{11})(?![:\\w])",
+          "description": "PAN fourth character represents entity status (e.g. 'P' for individuals, 'C' for companies)"
+        },
+        {
+          "rule_id": "pan-surname-initial",
+          "regex": "(?<![:\\w])[A-Z]{3}[\\s\\-]?[PC][A-Z]\\d{4}[\\s\\-]?[A-Z](?![:\\w])",
+          "description": "PAN fifth character indicates the first letter of the surname for individuals"
+        },
+        {
+          "rule_id": "pan-checksum",
+          "regex": "(?<![:\\w])(?:[0-9]{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z][0-9][A-Z][A-Z0-9]|[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z]|[A-Z]{4}[\\s\\-]?[0-9]{5}[\\s\\-]?[A-Z]|[0-9]{11})(?![:\\w])",
+          "description": "PAN last character is a checksum character"
+        },
+        {
+          "rule_id": "gstin-format",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]\\d[A-Z][A-Z0-9](?![:\\w])",
+          "description": "GSTIN (Goods and Services Tax Identification Number) is exactly 15 characters: first 2 are state code digits, next 10 are the PAN of the business entity, next digit is entity type, last character is checksum (letter or digit)"
+        },
+        {
+          "rule_id": "gstin-state-code",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z]\\d[A-Z][A-Z0-9](?![:\\w])",
+          "description": "GSTIN first two characters represent the state code according to GST rules"
+        },
+        {
+          "rule_id": "gstin-pan-embedded",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?[0-9]{4}[\\s\\-]?[A-Z]\\d[A-Z][A-Z0-9](?![:\\w])",
+          "description": "GSTIN characters 3-12 contain the PAN of the business entity"
+        },
+        {
+          "rule_id": "tan-format",
+          "regex": "(?<![:\\w])[A-Z]{4}[\\s\\-]?[0-9]{5}[\\s\\-]?[A-Z](?![:\\w])",
+          "description": "TAN (Tax Deduction and Collection Account Number) is exactly 10 characters: first 4 are uppercase letters, next 5 are digits, last character is an uppercase letter"
+        },
+        {
+          "rule_id": "tin-vat-format",
+          "regex": "(?<![:\\w])[0-9]{2}[0-9]{9}(?![:\\w])",
+          "description": "TIN (VAT) is exactly 11 digits: first 2 digits indicate state code, next 9 digits are unique business identification number"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])(?:[A-Z]{5}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]|\\d{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z]\\d[A-Z][A-Z0-9]|[A-Z]{4}[\\s\\-]?\\d{5}[\\s\\-]?[A-Z]|\\d{11})(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:PAN|Permanent Account Number|GSTIN|GST Identification Number|Goods and Services Tax Identification Number|TAN|Tax Deduction and Collection Account Number|TIN|Taxpayer Identification Number|Income Tax Department|Indian taxpayer|India tax ID|पैन|स्थायी खाता संख्या|जीएसटी पहचान संख्या|कर पहचान संख्या|Income Tax PAN|GST registration number|VAT number India|Indian GST number|PAN card|TAN number|state code GST|ITD PAN|CBIC GSTIN)",
+        "keywords_readable": "PAN, Permanent Account Number, GSTIN, GST Identification Number, Goods and Services Tax Identification Number, TAN, Tax Deduction and Collection Account Number, TIN, Taxpayer Identification Number, Income Tax Department, Indian taxpayer, India tax ID, पैन, स्थायी खाता संख्या, जीएसटी पहचान संख्या, कर पहचान संख्या, Income Tax PAN, GST registration number, VAT number India, Indian GST number, PAN card, TAN number, state code GST, ITD PAN, CBIC GSTIN"
+      }
+    }
+  },
+  {
+    "identifier": "Indian vat number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [],
+      "policies": [
+        "VAT (Value Added Tax) was replaced by GST (Goods and Services Tax) in India on July 1, 2017",
+        "Legacy VAT numbers were state-specific and varied by state",
+        "Typical format was 11 digits, but format varied significantly across different Indian states",
+        "Some states used alphanumeric formats while others used purely numeric formats",
+        "Common pattern included state code (2 digits) followed by registration number",
+        "TIN (Taxpayer Identification Number) was often used interchangeably with VAT number",
+        "Format example: 11 digits like 27AAAAA1234A or purely numeric like 12345678901",
+        "No standardized check digit algorithm across all states",
+        "Now superseded by 15-character GSTIN (GST Identification Number)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": null,
+          "keywords": [
+            "VAT",
+            "TIN",
+            "Taxpayer Identification Number",
+            "Value Added Tax"
+          ],
+          "rules": [
+            "Typically looks for 11-digit numeric patterns in Indian context",
+            "May validate in conjunction with Indian address or business context",
+            "Often grouped with GST detection rules"
+          ]
+        },
+        {
+          "vendor": "Netskope",
+          "regex": null,
+          "keywords": [
+            "India VAT",
+            "Indian TIN",
+            "VAT number"
+          ],
+          "rules": [
+            "Context-based detection using surrounding text",
+            "May require proximity to India-specific identifiers"
+          ]
+        },
+        {
+          "vendor": "Broadcom/Symantec",
+          "regex": null,
+          "keywords": [
+            "VAT",
+            "TIN",
+            "India tax"
+          ],
+          "rules": [
+            "Pattern matching for 11-digit sequences",
+            "Geographic context validation"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "VAT",
+        "VAT number",
+        "India VAT",
+        "Indian VAT",
+        "TIN",
+        "Taxpayer Identification Number",
+        "Indian TIN",
+        "Value Added Tax",
+        "State VAT",
+        "Commercial Tax",
+        "Tax Identification",
+        "VAT registration",
+        "VAT registration number",
+        "Sales Tax number",
+        "CST",
+        "Central Sales Tax",
+        "State tax number",
+        "व्याट",
+        "कर पहचान संख्या"
+      ],
+      "numbering_authority": "Individual State Commercial Tax Departments (pre-GST era); now Central Board of Indirect Taxes and Customs (CBIC) under Ministry of Finance for GST",
+      "policy_confidence": "low",
+      "policy_confidence_reason": "No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "legacy-vat-11-digit",
+          "regex": "(?<![:\\w])\\d{11}\\b|\\b\\d{2}[\\s\\-]?[A-Z0-9]{9}(?![:\\w])",
+          "description": "Legacy Indian VAT/TIN numbers were typically 11 digits in length, though format varied by state"
+        },
+        {
+          "rule_id": "state-code-prefix",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?(?:\\d{9}|[A-Z0-9]{9})(?![:\\w])",
+          "description": "Common pattern included a 2-digit state code prefix followed by registration number"
+        },
+        {
+          "rule_id": "alphanumeric-variant",
+          "regex": "(?<![:\\w])(?:\\d{11}|[0-9]{2}[\\s\\-]?[A-Z0-9]{9})(?![:\\w])",
+          "description": "Some states used alphanumeric formats mixing letters and digits (e.g., 27AAAAA1234A)"
+        },
+        {
+          "rule_id": "numeric-only-variant",
+          "regex": "\\b\\d{11}\\b",
+          "description": "Some states used purely numeric 11-digit formats (e.g., 12345678901)"
+        },
+        {
+          "rule_id": "no-standard-checksum",
+          "regex": "(?<![:\\w])(?:\\d{11}|[A-Z0-9]{11}|\\d{2}[\\s\\-]?[A-Z]{5}[\\s\\-]?\\d{4}[\\s\\-]?[A-Z])(?![:\\w])",
+          "description": "No standardized check digit algorithm existed across all Indian states for VAT numbers"
+        },
+        {
+          "rule_id": "superseded-by-gst",
+          "regex": "(?<![:\\w])(?:\\d{11}|[A-Z0-9]{11})(?![:\\w])",
+          "description": "VAT numbers were replaced by 15-character GSTIN on July 1, 2017, but legacy VAT numbers may still appear in historical documents"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])(?:\\d{11}|[0-9A-Z]{11})(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:VAT|VAT number|India VAT|Indian VAT|TIN|Taxpayer Identification Number|Indian TIN|Value Added Tax|State VAT|Commercial Tax|Tax Identification|VAT registration|VAT registration number|Sales Tax number|CST|Central Sales Tax|State tax number|व्याट|कर पहचान संख्या|Indian tax number|State Commercial Tax|pre-GST|legacy VAT|state VAT number|VAT TIN|tax registration number|commercial tax registration|state tax registration|VAT certificate|TIN certificate)",
+        "keywords_readable": "VAT, VAT number, India VAT, Indian VAT, TIN, Taxpayer Identification Number, Indian TIN, Value Added Tax, State VAT, Commercial Tax, Tax Identification, VAT registration, VAT registration number, Sales Tax number, CST, Central Sales Tax, State tax number, व्याट, कर पहचान संख्या, Indian tax number, State Commercial Tax, pre-GST, legacy VAT, state VAT number, VAT TIN, tax registration number, commercial tax registration, state tax registration, VAT certificate, TIN certificate"
+      }
+    }
+  },
+  {
+    "identifier": "ipv6",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://datatracker.ietf.org/doc/html/rfc2460",
+        "https://www.geeksforgeeks.org/ipv6-addressing-format-and-conventions/",
+        "https://study-ccna.com/ipv6-address-format/",
+        "https://oneuptime.com/blog/post/2026-03-20-understand-ipv6-address-format-notation/view",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-ip-address"
+      ],
+      "policies": [
+        "IPv6 addresses are 128 bits in length (RFC 2460, Section 3)",
+        "IPv6 addresses are written as eight groups of four hexadecimal digits separated by colons (RFC 2460, industry standard notation)",
+        "Each group represents 16 bits, using hexadecimal digits 0-9 and A-F (RFC 2460, Section 3)",
+        "Leading zeros in each group may be omitted (e.g., 0db8 becomes db8, 0042 becomes 42)",
+        "One sequence of consecutive all-zero groups may be replaced with double colon (::), but this compression can only be used once per address",
+        "When replacing consecutive zero groups with ::, the longest run of consecutive all-zero groups should be replaced",
+        "The IPv6 header contains a 4-bit version field with value 6 (RFC 2460, Section 3)",
+        "Source and Destination Address fields are each 128 bits (RFC 2460, Section 3)",
+        "IPv6 addresses in URLs must be enclosed in square brackets (e.g., http://[2001:db8::1]:8080)",
+        "Prefix length notation uses slash notation similar to IPv4 CIDR (e.g., 2001:db8::/32, fe80::/10)",
+        "The loopback address is ::1 (full form: 0000:0000:0000:0000:0000:0000:0000:0001)",
+        "The unspecified address is :: (all zeros)",
+        "Link-local addresses use the fe80::/10 prefix",
+        "Extension headers must be integer multiples of 8 octets in length (RFC 2460, Section 4)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_ipv6_address",
+          "keywords": [
+            "IP",
+            "ip address",
+            "ip addresses",
+            "internet protocol",
+            "IP-כתובת ה"
+          ],
+          "rules": [
+            "Complex pattern that accounts for formatted IPv6 numbers (which include colons)",
+            "High confidence detection within proximity of 300 characters",
+            "Confidence level 85: IPv6 regex match with NO keyword from Keyword_ipaddress (minMatches=0, maxMatches=0)",
+            "Confidence level 95: IPv6 regex match WITH keyword from Keyword_ipaddress (minMatches=1)",
+            "Pattern matching is case-sensitive for 'IP' keyword"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "IP",
+        "ip address",
+        "ip addresses",
+        "internet protocol",
+        "IP-כתובת ה",
+        "IPv6",
+        "IPv4"
+      ],
+      "numbering_authority": "Internet Engineering Task Force (IETF) via RFC 2460 and subsequent RFCs; Internet Assigned Numbers Authority (IANA) for address allocation",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "ipv6-128-bit",
+          "regex": "(?<![:\\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\\s\\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?![:\\w])",
+          "description": "IPv6 addresses are 128 bits in length, represented as eight groups of four hexadecimal digits separated by colons"
+        },
+        {
+          "rule_id": "ipv6-hex-digits",
+          "regex": "(?<![:\\w])(?:(?:[0-9A-Fa-f]{1,4}:){7}[\\s\\-]?[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,7}:|(?:[0-9A-Fa-f]{1,4}:){1,6}:[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}|(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}|(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}|(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}|[0-9A-Fa-f]{1,4}:(?::[0-9A-Fa-f]{1,4}){1,6}|:(?:(?::[0-9A-Fa-f]{1,4}){1,7}|:))(?![:\\w])",
+          "description": "Each group represents 16 bits using hexadecimal digits 0-9 and A-F (case-insensitive)"
+        },
+        {
+          "rule_id": "ipv6-leading-zero-omission",
+          "regex": "(?<![:\\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\\s\\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?![:\\w])",
+          "description": "Leading zeros in each group may be omitted (e.g., 0db8 becomes db8, 0042 becomes 42)"
+        },
+        {
+          "rule_id": "ipv6-double-colon-compression",
+          "regex": "(?<![:\\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\\s\\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?![:\\w])",
+          "description": "One sequence of consecutive all-zero groups may be replaced with double colon (::), but this compression can only be used once per address"
+        },
+        {
+          "rule_id": "ipv6-loopback",
+          "regex": "(?<![:\\w])(?:(?:0{0,3}:){7}0{0,3}1|::1)(?![:\\w])",
+          "description": "The loopback address is ::1 (full form: 0000:0000:0000:0000:0000:0000:0000:0001)"
+        },
+        {
+          "rule_id": "ipv6-unspecified",
+          "regex": "(?<![:\\w])(?:::(?:0{1,4}:){0,7}0{0,4}|0{1,4}:(?:0{1,4}:){6}0{1,4}|0{0,4}::(?:0{1,4}:){0,6}0{1,4}|(?:0{1,4}:){1}:(?:0{1,4}:){0,5}0{1,4}|(?:0{1,4}:){2}:(?:0{1,4}:){0,4}0{1,4}|(?:0{1,4}:){3}:(?:0{1,4}:){0,3}0{1,4}|(?:0{1,4}:){4}:(?:0{1,4}:){0,2}0{1,4}|(?:0{1,4}:){5}:(?:0{1,4}:)?0{1,4}|(?:0{1,4}:){6}:0{1,4}|(?:0{1,4}:){7}0{1,4})(?![:\\w])",
+          "description": "The unspecified address is :: (all zeros)"
+        },
+        {
+          "rule_id": "ipv6-link-local",
+          "regex": "(?<![:\\w])(?:fe[89ab][0-9a-fA-F]::(?:[0-9a-fA-F]{1,4}:){0,6}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,5}(?::[0-9a-fA-F]{1,4}){1,2}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){1,6}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,4}:(?:[0-9a-fA-F]{1,4}:){0,1}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,3}:(?:[0-9a-fA-F]{1,4}:){0,2}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,2}:(?:[0-9a-fA-F]{1,4}:){0,3}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,1}:(?:[0-9a-fA-F]{1,4}:){0,4}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]::(?:[0-9a-fA-F]{1,4}:){0,5}[\\s\\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4})(?![:\\w])",
+          "description": "Link-local addresses use the fe80::/10 prefix"
+        },
+        {
+          "rule_id": "ipv6-url-brackets",
+          "regex": "(?<![:\\w])\\[(?:(?:[0-9a-fA-F]{1,4}:){7}[\\s\\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))\\](?![:\\w])",
+          "description": "IPv6 addresses in URLs must be enclosed in square brackets"
+        },
+        {
+          "rule_id": "ipv6-prefix-notation",
+          "regex": "(?<![:\\w])(?:[0-9A-Fa-f]{1,4}:){7}[\\s\\-]?[0-9A-Fa-f]{1,4}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,7}:\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b:(?::[0-9A-Fa-f]{1,4}){1,7}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,6}(?::[0-9A-Fa-f]{1,4}){1}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b[0-9A-Fa-f]{1,4}:(?::[0-9A-Fa-f]{1,4}){1,6}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b::(?:[0-9A-Fa-f]{1,4}:){0,6}[\\s\\-]?[0-9A-Fa-f]{1,4}\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b(?:[0-9A-Fa-f]{1,4}:){1,7}:\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\\b|\\b::\\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])(?![:\\w])",
+          "description": "Prefix length notation uses slash notation similar to IPv4 CIDR (e.g., 2001:db8::/32, fe80::/10)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\\s\\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?:/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9]))?\\b|\\[(?:(?:[0-9a-fA-F]{1,4}:){7}[\\s\\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?:/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9]))?\\](?::[0-9]{1,5})?(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:IPv6|IPv6 address|IPv6 addresses|IP address|IP addresses|internet protocol|IP version 6|link-local address|loopback address|global unicast address|unique local address|multicast address|anycast address|source address|destination address|network address|host address|subnet prefix|routing prefix|interface identifier|SLAAC|stateless address autoconfiguration|DHCPv6|neighbor discovery|router advertisement|solicited-node multicast|IP-כתובת ה)",
+        "keywords_readable": "IPv6, IPv6 address, IPv6 addresses, IP address, IP addresses, internet protocol, IP version 6, link-local address, loopback address, global unicast address, unique local address, multicast address, anycast address, source address, destination address, network address, host address, subnet prefix, routing prefix, interface identifier, SLAAC, stateless address autoconfiguration, DHCPv6, neighbor discovery, router advertisement, solicited-node multicast, IP-כתובת ה"
+      }
+    }
+  },
+  {
+    "identifier": "latvia postcode",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.geopostcodes.com/country/latvia/address-format/",
+        "https://www.postgrid.com/global-address-format/latvia-address-format/",
+        "https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/lvaEn.pdf",
+        "https://ling-app.com/blog/read-latvian-addresses/"
+      ],
+      "policies": [
+        "Format is LV-NNNN where LV is the country code and NNNN is a 4-digit numeric code (source: multiple references in scraped text including GeoPostcodes and address format guides)",
+        "Total length is 7 characters including the hyphen: 2 letters (LV), 1 hyphen, and 4 digits (source: consistent across all examples in scraped text)",
+        "The prefix 'LV' is mandatory and represents the ISO 3166-1 alpha-2 country code for Latvia (source: ISO codes table in scraped text)",
+        "The 4-digit numeric portion ranges from 0000 to 9999 with no alphabetic characters (source: format specification 'LV-NNNN' and examples like LV-5401, LV-2345, LV-1234)",
+        "The hyphen separator between country code and numeric digits is required (source: all address examples consistently show 'LV-' format)",
+        "Postal codes are written after the city name in domestic addresses (source: address format guidelines stating 'City Name and Postal Code (LV-4 digits)')",
+        "For international mail, the postal code appears before the country name 'LATVIA' which should be in capital letters (source: address format examples showing 'RIGA, LV-2345' followed by 'LATVIA')",
+        "The term for postal code in Latvian is 'Pasta indekss' (source: terminology table in scraped text)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Latvijas Pasts (Latvia Post)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "lv-prefix-mandatory",
+          "regex": "(?<![:\\w])LV-\\d{4}(?![:\\w])",
+          "description": "Must begin with the ISO 3166-1 alpha-2 country code 'LV' in uppercase"
+        },
+        {
+          "rule_id": "hyphen-separator-required",
+          "regex": "(?<![:\\w])LV-\\d{4}(?![:\\w])",
+          "description": "Must contain a hyphen separator between the country code and numeric portion"
+        },
+        {
+          "rule_id": "four-digit-numeric",
+          "regex": "(?<![:\\w])LV-\\d{4}(?![:\\w])",
+          "description": "Must end with exactly 4 numeric digits (0-9) with no alphabetic characters"
+        },
+        {
+          "rule_id": "total-length-seven",
+          "regex": "(?<![:\\w])LV-\\d{4}(?![:\\w])",
+          "description": "Total length must be exactly 7 characters: 2 letters, 1 hyphen, 4 digits"
+        },
+        {
+          "rule_id": "numeric-range-0000-9999",
+          "regex": "(?<![:\\w])LV-\\d{4}(?![:\\w])",
+          "description": "The 4-digit numeric portion ranges from 0000 to 9999"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])LV-\\d{4}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:pasta indekss|Latvijas Pasts|Latvia postal code|Latvian postcode|Latvian postal code|Latvia post code|adrese Latvij[aā]|pasta indeksa sektors|R[iī]ga LV-|pils[eē]ta un pasta indekss|Latvijas adrese|dz[iī]vesvieta Latvij[aā]|s[uū]t[iī]juma adrese|pasta kods|Latvian address|mailing address Latvia|ZIP code Latvia|postal index Latvia|Riga postal code|Latvijas pasta indekss)",
+        "keywords_readable": "pasta indekss, Latvijas Pasts, Latvia postal code, Latvian postcode, Latvian postal code, Latvia post code, adrese Latvijā, pasta indeksa sektors, Rīga LV-, pilsēta un pasta indekss, Latvijas adrese, dzīvesvieta Latvijā, sūtījuma adrese, pasta kods, Latvian address, mailing address Latvia, ZIP code Latvia, postal index Latvia, Riga postal code, Latvijas pasta indekss"
+      }
+    }
+  },
+  {
+    "identifier": "Qatar passport",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [],
+      "policies": [
+        {
+          "rule": "Format consists of alphanumeric characters",
+          "details": "Qatar passport numbers typically contain 8-9 characters mixing letters and numbers"
+        },
+        {
+          "rule": "Standard format is one letter followed by 8 digits",
+          "details": "Most common pattern: [A-Z][0-9]{8}"
+        },
+        {
+          "rule": "No embedded spaces or special characters",
+          "details": "Passport number is continuous alphanumeric string"
+        },
+        {
+          "rule": "Case insensitive but typically uppercase",
+          "details": "Letters are printed in uppercase on passport documents"
+        },
+        {
+          "rule": "Machine readable zone (MRZ) follows ICAO Document 9303 standard",
+          "details": "Passport number appears in MRZ line with document type code 'P' for passport"
+        }
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": null,
+          "keywords": [
+            "qatar passport",
+            "passport",
+            "passport number",
+            "passport no",
+            "جواز سفر"
+          ],
+          "rules": [
+            "Pattern matching for alphanumeric sequences",
+            "Keyword proximity detection",
+            "Confidence scoring based on context"
+          ]
+        },
+        {
+          "vendor": "Netskope",
+          "regex": null,
+          "keywords": [
+            "qatar passport",
+            "passport",
+            "QA passport",
+            "passport number"
+          ],
+          "rules": [
+            "Context-based detection with keywords",
+            "Pattern validation for document numbers",
+            "Geographic entity recognition"
+          ]
+        },
+        {
+          "vendor": "Broadcom/Symantec",
+          "regex": "\\b[A-Z][0-9]{8}\\b",
+          "keywords": [
+            "passport",
+            "qatar",
+            "passport number",
+            "travel document"
+          ],
+          "rules": [
+            "Alphanumeric pattern matching",
+            "Keyword correlation",
+            "Document type classification"
+          ]
+        },
+        {
+          "vendor": "Zscaler",
+          "regex": null,
+          "keywords": [
+            "passport",
+            "qatar passport",
+            "passport no",
+            "passport#"
+          ],
+          "rules": [
+            "Pattern recognition with contextual keywords",
+            "Country-specific identifier detection",
+            "Multi-pattern validation"
+          ]
+        },
+        {
+          "vendor": "Forcepoint",
+          "regex": "\\b[A-Z][0-9]{8}\\b",
+          "keywords": [
+            "passport",
+            "qatar",
+            "passport number",
+            "travel document number"
+          ],
+          "rules": [
+            "Regular expression matching",
+            "Keyword proximity analysis",
+            "Document classification"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "qatar passport",
+        "passport",
+        "passport number",
+        "passport no",
+        "passport#",
+        "passport num",
+        "QA passport",
+        "travel document",
+        "travel document number",
+        "qatar travel document",
+        "جواز سفر",
+        "جواز سفر قطري",
+        "رقم جواز السفر",
+        "passport id",
+        "document number",
+        "qatar",
+        "QAT",
+        "state of qatar",
+        "دولة قطر",
+        "ministry of interior qatar",
+        "passport book number",
+        "passport card",
+        "national passport",
+        "international passport",
+        "machine readable passport",
+        "biometric passport",
+        "e-passport"
+      ],
+      "numbering_authority": "Ministry of Interior of Qatar - Passports Department (General Directorate of Passports)",
+      "policy_confidence": "low",
+      "policy_confidence_reason": "No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "letter-plus-eight-digits",
+          "regex": "(?<![:\\w])[A-Z][0-9]{8}(?![:\\w])",
+          "description": "One uppercase letter followed by exactly 8 digits"
+        },
+        {
+          "rule_id": "alphanumeric-8-9-chars",
+          "regex": "(?<![:\\w])[A-Z]\\d{8}(?![:\\w])",
+          "description": "Alphanumeric string of 8-9 characters total length"
+        },
+        {
+          "rule_id": "no-spaces-or-special-chars",
+          "regex": "(?<![:\\w])[A-Z][0-9]{8}(?![:\\w])",
+          "description": "Continuous alphanumeric string with no embedded spaces, hyphens, or special characters"
+        },
+        {
+          "rule_id": "uppercase-letters",
+          "regex": "(?<![:\\w])[A-Z][0-9]{8}(?![:\\w])",
+          "description": "All letters are uppercase (case insensitive but printed uppercase)"
+        },
+        {
+          "rule_id": "icao-mrz-compliant",
+          "regex": "(?<![:\\w])[A-Z][0-9]{8}(?![:\\w])",
+          "description": "Passport number appears in machine readable zone following ICAO Document 9303 standard with document type code 'P'"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]\\d{8}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:qatar passport|QA passport|passport number|passport no|passport#|travel document|travel document number|qatar travel document|جواز سفر|جواز سفر قطري|رقم جواز السفر|state of qatar|دولة قطر|ministry of interior qatar|passport book number|machine readable passport|biometric passport|e-passport|international passport)",
+        "keywords_readable": "qatar passport, QA passport, passport number, passport no, passport#, travel document, travel document number, qatar travel document, جواز سفر, جواز سفر قطري, رقم جواز السفر, state of qatar, دولة قطر, ministry of interior qatar, passport book number, machine readable passport, biometric passport, e-passport, international passport"
+      }
+    }
+  },
+  {
+    "identifier": "Russian Military Identity Number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [],
+      "policies": [
+        "Format: 10-digit numeric identifier",
+        "Structure: NNNN-NNNNNN where N represents digits",
+        "Length: Exactly 10 digits, often formatted with hyphen after 4th digit",
+        "Character types: Numeric only (0-9)",
+        "No check digit algorithm publicly documented",
+        "Issued to all Russian military personnel upon enlistment",
+        "First 4 digits typically indicate military district or branch allocation",
+        "Remaining 6 digits represent sequential assignment within district/branch",
+        "Format may appear without hyphen as continuous 10-digit string",
+        "Also known as 'военный билет номер' (military ticket number)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "\\b\\d{4}-?\\d{6}\\b",
+          "keywords": [
+            "военный билет",
+            "military ID",
+            "military identity",
+            "Russian military",
+            "военный номер",
+            "military number"
+          ],
+          "rules": [
+            "10 consecutive digits with optional hyphen after 4th position",
+            "Context-based detection requiring proximity to Russian military keywords",
+            "Medium confidence level due to generic numeric pattern"
+          ]
+        },
+        {
+          "vendor": "Netskope",
+          "regex": null,
+          "keywords": [
+            "Russian military ID",
+            "военный билет",
+            "military identity number"
+          ],
+          "rules": [
+            "Pattern matching for 10-digit sequences",
+            "Keyword proximity detection",
+            "Regional context (Russia) required for classification"
+          ]
+        },
+        {
+          "vendor": "Broadcom/Symantec",
+          "regex": "\\d{4}-\\d{6}",
+          "keywords": [
+            "military ID",
+            "Russian military",
+            "военный"
+          ],
+          "rules": [
+            "10-digit numeric pattern with hyphen separator",
+            "Requires contextual keywords within 300 characters",
+            "Part of Eastern European military identifier detection set"
+          ]
+        },
+        {
+          "vendor": "Forcepoint",
+          "regex": "\\b\\d{4}[\\s-]?\\d{6}\\b",
+          "keywords": [
+            "military identity",
+            "Russian military ID",
+            "военный билет номер"
+          ],
+          "rules": [
+            "10-digit pattern with optional separator (space or hyphen)",
+            "Keyword-based confidence scoring",
+            "Requires document language detection (Russian) for high confidence"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "военный билет",
+        "военный билет номер",
+        "военный номер",
+        "military ID",
+        "military identity",
+        "military identity number",
+        "military number",
+        "Russian military",
+        "Russian military ID",
+        "Russian military identity",
+        "Russian military number",
+        "военный",
+        "military ticket",
+        "military ticket number",
+        "воен. билет",
+        "МО РФ",
+        "Ministry of Defence",
+        "Министерство обороны",
+        "service number",
+        "military service number",
+        "Russian service number",
+        "armed forces ID",
+        "Russian armed forces"
+      ],
+      "numbering_authority": "Ministry of Defence of the Russian Federation (Министерство обороны Российской Федерации)",
+      "policy_confidence": "low",
+      "policy_confidence_reason": "No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "length-10-digits",
+          "regex": "(?<![:\\w])\\d{4}[\\s-]?\\d{6}(?![:\\w])",
+          "description": "Exactly 10 numeric digits (0-9)"
+        },
+        {
+          "rule_id": "hyphen-after-4th-digit",
+          "regex": "(?<![:\\w])\\d{4}-?\\d{6}(?![:\\w])",
+          "description": "Optional hyphen separator after the 4th digit, creating format NNNN-NNNNNN"
+        },
+        {
+          "rule_id": "space-after-4th-digit",
+          "regex": "\\b\\d{4} ?\\d{6}\\b",
+          "description": "Optional space separator after the 4th digit, creating format NNNN NNNNNN"
+        },
+        {
+          "rule_id": "first-4-digits-district",
+          "regex": "(?<![:\\w])\\d{4}[\\s-]?\\d{6}(?![:\\w])",
+          "description": "First 4 digits typically indicate military district or branch allocation"
+        },
+        {
+          "rule_id": "last-6-digits-sequential",
+          "regex": "(?<![:\\w])\\d{4}[\\s-]?\\d{6}(?![:\\w])",
+          "description": "Remaining 6 digits represent sequential assignment within district/branch"
+        },
+        {
+          "rule_id": "continuous-10-digit-string",
+          "regex": "(?<![:\\w])\\d{4}-?\\d{6}(?![:\\w])",
+          "description": "May appear without separator as continuous 10-digit string"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])\\d{4}[\\s-]?\\d{6}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:военный билет|военный билет номер|военный номер|воен\\. билет|МО РФ|Министерство обороны|Министерство обороны Российской Федерации|Russian military ID|Russian military identity|Russian military number|Russian service number|Russian armed forces|military ticket number|military service number|armed forces ID)",
+        "keywords_readable": "военный билет, военный билет номер, военный номер, воен\\. билет, МО РФ, Министерство обороны, Министерство обороны Российской Федерации, Russian military ID, Russian military identity, Russian military number, Russian service number, Russian armed forces, military ticket number, military service number, armed forces ID"
+      }
+    }
+  },
+  {
+    "identifier": "UAE National Identity Card Number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://icp.gov.ae/wp-content/uploads/2020/10/Breifing-on-The-UAE-National-ID-Card-Program-1.pdf",
+        "https://icp.gov.ae/wp-content/uploads/2020/10/UAE-National-ID-Card-Progam-1.pdf",
+        "https://u.ae/en/information-and-services/visa-and-emirates-id/emirates-id",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-uae-identity-card-number",
+        "https://learn.microsoft.com/nb-no/purview/sit-defn-uae-identity-card-number",
+        "https://learn.microsoft.com/sv-se/purview/sit-defn-uae-identity-card-number"
+      ],
+      "policies": [
+        "The Emirates ID number consists of exactly 15 digits (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security official documentation)",
+        "The identity number is unique and non-repeating for each holder (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)",
+        "The identity number remains with the holder permanently throughout their lifetime (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)",
+        "The card contains a smart chip that can store up to 32,000 letters of information (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)",
+        "The card includes biometric data in the form of fingerprint information stored on the chip (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)",
+        "The card incorporates public key infrastructure including digital signature and authentication certificates (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)",
+        "The card features nine security features including accurate letters, ultraviolet ink, and line drawing to prevent falsification (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)",
+        "It is a legal requirement for all UAE citizens and residents to apply for and carry the Emirates ID at all times (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_uae_id_card_number",
+          "keywords": [
+            "Emirates id",
+            "ID number",
+            "id no",
+            "id #",
+            "id#",
+            "identification number",
+            "identification no",
+            "identification #",
+            "identification#",
+            "emirates identity card",
+            "Insurance Number",
+            "insurance no",
+            "insurance#",
+            "insurance #",
+            "التأمين رقم",
+            "التأمينرقم#",
+            "رقم الهوية",
+            "رقم الهوية#"
+          ],
+          "rules": [
+            "Fifteen digits with optional hyphens",
+            "Must pass the Luhn check",
+            "Pattern: three digits, optional hyphen, four digits, optional hyphen, seven digits, optional hyphen, one digit",
+            "High confidence (85%): regex match + keyword within 300 characters proximity",
+            "Medium confidence (75%): regex match only within 300 characters proximity"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "Emirates id",
+        "ID number",
+        "id no",
+        "id #",
+        "id#",
+        "identification number",
+        "identification no",
+        "identification #",
+        "identification#",
+        "emirates identity card",
+        "Insurance Number",
+        "insurance no",
+        "insurance#",
+        "insurance #",
+        "التأمين رقم",
+        "التأمينرقم#",
+        "رقم الهوية",
+        "رقم الهوية#",
+        "UAE Identity Card Number",
+        "Keyword_uae_id_card_number"
+      ],
+      "numbering_authority": "Federal Authority for Identity, Citizenship, Customs and Ports Security (ICP)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "exactly-15-digits",
+          "regex": "(?<![:\\w])\\d{3}-?\\d{4}-?\\d{7}-?\\d(?![:\\w])",
+          "description": "The Emirates ID number consists of exactly 15 digits"
+        },
+        {
+          "rule_id": "optional-hyphens",
+          "regex": "(?<![:\\w])\\d{3}-?\\d{4}-?\\d{7}-?\\d(?![:\\w])",
+          "description": "The 15 digits may be formatted with optional hyphens in the pattern: three digits, optional hyphen, four digits, optional hyphen, seven digits, optional hyphen, one digit"
+        },
+        {
+          "rule_id": "luhn-check",
+          "regex": "(?<![:\\w])(?=(?:\\d[\\s-]*){15}\\b)(?=(?:\\d[\\s-]*){14}\\d(?!\\d))(?:\\d{3}[\\s-]?\\d{4}[\\s-]?\\d{7}[\\s-]?\\d)(?![:\\w])",
+          "description": "The Emirates ID number must pass the Luhn check digit validation algorithm"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])(?<![:\\w])\\d{3}-?\\d{4}-?\\d{7}-?\\d(?![:\\w])(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Emirates id|Emirates ID|Emirates identity card|UAE Identity Card|UAE ID|identification number|Emirates identification|بطاقة الهوية الإماراتية|رقم الهوية|رقم الهوية الإماراتية|هوية إماراتية|التأمين رقم|رقم التأمين|Insurance Number UAE|ICP card|Federal Authority Identity|resident identity card UAE|citizen identity card UAE|Emirates biometric card)",
+        "keywords_readable": "Emirates id, Emirates ID, Emirates identity card, UAE Identity Card, UAE ID, identification number, Emirates identification, بطاقة الهوية الإماراتية, رقم الهوية, رقم الهوية الإماراتية, هوية إماراتية, التأمين رقم, رقم التأمين, Insurance Number UAE, ICP card, Federal Authority Identity, resident identity card UAE, citizen identity card UAE, Emirates biometric card"
+      }
+    }
+  },
+  {
+    "identifier": "USA Medicaid Number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [],
+      "policies": [
+        "Medicaid ID format varies by state as each state administers its own Medicaid program",
+        "Length typically ranges from 8 to 14 alphanumeric characters depending on state",
+        "May contain letters, numbers, or combination thereof",
+        "Some states use SSN-based formats (9 digits), others use state-specific alphanumeric formats",
+        "No universal check digit algorithm across all states",
+        "Format examples: 12345678A (9 chars), 1234567890AB (12 chars), AA12345678 (10 chars)",
+        "Some states prefix with state code or specific letter identifiers",
+        "May include hyphens or spaces as separators in some state formats",
+        "Beneficiary Identification Number (BIN) used in some states",
+        "MSIS (Medicaid Statistical Information System) ID may be referenced but is internal",
+        "No single standardized format exists across all 50 states and territories"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": null,
+          "keywords": [
+            "medicaid",
+            "medicaid id",
+            "medicaid number",
+            "medicaid beneficiary",
+            "mcd",
+            "medicaid identification"
+          ],
+          "rules": [
+            "Pattern matching for 8-14 alphanumeric characters",
+            "Keyword proximity detection",
+            "Context-based classification using surrounding text",
+            "May combine with state identifiers"
+          ]
+        },
+        {
+          "vendor": "Netskope",
+          "regex": null,
+          "keywords": [
+            "medicaid",
+            "medicaid id",
+            "medicaid number",
+            "medicaid beneficiary id"
+          ],
+          "rules": [
+            "Alphanumeric pattern detection",
+            "Keyword-based detection",
+            "Length validation (typically 8-14 characters)",
+            "Context analysis"
+          ]
+        },
+        {
+          "vendor": "Broadcom/Symantec",
+          "regex": null,
+          "keywords": [
+            "medicaid",
+            "medicaid id",
+            "medicaid number",
+            "medicaid identification number"
+          ],
+          "rules": [
+            "Pattern-based detection with state variations",
+            "Keyword proximity matching",
+            "Alphanumeric character validation"
+          ]
+        },
+        {
+          "vendor": "Zscaler",
+          "regex": null,
+          "keywords": [
+            "medicaid",
+            "medicaid id",
+            "medicaid number"
+          ],
+          "rules": [
+            "Keyword-based detection",
+            "Pattern matching for common formats",
+            "Context-aware classification"
+          ]
+        },
+        {
+          "vendor": "Forcepoint",
+          "regex": null,
+          "keywords": [
+            "medicaid",
+            "medicaid id",
+            "medicaid number",
+            "medicaid beneficiary"
+          ],
+          "rules": [
+            "Alphanumeric pattern detection",
+            "Keyword correlation",
+            "Length-based validation"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "medicaid",
+        "medicaid id",
+        "medicaid number",
+        "medicaid identification",
+        "medicaid identification number",
+        "medicaid beneficiary",
+        "medicaid beneficiary id",
+        "medicaid beneficiary number",
+        "medicaid recipient",
+        "medicaid recipient id",
+        "medicaid member id",
+        "medicaid member number",
+        "mcd",
+        "mcd id",
+        "mcd number",
+        "state medicaid",
+        "state medicaid id",
+        "medicaid card",
+        "medicaid card number",
+        "beneficiary identification number",
+        "bin",
+        "medicaid bin",
+        "recipient id",
+        "recipient identification number",
+        "medical assistance id",
+        "medical assistance number",
+        "ma id",
+        "ma number",
+        "medicaid enrollee",
+        "medicaid enrollee id",
+        "medicaid subscriber",
+        "medicaid subscriber id",
+        "medicaid policy number",
+        "state medical assistance",
+        "msis id"
+      ],
+      "numbering_authority": "Centers for Medicare & Medicaid Services (CMS) - federal oversight, but individual state Medicaid agencies issue and manage their own beneficiary identification numbers",
+      "policy_confidence": "low",
+      "policy_confidence_reason": "No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "variable-length-alphanumeric",
+          "regex": "(?<![:\\w])[A-Z0-9]{8,14}(?![:\\w])",
+          "description": "Medicaid ID consists of 8 to 14 alphanumeric characters, with length varying by state"
+        },
+        {
+          "rule_id": "alphanumeric-composition",
+          "regex": "(?<![:\\w])[A-Z0-9]{8,14}(?![:\\w])",
+          "description": "May contain letters (A-Z), numbers (0-9), or combination thereof depending on state format"
+        },
+        {
+          "rule_id": "ssn-based-format",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Some states use SSN-based formats consisting of 9 digits"
+        },
+        {
+          "rule_id": "state-prefix-format",
+          "regex": "(?<![:\\w])[A-Z0-9][\\sA-Z0-9-]{6,12}[A-Z0-9](?![:\\w])",
+          "description": "Some states prefix with state code or specific letter identifiers"
+        },
+        {
+          "rule_id": "optional-separators",
+          "regex": "(?<![:\\w])[A-Z0-9](?:[A-Z0-9]|\\s|-){6,12}[A-Z0-9](?![:\\w])",
+          "description": "May include hyphens or spaces as separators in some state formats"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z0-9](?:[A-Z0-9]|\\s|-){6,12}[A-Z0-9](?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:medicaid|medicaid id|medicaid number|medicaid identification|medicaid identification number|medicaid beneficiary|medicaid beneficiary id|medicaid beneficiary number|medicaid recipient|medicaid recipient id|medicaid member id|medicaid member number|medicaid card|medicaid card number|medicaid enrollee|medicaid enrollee id|medicaid subscriber|medicaid subscriber id|medicaid policy number|state medicaid|state medicaid id|beneficiary identification number|recipient identification number|medical assistance id|medical assistance number|state medical assistance|mcd id|mcd number)",
+        "keywords_readable": "medicaid, medicaid id, medicaid number, medicaid identification, medicaid identification number, medicaid beneficiary, medicaid beneficiary id, medicaid beneficiary number, medicaid recipient, medicaid recipient id, medicaid member id, medicaid member number, medicaid card, medicaid card number, medicaid enrollee, medicaid enrollee id, medicaid subscriber, medicaid subscriber id, medicaid policy number, state medicaid, state medicaid id, beneficiary identification number, recipient identification number, medical assistance id, medical assistance number, state medical assistance, mcd id, mcd number"
+      }
+    }
+  },
+  {
+    "identifier": "USA Medicare Number (MBI)",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf",
+        "https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi.pdf",
+        "https://infinedi.net/wp-content/uploads/2020/04/New-Medicare-Card-Format.pdf",
+        "https://www.plasticsurgery.org/documents/Health-Policy/Transition-to-New-Medicare-Numbers-and-Cards.pdf",
+        "https://www.csscoperations.com/internet/csscw3_files.nsf/F/CSSCAppendix_3C_MBI_Edits_11132018.pdf/$FILE/Appendix_3C_MBI_Edits_11132018.pdf",
+        "https://learn.microsoft.com/fi-fi/purview/sit-defn-medicare-beneficiary-identifier-card",
+        "https://learn.microsoft.com/nl-nl/Purview/sit-defn-medicare-beneficiary-identifier-card",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-medicare-beneficiary-identifier-card",
+        "https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf"
+      ],
+      "policies": [
+        "MBI is exactly 11 characters long (Source: CMS Medicare documentation)",
+        "MBI uses only uppercase letters (except S, L, O, I, B, Z) and numbers 0-9 (Source: CMS Medicare documentation)",
+        "Position 1 is always a number (1-9) (Source: CMS Medicare documentation)",
+        "Position 2 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)",
+        "Position 3 is either a letter or a number (Source: CMS Medicare documentation)",
+        "Position 4 is always a number (0-9) (Source: CMS Medicare documentation)",
+        "Position 5 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)",
+        "Position 6 is either a letter or a number (Source: CMS Medicare documentation)",
+        "Position 7 is always a number (0-9) (Source: CMS Medicare documentation)",
+        "Position 8 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)",
+        "Position 9 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)",
+        "Position 10 is always a number (0-9) (Source: CMS Medicare documentation)",
+        "Position 11 is always a number (0-9) (Source: CMS Medicare documentation)",
+        "Letters S, L, O, I, B, and Z are never used to avoid confusion with numbers (Source: CMS Medicare documentation)",
+        "MBI replaced the Health Insurance Claim Number (HICN) which contained Social Security Numbers (Source: CMS Medicare documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_mbi_card",
+          "keywords": [
+            "mbi",
+            "mbi#",
+            "medicare beneficiary #",
+            "medicare beneficiary identifier",
+            "medicare beneficiary no",
+            "medicare beneficiary number",
+            "medicare beneficiary#"
+          ],
+          "rules": [
+            "11 character alphanumeric pattern",
+            "one digit between 1 to 9",
+            "one letter excluding S, L, O, I, B, Z",
+            "one digit or letter excluding S, L, O, I, B, Z",
+            "one digit",
+            "an optional Hyphen",
+            "one letter excluding S, L, O, I, B, Z",
+            "one digit or letter excluding S, L, O, I, B, Z",
+            "one digit",
+            "an optional Hyphen",
+            "two letters excluding S, L, O, I, B, Z",
+            "two digits",
+            "High confidence (85%): pattern match + keyword within 300 characters",
+            "Medium confidence (75%): pattern match only within 300 characters"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "mbi",
+        "mbi#",
+        "medicare beneficiary #",
+        "medicare beneficiary identifier",
+        "medicare beneficiary no",
+        "medicare beneficiary number",
+        "medicare beneficiary#",
+        "Medicare Beneficiary Identifier",
+        "MBI card",
+        "MBI"
+      ],
+      "numbering_authority": "Centers for Medicare & Medicaid Services (CMS), U.S. Department of Health and Human Services (HHS)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "mbi-length",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "MBI is exactly 11 characters long"
+        },
+        {
+          "rule_id": "mbi-character-set",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "MBI uses only uppercase letters (excluding S, L, O, I, B, Z) and numbers 0-9"
+        },
+        {
+          "rule_id": "mbi-position-1-numeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 1 is always a number (1-9)"
+        },
+        {
+          "rule_id": "mbi-position-2-alpha",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 2 is always a letter (A-Z, excluding S, L, O, I, B, Z)"
+        },
+        {
+          "rule_id": "mbi-position-3-alphanumeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 3 is either a letter (excluding S, L, O, I, B, Z) or a number (0-9)"
+        },
+        {
+          "rule_id": "mbi-position-4-numeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 4 is always a number (0-9)"
+        },
+        {
+          "rule_id": "mbi-position-5-alpha",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 5 is always a letter (A-Z, excluding S, L, O, I, B, Z)"
+        },
+        {
+          "rule_id": "mbi-position-6-alphanumeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 6 is either a letter (excluding S, L, O, I, B, Z) or a number (0-9)"
+        },
+        {
+          "rule_id": "mbi-position-7-numeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 7 is always a number (0-9)"
+        },
+        {
+          "rule_id": "mbi-position-8-alpha",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 8 is always a letter (A-Z, excluding S, L, O, I, B, Z)"
+        },
+        {
+          "rule_id": "mbi-position-9-alpha",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 9 is always a letter (A-Z, excluding S, L, O, I, B, Z)"
+        },
+        {
+          "rule_id": "mbi-position-10-numeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 10 is always a number (0-9)"
+        },
+        {
+          "rule_id": "mbi-position-11-numeric",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "Position 11 is always a number (0-9)"
+        },
+        {
+          "rule_id": "mbi-optional-hyphen",
+          "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+          "description": "MBI may contain optional hyphens after position 4 and position 7 for readability (e.g., 1EG4-TE5-MK73)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Medicare Beneficiary Identifier|Medicare Beneficiary Number|medicare beneficiary|MBI card|MBI number|Medicare card|Medicare ID|Medicare identification|Medicare enrollment|CMS beneficiary|health insurance claim number|Medicare coverage|Medicare eligibility|red white and blue card)",
+        "keywords_readable": "Medicare Beneficiary Identifier, Medicare Beneficiary Number, medicare beneficiary, MBI card, MBI number, Medicare card, Medicare ID, Medicare identification, Medicare enrollment, CMS beneficiary, health insurance claim number, Medicare coverage, Medicare eligibility, red white and blue card"
+      }
+    }
+  },
+  {
+    "identifier": "USA SWIFT / BIC Code",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://convera.com/resources/swift-bic-codes/",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-swift-code"
+      ],
+      "policies": [
+        "Total length is 8 or 11 characters (8-character format for head office, 11-character format includes branch code)",
+        "Positions 1-4: 4-letter bank code, typically an abbreviation of the bank name (letters only)",
+        "Positions 5-6: 2-letter country code identifying the country where the bank is located (for USA: 'US')",
+        "Positions 7-8: 2-character location code (letters or digits) identifying the bank's main office location",
+        "Positions 9-11: Optional 3-character branch code; 'XXX' commonly denotes the bank's head office",
+        "SWIFT/BIC codes identify banks and financial institutions, not individual accounts (unlike IBANs)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_swift",
+          "keywords": [
+            "international organization for standardization 9362",
+            "iso 9362",
+            "iso9362",
+            "swift#",
+            "swiftcode",
+            "swiftnumber",
+            "swiftroutingnumber",
+            "swift code",
+            "swift number #",
+            "swift routing number",
+            "bic number",
+            "bic code",
+            "bic #",
+            "bic#",
+            "bank identifier code",
+            "Organisation internationale de normalisation 9362",
+            "rapide #",
+            "code SWIFT",
+            "le numéro de swift",
+            "swift numéro d'acheminement",
+            "le numéro BIC",
+            "# BIC",
+            "code identificateur de banque",
+            "SWIFTコード",
+            "SWIFT番号",
+            "BIC番号",
+            "BICコード",
+            "SWIFT コード",
+            "SWIFT 番号",
+            "BIC 番号",
+            "BIC コード",
+            "金融機関識別コード",
+            "金融機関コード",
+            "銀行コード"
+          ],
+          "rules": [
+            "four-letter bank code (not case-sensitive)",
+            "an optional space",
+            "4-28 letters or digits (the Basic Bank Account Number (BBAN))",
+            "an optional space",
+            "one to three letters or digits (remainder of the BBAN)",
+            "total format: four letters followed by 5-31 letters or digits",
+            "confidence level: 75% (medium confidence)",
+            "proximity: 300 characters",
+            "requires both regex match and keyword match"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "international organization for standardization 9362",
+        "iso 9362",
+        "iso9362",
+        "swift#",
+        "swiftcode",
+        "swiftnumber",
+        "swiftroutingnumber",
+        "swift code",
+        "swift number #",
+        "swift routing number",
+        "bic number",
+        "bic code",
+        "bic #",
+        "bic#",
+        "bank identifier code",
+        "Organisation internationale de normalisation 9362",
+        "rapide #",
+        "code SWIFT",
+        "le numéro de swift",
+        "swift numéro d'acheminement",
+        "le numéro BIC",
+        "# BIC",
+        "code identificateur de banque",
+        "SWIFTコード",
+        "SWIFT番号",
+        "BIC番号",
+        "BICコード",
+        "SWIFT コード",
+        "SWIFT 番号",
+        "BIC 番号",
+        "BIC コード",
+        "金融機関識別コード",
+        "金融機関コード",
+        "銀行コード"
+      ],
+      "numbering_authority": "SWIFT (Society for Worldwide Interbank Financial Telecommunication)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length",
+          "regex": "(?<![:\\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\\w])",
+          "description": "Total length is either 8 characters (head office format) or 11 characters (branch code format)"
+        },
+        {
+          "rule_id": "bank-code",
+          "regex": "(?<![:\\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\\w])",
+          "description": "Positions 1-4: 4-letter bank code, typically an abbreviation of the bank name (letters only, A-Z)"
+        },
+        {
+          "rule_id": "country-code-us",
+          "regex": "(?<![:\\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\\w])",
+          "description": "Positions 5-6: 2-letter country code 'US' for United States"
+        },
+        {
+          "rule_id": "location-code",
+          "regex": "(?<![:\\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\\w])",
+          "description": "Positions 7-8: 2-character location code identifying the bank's main office location (letters or digits)"
+        },
+        {
+          "rule_id": "branch-code-optional",
+          "regex": "(?<![:\\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\\w])",
+          "description": "Positions 9-11: Optional 3-character branch code; 'XXX' commonly denotes the bank's head office"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:SWIFT code|SWIFT number|BIC code|BIC number|bank identifier code|SWIFT/BIC|SWIFT BIC|international bank code|wire transfer code|correspondent bank|beneficiary bank SWIFT|intermediary bank BIC|receiving bank code|sender bank SWIFT|financial institution identifier|ISO 9362|SWIFT routing number|international wire|cross-border payment|remittance bank code|bank SWIFT address|institution code SWIFT|clearing code BIC)",
+        "keywords_readable": "SWIFT code, SWIFT number, BIC code, BIC number, bank identifier code, SWIFT/BIC, SWIFT BIC, international bank code, wire transfer code, correspondent bank, beneficiary bank SWIFT, intermediary bank BIC, receiving bank code, sender bank SWIFT, financial institution identifier, ISO 9362, SWIFT routing number, international wire, cross-border payment, remittance bank code, bank SWIFT address, institution code SWIFT, clearing code BIC"
+      }
+    }
+  }
+]

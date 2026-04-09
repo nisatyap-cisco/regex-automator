@@ -224,20 +224,33 @@ def _run_pipeline(run_id: str, condition: str) -> None:
         except ImportError:
             pass
 
+        policy_confidence = policies.get("policy_confidence", "high")
         sot = {
             "data_source": source,
             "total_values": stats.get("total", 0),
             "train_count": stats.get("train", 0),
             "test_count": stats.get("test", 0),
+            "policy_confidence": policy_confidence,
             "policies": policies.get("policies", []),
             "numbering_authority": policies.get("numbering_authority", ""),
             "vendor_patterns": policies.get("vendor_patterns", []),
             "sources": policies.get("sources", []),
             "vendor_keywords": policies.get("vendor_keywords", []),
         }
+        if policy_confidence != "high":
+            sot["policy_confidence_reason"] = policies.get(
+                "policy_confidence_reason",
+                "Relevance gate flagged one or both research phases.",
+            )
+            _log(run_id, f"  ⚠ Policy confidence: {policy_confidence} — "
+                         f"{sot['policy_confidence_reason']}")
         sot_path = RESULTS_DIR / f"{slug}_source_of_truth.json"
         sot_path.write_text(json.dumps(sot, indent=2))
         _log(run_id, f"  Source-of-truth saved → {sot_path.name}")
+
+        if stats.get("total", 0) == 0:
+            _log(run_id, f"  ⚠ No example data in DB (source: {source}). "
+                         "Continuing with policies only.")
 
         _runs[run_id]["step"] = "Step 2/4 — Pattern Analyzer"
         _log(run_id, "Step 2/4: Pattern Analyzer")

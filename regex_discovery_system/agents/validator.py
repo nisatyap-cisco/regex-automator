@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import logging
 import math
+import os
 import random
 import re
 import string
@@ -33,6 +34,19 @@ logger = logging.getLogger(__name__)
 MAX_REMEDIATION_ROUNDS = 2
 SYNTH_COUNT = 1000
 SEED = 42
+
+_FENCE_RE = re.compile(r"^```[\w]*\n?(.*?)```$", re.DOTALL)
+
+
+def _clean_llm_regex(raw: str) -> str:
+    """Strip markdown fences, quotes, and whitespace from an LLM regex response."""
+    text = raw.strip()
+    m = _FENCE_RE.match(text)
+    if m:
+        text = m.group(1).strip()
+    text = text.strip("'\"` \n")
+    return text
+
 
 REMEDIATION_TEMPLATE = """You are a regex engineering expert.
 
@@ -264,7 +278,7 @@ def _validate_value_pattern(
         )
         try:
             response = invoke_claude(prompt, config)
-            candidate_regex = response.strip().strip("'\"` ")
+            candidate_regex = _clean_llm_regex(response)
             re.compile(candidate_regex)
             current_regex = candidate_regex
         except Exception as exc:
@@ -417,8 +431,11 @@ def validate(
     report_path = paths.get("validation_report", "results/validation_report.json")
     final_path = paths.get("final_report", "results/final_report.md")
 
-    with open(test_path) as f:
-        truth_values = [line.strip() for line in f if line.strip()]
+    if os.path.isfile(test_path):
+        with open(test_path) as f:
+            truth_values = [line.strip() for line in f if line.strip()]
+    else:
+        truth_values = []
 
     with open(regex_path) as f:
         regex_data = json.load(f)
@@ -429,7 +446,19 @@ def validate(
 
     is_net_sourced = data_source in ("db", "scrape_tool")
 
-    if is_net_sourced:
+    if not truth_values:
+        logger.warning(
+            "Agent 4: no example data — generating %d LLM test cases from policies only",
+            SYNTH_COUNT,
+        )
+        candidates, llm_labels = _llm_generate_test_cases(
+            condition, truth_values, policies, config, count=SYNTH_COUNT,
+        )
+        if not candidates:
+            logger.warning("Agent 4: LLM test-gen returned nothing and no truth values — validation will be limited")
+            candidates = []
+            llm_labels = None
+    elif is_net_sourced:
         logger.info(
             "Agent 4: NET-SOURCED mode — truth set=%d, generating %d LLM test cases with policies",
             len(truth_values), SYNTH_COUNT,

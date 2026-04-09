@@ -65,16 +65,16 @@ def search_policy_urls(
     api_key = tavily_api_key or os.environ.get("TAVILY_API_KEY")
 
     queries = [
-        f"{condition} format specification rules official",
-        f"{condition} numbering policy allocation government authority",
-        f"{condition} valid range structure check digit specification",
+        # Short, natural queries that work well on Tavily / DuckDuckGo
+        f"{condition} format",
+        f"{condition} rules",
+        f"{condition} format rules",
+        f"{condition} validation",
+        # Slightly more specific — still concise
+        f"{condition} format specification official",
         f"{condition} format wikipedia",
-        f"{condition} validation rules structure format guide",
-        f"{condition} format rules digits length example",
-        f"{condition} official format documentation",
-        f"{condition} numbering system structure ISO standard",
-        f"{condition} regex pattern format definition",
-        f"{condition} identifier format allocation rules breakdown",
+        f"{condition} structure length digits",
+        f"{condition} regex pattern",
     ]
 
     if api_key:

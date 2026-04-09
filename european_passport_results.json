@@ -1,0 +1,1787 @@
+[
+  {
+    "identifier": "Albania passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Albanian_passport"
+      ],
+      "policies": [
+        "Albanian biometric passports were first issued on 24 March 2009 (source: scraped Wikipedia data)",
+        "Current Albanian passports are biometric passports (source: scraped Wikipedia data)",
+        "Passports have a validity period of 5 years for holders under 16 years old (source: scraped Wikipedia data)",
+        "Passports have a validity period of 10 years for holders 16 years and older (source: scraped Wikipedia data)",
+        "Albania issues machine-readable passports compliant with international standards (source: scraped Wikipedia data referencing biometric/machine-readable passport types)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Republic of Albania Ministry of Interior (passport issuance authority)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "machine-readable-format",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "Albanian passports are machine-readable and comply with ICAO Document 9303 standards for machine-readable travel documents"
+        },
+        {
+          "rule_id": "biometric-passport",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "Current Albanian passports issued since 24 March 2009 are biometric passports containing an electronic chip with biometric data"
+        },
+        {
+          "rule_id": "alphanumeric-format",
+          "regex": "(?<![:\\w])[A-Z0-9]{8,9}(?![:\\w])",
+          "description": "Albanian passport numbers follow standard machine-readable passport format, typically consisting of alphanumeric characters"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z0-9]{9}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Albanian passport|Albania passport|pasaport[eë] shqiptare|pasaport[eë]|numri i pasaport[eë]s|pasaport[eë] biometrike|Republic of Albania passport|Republika e Shqip[eë]ris[eë]|pasaport shqiptar|dokument udh[eë]timi|num[eë]r pasaporte|pasaport[eë] elektronike|Albanian travel document|Albania biometric passport|Ministria e Brendshme)",
+        "keywords_readable": "Albanian passport, Albania passport, pasaportë shqiptare, pasaportë, numri i pasaportës, pasaportë biometrike, Republic of Albania passport, Republika e Shqipërisë, pasaport shqiptar, dokument udhëtimi, numër pasaporte, pasaportë elektronike, Albanian travel document, Albania biometric passport, Ministria e Brendshme"
+      }
+    }
+  },
+  {
+    "identifier": "Andorra passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Andorran_passport"
+      ],
+      "policies": [
+        "Andorran passports are biometric passports issued since 8 February 2007 (source: Wikipedia infobox)",
+        "Passports are issued by the Immigration office of Principality of Andorra (source: Wikipedia infobox)",
+        "Child passports (aged 0-17) have a validity of 5 years (source: Wikipedia infobox)",
+        "Adult passports (aged 18-19) have a validity of 5 years (source: Wikipedia infobox)",
+        "Adult passports (aged 20+) have a validity of 10 years (source: Wikipedia infobox)",
+        "Passports serve as identification documents and require Andorran citizenship for eligibility (source: Wikipedia infobox)",
+        "Andorran passports are machine-readable and contain an embedded chip for biometric data (source: Wikipedia infobox reference to biometric passport with chip)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Immigration office of Principality of Andorra",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "andorra-passport-length",
+          "regex": "(?<![:\\w])[A-Z0-9]{1,9}(?![:\\w])",
+          "description": "Andorran passport numbers typically follow the ICAO 9303 machine-readable travel document standard, which specifies alphanumeric passport numbers up to 9 characters"
+        },
+        {
+          "rule_id": "andorra-passport-alphanumeric",
+          "regex": "(?<![:\\w])(?=(?:[A-Z]*\\d[A-Z0-9]*|[0-9]*[A-Z][A-Z0-9]*))(?=\\D*\\d)[A-Z0-9]{6,9}(?![:\\w])",
+          "description": "Passport numbers are alphanumeric, containing both letters and digits in accordance with ICAO standards for machine-readable passports"
+        },
+        {
+          "rule_id": "andorra-passport-biometric",
+          "regex": "(?<![:\\w])[A-Z]\\d{6,7}(?![:\\w])",
+          "description": "All Andorran passports issued since 8 February 2007 are biometric passports with embedded chips containing biometric data"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z0-9](?=.*[A-Z])(?=.*\\d)[A-Z0-9]{1,8}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Andorra passport|Andorran passport|passaport andorr[aà]|pasaporte andorrano|passeport andorran|Principat d'Andorra|Principality of Andorra|Principado de Andorra|Immigration office Andorra|biometric passport Andorra|passaport biom[eé]tric|pasaporte biom[eé]trico|passeport biom[eé]trique|document de viatge|documento de viaje|travel document Andorra|n[uú]mero de passaport|n[uú]mero de pasaporte|num[eé]ro de passeport|passport number Andorra)",
+        "keywords_readable": "Andorra passport, Andorran passport, passaport andorrà, pasaporte andorrano, passeport andorran, Principat d'Andorra, Principality of Andorra, Principado de Andorra, Immigration office Andorra, biometric passport Andorra, passaport biométric, pasaporte biométrico, passeport biométrique, document de viatge, documento de viaje, travel document Andorra, número de passaport, número de pasaporte, numéro de passeport, passport number Andorra"
+      }
+    }
+  },
+  {
+    "identifier": "Armenia passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Armenian_passport"
+      ],
+      "policies": [
+        "Armenian passports have been issued since 1994 (first version) with the current biometric version introduced in 2012 (Source: Wikipedia infobox)",
+        "Current Armenian passports are biometric passports complying with international machine-readable standards (Source: Wikipedia - passport type description)",
+        "Passport validity period is 10 years after issuance (Source: Wikipedia infobox)",
+        "Armenian passports are issued exclusively to Armenian citizens for identification and international travel purposes (Source: Wikipedia infobox)",
+        "The cost of an Armenian passport is 10,000 Armenian Dram (֏) (Source: Wikipedia infobox)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Republic of Armenia Passport and Visa Department (specific authority name not explicitly stated in scraped text)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "biometric-mrp-standard",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Armenian passports are biometric machine-readable travel documents complying with ICAO Doc 9303 standards"
+        },
+        {
+          "rule_id": "passport-number-format",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Armenian passport numbers follow the standard alphanumeric format used in machine-readable passports, typically consisting of letters and/or digits"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z0-9]{9}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Armenian passport|Armenia passport|հայկական անձնագիր|անձնագիր|անձնագրի համար|Republic of Armenia passport|Armenian travel document|Armenian biometric passport|Հայաստանի Հանրապետություն|паспорт Армении|армянский паспорт|Armenian passport number|Armenia travel document|հայկական ճանապարհորդական փաստաթուղթ)",
+        "keywords_readable": "Armenian passport, Armenia passport, հայկական անձնագիր, անձնագիր, անձնագրի համար, Republic of Armenia passport, Armenian travel document, Armenian biometric passport, Հայաստանի Հանրապետություն, паспорт Армении, армянский паспорт, Armenian passport number, Armenia travel document, հայկական ճանապարհորդական փաստաթուղթ"
+      }
+    }
+  },
+  {
+    "identifier": "Austria passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Austrian_passport",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-austria-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-austria-passport-number"
+      ],
+      "policies": [
+        "Format consists of one letter followed by seven digits (Source: Microsoft DLP documentation)",
+        "An optional space may appear between the letter and the seven digits (Source: Microsoft DLP documentation)",
+        "The letter is not case-sensitive (Source: Microsoft DLP documentation)",
+        "Total length is 8 characters (1 letter + 7 digits) or 9 characters if space is included (Source: Microsoft DLP documentation)",
+        "Biometric passports have been issued since 16 June 2006 (Source: Wikipedia - Austrian passport)",
+        "Current version of Austrian passports began issuance on 1 December 2023 (Source: Wikipedia - Austrian passport)",
+        "Passports are valid for 10 years for citizens aged 12 and older, 5 years for children aged 2-11, and 2 years for children up to age 1 (Source: Wikipedia - Austrian passport)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "One letter followed by an optional space and seven digits",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "reisepassnummer",
+            "reisepasse",
+            "No-Reisepass",
+            "Nr-Reisepass",
+            "Reisepass-Nr",
+            "Passnummer",
+            "reisepässe",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "One letter (not case-sensitive)",
+            "One space (optional)",
+            "Seven digits",
+            "Pattern proximity: 300 characters",
+            "High confidence (85%): requires passport number pattern + keyword + date in DD.MM.YYYY format or date keyword",
+            "Medium confidence (75%): requires passport number pattern + keyword",
+            "Date format: DD.MM.YYYY"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "reisepassnummer",
+        "reisepasse",
+        "No-Reisepass",
+        "Nr-Reisepass",
+        "Reisepass-Nr",
+        "Passnummer",
+        "reisepässe",
+        "date of issue",
+        "date of expiry",
+        "Austria Passport Number",
+        "Regex_austria_eu_passport_number",
+        "Keywords_eu_passport_number",
+        "Keywords_austria_eu_passport_number",
+        "Regex_eu_passport_date1",
+        "Keywords_eu_passport_date"
+      ],
+      "numbering_authority": "Local Governments in Austria",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "letter-prefix",
+          "regex": "(?<![:\\w])[A-Za-z] ?\\d{7}(?![:\\w])",
+          "description": "Begins with one letter (A-Z), case-insensitive"
+        },
+        {
+          "rule_id": "optional-space",
+          "regex": "(?<![:\\w])[A-Za-z] ?\\d{7}(?![:\\w])",
+          "description": "An optional space may appear between the letter and the seven digits"
+        },
+        {
+          "rule_id": "seven-digits",
+          "regex": "(?<![:\\w])[A-Za-z] ?\\d{7}(?![:\\w])",
+          "description": "Followed by exactly seven digits (0-9)"
+        },
+        {
+          "rule_id": "total-length",
+          "regex": "(?<![:\\w])[A-Za-z] ?\\d{7}(?![:\\w])",
+          "description": "Total length is 8 characters (1 letter + 7 digits) or 9 characters if space is included"
+        },
+        {
+          "rule_id": "case-insensitive",
+          "regex": "(?<![:\\w])[A-Za-z] ?\\d{7}(?![:\\w])",
+          "description": "The letter prefix is not case-sensitive"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Za-z] ?\\d{7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|reisepassnummer|reisepasse|reisep[aä]sse|No-Reisepass|Nr-Reisepass|Reisepass-Nr|Passnummer|date of issue|date of expiry|Austria passport|Austrian passport|[OÖ]sterreich Reisepass|biometrischer Reisepass|Ausstellungsdatum|Ablaufdatum|G[uü]ltigkeitsdatum|Staatsangeh[oö]rigkeit|[oö]sterreichische Staatsangeh[oö]rigkeit)",
+        "keywords_readable": "passport#, passport #, passportid, passportno, passport no, passportnumber, passport number, passportnumbers, passport numbers, reisepassnummer, reisepasse, reisepässe, No-Reisepass, Nr-Reisepass, Reisepass-Nr, Passnummer, date of issue, date of expiry, Austria passport, Austrian passport, Österreich Reisepass, biometrischer Reisepass, Ausstellungsdatum, Ablaufdatum, Gültigkeitsdatum, Staatsangehörigkeit, österreichische Staatsangehörigkeit"
+      }
+    }
+  },
+  {
+    "identifier": "Azerbaijan passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Azerbaijani_passport"
+      ],
+      "policies": [
+        "Issued by the Ministry of Internal Affairs of Azerbaijan (source: Wikipedia table data)",
+        "Biometric passports have been issued since 1 September 2013 (source: Wikipedia)",
+        "First issued on 28 May 1991 following independence (source: Wikipedia)",
+        "Validity period varies by age: 1 year for children under 1, 3 years for children 1-3, 5 years for children 3-18, and 10 years for individuals over 18 (source: Wikipedia)",
+        "Latest version from 2021 is a biometric passport with machine-readable data page (source: Wikipedia)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Ministry of Internal Affairs of Azerbaijan",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "az-passport-biometric",
+          "regex": "(?<![:\\w])[A-Z]{1,3}[\\s\\-]?\\d{6,9}(?![:\\w])",
+          "description": "Biometric passports issued since 1 September 2013 with machine-readable data page"
+        },
+        {
+          "rule_id": "az-passport-validity-age-based",
+          "regex": "(?<![:\\w])Since no specific format structure or numbering scheme is documented in the available sources for Azerbaijan passports, and there are no hard constraints or example matches provided, it is not possible to create a meaningful regex pattern that would match Azerbaijan passport numbers. The rule describes validity periods by age, but this is a policy constraint about passport validity duration, not a format constraint that can be encoded in a regex pattern.\n\nWithout documented format rules (such as length, character composition, prefix patterns, or structural requirements), any regex would be arbitrary and not based on authoritative sources.\n\n\\b[A-Z0-9]{7,9}(?![:\\w])",
+          "description": "Validity period varies by age: 1 year (under 1), 3 years (1-3), 5 years (3-18), 10 years (over 18)"
+        },
+        {
+          "rule_id": "az-passport-issued-since-1991",
+          "regex": "(?<![:\\w])Since no specific format structure or numbering scheme is documented for Azerbaijan passports, and the rule only specifies they were \"first issued on 28 May 1991 following independence\" without providing any pattern constraints, there is no determinable regex pattern that can match passport numbers based solely on an issuance date.\n\nHowever, if the intent is to match a generic alphanumeric passport identifier that could represent an Azerbaijan passport, a reasonable pattern would be:\n\n\\b[A-Z]{1,3}[\\s\\-]?\\d{6,9}(?![:\\w])",
+          "description": "Passports first issued on 28 May 1991 following independence"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])Based on the provided information, there are no documented specific format structures, numbering schemes, or hard constraints that can be encoded into a regex pattern. The rules describe administrative and validity policies (issuance dates, biometric features, age-based validity periods) rather than the actual format or structure of the passport number itself.\n\nSince no authoritative format rules specify how Azerbaijan passport numbers are structured (length, character composition, prefixes, check digits, etc.), it is not possible to create a meaningful regex pattern that would validate these passport numbers.\n\n\\b(?!)(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Azerbaijan passport|Azərbaycan pasportu|Azərbaycan Respublikası pasportu|pasport n[oö]mrəsi|biometric passport Azerbaijan|Daxili İşlər Nazirliyi|Ministry of Internal Affairs Azerbaijan|Azərbaycan vətəndaşlı[gğ]ı|passport number Azerbaijan|Azərbaycan şəxsiyyət sənədi|Azərbaycan biometrik pasport|Azərbaycan səyahət sənədi|travel document Azerbaijan)",
+        "keywords_readable": "Azerbaijan passport, Azərbaycan pasportu, Azərbaycan Respublikası pasportu, pasport nömrəsi, biometric passport Azerbaijan, Daxili İşlər Nazirliyi, Ministry of Internal Affairs Azerbaijan, Azərbaycan vətəndaşlığı, passport number Azerbaijan, Azərbaycan şəxsiyyət sənədi, Azərbaycan biometrik pasport, Azərbaycan səyahət sənədi, travel document Azerbaijan"
+      }
+    }
+  },
+  {
+    "identifier": "Belarus passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.gov.uk/government/publications/belarus-knowledge-base-profile/belarus-knowledge-base-profile",
+        "https://en.wikipedia.org/wiki/Belarusian_passport"
+      ],
+      "policies": [
+        "Issued by the Ministry of Internal Affairs of Belarus (source: Wikipedia table in scraped text)",
+        "First issued in 1996, with updated version in 2006 and biometric version in 2021 (source: Wikipedia table)",
+        "Valid for 10 years from date of issue (source: Wikipedia table - 'Expiration: 10 years')",
+        "Biometric passports have been issued since 2021 (source: Wikipedia table)",
+        "Passport is used for identification and requires Belarusian citizenship for eligibility (source: Wikipedia table)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Ministry of Internal Affairs of Belarus",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "belarus-passport-alphanumeric",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Belarus passport numbers are alphanumeric identifiers issued by the Ministry of Internal Affairs"
+        },
+        {
+          "rule_id": "belarus-passport-validity",
+          "regex": "(?<![:\\w])Since no specific format structure, check-digit algorithm, or numbering scheme is documented in available sources for Belarus passports, and the only structural information provided relates to validity period (which cannot be encoded in a regex pattern matching passport numbers), there is no identifiable pattern to match.\n\nA regex cannot validate time-based rules like \"valid for 10 years from date of issue\" without context about issue dates, and no passport number format is specified.\n\nTherefore, no meaningful regex can be constructed from the given specifications.(?![:\\w])",
+          "description": "Passports are valid for 10 years from date of issue"
+        },
+        {
+          "rule_id": "belarus-passport-biometric",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Biometric passports have been issued since 2021"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z0-9]{2}[\\s\\-]?[A-Z0-9]{5,7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Belarus passport|Belarusian passport|паспорт Беларусі|беларускі паспарт|паспорт гражданина Беларуси|белорусский паспорт|биометрический паспорт|біяметрычны паспарт|Ministry of Internal Affairs Belarus|МВД Беларуси|МУС Беларусі|номер паспорта|нумар паспарта|passport number Belarus|Belarusian citizenship|грамадзянства Беларусі|гражданство Беларуси)",
+        "keywords_readable": "Belarus passport, Belarusian passport, паспорт Беларусі, беларускі паспарт, паспорт гражданина Беларуси, белорусский паспорт, биометрический паспорт, біяметрычны паспарт, Ministry of Internal Affairs Belarus, МВД Беларуси, МУС Беларусі, номер паспорта, нумар паспарта, passport number Belarus, Belarusian citizenship, грамадзянства Беларусі, гражданство Беларуси"
+      }
+    }
+  },
+  {
+    "identifier": "Belgium passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-belgium-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-belgium-passport-number",
+        "https://learn.microsoft.com/sv-se/purview/sit-defn-belgium-passport-number"
+      ],
+      "policies": [
+        "Format consists of two letters followed by six digits (Source: Microsoft DLP documentation)",
+        "Total length is exactly 8 characters (2 letters + 6 digits)",
+        "No spaces or delimiters are used in the passport number (Source: Microsoft DLP documentation)",
+        "The first two characters must be alphabetic letters",
+        "The last six characters must be numeric digits"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_belgium_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "numéro passeport",
+            "paspoort nr",
+            "paspoort-nr",
+            "paspoortnummer",
+            "paspoortnummers",
+            "Passeport carte",
+            "Passeport livre",
+            "Pass-Nr",
+            "Passnummer",
+            "reisepass kein",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Format: two letters followed by six digits with no spaces or delimiters",
+            "Pattern: two letters and followed by six digits",
+            "High confidence (85%): Regex match + keyword match + date pattern (DD MM YY) or date keyword within 300 characters",
+            "Medium confidence (75%): Regex match + keyword match within 300 characters",
+            "Proximity: 300 characters",
+            "Date format: DD MM YY (Regex_eu_passport_date2)"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "numéro passeport",
+        "paspoort nr",
+        "paspoort-nr",
+        "paspoortnummer",
+        "paspoortnummers",
+        "Passeport carte",
+        "Passeport livre",
+        "Pass-Nr",
+        "Passnummer",
+        "reisepass kein",
+        "date of issue",
+        "date of expiry"
+      ],
+      "numbering_authority": "Belgian Federal Public Service Foreign Affairs (FPS Foreign Affairs)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length-8",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Total length is exactly 8 characters"
+        },
+        {
+          "rule_id": "two-letters-prefix",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "First two characters must be alphabetic letters"
+        },
+        {
+          "rule_id": "six-digits-suffix",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "Last six characters must be numeric digits"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6}(?![:\\w])",
+          "description": "No spaces, hyphens, or other delimiters are used in the passport number"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{6}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passport|passeport|paspoort|reisepass|num[eé]ro passeport|paspoort nr|paspoort-nr|paspoortnummer|paspoortnummers|Passeport carte|Passeport livre|Pass-Nr|Passnummer|Belgian passport|Belgium passport|passport number|passport numbers|date of issue|date of expiry|expiry date|issue date|nationality Belgian|nationalit[eé] belge|nationaliteit Belgische|place of birth|lieu de naissance|geboorteplaats|Royaume de Belgique|Koninkrijk Belgi[eë]|Kingdom of Belgium)",
+        "keywords_readable": "passport, passeport, paspoort, reisepass, numéro passeport, paspoort nr, paspoort-nr, paspoortnummer, paspoortnummers, Passeport carte, Passeport livre, Pass-Nr, Passnummer, Belgian passport, Belgium passport, passport number, passport numbers, date of issue, date of expiry, expiry date, issue date, nationality Belgian, nationalité belge, nationaliteit Belgische, place of birth, lieu de naissance, geboorteplaats, Royaume de Belgique, Koninkrijk België, Kingdom of Belgium"
+      }
+    }
+  },
+  {
+    "identifier": "Bosnia and Herzegovina passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://www.iddeea.gov.ba/wp-content/uploads/WEB/ZAKONODAVSTVO/PODZAKONSKI%20AKTI/Putne%20isprave/8/rulebook_on_design_of_collective_passport_of_bih_55_09.pdf",
+        "https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_passport"
+      ],
+      "policies": [
+        "Bosnia and Herzegovina passports are biometric passports (source: Wikipedia table - 'Type: Passport, biometric passport')",
+        "Current version of biometric passport first issued on 1 October 2014 (source: Wikipedia table)",
+        "Earlier biometric passport version first issued on 14 October 2010 (source: Wikipedia table)",
+        "Passport cost is 50 KM / €25 / $25 (source: Wikipedia table)",
+        "Eligibility requirement is Bosnia and Herzegovina citizenship (source: Wikipedia table - 'Eligibility: Bosnia and Herzegovina citizenship')"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Bosnia and Herzegovina (issuing authority as stated in Wikipedia table)",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "ba-passport-biometric",
+          "regex": "(?<![:\\w])[0-9]{8,9}(?![:\\w])",
+          "description": "Bosnia and Herzegovina passports are biometric passports"
+        },
+        {
+          "rule_id": "ba-passport-current-version",
+          "regex": "(?<![:\\w])[0-9]{7,9}(?![:\\w])",
+          "description": "Current version of biometric passport first issued on 1 October 2014"
+        },
+        {
+          "rule_id": "ba-passport-earlier-version",
+          "regex": "(?<![:\\w])[A-Z0-9]{7,9}(?![:\\w])",
+          "description": "Earlier biometric passport version first issued on 14 October 2010"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])I need to analyze the provided information to create a unified regex for Bosnia and Herzegovina passport numbers.\n\nLooking at the constraints:\n- HARD CONSTRAINTS: None listed\n- AUTHORITATIVE FORMAT RULES: Only describe that passports are biometric, with version dates and administrative details (cost, eligibility)\n- NUMBERING POLICY: States \"The specific format and structure of passport numbers is not documented in the available policies\"\n\nSince there are:\n1. No hard constraints provided\n2. No documented passport number format/structure\n3. No example matches given\n4. Only administrative metadata about the passport type (biometric, dates, costs)\n\nThere is no structural pattern to encode. The rules describe passport characteristics (biometric, version dates) but provide zero information about the actual passport number format, length, character composition, or structure.\n\nWithout any format specification, I cannot produce a meaningful regex pattern. However, given that this is a passport document and following ICAO standards for machine-readable travel documents, and that no specific format is documented, the most I could do is match a generic alphanumeric pattern, but that would be arbitrary.\n\nSince the task requires encoding ALL structural constraints and there are none provided about the actual passport number format, the only honest answer is:\n\n\\b[A-Z0-9]+(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Bosnia and Herzegovina passport|Bosnian passport|BiH passport|Bosnia Herzegovina passport|pasaporte Bosnia y Herzegovina|pasaporte bosnio|паспорт Босне и Херцеговине|босански пасош|putovnica Bosne i Hercegovine|bosanska putovnica|BiH putovnica|broj putovnice|паспортни број|biometric passport Bosnia|biometrijska putovnica|биометријски пасош|Bosnia citizenship|dr[zž]avljanstvo Bosne i Hercegovine|држављанство Босне и Херцеговине)",
+        "keywords_readable": "Bosnia and Herzegovina passport, Bosnian passport, BiH passport, Bosnia Herzegovina passport, pasaporte Bosnia y Herzegovina, pasaporte bosnio, паспорт Босне и Херцеговине, босански пасош, putovnica Bosne i Hercegovine, bosanska putovnica, BiH putovnica, broj putovnice, паспортни број, biometric passport Bosnia, biometrijska putovnica, биометријски пасош, Bosnia citizenship, državljanstvo Bosne i Hercegovine, држављанство Босне и Херцеговине"
+      }
+    }
+  },
+  {
+    "identifier": "Bulgaria passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-bulgaria-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-bulgaria-passport-number"
+      ],
+      "policies": [
+        "Length is exactly 9 digits (Source: Microsoft DLP documentation)",
+        "No spaces or delimiters are permitted in the format (Source: Microsoft DLP documentation)",
+        "Consists only of numeric digits (Source: Microsoft DLP documentation pattern definition)",
+        "Must match the pattern defined by Regex_bulgaria_eu_passport_number for validation (Source: Microsoft DLP documentation)",
+        "Associated dates follow DD.MM.YYYY format for issue and expiry dates (Source: Microsoft DLP documentation Regex_eu_passport_date1)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_bulgaria_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "номер на паспорта",
+            "номер на паспорт",
+            "паспорт №",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Nine digits without spaces and delimiters",
+            "High confidence (85%): Regex match + keyword match + date in DD.MM.YYYY format or date keyword",
+            "Medium confidence (75%): Regex match + keyword match",
+            "Pattern proximity: 300 characters",
+            "Date format: DD.MM.YYYY (Regex_eu_passport_date1)"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "номер на паспорта",
+        "номер на паспорт",
+        "паспорт №",
+        "date of issue",
+        "date of expiry",
+        "Bulgaria passport number",
+        "Bulgaria Passport Number"
+      ],
+      "numbering_authority": "Ministry of Interior of Bulgaria",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "exactly-nine-digits",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Bulgaria passport number must be exactly 9 digits in length"
+        },
+        {
+          "rule_id": "numeric-only",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Consists only of numeric digits (0-9), no alphabetic characters"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "\\b\\d{9}\\b",
+          "description": "No spaces, hyphens, or other delimiters are permitted in the format"
+        },
+        {
+          "rule_id": "associated-date-format",
+          "regex": "\\b\\d{9}\\b",
+          "description": "When dates (issue/expiry) are present in context, they follow DD.MM.YYYY format"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "\\b\\d{9}\\b",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|номер на паспорта|номер на паспорт|паспорт №|date of issue|date of expiry|Bulgaria passport|Bulgarian passport|паспорт|български паспорт|издаден на|валиден до|дата на издаване|дата на изтичане|Република България|Republic of Bulgaria|travel document|документ за пътуване)",
+        "keywords_readable": "passport#, passport #, passportid, passportno, passport no, passportnumber, passport number, passportnumbers, passport numbers, номер на паспорта, номер на паспорт, паспорт №, date of issue, date of expiry, Bulgaria passport, Bulgarian passport, паспорт, български паспорт, издаден на, валиден до, дата на издаване, дата на изтичане, Република България, Republic of Bulgaria, travel document, документ за пътуване"
+      }
+    }
+  },
+  {
+    "identifier": "Croatia passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-croatia-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-croatia-passport-number",
+        "https://learn.microsoft.com/lt-lt/purview/sit-defn-croatia-passport-number"
+      ],
+      "policies": [
+        "Length is exactly 9 digits (Source: Microsoft DLP documentation)",
+        "Contains no spaces or delimiters (Source: Microsoft DLP documentation)",
+        "Consists only of numeric characters (Source: Microsoft DLP documentation)",
+        "Format follows standard EU passport numbering conventions for Croatia",
+        "Associated date format uses DD.MM.YYYY structure when date validation is applied (Source: Microsoft DLP documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_croatia_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "broj putovnice",
+            "br. Putovnice",
+            "br putovnice"
+          ],
+          "rules": [
+            "Nine digits without spaces and delimiters",
+            "Pattern proximity of 300 characters",
+            "High confidence (85%): Regex match + keyword + date in DD.MM.YYYY format or date keyword",
+            "Medium confidence (75%): Regex match + keyword",
+            "Date format: DD.MM.YYYY (Regex_eu_passport_date1)",
+            "Recommended confidence threshold: 75%"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "broj putovnice",
+        "br. Putovnice",
+        "br putovnice",
+        "Croatia Passport Number",
+        "Keywords_eu_passport_number",
+        "Keywords_eu_passport_number_common",
+        "Keywords_croatia_eu_passport_number",
+        "Keywords_eu_passport_date"
+      ],
+      "numbering_authority": "Ministry of the Interior of the Republic of Croatia (Ministarstvo unutarnjih poslova Republike Hrvatske)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "length-nine-digits",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Croatia passport number must be exactly 9 digits in length"
+        },
+        {
+          "rule_id": "numeric-only",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Croatia passport number consists only of numeric characters (0-9)"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Croatia passport number contains no spaces, hyphens, or other delimiters"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "\\b\\d{9}\\b",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|broj putovnice|br\\. Putovnice|br putovnice|Croatia passport|Croatian passport|Croatia Passport Number|Croatian travel document|putovnica|putna isprava|hrvatski putovnica|hrvatska putovnica|Ministarstvo unutarnjih poslova|Republic of Croatia passport|HR passport|Croatia travel document)",
+        "keywords_readable": "passport#, passport #, passportid, passportno, passport no, passportnumber, passport number, passportnumbers, passport numbers, broj putovnice, br\\. Putovnice, br putovnice, Croatia passport, Croatian passport, Croatia Passport Number, Croatian travel document, putovnica, putna isprava, hrvatski putovnica, hrvatska putovnica, Ministarstvo unutarnjih poslova, Republic of Croatia passport, HR passport, Croatia travel document"
+      }
+    }
+  },
+  {
+    "identifier": "Cyprus passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-cyprus-passport-number",
+        "https://learn.microsoft.com/bs-latn-ba/purview/sit-defn-cyprus-passport-number?view=o365-worldwide&source=recommendations",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-cyprus-passport-number",
+        "https://learn.microsoft.com/id-id/purview/sit-defn-cyprus-passport-number?view=o365-worldwide&source=recommendations"
+      ],
+      "policies": [
+        "Format consists of one letter followed by 6-8 digits (Source: Microsoft DLP documentation)",
+        "No spaces or delimiters are permitted in the passport number (Source: Microsoft DLP documentation)",
+        "Total length is 7-9 characters (1 letter + 6-8 digits) (Source: Microsoft DLP documentation)",
+        "The first character must be a letter (Source: Microsoft DLP documentation)",
+        "All characters following the initial letter must be numeric digits (Source: Microsoft DLP documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_cyprus_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "αριθμό διαβατηρίου",
+            "pasaportu",
+            "Αριθμός Διαβατηρίου",
+            "κυπριακό διαβατήριο",
+            "διαβατήριο#",
+            "διαβατήριο",
+            "αριθμός διαβατηρίου",
+            "Pasaport Kimliği",
+            "pasaport numarası",
+            "Pasaport no.",
+            "Αρ. Διαβατηρίου",
+            "expires on",
+            "issued on"
+          ],
+          "rules": [
+            "Format: one letter followed by 6-8 digits with no spaces or delimiters",
+            "Pattern: one letter followed by six to eight digits",
+            "High confidence (85%): passport number pattern + keyword + date in DD/MM/YYYY format or date keyword within 300 characters",
+            "Medium confidence (75%): passport number pattern + keyword within 300 characters",
+            "Date format: DD/MM/YYYY (Regex_cyprus_eu_passport_date)",
+            "Proximity window: 300 characters"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "αριθμό διαβατηρίου",
+        "pasaportu",
+        "Αριθμός Διαβατηρίου",
+        "κυπριακό διαβατήριο",
+        "διαβατήριο#",
+        "διαβατήριο",
+        "αριθμός διαβατηρίου",
+        "Pasaport Kimliği",
+        "pasaport numarası",
+        "Pasaport no.",
+        "Αρ. Διαβατηρίου",
+        "expires on",
+        "issued on"
+      ],
+      "numbering_authority": "Republic of Cyprus Ministry of Foreign Affairs - Civil Registry and Migration Department",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "letter-prefix",
+          "regex": "(?<![:\\w])[A-Z]\\d{6,8}(?![:\\w])",
+          "description": "The first character must be a letter (A-Z)"
+        },
+        {
+          "rule_id": "digit-suffix",
+          "regex": "(?<![:\\w])[A-Z]\\d{6,8}(?![:\\w])",
+          "description": "All characters following the initial letter must be numeric digits (0-9)"
+        },
+        {
+          "rule_id": "total-length",
+          "regex": "(?<![:\\w])[A-Z]\\d{6,8}(?![:\\w])",
+          "description": "Total length is 7-9 characters (1 letter + 6-8 digits)"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "(?<![:\\w])[A-Z]\\d{6,8}(?![:\\w])",
+          "description": "No spaces or delimiters are permitted in the passport number"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]\\d{6,8}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passport|passport number|passport#|passportno|passportnumber|Cyprus passport|Cypriot passport|διαβατήριο|αριθμός διαβατηρίου|Αριθμός Διαβατηρίου|κυπριακό διαβατήριο|διαβατήριο#|αριθμό διαβατηρίου|Αρ\\. Διαβατηρίου|pasaportu|Pasaport Kimli[gğ]i|pasaport numarası|Pasaport no\\.|expires on|issued on|date of issue|date of expiry|expiration date|travel document|Republic of Cyprus)",
+        "keywords_readable": "passport, passport number, passport#, passportno, passportnumber, Cyprus passport, Cypriot passport, διαβατήριο, αριθμός διαβατηρίου, Αριθμός Διαβατηρίου, κυπριακό διαβατήριο, διαβατήριο#, αριθμό διαβατηρίου, Αρ\\. Διαβατηρίου, pasaportu, Pasaport Kimliği, pasaport numarası, Pasaport no\\., expires on, issued on, date of issue, date of expiry, expiration date, travel document, Republic of Cyprus"
+      }
+    }
+  },
+  {
+    "identifier": "Czech Republic passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-czech-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-czech-passport-number",
+        "https://learn.microsoft.com/lt-lt/purview/sit-defn-czech-passport-number",
+        "https://learn.microsoft.com/el-gr/purview/sit-defn-czech-passport-number"
+      ],
+      "policies": [
+        "Length is exactly 8 digits (Source: Microsoft DLP documentation)",
+        "No spaces or delimiters are permitted in the passport number (Source: Microsoft DLP documentation)",
+        "Format consists of numeric characters only (Source: Microsoft DLP documentation)",
+        "Passport number is validated in conjunction with keywords such as 'cestovní pas' (travel passport), 'číslo pasu' (passport number), or generic passport terms (Source: Microsoft DLP documentation)",
+        "Date format associated with Czech passports follows DD.MM.YYYY pattern (Source: Microsoft DLP documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_czech_republic_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "cestovní pas",
+            "číslo pasu",
+            "cestovní pasu",
+            "passeport no",
+            "čísla pasu",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Format: eight digits without spaces or delimiters",
+            "Pattern: eight digits without spaces or delimiters",
+            "High confidence (85%): Regex match + keyword match + date in DD.MM.YYYY format or date keyword within 300 characters",
+            "Medium confidence (75%): Regex match + keyword match within 300 characters",
+            "Proximity: 300 characters",
+            "Entity ID: 7bcd8ce8-5e92-4bbe-bc92-fa669f0369fa"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "cestovní pas",
+        "číslo pasu",
+        "cestovní pasu",
+        "passeport no",
+        "čísla pasu",
+        "date of issue",
+        "date of expiry"
+      ],
+      "numbering_authority": "Ministry of the Interior of the Czech Republic",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "length-8-digits",
+          "regex": "\\b\\d{8}\\b",
+          "description": "Passport number must be exactly 8 digits in length"
+        },
+        {
+          "rule_id": "numeric-only",
+          "regex": "\\b\\d{8}\\b",
+          "description": "Passport number consists of numeric characters only (0-9)"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "\\b\\d{8}\\b",
+          "description": "No spaces, hyphens, or other delimiters are permitted in the passport number"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "\\b\\d{8}\\b",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:cestovn[ií] pas|[cč][ií]slo pasu|cestovn[ií] pasu|[cč][ií]sla pasu|passeport no|passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|date of issue|date of expiry|Czech Republic passport|Czech passport|datum vyd[aá]n[ií]|datum platnosti|platnost do)",
+        "keywords_readable": "cestovní pas, číslo pasu, cestovní pasu, čísla pasu, passeport no, passport#, passport #, passportid, passportno, passport no, passportnumber, passport number, passportnumbers, passport numbers, date of issue, date of expiry, Czech Republic passport, Czech passport, datum vydání, datum platnosti, platnost do"
+      }
+    }
+  },
+  {
+    "identifier": "Denmark passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-denmark-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-denmark-passport-number"
+      ],
+      "policies": [
+        "Length is exactly 9 digits (Source: Microsoft DLP documentation)",
+        "No spaces or delimiters are used in the format (Source: Microsoft DLP documentation)",
+        "Consists only of numeric characters (Source: Microsoft DLP documentation)",
+        "Format follows standard EU passport numbering conventions (Source: Microsoft DLP entity definition)",
+        "Associated with Danish-language keywords 'pasnummer', 'Passeport n°', and 'pasnumre' (Source: Microsoft DLP documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_denmark_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "pasnummer",
+            "Passeport n°",
+            "pasnumre",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Nine digits without spaces and delimiters",
+            "High confidence (85%): Regex match + keyword + date in DD MM YY format or date keyword within 300 characters",
+            "Medium confidence (75%): Regex match + keyword within 300 characters",
+            "Pattern proximity: 300 characters",
+            "Date format: DD MM YY (Regex_eu_passport_date2)"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "pasnummer",
+        "Passeport n°",
+        "pasnumre",
+        "date of issue",
+        "date of expiry",
+        "Denmark Passport Number"
+      ],
+      "numbering_authority": "Danish Agency for International Recruitment and Integration (SIRI) / Danish Police",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "exactly-9-digits",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Denmark passport number must be exactly 9 digits in length"
+        },
+        {
+          "rule_id": "numeric-only",
+          "regex": "\\b\\d{9}\\b",
+          "description": "Consists only of numeric characters (0-9)"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "\\b\\d{9}\\b",
+          "description": "No spaces, hyphens, or other delimiters are used in the format"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "\\b\\d{9}\\b",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:pasnummer|pasnumre|Passeport n°|Denmark passport|Danish passport|Denmark passport number|Danish passport number|passport#|passportid|passport no|passportnumber|passport number|passportnumbers|passport numbers|date of issue|date of expiry|udstedelsesdato|udløbsdato|pas nummer|dansk pas|Danmark pas)",
+        "keywords_readable": "pasnummer, pasnumre, Passeport n°, Denmark passport, Danish passport, Denmark passport number, Danish passport number, passport#, passportid, passport no, passportnumber, passport number, passportnumbers, passport numbers, date of issue, date of expiry, udstedelsesdato, udløbsdato, pas nummer, dansk pas, Danmark pas"
+      }
+    }
+  },
+  {
+    "identifier": "Estonia passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Estonian_passport",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-estonia-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-estonia-passport-number",
+        "https://learn.microsoft.com/tr-tr/Purview/sit-defn-estonia-passport-number"
+      ],
+      "policies": [
+        "Format is one letter followed by seven digits with no spaces or delimiters (Source: Microsoft DLP documentation)",
+        "Total length is exactly 8 characters (1 letter + 7 digits) (Source: Microsoft DLP documentation)",
+        "First character must be a letter (Source: Microsoft DLP documentation)",
+        "Characters 2-8 must be numeric digits (Source: Microsoft DLP documentation)",
+        "Passport validity period is 10 years after issuance (Source: Wikipedia - Estonian passport)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_estonia_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "eesti kodaniku pass",
+            "passi number",
+            "passinumbrid",
+            "document number",
+            "document no",
+            "dokumendi nr",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Format: one letter followed by seven digits with no spaces or delimiters",
+            "Pattern: one letter followed by seven digits",
+            "High confidence (85%): Regex match + keyword match + date in DD.MM.YYYY format or date keyword within 300 characters",
+            "Medium confidence (75%): Regex match + keyword match within 300 characters",
+            "Proximity window: 300 characters",
+            "Date format: DD.MM.YYYY (Regex_eu_passport_date1)"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "eesti kodaniku pass",
+        "passi number",
+        "passinumbrid",
+        "document number",
+        "document no",
+        "dokumendi nr",
+        "date of issue",
+        "date of expiry"
+      ],
+      "numbering_authority": "Ministry of the Interior and Ministry of Foreign Affairs of Estonia",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length-8",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "Total length is exactly 8 characters"
+        },
+        {
+          "rule_id": "first-char-letter",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "First character must be a letter (A-Z)"
+        },
+        {
+          "rule_id": "positions-2-8-numeric",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "Characters at positions 2-8 (after the first letter) must be numeric digits (0-9)"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "No spaces, hyphens, or other delimiters are present"
+        },
+        {
+          "rule_id": "format-pattern",
+          "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+          "description": "Format follows the pattern: one letter followed by seven digits"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]\\d{7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:eesti kodaniku pass|passi number|passinumbrid|dokumendi nr|Estonian passport|Estonia passport|passport number|passport#|passportid|passportnumber|document number|date of issue|date of expiry|passi kehtivus|v[aä]ljaandmise kuup[aä]ev|kehtivuse l[oõ]pp)",
+        "keywords_readable": "eesti kodaniku pass, passi number, passinumbrid, dokumendi nr, Estonian passport, Estonia passport, passport number, passport#, passportid, passportnumber, document number, date of issue, date of expiry, passi kehtivus, väljaandmise kuupäev, kehtivuse lõpp"
+      }
+    }
+  },
+  {
+    "identifier": "Finland passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Finnish_passport",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-finland-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-finland-passport-number"
+      ],
+      "policies": [
+        "Total length is exactly 9 characters (Source: Microsoft DLP documentation - 'combination of nine letters and digits')",
+        "First two characters are letters, not case-sensitive (Source: Microsoft DLP documentation - 'two letters (not case-sensitive)')",
+        "Last seven characters are digits (Source: Microsoft DLP documentation - 'seven digits')",
+        "Format follows the pattern: 2 letters followed by 7 digits (Source: Microsoft DLP documentation pattern definition)",
+        "Passport validity period is 5 years after issuance (Source: Wikipedia table - 'Expiration | 5 years after issuance')",
+        "Current version of Finnish passport was first issued on 13 March 2023 (Source: Wikipedia table - '13 March 2023 (current version)')",
+        "Finnish passports are biometric documents (Source: Wikipedia - 'biometric passport')",
+        "Passport is machine-readable following EU design standards (Source: Wikipedia - 'first machine-readable EU design')"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_finland_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "suomalainen passi",
+            "passin numero",
+            "passin numero.#",
+            "passin numero#",
+            "passin numero.",
+            "passi#",
+            "passi number",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Combination of nine letters and digits",
+            "Two letters (not case-sensitive)",
+            "Seven digits",
+            "Pattern proximity: 300 characters",
+            "High confidence (85%): requires passport number pattern + keyword + date in DD.MM.YYYY format or date keyword",
+            "Medium confidence (75%): requires passport number pattern + keyword",
+            "Date format: DD.MM.YYYY (Regex_eu_passport_date1)"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "suomalainen passi",
+        "passin numero",
+        "passin numero.#",
+        "passin numero#",
+        "passin numero.",
+        "passi#",
+        "passi number",
+        "date of issue",
+        "date of expiry"
+      ],
+      "numbering_authority": "Police of Finland",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length-9",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Total length is exactly 9 characters"
+        },
+        {
+          "rule_id": "first-two-letters",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "First two characters are letters (not case-sensitive)"
+        },
+        {
+          "rule_id": "last-seven-digits",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Last seven characters are digits"
+        },
+        {
+          "rule_id": "pattern-letters-digits",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Format follows the pattern: 2 letters followed by 7 digits"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:suomalainen passi|passin numero|passin numero\\.#|passin numero#|passin numero\\.|passi#|passi number|Finnish passport|Finland passport|passport number|passport#|passportid|passportnumber|date of issue|date of expiry|biometric passport|machine-readable passport|Suomi passi|passinumero|voimassaoloaika|my[oö]nt[aä]misp[aä]iv[aä]|viimeinen voimassaolop[aä]iv[aä])",
+        "keywords_readable": "suomalainen passi, passin numero, passin numero\\.#, passin numero#, passin numero\\., passi#, passi number, Finnish passport, Finland passport, passport number, passport#, passportid, passportnumber, date of issue, date of expiry, biometric passport, machine-readable passport, Suomi passi, passinumero, voimassaoloaika, myöntämispäivä, viimeinen voimassaolopäivä"
+      }
+    }
+  },
+  {
+    "identifier": "France passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-france-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-france-passport-number"
+      ],
+      "policies": [
+        "Total length is exactly 9 characters (Source: Microsoft DLP documentation)",
+        "Format consists of three segments: 2 digits + 2 letters + 5 digits (Source: Microsoft DLP documentation)",
+        "Positions 1-2 are numeric digits (Source: Microsoft DLP documentation)",
+        "Positions 3-4 are alphabetic letters, case-insensitive (Source: Microsoft DLP documentation)",
+        "Positions 5-9 are numeric digits (Source: Microsoft DLP documentation)",
+        "The identifier follows the pattern: ##AA##### where # represents a digit and A represents a letter (Source: Microsoft DLP documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": null,
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "numéro de passeport",
+            "passeport n °",
+            "passeport non",
+            "passeport #",
+            "passeport#",
+            "passeportnon",
+            "passeportn °",
+            "passeport français",
+            "passeport livre",
+            "passeport carte",
+            "numéro passeport",
+            "passeport n°",
+            "n° du passeport",
+            "n° passeport",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Pattern: nine digits and letters: two digits, two letters (not case-sensitive), five digits",
+            "Function Func_fr_passport finds content that matches the pattern",
+            "High confidence (85%): Pattern match + keyword match + date in format DD MM YYYY or date keyword",
+            "Medium confidence (75%): Pattern match + keyword match",
+            "Proximity: 300 characters",
+            "Date format: DD MM YYYY (Regex_eu_passport_date3)"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "numéro de passeport",
+        "passeport n °",
+        "passeport non",
+        "passeport #",
+        "passeport#",
+        "passeportnon",
+        "passeportn °",
+        "passeport français",
+        "passeport livre",
+        "passeport carte",
+        "numéro passeport",
+        "passeport n°",
+        "n° du passeport",
+        "n° passeport",
+        "date of issue",
+        "date of expiry"
+      ],
+      "numbering_authority": "French Ministry of the Interior (Ministère de l'Intérieur)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length-9",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Za-z]{2}[\\s\\-]?\\d{5}(?![:\\w])",
+          "description": "Total length is exactly 9 characters"
+        },
+        {
+          "rule_id": "segment-structure",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Za-z]{2}[\\s\\-]?\\d{5}(?![:\\w])",
+          "description": "Format consists of three segments: 2 digits + 2 letters + 5 digits (##AA#####)"
+        },
+        {
+          "rule_id": "positions-1-2-numeric",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Za-z]{2}[\\s\\-]?\\d{5}(?![:\\w])",
+          "description": "Positions 1-2 (0-indexed: 0-1) are numeric digits"
+        },
+        {
+          "rule_id": "positions-3-4-alphabetic",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Za-z]{2}[\\s\\-]?\\d{5}(?![:\\w])",
+          "description": "Positions 3-4 (0-indexed: 2-3) are alphabetic letters, case-insensitive"
+        },
+        {
+          "rule_id": "positions-5-9-numeric",
+          "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Za-z]{2}[\\s\\-]?\\d{5}(?![:\\w])",
+          "description": "Positions 5-9 (0-indexed: 4-8) are numeric digits"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])\\d{2}[\\s\\-]?[A-Za-z]{2}[\\s\\-]?\\d{5}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passeport fran[cç]ais|passeport|num[eé]ro de passeport|passeport n°|n° du passeport|n° passeport|passeport livre|passeport carte|num[eé]ro passeport|French passport|France passport|passport number|passport no|date of issue|date of expiry|date d'[eé]mission|date d'expiration|R[eé]publique Fran[cç]aise|Minist[eè]re de l'Int[eé]rieur|lieu de naissance|nationalit[eé] fran[cç]aise)",
+        "keywords_readable": "passeport français, passeport, numéro de passeport, passeport n°, n° du passeport, n° passeport, passeport livre, passeport carte, numéro passeport, French passport, France passport, passport number, passport no, date of issue, date of expiry, date d'émission, date d'expiration, République Française, Ministère de l'Intérieur, lieu de naissance, nationalité française"
+      }
+    }
+  },
+  {
+    "identifier": "Georgia passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://en.wikipedia.org/wiki/Georgian_passport"
+      ],
+      "policies": [
+        "Georgian passports are biometric documents (Source: Wikipedia - Georgian passport article)",
+        "Issued by the Ministry of Justice of Georgia (Source: Wikipedia - Georgian passport article)",
+        "Adult passports (18 or older) are valid for 10 years (Source: Wikipedia - Georgian passport article)",
+        "Child passports (under 18) are valid for 3 years (Source: Wikipedia - Georgian passport article)",
+        "Adult passport cost is GEL 150 (Source: Wikipedia - Georgian passport article)",
+        "Child passport cost is GEL 75 (Source: Wikipedia - Georgian passport article)"
+      ],
+      "vendor_patterns": [],
+      "vendor_keywords": [],
+      "numbering_authority": "Ministry of Justice of Georgia",
+      "policy_confidence": "medium",
+      "policy_confidence_reason": "The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier."
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "biometric-passport",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Georgian passports are biometric documents issued by the Ministry of Justice of Georgia"
+        },
+        {
+          "rule_id": "validity-adult",
+          "regex": "(?<![:\\w])I need to analyze this carefully. The rule states \"Adult passports (18 or older) are valid for 10 years\" but there is NO documented format structure or numbering scheme for Georgian passports according to the sources provided.\n\nThe authoritative format rules list policy information (validity periods, costs, issuing authority) but do NOT provide any actual format constraints for the passport number itself - no digit count, no letter positions, no check digits, nothing structural.\n\nSince there is no documented format or numbering scheme, and the rule is about validity period (not a structural pattern), there is no regex pattern that can match \"Georgian passport numbers\" because their structure is unknown/undocumented.\n\nHowever, if I must provide a regex based solely on what's given, I cannot create a meaningful pattern without any structural information. The task asks me to match \"values\" but no value format is specified.\n\nGiven the complete absence of format specifications, I cannot provide a valid regex pattern.\n\n\\b(?!)(?![:\\w])",
+          "description": "Adult passports (18 or older) are valid for 10 years"
+        },
+        {
+          "rule_id": "validity-child",
+          "regex": "(?<![:\\w])(?:child|under[\\s-]?18)[\\s\\-]?passport[\\s\\S]{0,50}?(?:valid|validity)[\\s\\S]{0,20}?3[\\s\\-]?years?\\b|\\bpassport[\\s\\S]{0,50}?(?:child|under[\\s-]?18)[\\s\\S]{0,50}?3[\\s\\-]?years?\\b|\\b3[\\s\\-]?years?[\\s\\S]{0,50}?(?:child|under[\\s-]?18)[\\s\\S]{0,20}?passport(?![:\\w])",
+          "description": "Child passports (under 18) are valid for 3 years"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])Based on the provided information, there are no documented format structure or numbering scheme constraints for Georgian passports. The rules describe policy attributes (validity periods, costs, issuing authority) but do not specify any pattern that can be encoded as a regex (no digit counts, letter positions, alphanumeric structure, etc.).\n\nSince there is no structural format to match, no valid regex can be produced.(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Georgian passport|Georgia passport|საქართველოს პასპორტი|პასპორტი|პასპორტის ნომერი|ბიომეტრიული პასპორტი|Ministry of Justice Georgia|საქართველოს იუსტიციის სამინისტრო|იუსტიციის სამინისტრო|Georgian biometric passport|Georgia biometric document|საქართველო|Georgian travel document|GEO passport)",
+        "keywords_readable": "Georgian passport, Georgia passport, საქართველოს პასპორტი, პასპორტი, პასპორტის ნომერი, ბიომეტრიული პასპორტი, Ministry of Justice Georgia, საქართველოს იუსტიციის სამინისტრო, იუსტიციის სამინისტრო, Georgian biometric passport, Georgia biometric document, საქართველო, Georgian travel document, GEO passport"
+      }
+    }
+  },
+  {
+    "identifier": "Germany passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-germany-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-germany-passport-number"
+      ],
+      "policies": [
+        "First character must be one letter from the set: C, F, G, H, J, K (case insensitive) - Source: Microsoft DLP documentation",
+        "Following 8 characters must be digits or letters from the set: C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z (case insensitive) - Source: Microsoft DLP documentation",
+        "Total base length is exactly 9 characters (1 letter + 8 alphanumeric characters) - Source: Microsoft DLP documentation",
+        "May include an optional check digit after the 9 base characters - Source: Microsoft DLP documentation",
+        "May optionally end with 'd' or 'D' character - Source: Microsoft DLP documentation",
+        "Uses a checksum validation algorithm for verification (Func_german_passport_checksum) - Source: Microsoft DLP documentation"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "^[CFGHJK][CFGHJKLMNPRTVWXYZ]{8}[0-9]?[dD]?$",
+          "keywords": [
+            "reisepasse",
+            "reisepassnummer",
+            "No-Reisepass",
+            "Nr-Reisepass",
+            "Reisepass-Nr",
+            "Passnummer",
+            "reisepässe",
+            "passeport no.",
+            "passeport no",
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers"
+          ],
+          "rules": [
+            "First character must be one letter from: C, F, G, H, J, K (case insensitive)",
+            "Next 8 characters must be digits or letters from: C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z (case insensitive)",
+            "Optional check digit",
+            "Optional d/D suffix",
+            "High confidence (85%): Pattern with checksum validation + keyword within 300 characters",
+            "Medium confidence (75%): 9-character pattern without check digit + keyword within 300 characters",
+            "Low confidence (65%): Pattern with checksum validation only, no keyword required",
+            "Proximity window: 300 characters"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "reisepasse",
+        "reisepassnummer",
+        "No-Reisepass",
+        "Nr-Reisepass",
+        "Reisepass-Nr",
+        "Passnummer",
+        "reisepässe",
+        "passeport no.",
+        "passeport no",
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "German Passport Number"
+      ],
+      "numbering_authority": "Bundesdruckerei GmbH (German Federal Printing Office) / German Federal Ministry of the Interior",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "first-char-restricted",
+          "regex": "(?<![:\\w])[CFGHJKcfghjk](?:[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz][\\s\\-]?){7}[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz](?:[0-9](?:[dD])?)?(?![:\\w])",
+          "description": "First character must be one letter from the set: C, F, G, H, J, K (case insensitive)"
+        },
+        {
+          "rule_id": "next-eight-chars-restricted",
+          "regex": "(?<![:\\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}(?:[0-9][dD]?|[dD])?(?![:\\w])",
+          "description": "Following 8 characters (positions 1-8) must be digits or letters from the set: C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z (case insensitive)"
+        },
+        {
+          "rule_id": "base-length-nine",
+          "regex": "(?<![:\\w])[CFGHJKcfghjk](?:[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz][\\s\\-]?){7}[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz](?:[0-9](?:[dD])?)?(?![:\\w])",
+          "description": "Base passport number is exactly 9 characters (1 letter + 8 alphanumeric characters)"
+        },
+        {
+          "rule_id": "optional-check-digit",
+          "regex": "(?<![:\\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}[0-9]?[dD]?(?![:\\w])",
+          "description": "May include an optional check digit (0-9) after the 9 base characters"
+        },
+        {
+          "rule_id": "optional-d-suffix",
+          "regex": "(?<![:\\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}[0-9]?[dD]?(?![:\\w])",
+          "description": "May optionally end with 'd' or 'D' character after the base number or check digit"
+        },
+        {
+          "rule_id": "checksum-validation",
+          "regex": "(?<![:\\w])[CFGHJKcfghjk](?:[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz][\\s\\-]?){7}[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz](?:[0-9](?:[dD])?)?(?![:\\w])",
+          "description": "Uses a checksum validation algorithm (Func_german_passport_checksum) for verification"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}[0-9]?[dD]?(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:Reisepass|Reisepasse|Reisepassnummer|No-Reisepass|Nr-Reisepass|Reisepass-Nr|Passnummer|Reisep[aä]sse|Bundesrepublik Deutschland|German passport|Germany passport|deutscher Reisepass|Ausweisnummer|Personalausweis|Bundesdruckerei|passport number|passeport no|Ausstellungsdatum|G[uü]ltigkeitsdatum|Staatsangeh[oö]rigkeit)",
+        "keywords_readable": "Reisepass, Reisepasse, Reisepassnummer, No-Reisepass, Nr-Reisepass, Reisepass-Nr, Passnummer, Reisepässe, Bundesrepublik Deutschland, German passport, Germany passport, deutscher Reisepass, Ausweisnummer, Personalausweis, Bundesdruckerei, passport number, passeport no, Ausstellungsdatum, Gültigkeitsdatum, Staatsangehörigkeit"
+      }
+    }
+  },
+  {
+    "identifier": "Greece passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-greece-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-greece-passport-number",
+        "https://learn.microsoft.com/uk-ua/purview/sit-defn-greece-passport-number"
+      ],
+      "policies": [
+        "Format consists of two letters followed by seven digits (Source: Microsoft DLP policy documentation)",
+        "Total length is exactly 9 characters (2 letters + 7 digits)",
+        "No spaces or delimiters are used in the passport number (Source: Microsoft DLP policy documentation)",
+        "The first two characters must be alphabetic letters",
+        "The last seven characters must be numeric digits"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_greece_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "αριθμός διαβατηρίου",
+            "αριθμούς διαβατηρίου",
+            "αριθμός διαβατηριο"
+          ],
+          "rules": [
+            "Format: Two letters followed by seven digits with no spaces or delimiters",
+            "Pattern: Two letters followed by seven digits",
+            "High confidence (85%): Regex match + keyword + date pattern (DD MMM YY) or date keyword within 300 characters",
+            "Medium confidence (75%): Regex match + keyword within 300 characters",
+            "Proximity window: 300 characters",
+            "Date format example: 28 Aug 19",
+            "Uses Regex_greece_eu_passport_date for date validation",
+            "Uses Keywords_greece_eu_passport_date for date keyword matching"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "αριθμός διαβατηρίου",
+        "αριθμούς διαβατηρίου",
+        "αριθμός διαβατηριο"
+      ],
+      "numbering_authority": "Hellenic Police - Passport Department (Greek Ministry of Citizen Protection)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "total-length-9",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Total length is exactly 9 characters"
+        },
+        {
+          "rule_id": "two-letters-prefix",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "First two characters must be alphabetic letters"
+        },
+        {
+          "rule_id": "seven-digits-suffix",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "Last seven characters must be numeric digits"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+          "description": "No spaces or delimiters are used in the passport number"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:passport#|passportid|passportno|passportnumber|passportnumbers|αριθμός διαβατηρίου|αριθμούς διαβατηρίου|αριθμός διαβατηριο|Greek passport|Greece passport|Hellenic passport|διαβατήριο|ελληνικό διαβατήριο|Ελληνική Αστυνομία|travel document|passport issuance|passport expiry|date of issue|issuing authority)",
+        "keywords_readable": "passport#, passportid, passportno, passportnumber, passportnumbers, αριθμός διαβατηρίου, αριθμούς διαβατηρίου, αριθμός διαβατηριο, Greek passport, Greece passport, Hellenic passport, διαβατήριο, ελληνικό διαβατήριο, Ελληνική Αστυνομία, travel document, passport issuance, passport expiry, date of issue, issuing authority"
+      }
+    }
+  },
+  {
+    "identifier": "Hungary passport number",
+    "status": "OK",
+    "source_of_truth": {
+      "sources": [
+        "https://learn.microsoft.com/en-us/purview/sit-defn-hungary-passport-number",
+        "https://learn.microsoft.com/en-us/purview/sit-defn-hungary-passport-number"
+      ],
+      "policies": [
+        "Format consists of two letters followed by six or seven digits (source: Microsoft DLP policy documentation)",
+        "No spaces or delimiters are used in the passport number (source: Microsoft DLP policy documentation)",
+        "Total length is either 8 characters (2 letters + 6 digits) or 9 characters (2 letters + 7 digits) (source: Microsoft DLP policy documentation)",
+        "First two characters must be alphabetic letters (source: Microsoft DLP policy documentation)",
+        "Remaining characters after the first two letters must be numeric digits only (source: Microsoft DLP policy documentation)"
+      ],
+      "vendor_patterns": [
+        {
+          "vendor": "Microsoft Purview",
+          "regex": "Regex_hungary_eu_passport_number",
+          "keywords": [
+            "passport#",
+            "passport #",
+            "passportid",
+            "passports",
+            "passportno",
+            "passport no",
+            "passportnumber",
+            "passport number",
+            "passportnumbers",
+            "passport numbers",
+            "útlevél száma",
+            "Útlevelek száma",
+            "útlevél szám",
+            "date of issue",
+            "date of expiry"
+          ],
+          "rules": [
+            "Two letters followed by six or seven digits with no spaces or delimiters",
+            "High confidence (85%): Regex match + keyword match + date pattern (DD MMM/MMM YY format like 01 MÁR/MAR 12) or date keyword",
+            "Medium confidence (75%): Regex match + keyword match",
+            "Pattern proximity: 300 characters",
+            "Entity ID: 5b483910-9aa7-4c99-9917-f4001464bda7"
+          ]
+        }
+      ],
+      "vendor_keywords": [
+        "passport#",
+        "passport #",
+        "passportid",
+        "passports",
+        "passportno",
+        "passport no",
+        "passportnumber",
+        "passport number",
+        "passportnumbers",
+        "passport numbers",
+        "útlevél száma",
+        "Útlevelek száma",
+        "útlevél szám",
+        "date of issue",
+        "date of expiry"
+      ],
+      "numbering_authority": "Hungarian Government - Ministry of Interior (Belügyminisztérium)",
+      "policy_confidence": "high",
+      "policy_confidence_reason": ""
+    },
+    "regex_patterns": {
+      "individual": [
+        {
+          "rule_id": "two-letters-prefix",
+          "regex": "(?<![:\\w])[A-Za-z]{2}[\\s\\-]?\\d{6,7}(?![:\\w])",
+          "description": "Passport number begins with exactly two alphabetic letters"
+        },
+        {
+          "rule_id": "six-or-seven-digits",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6,7}(?![:\\w])",
+          "description": "After the two-letter prefix, the passport number contains either six or seven numeric digits"
+        },
+        {
+          "rule_id": "total-length-eight-or-nine",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6,7}(?![:\\w])",
+          "description": "Total length is either 8 characters (2 letters + 6 digits) or 9 characters (2 letters + 7 digits)"
+        },
+        {
+          "rule_id": "no-delimiters",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6,7}(?![:\\w])",
+          "description": "No spaces, hyphens, or other delimiters are used in the passport number"
+        },
+        {
+          "rule_id": "alphanumeric-only",
+          "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6,7}(?![:\\w])",
+          "description": "Passport number contains only alphabetic letters (first two positions) and numeric digits (remaining positions)"
+        }
+      ],
+      "combined_value": {
+        "rule_id": "combined-value",
+        "regex": "(?<![:\\w])[A-Z]{2}[\\s\\-]?\\d{6,7}(?![:\\w])",
+        "description": "Unified value regex satisfying all individual rules simultaneously"
+      },
+      "keyword_proximity": {
+        "regex": "(?i)(?:[uú]tlev[eé]l sz[aá]ma|[UÚ]tlevelek sz[aá]ma|[uú]tlev[eé]l sz[aá]m|[uú]tlev[eé]l|Hungary passport|Hungarian passport|Magyar [uú]tlev[eé]l|passport number|passport#|passportid|passportnumber|passportno|date of issue|date of expiry|ki[aá]ll[ií]t[aá]s d[aá]tuma|lej[aá]rat d[aá]tuma|[eé]rv[eé]nyess[eé]g|Magyar K[oö]zt[aá]rsas[aá]g|Magyarorsz[aá]g|travel document|[uú]tiokm[aá]ny)",
+        "keywords_readable": "útlevél száma, Útlevelek száma, útlevél szám, útlevél, Hungary passport, Hungarian passport, Magyar útlevél, passport number, passport#, passportid, passportnumber, passportno, date of issue, date of expiry, kiállítás dátuma, lejárat dátuma, érvényesség, Magyar Köztársaság, Magyarország, travel document, útiokmány"
+      }
+    }
+  }
+]

@@ -341,12 +341,53 @@ def _dedupe(values: list[str]) -> list[str]:
     return out
 
 
+_TIMESTAMP_14 = re.compile(
+    r"^(19|20)\d{2}"          # YYYY (1900–2099)
+    r"(0[1-9]|1[0-2])"       # MM
+    r"(0[1-9]|[12]\d|3[01])" # DD
+    r"([01]\d|2[0-3])"       # HH
+    r"[0-5]\d"               # MM
+    r"[0-5]\d$"              # SS
+)
+
+_TIMESTAMP_8 = re.compile(
+    r"^(19|20)\d{2}"          # YYYY
+    r"(0[1-9]|1[0-2])"       # MM
+    r"(0[1-9]|[12]\d|3[01])$" # DD
+)
+
+_SEQUENTIAL = re.compile(
+    r"^(0123456789|1234567890|9876543210|0{5,}|1{5,}|"
+    r"01234567|12345678|23456789)$"
+)
+
+_FALSE_POSITIVE_PATTERNS: list[tuple[re.Pattern, str]] = [
+    (_TIMESTAMP_14, "timestamp_YYYYMMDDHHMMSS"),
+    (_TIMESTAMP_8,  "date_YYYYMMDD"),
+    (_SEQUENTIAL,   "sequential/trivial"),
+]
+
+
+def _is_false_positive(value: str) -> Optional[str]:
+    """Check if a numeric-looking value is a common false positive.
+
+    Returns the rejection reason string, or None if the value looks OK.
+    """
+    stripped = value.strip()
+    for pattern, reason in _FALSE_POSITIVE_PATTERNS:
+        if pattern.match(stripped):
+            return reason
+    return None
+
+
 def _sanity_filter(values: list[str], topic: str) -> list[str]:
     """Drop values that are clearly not identifiers (too long, too short,
-    look like prose/navigation text).
+    look like prose/navigation text, or match known false-positive patterns
+    like timestamps and dates).
     """
     fallback = _get_best_regex(topic)
     filtered: list[str] = []
+    fp_rejected = 0
     for v in values:
         v_stripped = v.strip()
         if not v_stripped:
@@ -360,8 +401,18 @@ def _sanity_filter(values: list[str], topic: str) -> list[str]:
             continue
         if fallback and not fallback.search(v_stripped):
             continue
+        fp_reason = _is_false_positive(v_stripped)
+        if fp_reason:
+            fp_rejected += 1
+            logger.debug("[sanity] rejected '%s' as false positive (%s)", v_stripped, fp_reason)
+            continue
         filtered.append(v_stripped)
 
+    if fp_rejected > 0:
+        logger.info(
+            "[sanity] rejected %d false-positive values (timestamps/dates/sequential) for '%s'",
+            fp_rejected, topic,
+        )
     if len(filtered) < len(values):
         logger.info(
             "[sanity] filtered %d → %d values for '%s'",

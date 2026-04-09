@@ -10,7 +10,9 @@ logger = logging.getLogger(__name__)
 
 PROMPT_TEMPLATE = """You are a regex engineering expert.
 
-Write a single Python-compatible regex that matches values satisfying this rule:
+Write a single regex that matches values satisfying this rule.
+The regex MUST be valid in both PCRE2 (Perl Compatible Regular Expressions) and
+JavaScript (ES2018+) flavors.
 
 RULE: {rule_description}
 HARD CONSTRAINTS (policy/vendor-backed — MUST encode): {range_restrictions}
@@ -36,11 +38,23 @@ Requirements:
   position type (\\d for digits, [A-Z] for letters, [A-Z0-9] for alphanumeric).
 - Consider optional separators (spaces, hyphens) between segments when the
   identifier might appear formatted in real documents.
+
+PCRE/JavaScript compatibility — DO NOT use:
+- Python-specific named groups (?P<name>...) or (?P=name)
+- Atomic groups (?>...) or possessive quantifiers (++, *+)
+- Any syntax unique to a single engine
+Use ONLY: non-capturing groups (?:...), lookaheads (?=...) (?!...),
+fixed-length lookbehinds (?<=...) (?<!...), \\b, \\d, \\w, \\s, and standard
+character classes / quantifiers.
+
 Return ONLY the regex string, no explanation, no markdown."""
 
 COMBINED_PROMPT_TEMPLATE = """You are a regex engineering expert tasked with producing the mathematically minimal unified regex.
 
-Given the individual rules and their regexes below, produce ONE unified Python-compatible regex with ZERO duplicated constraints.
+Given the individual rules and their regexes below, produce ONE unified regex with ZERO
+duplicated constraints.
+The regex MUST be valid in both PCRE2 (Perl Compatible Regular Expressions) and
+JavaScript (ES2018+) flavors.
 
 INDIVIDUAL RULES:
 {rules_list}
@@ -80,18 +94,27 @@ MINIMALITY RULES — follow strictly:
 10. Consider optional separators (spaces, hyphens) between segments when the identifier
     commonly appears formatted in documents.
 
+PCRE/JavaScript compatibility — DO NOT use:
+- Python-specific named groups (?P<name>...) or (?P=name)
+- Atomic groups (?>...) or possessive quantifiers (++, *+)
+- Any syntax unique to a single engine
+Use ONLY: non-capturing groups (?:...), lookaheads (?=...) (?!...),
+fixed-length lookbehinds (?<=...) (?<!...), \\b, \\d, \\w, \\s, and standard
+character classes / quantifiers.
+
 Before writing the final regex, mentally verify:
 - Is every HARD CONSTRAINT from policy/vendor encoded exactly once?
 - Does any lookahead duplicate what the main pattern already guarantees? If yes, remove it.
 
 Return ONLY the final unified regex string. No explanation, no markdown, no comments."""
 
-REFINEMENT_TEMPLATE = """The regex you provided failed to compile in Python.
+REFINEMENT_TEMPLATE = """The regex you provided is invalid.
 
 ORIGINAL REGEX: {regex}
-COMPILE ERROR: {error}
+ERROR: {error}
 
-Fix the regex so it compiles with Python's re module.
+Fix the regex so it is valid in both PCRE2 and JavaScript (ES2018+).
+Do NOT use Python-specific syntax (e.g. (?P<name>...), (?P=name)).
 Return ONLY the corrected regex string, no explanation."""
 
 
@@ -308,8 +331,40 @@ def _clean_regex_response(text: str) -> str:
     return text.strip()
 
 
+_NON_WORD_EDGE_CHARS = set(":./+-@#")
+
+
+def _needs_lookaround_boundaries(regex_str: str) -> bool:
+    """Return True when the regex can match values that start or end with
+    non-word characters (like ``:`` in IPv6 or ``+`` in phone numbers).
+
+    In these cases ``\\b`` fails because there's no word-char ↔ non-word-char
+    transition, so we need lookaround assertions instead.
+    """
+    r = regex_str.strip().lstrip("\\b").rstrip("\\b").strip()
+    if not r:
+        return False
+
+    # Check if the pattern can start with a non-word char.
+    # Look at the first meaningful character/class in the pattern.
+    # Common indicators: starts with literal ':', or has an alternation
+    # branch starting with ':' (like the :: branches in IPv6).
+    for ch in _NON_WORD_EDGE_CHARS:
+        if ch in r:
+            return True
+    # Also detect escaped versions like \: or character classes containing :
+    if re.search(r'\[:.*?:\]|\\:', r):
+        return True
+    return False
+
+
 def _strip_anchors_add_boundaries(regex_str: str) -> str:
-    """Strip ^ and $ anchors, add \\b word boundaries."""
+    """Strip ^ and $ anchors, add appropriate boundary assertions.
+
+    Uses ``\\b`` for patterns whose edges are always word characters.
+    Uses lookaround assertions for patterns that can start/end with
+    non-word characters (e.g. ``::1`` for IPv6, ``+91`` for phones).
+    """
     r = regex_str.strip()
     if r.startswith("^"):
         r = r[1:]
@@ -318,10 +373,22 @@ def _strip_anchors_add_boundaries(regex_str: str) -> str:
     r = r.strip()
     if "XXX" in r:
         r = r.replace("XXX", "[A-Z0-9]{3}")
-    if not r.startswith("\\b"):
-        r = "\\b" + r
-    if not r.endswith("\\b"):
-        r = r + "\\b"
+
+    # Strip any existing \b boundaries before deciding which to add
+    if r.startswith("\\b"):
+        r = r[2:]
+    if r.endswith("\\b"):
+        r = r[:-2]
+    r = r.strip()
+
+    if _needs_lookaround_boundaries(r):
+        start = "(?<![:\\w])"
+        end = "(?![:\\w])"
+        r = start + r + end
+        logger.debug("boundary: using lookaround (non-word edge chars detected)")
+    else:
+        r = "\\b" + r + "\\b"
+
     return r
 
 

@@ -239,8 +239,9 @@ def build_search_queries(condition: str) -> list[str]:
         queries.append(f"{c} complete list site:{gov_domains[0]}")
 
     queries.extend([
-        f"{c} complete list database directory",
-        f"{c} complete list Wikipedia OR geonames OR worldpostalcode",
-        f"all {c} examples data open data",
+        f"{c} examples list",
+        f"{c} complete list database",
+        f"{c} Wikipedia",
+        f"all {c} examples data",
     ])
     return queries

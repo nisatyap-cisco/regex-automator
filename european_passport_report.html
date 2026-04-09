@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regex Discovery Report — test1 batch</title>
+<style>
+  :root {
+    --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9;
+    --accent: #58a6ff; --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+    --yellow: #f1c40f; --muted: #8b949e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); padding: 24px; line-height: 1.6;
+  }
+  h1 { color: #fff; margin-bottom: 4px; }
+  h2 { color: var(--accent); margin: 32px 0 12px; }
+  h3 { color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .subtitle { color: var(--muted); margin-bottom: 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .summary-cards { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .scard {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 24px; min-width: 160px;
+  }
+  .scard .num { font-size: 2em; font-weight: 700; }
+  .scard .lbl { color: var(--muted); font-size: .85em; }
+
+  .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .summary-table th, .summary-table td {
+    padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .summary-table th { background: var(--card); color: #fff; font-weight: 600; }
+  .ident { font-weight: 500; }
+  .status-ok { color: var(--green); font-weight: 700; }
+  .status-fail { color: var(--red); font-weight: 700; }
+  .status-warn { color: var(--orange); font-weight: 700; }
+
+  .detail-block {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .idx { color: var(--muted); font-weight: 400; }
+
+  .badge {
+    font-size: .7em; padding: 2px 8px; border-radius: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  .badge-high { background: var(--green); color: #fff; }
+  .badge-med { background: var(--orange); color: #fff; }
+  .badge-none { background: var(--red); color: #fff; }
+  .conf-reason { color: var(--muted); font-size: .85em; margin-bottom: 12px; font-style: italic; }
+
+  details { margin: 10px 0; }
+  details summary {
+    cursor: pointer; color: var(--accent); font-weight: 600; font-size: .95em;
+    padding: 4px 0;
+  }
+  details summary:hover { text-decoration: underline; }
+
+  .empty { color: var(--muted); font-style: italic; font-size: .85em; margin: 6px 0; }
+
+  .source-list, .policy-list { margin: 8px 0 8px 20px; }
+  .source-list li, .policy-list li { margin-bottom: 4px; font-size: .9em; }
+  .source-list a { word-break: break-all; }
+
+  .vendor-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+  .vendor-table th, .vendor-table td {
+    padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: .85em;
+  }
+  .vendor-table th { background: #0d1117; color: #fff; }
+  .vendor-table code { font-size: .82em; word-break: break-all; white-space: pre-wrap; }
+
+  .regex-card {
+    background: #0d1117; border: 1px solid var(--border); border-radius: 6px;
+    padding: 12px; margin: 8px 0; overflow-x: auto;
+  }
+  .regex-card.combined { border-color: var(--accent); }
+  .rule-id { font-weight: 700; color: var(--accent); font-size: .85em; margin-bottom: 2px; }
+  .rule-desc { color: var(--muted); font-size: .82em; margin-bottom: 6px; }
+  .regex-code {
+    display: block; font-size: .82em; word-break: break-all; white-space: pre-wrap;
+    color: #e6edf3; background: transparent; padding: 0;
+  }
+
+  .kw-block { margin: 8px 0; }
+  .kw-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .kw-tag {
+    background: #21262d; border: 1px solid var(--border); border-radius: 12px;
+    padding: 2px 10px; font-size: .8em; color: var(--text);
+  }
+
+  footer {
+    margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+    color: #484f58; font-size: .8em;
+  }
+</style>
+</head>
+<body>
+
+<h1>Regex Discovery Report</h1>
+<p class="subtitle">Batch results for 20 identifiers from test1.json</p>
+
+<div class="summary-cards">
+  <div class="scard"><div class="num">20</div><div class="lbl">Identifiers</div></div>
+  <div class="scard"><div class="num" style="color:var(--green)">20</div><div class="lbl">Succeeded</div></div>
+  <div class="scard"><div class="num" style="color:var(--red)">0</div><div class="lbl">Failed</div></div>
+  <div class="scard"><div class="num">110</div><div class="lbl">Total Policies</div></div>
+  <div class="scard"><div class="num">75</div><div class="lbl">Individual Regexes</div></div>
+</div>
+
+<h2>Summary</h2>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Identifier</th><th>Status</th><th>Confidence</th>
+          <th>Policies</th><th>Individual Regex</th><th>Combined</th><th>Keywords</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td class="ident"><a href="#detail-1">Albania passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="ident"><a href="#detail-2">Andorra passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>7</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="ident"><a href="#detail-3">Armenia passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>5</td>
+          <td>2</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="ident"><a href="#detail-4">Austria passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>7</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="ident"><a href="#detail-5">Azerbaijan passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="ident"><a href="#detail-6">Belarus passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="ident"><a href="#detail-7">Belgium passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="ident"><a href="#detail-8">Bosnia and Herzegovina passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="ident"><a href="#detail-9">Bulgaria passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td class="ident"><a href="#detail-10">Croatia passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td class="ident"><a href="#detail-11">Cyprus passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td class="ident"><a href="#detail-12">Czech Republic passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td class="ident"><a href="#detail-13">Denmark passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td class="ident"><a href="#detail-14">Estonia passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td class="ident"><a href="#detail-15">Finland passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>8</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td class="ident"><a href="#detail-16">France passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>6</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td class="ident"><a href="#detail-17">Georgia passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>6</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td class="ident"><a href="#detail-18">Germany passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>6</td>
+          <td>6</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td class="ident"><a href="#detail-19">Greece passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td class="ident"><a href="#detail-20">Hungary passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>5</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr></tbody>
+    </table>
+
+<h2>Detailed Results</h2>
+
+    <div class="detail-block" id="detail-1">
+      <h3>
+        <span class="idx">1.</span> Albania passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Albanian_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Albanian_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Albanian biometric passports were first issued on 24 March 2009 (source: scraped Wikipedia data)</li>
+<li>Current Albanian passports are biometric passports (source: scraped Wikipedia data)</li>
+<li>Passports have a validity period of 5 years for holders under 16 years old (source: scraped Wikipedia data)</li>
+<li>Passports have a validity period of 10 years for holders 16 years and older (source: scraped Wikipedia data)</li>
+<li>Albania issues machine-readable passports compliant with international standards (source: scraped Wikipedia data referencing biometric/machine-readable passport types)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">machine-readable-format</div>
+          <div class="rule-desc">Albanian passports are machine-readable and comply with ICAO Document 9303 standards for machine-readable travel documents</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">biometric-passport</div>
+          <div class="rule-desc">Current Albanian passports issued since 24 March 2009 are biometric passports containing an electronic chip with biometric data</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">alphanumeric-format</div>
+          <div class="rule-desc">Albanian passport numbers follow standard machine-readable passport format, typically consisting of alphanumeric characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{8,9}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{9}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Albanian passport</span> <span class="kw-tag">Albania passport</span> <span class="kw-tag">pasaportë shqiptare</span> <span class="kw-tag">pasaportë</span> <span class="kw-tag">numri i pasaportës</span> <span class="kw-tag">pasaportë biometrike</span> <span class="kw-tag">Republic of Albania passport</span> <span class="kw-tag">Republika e Shqipërisë</span> <span class="kw-tag">pasaport shqiptar</span> <span class="kw-tag">dokument udhëtimi</span> <span class="kw-tag">numër pasaporte</span> <span class="kw-tag">pasaportë elektronike</span> <span class="kw-tag">Albanian travel document</span> <span class="kw-tag">Albania biometric passport</span> <span class="kw-tag">Ministria e Brendshme</span> </div>
+      <code class="regex-code">(?i)(?:Albanian passport|Albania passport|pasaport[eë] shqiptare|pasaport[eë]|numri i pasaport[eë]s|pasaport[eë] biometrike|Republic of Albania passport|Republika e Shqip[eë]ris[eë]|pasaport shqiptar|dokument udh[eë]timi|num[eë]r pasaporte|pasaport[eë] elektronike|Albanian travel document|Albania biometric passport|Ministria e Brendshme)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-2">
+      <h3>
+        <span class="idx">2.</span> Andorra passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Andorran_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Andorran_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (7)</summary>
+        <ul class='policy-list'><li>Andorran passports are biometric passports issued since 8 February 2007 (source: Wikipedia infobox)</li>
+<li>Passports are issued by the Immigration office of Principality of Andorra (source: Wikipedia infobox)</li>
+<li>Child passports (aged 0-17) have a validity of 5 years (source: Wikipedia infobox)</li>
+<li>Adult passports (aged 18-19) have a validity of 5 years (source: Wikipedia infobox)</li>
+<li>Adult passports (aged 20+) have a validity of 10 years (source: Wikipedia infobox)</li>
+<li>Passports serve as identification documents and require Andorran citizenship for eligibility (source: Wikipedia infobox)</li>
+<li>Andorran passports are machine-readable and contain an embedded chip for biometric data (source: Wikipedia infobox reference to biometric passport with chip)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">andorra-passport-length</div>
+          <div class="rule-desc">Andorran passport numbers typically follow the ICAO 9303 machine-readable travel document standard, which specifies alphanumeric passport numbers up to 9 characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{1,9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">andorra-passport-alphanumeric</div>
+          <div class="rule-desc">Passport numbers are alphanumeric, containing both letters and digits in accordance with ICAO standards for machine-readable passports</div>
+          <code class="regex-code">(?&lt;![:\w])(?=(?:[A-Z]*\d[A-Z0-9]*|[0-9]*[A-Z][A-Z0-9]*))(?=\D*\d)[A-Z0-9]{6,9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">andorra-passport-biometric</div>
+          <div class="rule-desc">All Andorran passports issued since 8 February 2007 are biometric passports with embedded chips containing biometric data</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{6,7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z0-9](?=.*[A-Z])(?=.*\d)[A-Z0-9]{1,8}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Andorra passport</span> <span class="kw-tag">Andorran passport</span> <span class="kw-tag">passaport andorrà</span> <span class="kw-tag">pasaporte andorrano</span> <span class="kw-tag">passeport andorran</span> <span class="kw-tag">Principat d&#x27;Andorra</span> <span class="kw-tag">Principality of Andorra</span> <span class="kw-tag">Principado de Andorra</span> <span class="kw-tag">Immigration office Andorra</span> <span class="kw-tag">biometric passport Andorra</span> <span class="kw-tag">passaport biométric</span> <span class="kw-tag">pasaporte biométrico</span> <span class="kw-tag">passeport biométrique</span> <span class="kw-tag">document de viatge</span> <span class="kw-tag">documento de viaje</span> <span class="kw-tag">travel document Andorra</span> <span class="kw-tag">número de passaport</span> <span class="kw-tag">número de pasaporte</span> <span class="kw-tag">numéro de passeport</span> <span class="kw-tag">passport number Andorra</span> </div>
+      <code class="regex-code">(?i)(?:Andorra passport|Andorran passport|passaport andorr[aà]|pasaporte andorrano|passeport andorran|Principat d&#x27;Andorra|Principality of Andorra|Principado de Andorra|Immigration office Andorra|biometric passport Andorra|passaport biom[eé]tric|pasaporte biom[eé]trico|passeport biom[eé]trique|document de viatge|documento de viaje|travel document Andorra|n[uú]mero de passaport|n[uú]mero de pasaporte|num[eé]ro de passeport|passport number Andorra)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-3">
+      <h3>
+        <span class="idx">3.</span> Armenia passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Armenian_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Armenian_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Armenian passports have been issued since 1994 (first version) with the current biometric version introduced in 2012 (Source: Wikipedia infobox)</li>
+<li>Current Armenian passports are biometric passports complying with international machine-readable standards (Source: Wikipedia - passport type description)</li>
+<li>Passport validity period is 10 years after issuance (Source: Wikipedia infobox)</li>
+<li>Armenian passports are issued exclusively to Armenian citizens for identification and international travel purposes (Source: Wikipedia infobox)</li>
+<li>The cost of an Armenian passport is 10,000 Armenian Dram (֏) (Source: Wikipedia infobox)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (2)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">biometric-mrp-standard</div>
+          <div class="rule-desc">Armenian passports are biometric machine-readable travel documents complying with ICAO Doc 9303 standards</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">passport-number-format</div>
+          <div class="rule-desc">Armenian passport numbers follow the standard alphanumeric format used in machine-readable passports, typically consisting of letters and/or digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{9}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Armenian passport</span> <span class="kw-tag">Armenia passport</span> <span class="kw-tag">հայկական անձնագիր</span> <span class="kw-tag">անձնագիր</span> <span class="kw-tag">անձնագրի համար</span> <span class="kw-tag">Republic of Armenia passport</span> <span class="kw-tag">Armenian travel document</span> <span class="kw-tag">Armenian biometric passport</span> <span class="kw-tag">Հայաստանի Հանրապետություն</span> <span class="kw-tag">паспорт Армении</span> <span class="kw-tag">армянский паспорт</span> <span class="kw-tag">Armenian passport number</span> <span class="kw-tag">Armenia travel document</span> <span class="kw-tag">հայկական ճանապարհորդական փաստաթուղթ</span> </div>
+      <code class="regex-code">(?i)(?:Armenian passport|Armenia passport|հայկական անձնագիր|անձնագիր|անձնագրի համար|Republic of Armenia passport|Armenian travel document|Armenian biometric passport|Հայաստանի Հանրապետություն|паспорт Армении|армянский паспорт|Armenian passport number|Armenia travel document|հայկական ճանապարհորդական փաստաթուղթ)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-4">
+      <h3>
+        <span class="idx">4.</span> Austria passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Austrian_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Austrian_passport</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-austria-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-austria-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-austria-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-austria-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (7)</summary>
+        <ul class='policy-list'><li>Format consists of one letter followed by seven digits (Source: Microsoft DLP documentation)</li>
+<li>An optional space may appear between the letter and the seven digits (Source: Microsoft DLP documentation)</li>
+<li>The letter is not case-sensitive (Source: Microsoft DLP documentation)</li>
+<li>Total length is 8 characters (1 letter + 7 digits) or 9 characters if space is included (Source: Microsoft DLP documentation)</li>
+<li>Biometric passports have been issued since 16 June 2006 (Source: Wikipedia - Austrian passport)</li>
+<li>Current version of Austrian passports began issuance on 1 December 2023 (Source: Wikipedia - Austrian passport)</li>
+<li>Passports are valid for 10 years for citizens aged 12 and older, 5 years for children aged 2-11, and 2 years for children up to age 1 (Source: Wikipedia - Austrian passport)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>One letter followed by an optional space and seven digits</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">letter-prefix</div>
+          <div class="rule-desc">Begins with one letter (A-Z), case-insensitive</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z] ?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-space</div>
+          <div class="rule-desc">An optional space may appear between the letter and the seven digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z] ?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">seven-digits</div>
+          <div class="rule-desc">Followed by exactly seven digits (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z] ?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">total-length</div>
+          <div class="rule-desc">Total length is 8 characters (1 letter + 7 digits) or 9 characters if space is included</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z] ?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">case-insensitive</div>
+          <div class="rule-desc">The letter prefix is not case-sensitive</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z] ?\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Za-z] ?\d{7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passport#</span> <span class="kw-tag">passport #</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportno</span> <span class="kw-tag">passport no</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passportnumbers</span> <span class="kw-tag">passport numbers</span> <span class="kw-tag">reisepassnummer</span> <span class="kw-tag">reisepasse</span> <span class="kw-tag">reisepässe</span> <span class="kw-tag">No-Reisepass</span> <span class="kw-tag">Nr-Reisepass</span> <span class="kw-tag">Reisepass-Nr</span> <span class="kw-tag">Passnummer</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">Austria passport</span> <span class="kw-tag">Austrian passport</span> <span class="kw-tag">Österreich Reisepass</span> <span class="kw-tag">biometrischer Reisepass</span> <span class="kw-tag">Ausstellungsdatum</span> <span class="kw-tag">Ablaufdatum</span> <span class="kw-tag">Gültigkeitsdatum</span> <span class="kw-tag">Staatsangehörigkeit</span> <span class="kw-tag">österreichische Staatsangehörigkeit</span> </div>
+      <code class="regex-code">(?i)(?:passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|reisepassnummer|reisepasse|reisep[aä]sse|No-Reisepass|Nr-Reisepass|Reisepass-Nr|Passnummer|date of issue|date of expiry|Austria passport|Austrian passport|[OÖ]sterreich Reisepass|biometrischer Reisepass|Ausstellungsdatum|Ablaufdatum|G[uü]ltigkeitsdatum|Staatsangeh[oö]rigkeit|[oö]sterreichische Staatsangeh[oö]rigkeit)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-5">
+      <h3>
+        <span class="idx">5.</span> Azerbaijan passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Azerbaijani_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Azerbaijani_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Issued by the Ministry of Internal Affairs of Azerbaijan (source: Wikipedia table data)</li>
+<li>Biometric passports have been issued since 1 September 2013 (source: Wikipedia)</li>
+<li>First issued on 28 May 1991 following independence (source: Wikipedia)</li>
+<li>Validity period varies by age: 1 year for children under 1, 3 years for children 1-3, 5 years for children 3-18, and 10 years for individuals over 18 (source: Wikipedia)</li>
+<li>Latest version from 2021 is a biometric passport with machine-readable data page (source: Wikipedia)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">az-passport-biometric</div>
+          <div class="rule-desc">Biometric passports issued since 1 September 2013 with machine-readable data page</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{1,3}[\s\-]?\d{6,9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">az-passport-validity-age-based</div>
+          <div class="rule-desc">Validity period varies by age: 1 year (under 1), 3 years (1-3), 5 years (3-18), 10 years (over 18)</div>
+          <code class="regex-code">(?&lt;![:\w])Since no specific format structure or numbering scheme is documented in the available sources for Azerbaijan passports, and there are no hard constraints or example matches provided, it is not possible to create a meaningful regex pattern that would match Azerbaijan passport numbers. The rule describes validity periods by age, but this is a policy constraint about passport validity duration, not a format constraint that can be encoded in a regex pattern.
+
+Without documented format rules (such as length, character composition, prefix patterns, or structural requirements), any regex would be arbitrary and not based on authoritative sources.
+
+\b[A-Z0-9]{7,9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">az-passport-issued-since-1991</div>
+          <div class="rule-desc">Passports first issued on 28 May 1991 following independence</div>
+          <code class="regex-code">(?&lt;![:\w])Since no specific format structure or numbering scheme is documented for Azerbaijan passports, and the rule only specifies they were &quot;first issued on 28 May 1991 following independence&quot; without providing any pattern constraints, there is no determinable regex pattern that can match passport numbers based solely on an issuance date.
+
+However, if the intent is to match a generic alphanumeric passport identifier that could represent an Azerbaijan passport, a reasonable pattern would be:
+
+\b[A-Z]{1,3}[\s\-]?\d{6,9}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])Based on the provided information, there are no documented specific format structures, numbering schemes, or hard constraints that can be encoded into a regex pattern. The rules describe administrative and validity policies (issuance dates, biometric features, age-based validity periods) rather than the actual format or structure of the passport number itself.
+
+Since no authoritative format rules specify how Azerbaijan passport numbers are structured (length, character composition, prefixes, check digits, etc.), it is not possible to create a meaningful regex pattern that would validate these passport numbers.
+
+\b(?!)(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Azerbaijan passport</span> <span class="kw-tag">Azərbaycan pasportu</span> <span class="kw-tag">Azərbaycan Respublikası pasportu</span> <span class="kw-tag">pasport nömrəsi</span> <span class="kw-tag">biometric passport Azerbaijan</span> <span class="kw-tag">Daxili İşlər Nazirliyi</span> <span class="kw-tag">Ministry of Internal Affairs Azerbaijan</span> <span class="kw-tag">Azərbaycan vətəndaşlığı</span> <span class="kw-tag">passport number Azerbaijan</span> <span class="kw-tag">Azərbaycan şəxsiyyət sənədi</span> <span class="kw-tag">Azərbaycan biometrik pasport</span> <span class="kw-tag">Azərbaycan səyahət sənədi</span> <span class="kw-tag">travel document Azerbaijan</span> </div>
+      <code class="regex-code">(?i)(?:Azerbaijan passport|Azərbaycan pasportu|Azərbaycan Respublikası pasportu|pasport n[oö]mrəsi|biometric passport Azerbaijan|Daxili İşlər Nazirliyi|Ministry of Internal Affairs Azerbaijan|Azərbaycan vətəndaşlı[gğ]ı|passport number Azerbaijan|Azərbaycan şəxsiyyət sənədi|Azərbaycan biometrik pasport|Azərbaycan səyahət sənədi|travel document Azerbaijan)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-6">
+      <h3>
+        <span class="idx">6.</span> Belarus passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://www.gov.uk/government/publications/belarus-knowledge-base-profile/belarus-knowledge-base-profile" target="_blank" rel="noopener noreferrer">https://www.gov.uk/government/publications/belarus-knowledge-base-profile/belarus-knowledge-base-profile</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Belarusian_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Belarusian_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Issued by the Ministry of Internal Affairs of Belarus (source: Wikipedia table in scraped text)</li>
+<li>First issued in 1996, with updated version in 2006 and biometric version in 2021 (source: Wikipedia table)</li>
+<li>Valid for 10 years from date of issue (source: Wikipedia table - &#x27;Expiration: 10 years&#x27;)</li>
+<li>Biometric passports have been issued since 2021 (source: Wikipedia table)</li>
+<li>Passport is used for identification and requires Belarusian citizenship for eligibility (source: Wikipedia table)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">belarus-passport-alphanumeric</div>
+          <div class="rule-desc">Belarus passport numbers are alphanumeric identifiers issued by the Ministry of Internal Affairs</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">belarus-passport-validity</div>
+          <div class="rule-desc">Passports are valid for 10 years from date of issue</div>
+          <code class="regex-code">(?&lt;![:\w])Since no specific format structure, check-digit algorithm, or numbering scheme is documented in available sources for Belarus passports, and the only structural information provided relates to validity period (which cannot be encoded in a regex pattern matching passport numbers), there is no identifiable pattern to match.
+
+A regex cannot validate time-based rules like &quot;valid for 10 years from date of issue&quot; without context about issue dates, and no passport number format is specified.
+
+Therefore, no meaningful regex can be constructed from the given specifications.(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">belarus-passport-biometric</div>
+          <div class="rule-desc">Biometric passports have been issued since 2021</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{2}[\s\-]?[A-Z0-9]{5,7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Belarus passport</span> <span class="kw-tag">Belarusian passport</span> <span class="kw-tag">паспорт Беларусі</span> <span class="kw-tag">беларускі паспарт</span> <span class="kw-tag">паспорт гражданина Беларуси</span> <span class="kw-tag">белорусский паспорт</span> <span class="kw-tag">биометрический паспорт</span> <span class="kw-tag">біяметрычны паспарт</span> <span class="kw-tag">Ministry of Internal Affairs Belarus</span> <span class="kw-tag">МВД Беларуси</span> <span class="kw-tag">МУС Беларусі</span> <span class="kw-tag">номер паспорта</span> <span class="kw-tag">нумар паспарта</span> <span class="kw-tag">passport number Belarus</span> <span class="kw-tag">Belarusian citizenship</span> <span class="kw-tag">грамадзянства Беларусі</span> <span class="kw-tag">гражданство Беларуси</span> </div>
+      <code class="regex-code">(?i)(?:Belarus passport|Belarusian passport|паспорт Беларусі|беларускі паспарт|паспорт гражданина Беларуси|белорусский паспорт|биометрический паспорт|біяметрычны паспарт|Ministry of Internal Affairs Belarus|МВД Беларуси|МУС Беларусі|номер паспорта|нумар паспарта|passport number Belarus|Belarusian citizenship|грамадзянства Беларусі|гражданство Беларуси)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-7">
+      <h3>
+        <span class="idx">7.</span> Belgium passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-belgium-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-belgium-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-belgium-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-belgium-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/sv-se/purview/sit-defn-belgium-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/sv-se/purview/sit-defn-belgium-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Format consists of two letters followed by six digits (Source: Microsoft DLP documentation)</li>
+<li>Total length is exactly 8 characters (2 letters + 6 digits)</li>
+<li>No spaces or delimiters are used in the passport number (Source: Microsoft DLP documentation)</li>
+<li>The first two characters must be alphabetic letters</li>
+<li>The last six characters must be numeric digits</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_belgium_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length-8</div>
+          <div class="rule-desc">Total length is exactly 8 characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">two-letters-prefix</div>
+          <div class="rule-desc">First two characters must be alphabetic letters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">six-digits-suffix</div>
+          <div class="rule-desc">Last six characters must be numeric digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces, hyphens, or other delimiters are used in the passport number</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{6}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passport</span> <span class="kw-tag">passeport</span> <span class="kw-tag">paspoort</span> <span class="kw-tag">reisepass</span> <span class="kw-tag">numéro passeport</span> <span class="kw-tag">paspoort nr</span> <span class="kw-tag">paspoort-nr</span> <span class="kw-tag">paspoortnummer</span> <span class="kw-tag">paspoortnummers</span> <span class="kw-tag">Passeport carte</span> <span class="kw-tag">Passeport livre</span> <span class="kw-tag">Pass-Nr</span> <span class="kw-tag">Passnummer</span> <span class="kw-tag">Belgian passport</span> <span class="kw-tag">Belgium passport</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport numbers</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">expiry date</span> <span class="kw-tag">issue date</span> <span class="kw-tag">nationality Belgian</span> <span class="kw-tag">nationalité belge</span> <span class="kw-tag">nationaliteit Belgische</span> <span class="kw-tag">place of birth</span> <span class="kw-tag">lieu de naissance</span> <span class="kw-tag">geboorteplaats</span> <span class="kw-tag">Royaume de Belgique</span> <span class="kw-tag">Koninkrijk België</span> <span class="kw-tag">Kingdom of Belgium</span> </div>
+      <code class="regex-code">(?i)(?:passport|passeport|paspoort|reisepass|num[eé]ro passeport|paspoort nr|paspoort-nr|paspoortnummer|paspoortnummers|Passeport carte|Passeport livre|Pass-Nr|Passnummer|Belgian passport|Belgium passport|passport number|passport numbers|date of issue|date of expiry|expiry date|issue date|nationality Belgian|nationalit[eé] belge|nationaliteit Belgische|place of birth|lieu de naissance|geboorteplaats|Royaume de Belgique|Koninkrijk Belgi[eë]|Kingdom of Belgium)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-8">
+      <h3>
+        <span class="idx">8.</span> Bosnia and Herzegovina passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://www.iddeea.gov.ba/wp-content/uploads/WEB/ZAKONODAVSTVO/PODZAKONSKI%20AKTI/Putne%20isprave/8/rulebook_on_design_of_collective_passport_of_bih_55_09.pdf" target="_blank" rel="noopener noreferrer">https://www.iddeea.gov.ba/wp-content/uploads/WEB/ZAKONODAVSTVO/PODZAKONSKI%20AKTI/Putne%20isprave/8/rulebook_on_design_of_collective_passport_of_bih_55_09.pdf</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Bosnia and Herzegovina passports are biometric passports (source: Wikipedia table - &#x27;Type: Passport, biometric passport&#x27;)</li>
+<li>Current version of biometric passport first issued on 1 October 2014 (source: Wikipedia table)</li>
+<li>Earlier biometric passport version first issued on 14 October 2010 (source: Wikipedia table)</li>
+<li>Passport cost is 50 KM / €25 / $25 (source: Wikipedia table)</li>
+<li>Eligibility requirement is Bosnia and Herzegovina citizenship (source: Wikipedia table - &#x27;Eligibility: Bosnia and Herzegovina citizenship&#x27;)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">ba-passport-biometric</div>
+          <div class="rule-desc">Bosnia and Herzegovina passports are biometric passports</div>
+          <code class="regex-code">(?&lt;![:\w])[0-9]{8,9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ba-passport-current-version</div>
+          <div class="rule-desc">Current version of biometric passport first issued on 1 October 2014</div>
+          <code class="regex-code">(?&lt;![:\w])[0-9]{7,9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ba-passport-earlier-version</div>
+          <div class="rule-desc">Earlier biometric passport version first issued on 14 October 2010</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{7,9}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])I need to analyze the provided information to create a unified regex for Bosnia and Herzegovina passport numbers.
+
+Looking at the constraints:
+- HARD CONSTRAINTS: None listed
+- AUTHORITATIVE FORMAT RULES: Only describe that passports are biometric, with version dates and administrative details (cost, eligibility)
+- NUMBERING POLICY: States &quot;The specific format and structure of passport numbers is not documented in the available policies&quot;
+
+Since there are:
+1. No hard constraints provided
+2. No documented passport number format/structure
+3. No example matches given
+4. Only administrative metadata about the passport type (biometric, dates, costs)
+
+There is no structural pattern to encode. The rules describe passport characteristics (biometric, version dates) but provide zero information about the actual passport number format, length, character composition, or structure.
+
+Without any format specification, I cannot produce a meaningful regex pattern. However, given that this is a passport document and following ICAO standards for machine-readable travel documents, and that no specific format is documented, the most I could do is match a generic alphanumeric pattern, but that would be arbitrary.
+
+Since the task requires encoding ALL structural constraints and there are none provided about the actual passport number format, the only honest answer is:
+
+\b[A-Z0-9]+(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Bosnia and Herzegovina passport</span> <span class="kw-tag">Bosnian passport</span> <span class="kw-tag">BiH passport</span> <span class="kw-tag">Bosnia Herzegovina passport</span> <span class="kw-tag">pasaporte Bosnia y Herzegovina</span> <span class="kw-tag">pasaporte bosnio</span> <span class="kw-tag">паспорт Босне и Херцеговине</span> <span class="kw-tag">босански пасош</span> <span class="kw-tag">putovnica Bosne i Hercegovine</span> <span class="kw-tag">bosanska putovnica</span> <span class="kw-tag">BiH putovnica</span> <span class="kw-tag">broj putovnice</span> <span class="kw-tag">паспортни број</span> <span class="kw-tag">biometric passport Bosnia</span> <span class="kw-tag">biometrijska putovnica</span> <span class="kw-tag">биометријски пасош</span> <span class="kw-tag">Bosnia citizenship</span> <span class="kw-tag">državljanstvo Bosne i Hercegovine</span> <span class="kw-tag">држављанство Босне и Херцеговине</span> </div>
+      <code class="regex-code">(?i)(?:Bosnia and Herzegovina passport|Bosnian passport|BiH passport|Bosnia Herzegovina passport|pasaporte Bosnia y Herzegovina|pasaporte bosnio|паспорт Босне и Херцеговине|босански пасош|putovnica Bosne i Hercegovine|bosanska putovnica|BiH putovnica|broj putovnice|паспортни број|biometric passport Bosnia|biometrijska putovnica|биометријски пасош|Bosnia citizenship|dr[zž]avljanstvo Bosne i Hercegovine|држављанство Босне и Херцеговине)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-9">
+      <h3>
+        <span class="idx">9.</span> Bulgaria passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-bulgaria-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-bulgaria-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-bulgaria-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-bulgaria-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Length is exactly 9 digits (Source: Microsoft DLP documentation)</li>
+<li>No spaces or delimiters are permitted in the format (Source: Microsoft DLP documentation)</li>
+<li>Consists only of numeric digits (Source: Microsoft DLP documentation pattern definition)</li>
+<li>Must match the pattern defined by Regex_bulgaria_eu_passport_number for validation (Source: Microsoft DLP documentation)</li>
+<li>Associated dates follow DD.MM.YYYY format for issue and expiry dates (Source: Microsoft DLP documentation Regex_eu_passport_date1)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_bulgaria_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">exactly-nine-digits</div>
+          <div class="rule-desc">Bulgaria passport number must be exactly 9 digits in length</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-only</div>
+          <div class="rule-desc">Consists only of numeric digits (0-9), no alphabetic characters</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces, hyphens, or other delimiters are permitted in the format</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">associated-date-format</div>
+          <div class="rule-desc">When dates (issue/expiry) are present in context, they follow DD.MM.YYYY format</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">\b\d{9}\b</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passport#</span> <span class="kw-tag">passport #</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportno</span> <span class="kw-tag">passport no</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passportnumbers</span> <span class="kw-tag">passport numbers</span> <span class="kw-tag">номер на паспорта</span> <span class="kw-tag">номер на паспорт</span> <span class="kw-tag">паспорт №</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">Bulgaria passport</span> <span class="kw-tag">Bulgarian passport</span> <span class="kw-tag">паспорт</span> <span class="kw-tag">български паспорт</span> <span class="kw-tag">издаден на</span> <span class="kw-tag">валиден до</span> <span class="kw-tag">дата на издаване</span> <span class="kw-tag">дата на изтичане</span> <span class="kw-tag">Република България</span> <span class="kw-tag">Republic of Bulgaria</span> <span class="kw-tag">travel document</span> <span class="kw-tag">документ за пътуване</span> </div>
+      <code class="regex-code">(?i)(?:passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|номер на паспорта|номер на паспорт|паспорт №|date of issue|date of expiry|Bulgaria passport|Bulgarian passport|паспорт|български паспорт|издаден на|валиден до|дата на издаване|дата на изтичане|Република България|Republic of Bulgaria|travel document|документ за пътуване)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-10">
+      <h3>
+        <span class="idx">10.</span> Croatia passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-croatia-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-croatia-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-croatia-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-croatia-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/lt-lt/purview/sit-defn-croatia-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/lt-lt/purview/sit-defn-croatia-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Length is exactly 9 digits (Source: Microsoft DLP documentation)</li>
+<li>Contains no spaces or delimiters (Source: Microsoft DLP documentation)</li>
+<li>Consists only of numeric characters (Source: Microsoft DLP documentation)</li>
+<li>Format follows standard EU passport numbering conventions for Croatia</li>
+<li>Associated date format uses DD.MM.YYYY structure when date validation is applied (Source: Microsoft DLP documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_croatia_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">length-nine-digits</div>
+          <div class="rule-desc">Croatia passport number must be exactly 9 digits in length</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-only</div>
+          <div class="rule-desc">Croatia passport number consists only of numeric characters (0-9)</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">Croatia passport number contains no spaces, hyphens, or other delimiters</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">\b\d{9}\b</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passport#</span> <span class="kw-tag">passport #</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportno</span> <span class="kw-tag">passport no</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passportnumbers</span> <span class="kw-tag">passport numbers</span> <span class="kw-tag">broj putovnice</span> <span class="kw-tag">br\. Putovnice</span> <span class="kw-tag">br putovnice</span> <span class="kw-tag">Croatia passport</span> <span class="kw-tag">Croatian passport</span> <span class="kw-tag">Croatia Passport Number</span> <span class="kw-tag">Croatian travel document</span> <span class="kw-tag">putovnica</span> <span class="kw-tag">putna isprava</span> <span class="kw-tag">hrvatski putovnica</span> <span class="kw-tag">hrvatska putovnica</span> <span class="kw-tag">Ministarstvo unutarnjih poslova</span> <span class="kw-tag">Republic of Croatia passport</span> <span class="kw-tag">HR passport</span> <span class="kw-tag">Croatia travel document</span> </div>
+      <code class="regex-code">(?i)(?:passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|broj putovnice|br\. Putovnice|br putovnice|Croatia passport|Croatian passport|Croatia Passport Number|Croatian travel document|putovnica|putna isprava|hrvatski putovnica|hrvatska putovnica|Ministarstvo unutarnjih poslova|Republic of Croatia passport|HR passport|Croatia travel document)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-11">
+      <h3>
+        <span class="idx">11.</span> Cyprus passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (4)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-cyprus-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-cyprus-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/bs-latn-ba/purview/sit-defn-cyprus-passport-number?view=o365-worldwide&amp;source=recommendations" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/bs-latn-ba/purview/sit-defn-cyprus-passport-number?view=o365-worldwide&amp;source=recommendations</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-cyprus-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-cyprus-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/id-id/purview/sit-defn-cyprus-passport-number?view=o365-worldwide&amp;source=recommendations" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/id-id/purview/sit-defn-cyprus-passport-number?view=o365-worldwide&amp;source=recommendations</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Format consists of one letter followed by 6-8 digits (Source: Microsoft DLP documentation)</li>
+<li>No spaces or delimiters are permitted in the passport number (Source: Microsoft DLP documentation)</li>
+<li>Total length is 7-9 characters (1 letter + 6-8 digits) (Source: Microsoft DLP documentation)</li>
+<li>The first character must be a letter (Source: Microsoft DLP documentation)</li>
+<li>All characters following the initial letter must be numeric digits (Source: Microsoft DLP documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_cyprus_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">letter-prefix</div>
+          <div class="rule-desc">The first character must be a letter (A-Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{6,8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">digit-suffix</div>
+          <div class="rule-desc">All characters following the initial letter must be numeric digits (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{6,8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">total-length</div>
+          <div class="rule-desc">Total length is 7-9 characters (1 letter + 6-8 digits)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{6,8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces or delimiters are permitted in the passport number</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{6,8}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]\d{6,8}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passport</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport#</span> <span class="kw-tag">passportno</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">Cyprus passport</span> <span class="kw-tag">Cypriot passport</span> <span class="kw-tag">διαβατήριο</span> <span class="kw-tag">αριθμός διαβατηρίου</span> <span class="kw-tag">Αριθμός Διαβατηρίου</span> <span class="kw-tag">κυπριακό διαβατήριο</span> <span class="kw-tag">διαβατήριο#</span> <span class="kw-tag">αριθμό διαβατηρίου</span> <span class="kw-tag">Αρ\. Διαβατηρίου</span> <span class="kw-tag">pasaportu</span> <span class="kw-tag">Pasaport Kimliği</span> <span class="kw-tag">pasaport numarası</span> <span class="kw-tag">Pasaport no\.</span> <span class="kw-tag">expires on</span> <span class="kw-tag">issued on</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">expiration date</span> <span class="kw-tag">travel document</span> <span class="kw-tag">Republic of Cyprus</span> </div>
+      <code class="regex-code">(?i)(?:passport|passport number|passport#|passportno|passportnumber|Cyprus passport|Cypriot passport|διαβατήριο|αριθμός διαβατηρίου|Αριθμός Διαβατηρίου|κυπριακό διαβατήριο|διαβατήριο#|αριθμό διαβατηρίου|Αρ\. Διαβατηρίου|pasaportu|Pasaport Kimli[gğ]i|pasaport numarası|Pasaport no\.|expires on|issued on|date of issue|date of expiry|expiration date|travel document|Republic of Cyprus)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-12">
+      <h3>
+        <span class="idx">12.</span> Czech Republic passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (4)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-czech-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-czech-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-czech-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-czech-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/lt-lt/purview/sit-defn-czech-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/lt-lt/purview/sit-defn-czech-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/el-gr/purview/sit-defn-czech-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/el-gr/purview/sit-defn-czech-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Length is exactly 8 digits (Source: Microsoft DLP documentation)</li>
+<li>No spaces or delimiters are permitted in the passport number (Source: Microsoft DLP documentation)</li>
+<li>Format consists of numeric characters only (Source: Microsoft DLP documentation)</li>
+<li>Passport number is validated in conjunction with keywords such as &#x27;cestovní pas&#x27; (travel passport), &#x27;číslo pasu&#x27; (passport number), or generic passport terms (Source: Microsoft DLP documentation)</li>
+<li>Date format associated with Czech passports follows DD.MM.YYYY pattern (Source: Microsoft DLP documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_czech_republic_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">length-8-digits</div>
+          <div class="rule-desc">Passport number must be exactly 8 digits in length</div>
+          <code class="regex-code">\b\d{8}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-only</div>
+          <div class="rule-desc">Passport number consists of numeric characters only (0-9)</div>
+          <code class="regex-code">\b\d{8}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces, hyphens, or other delimiters are permitted in the passport number</div>
+          <code class="regex-code">\b\d{8}\b</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">\b\d{8}\b</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">cestovní pas</span> <span class="kw-tag">číslo pasu</span> <span class="kw-tag">cestovní pasu</span> <span class="kw-tag">čísla pasu</span> <span class="kw-tag">passeport no</span> <span class="kw-tag">passport#</span> <span class="kw-tag">passport #</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportno</span> <span class="kw-tag">passport no</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passportnumbers</span> <span class="kw-tag">passport numbers</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">Czech Republic passport</span> <span class="kw-tag">Czech passport</span> <span class="kw-tag">datum vydání</span> <span class="kw-tag">datum platnosti</span> <span class="kw-tag">platnost do</span> </div>
+      <code class="regex-code">(?i)(?:cestovn[ií] pas|[cč][ií]slo pasu|cestovn[ií] pasu|[cč][ií]sla pasu|passeport no|passport#|passport #|passportid|passportno|passport no|passportnumber|passport number|passportnumbers|passport numbers|date of issue|date of expiry|Czech Republic passport|Czech passport|datum vyd[aá]n[ií]|datum platnosti|platnost do)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-13">
+      <h3>
+        <span class="idx">13.</span> Denmark passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-denmark-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-denmark-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-denmark-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-denmark-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Length is exactly 9 digits (Source: Microsoft DLP documentation)</li>
+<li>No spaces or delimiters are used in the format (Source: Microsoft DLP documentation)</li>
+<li>Consists only of numeric characters (Source: Microsoft DLP documentation)</li>
+<li>Format follows standard EU passport numbering conventions (Source: Microsoft DLP entity definition)</li>
+<li>Associated with Danish-language keywords &#x27;pasnummer&#x27;, &#x27;Passeport n°&#x27;, and &#x27;pasnumre&#x27; (Source: Microsoft DLP documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_denmark_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">exactly-9-digits</div>
+          <div class="rule-desc">Denmark passport number must be exactly 9 digits in length</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-only</div>
+          <div class="rule-desc">Consists only of numeric characters (0-9)</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces, hyphens, or other delimiters are used in the format</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">\b\d{9}\b</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">pasnummer</span> <span class="kw-tag">pasnumre</span> <span class="kw-tag">Passeport n°</span> <span class="kw-tag">Denmark passport</span> <span class="kw-tag">Danish passport</span> <span class="kw-tag">Denmark passport number</span> <span class="kw-tag">Danish passport number</span> <span class="kw-tag">passport#</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passport no</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passportnumbers</span> <span class="kw-tag">passport numbers</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">udstedelsesdato</span> <span class="kw-tag">udløbsdato</span> <span class="kw-tag">pas nummer</span> <span class="kw-tag">dansk pas</span> <span class="kw-tag">Danmark pas</span> </div>
+      <code class="regex-code">(?i)(?:pasnummer|pasnumre|Passeport n°|Denmark passport|Danish passport|Denmark passport number|Danish passport number|passport#|passportid|passport no|passportnumber|passport number|passportnumbers|passport numbers|date of issue|date of expiry|udstedelsesdato|udløbsdato|pas nummer|dansk pas|Danmark pas)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-14">
+      <h3>
+        <span class="idx">14.</span> Estonia passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (4)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Estonian_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Estonian_passport</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-estonia-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-estonia-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-estonia-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-estonia-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/tr-tr/Purview/sit-defn-estonia-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/tr-tr/Purview/sit-defn-estonia-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Format is one letter followed by seven digits with no spaces or delimiters (Source: Microsoft DLP documentation)</li>
+<li>Total length is exactly 8 characters (1 letter + 7 digits) (Source: Microsoft DLP documentation)</li>
+<li>First character must be a letter (Source: Microsoft DLP documentation)</li>
+<li>Characters 2-8 must be numeric digits (Source: Microsoft DLP documentation)</li>
+<li>Passport validity period is 10 years after issuance (Source: Wikipedia - Estonian passport)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_estonia_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length-8</div>
+          <div class="rule-desc">Total length is exactly 8 characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">first-char-letter</div>
+          <div class="rule-desc">First character must be a letter (A-Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">positions-2-8-numeric</div>
+          <div class="rule-desc">Characters at positions 2-8 (after the first letter) must be numeric digits (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces, hyphens, or other delimiters are present</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">format-pattern</div>
+          <div class="rule-desc">Format follows the pattern: one letter followed by seven digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]\d{7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">eesti kodaniku pass</span> <span class="kw-tag">passi number</span> <span class="kw-tag">passinumbrid</span> <span class="kw-tag">dokumendi nr</span> <span class="kw-tag">Estonian passport</span> <span class="kw-tag">Estonia passport</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport#</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">document number</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">passi kehtivus</span> <span class="kw-tag">väljaandmise kuupäev</span> <span class="kw-tag">kehtivuse lõpp</span> </div>
+      <code class="regex-code">(?i)(?:eesti kodaniku pass|passi number|passinumbrid|dokumendi nr|Estonian passport|Estonia passport|passport number|passport#|passportid|passportnumber|document number|date of issue|date of expiry|passi kehtivus|v[aä]ljaandmise kuup[aä]ev|kehtivuse l[oõ]pp)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-15">
+      <h3>
+        <span class="idx">15.</span> Finland passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Finnish_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Finnish_passport</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-finland-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-finland-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-finland-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-finland-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (8)</summary>
+        <ul class='policy-list'><li>Total length is exactly 9 characters (Source: Microsoft DLP documentation - &#x27;combination of nine letters and digits&#x27;)</li>
+<li>First two characters are letters, not case-sensitive (Source: Microsoft DLP documentation - &#x27;two letters (not case-sensitive)&#x27;)</li>
+<li>Last seven characters are digits (Source: Microsoft DLP documentation - &#x27;seven digits&#x27;)</li>
+<li>Format follows the pattern: 2 letters followed by 7 digits (Source: Microsoft DLP documentation pattern definition)</li>
+<li>Passport validity period is 5 years after issuance (Source: Wikipedia table - &#x27;Expiration | 5 years after issuance&#x27;)</li>
+<li>Current version of Finnish passport was first issued on 13 March 2023 (Source: Wikipedia table - &#x27;13 March 2023 (current version)&#x27;)</li>
+<li>Finnish passports are biometric documents (Source: Wikipedia - &#x27;biometric passport&#x27;)</li>
+<li>Passport is machine-readable following EU design standards (Source: Wikipedia - &#x27;first machine-readable EU design&#x27;)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_finland_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length-9</div>
+          <div class="rule-desc">Total length is exactly 9 characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">first-two-letters</div>
+          <div class="rule-desc">First two characters are letters (not case-sensitive)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">last-seven-digits</div>
+          <div class="rule-desc">Last seven characters are digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">pattern-letters-digits</div>
+          <div class="rule-desc">Format follows the pattern: 2 letters followed by 7 digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">suomalainen passi</span> <span class="kw-tag">passin numero</span> <span class="kw-tag">passin numero\.#</span> <span class="kw-tag">passin numero#</span> <span class="kw-tag">passin numero\.</span> <span class="kw-tag">passi#</span> <span class="kw-tag">passi number</span> <span class="kw-tag">Finnish passport</span> <span class="kw-tag">Finland passport</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport#</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">biometric passport</span> <span class="kw-tag">machine-readable passport</span> <span class="kw-tag">Suomi passi</span> <span class="kw-tag">passinumero</span> <span class="kw-tag">voimassaoloaika</span> <span class="kw-tag">myöntämispäivä</span> <span class="kw-tag">viimeinen voimassaolopäivä</span> </div>
+      <code class="regex-code">(?i)(?:suomalainen passi|passin numero|passin numero\.#|passin numero#|passin numero\.|passi#|passi number|Finnish passport|Finland passport|passport number|passport#|passportid|passportnumber|date of issue|date of expiry|biometric passport|machine-readable passport|Suomi passi|passinumero|voimassaoloaika|my[oö]nt[aä]misp[aä]iv[aä]|viimeinen voimassaolop[aä]iv[aä])</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-16">
+      <h3>
+        <span class="idx">16.</span> France passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-france-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-france-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-france-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-france-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (6)</summary>
+        <ul class='policy-list'><li>Total length is exactly 9 characters (Source: Microsoft DLP documentation)</li>
+<li>Format consists of three segments: 2 digits + 2 letters + 5 digits (Source: Microsoft DLP documentation)</li>
+<li>Positions 1-2 are numeric digits (Source: Microsoft DLP documentation)</li>
+<li>Positions 3-4 are alphabetic letters, case-insensitive (Source: Microsoft DLP documentation)</li>
+<li>Positions 5-9 are numeric digits (Source: Microsoft DLP documentation)</li>
+<li>The identifier follows the pattern: ##AA##### where # represents a digit and A represents a letter (Source: Microsoft DLP documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>{&quot;vendor&quot;: &quot;Microsoft Purview&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;passport#&quot;, &quot;passport #&quot;, &quot;passportid&quot;, &quot;passports&quot;, &quot;passportno&quot;, &quot;passport no&quot;, &quot;passportnumber&quot;, &quot;passport number&quot;, &quot;passportnumbers&quot;, &quot;passport numbers&quot;, &quot;numéro de passeport&quot;, &quot;passeport n °&quot;, &quot;passeport non&quot;, &quot;passeport #&quot;, &quot;passeport#&quot;, &quot;passeportnon&quot;, &quot;passeportn °&quot;, &quot;passeport français&quot;, &quot;passeport livre&quot;, &quot;passeport carte&quot;, &quot;numéro passeport&quot;, &quot;passeport n°&quot;, &quot;n° du passeport&quot;, &quot;n° passeport&quot;, &quot;date of issue&quot;, &quot;date of expiry&quot;], &quot;rules&quot;: [&quot;Pattern: nine digits and letters: two digits, two letters (not case-sensitive), five digits&quot;, &quot;Function Func_fr_passport finds content that matches the pattern&quot;, &quot;High confidence (85%): Pattern match + keyword match + date in format DD MM YYYY or date keyword&quot;, &quot;Medium confidence (75%): Pattern match + keyword match&quot;, &quot;Proximity: 300 characters&quot;, &quot;Date format: DD MM YYYY (Regex_eu_passport_date3)&quot;]}</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length-9</div>
+          <div class="rule-desc">Total length is exactly 9 characters</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Za-z]{2}[\s\-]?\d{5}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">segment-structure</div>
+          <div class="rule-desc">Format consists of three segments: 2 digits + 2 letters + 5 digits (##AA#####)</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Za-z]{2}[\s\-]?\d{5}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">positions-1-2-numeric</div>
+          <div class="rule-desc">Positions 1-2 (0-indexed: 0-1) are numeric digits</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Za-z]{2}[\s\-]?\d{5}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">positions-3-4-alphabetic</div>
+          <div class="rule-desc">Positions 3-4 (0-indexed: 2-3) are alphabetic letters, case-insensitive</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Za-z]{2}[\s\-]?\d{5}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">positions-5-9-numeric</div>
+          <div class="rule-desc">Positions 5-9 (0-indexed: 4-8) are numeric digits</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Za-z]{2}[\s\-]?\d{5}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Za-z]{2}[\s\-]?\d{5}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passeport français</span> <span class="kw-tag">passeport</span> <span class="kw-tag">numéro de passeport</span> <span class="kw-tag">passeport n°</span> <span class="kw-tag">n° du passeport</span> <span class="kw-tag">n° passeport</span> <span class="kw-tag">passeport livre</span> <span class="kw-tag">passeport carte</span> <span class="kw-tag">numéro passeport</span> <span class="kw-tag">French passport</span> <span class="kw-tag">France passport</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport no</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">date d&#x27;émission</span> <span class="kw-tag">date d&#x27;expiration</span> <span class="kw-tag">République Française</span> <span class="kw-tag">Ministère de l&#x27;Intérieur</span> <span class="kw-tag">lieu de naissance</span> <span class="kw-tag">nationalité française</span> </div>
+      <code class="regex-code">(?i)(?:passeport fran[cç]ais|passeport|num[eé]ro de passeport|passeport n°|n° du passeport|n° passeport|passeport livre|passeport carte|num[eé]ro passeport|French passport|France passport|passport number|passport no|date of issue|date of expiry|date d&#x27;[eé]mission|date d&#x27;expiration|R[eé]publique Fran[cç]aise|Minist[eè]re de l&#x27;Int[eé]rieur|lieu de naissance|nationalit[eé] fran[cç]aise)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-17">
+      <h3>
+        <span class="idx">17.</span> Georgia passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://en.wikipedia.org/wiki/Georgian_passport" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Georgian_passport</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (6)</summary>
+        <ul class='policy-list'><li>Georgian passports are biometric documents (Source: Wikipedia - Georgian passport article)</li>
+<li>Issued by the Ministry of Justice of Georgia (Source: Wikipedia - Georgian passport article)</li>
+<li>Adult passports (18 or older) are valid for 10 years (Source: Wikipedia - Georgian passport article)</li>
+<li>Child passports (under 18) are valid for 3 years (Source: Wikipedia - Georgian passport article)</li>
+<li>Adult passport cost is GEL 150 (Source: Wikipedia - Georgian passport article)</li>
+<li>Child passport cost is GEL 75 (Source: Wikipedia - Georgian passport article)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">biometric-passport</div>
+          <div class="rule-desc">Georgian passports are biometric documents issued by the Ministry of Justice of Georgia</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">validity-adult</div>
+          <div class="rule-desc">Adult passports (18 or older) are valid for 10 years</div>
+          <code class="regex-code">(?&lt;![:\w])I need to analyze this carefully. The rule states &quot;Adult passports (18 or older) are valid for 10 years&quot; but there is NO documented format structure or numbering scheme for Georgian passports according to the sources provided.
+
+The authoritative format rules list policy information (validity periods, costs, issuing authority) but do NOT provide any actual format constraints for the passport number itself - no digit count, no letter positions, no check digits, nothing structural.
+
+Since there is no documented format or numbering scheme, and the rule is about validity period (not a structural pattern), there is no regex pattern that can match &quot;Georgian passport numbers&quot; because their structure is unknown/undocumented.
+
+However, if I must provide a regex based solely on what&#x27;s given, I cannot create a meaningful pattern without any structural information. The task asks me to match &quot;values&quot; but no value format is specified.
+
+Given the complete absence of format specifications, I cannot provide a valid regex pattern.
+
+\b(?!)(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">validity-child</div>
+          <div class="rule-desc">Child passports (under 18) are valid for 3 years</div>
+          <code class="regex-code">(?&lt;![:\w])(?:child|under[\s-]?18)[\s\-]?passport[\s\S]{0,50}?(?:valid|validity)[\s\S]{0,20}?3[\s\-]?years?\b|\bpassport[\s\S]{0,50}?(?:child|under[\s-]?18)[\s\S]{0,50}?3[\s\-]?years?\b|\b3[\s\-]?years?[\s\S]{0,50}?(?:child|under[\s-]?18)[\s\S]{0,20}?passport(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])Based on the provided information, there are no documented format structure or numbering scheme constraints for Georgian passports. The rules describe policy attributes (validity periods, costs, issuing authority) but do not specify any pattern that can be encoded as a regex (no digit counts, letter positions, alphanumeric structure, etc.).
+
+Since there is no structural format to match, no valid regex can be produced.(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Georgian passport</span> <span class="kw-tag">Georgia passport</span> <span class="kw-tag">საქართველოს პასპორტი</span> <span class="kw-tag">პასპორტი</span> <span class="kw-tag">პასპორტის ნომერი</span> <span class="kw-tag">ბიომეტრიული პასპორტი</span> <span class="kw-tag">Ministry of Justice Georgia</span> <span class="kw-tag">საქართველოს იუსტიციის სამინისტრო</span> <span class="kw-tag">იუსტიციის სამინისტრო</span> <span class="kw-tag">Georgian biometric passport</span> <span class="kw-tag">Georgia biometric document</span> <span class="kw-tag">საქართველო</span> <span class="kw-tag">Georgian travel document</span> <span class="kw-tag">GEO passport</span> </div>
+      <code class="regex-code">(?i)(?:Georgian passport|Georgia passport|საქართველოს პასპორტი|პასპორტი|პასპორტის ნომერი|ბიომეტრიული პასპორტი|Ministry of Justice Georgia|საქართველოს იუსტიციის სამინისტრო|იუსტიციის სამინისტრო|Georgian biometric passport|Georgia biometric document|საქართველო|Georgian travel document|GEO passport)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-18">
+      <h3>
+        <span class="idx">18.</span> Germany passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-germany-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-germany-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-germany-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-germany-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (6)</summary>
+        <ul class='policy-list'><li>First character must be one letter from the set: C, F, G, H, J, K (case insensitive) - Source: Microsoft DLP documentation</li>
+<li>Following 8 characters must be digits or letters from the set: C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z (case insensitive) - Source: Microsoft DLP documentation</li>
+<li>Total base length is exactly 9 characters (1 letter + 8 alphanumeric characters) - Source: Microsoft DLP documentation</li>
+<li>May include an optional check digit after the 9 base characters - Source: Microsoft DLP documentation</li>
+<li>May optionally end with &#x27;d&#x27; or &#x27;D&#x27; character - Source: Microsoft DLP documentation</li>
+<li>Uses a checksum validation algorithm for verification (Func_german_passport_checksum) - Source: Microsoft DLP documentation</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>^[CFGHJK][CFGHJKLMNPRTVWXYZ]{8}[0-9]?[dD]?$</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (6)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">first-char-restricted</div>
+          <div class="rule-desc">First character must be one letter from the set: C, F, G, H, J, K (case insensitive)</div>
+          <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk](?:[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz][\s\-]?){7}[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz](?:[0-9](?:[dD])?)?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">next-eight-chars-restricted</div>
+          <div class="rule-desc">Following 8 characters (positions 1-8) must be digits or letters from the set: C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z (case insensitive)</div>
+          <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}(?:[0-9][dD]?|[dD])?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">base-length-nine</div>
+          <div class="rule-desc">Base passport number is exactly 9 characters (1 letter + 8 alphanumeric characters)</div>
+          <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk](?:[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz][\s\-]?){7}[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz](?:[0-9](?:[dD])?)?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-check-digit</div>
+          <div class="rule-desc">May include an optional check digit (0-9) after the 9 base characters</div>
+          <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}[0-9]?[dD]?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-d-suffix</div>
+          <div class="rule-desc">May optionally end with &#x27;d&#x27; or &#x27;D&#x27; character after the base number or check digit</div>
+          <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}[0-9]?[dD]?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">checksum-validation</div>
+          <div class="rule-desc">Uses a checksum validation algorithm (Func_german_passport_checksum) for verification</div>
+          <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk](?:[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz][\s\-]?){7}[0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz](?:[0-9](?:[dD])?)?(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[CFGHJKcfghjk][0-9CFGHJKLMNPRTVWXYZcfghjklmnprtvwxyz]{8}[0-9]?[dD]?(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Reisepass</span> <span class="kw-tag">Reisepasse</span> <span class="kw-tag">Reisepassnummer</span> <span class="kw-tag">No-Reisepass</span> <span class="kw-tag">Nr-Reisepass</span> <span class="kw-tag">Reisepass-Nr</span> <span class="kw-tag">Passnummer</span> <span class="kw-tag">Reisepässe</span> <span class="kw-tag">Bundesrepublik Deutschland</span> <span class="kw-tag">German passport</span> <span class="kw-tag">Germany passport</span> <span class="kw-tag">deutscher Reisepass</span> <span class="kw-tag">Ausweisnummer</span> <span class="kw-tag">Personalausweis</span> <span class="kw-tag">Bundesdruckerei</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passeport no</span> <span class="kw-tag">Ausstellungsdatum</span> <span class="kw-tag">Gültigkeitsdatum</span> <span class="kw-tag">Staatsangehörigkeit</span> </div>
+      <code class="regex-code">(?i)(?:Reisepass|Reisepasse|Reisepassnummer|No-Reisepass|Nr-Reisepass|Reisepass-Nr|Passnummer|Reisep[aä]sse|Bundesrepublik Deutschland|German passport|Germany passport|deutscher Reisepass|Ausweisnummer|Personalausweis|Bundesdruckerei|passport number|passeport no|Ausstellungsdatum|G[uü]ltigkeitsdatum|Staatsangeh[oö]rigkeit)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-19">
+      <h3>
+        <span class="idx">19.</span> Greece passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-greece-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-greece-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-greece-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-greece-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/uk-ua/purview/sit-defn-greece-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/uk-ua/purview/sit-defn-greece-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Format consists of two letters followed by seven digits (Source: Microsoft DLP policy documentation)</li>
+<li>Total length is exactly 9 characters (2 letters + 7 digits)</li>
+<li>No spaces or delimiters are used in the passport number (Source: Microsoft DLP policy documentation)</li>
+<li>The first two characters must be alphabetic letters</li>
+<li>The last seven characters must be numeric digits</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_greece_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length-9</div>
+          <div class="rule-desc">Total length is exactly 9 characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">two-letters-prefix</div>
+          <div class="rule-desc">First two characters must be alphabetic letters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">seven-digits-suffix</div>
+          <div class="rule-desc">Last seven characters must be numeric digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces or delimiters are used in the passport number</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">passport#</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportno</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passportnumbers</span> <span class="kw-tag">αριθμός διαβατηρίου</span> <span class="kw-tag">αριθμούς διαβατηρίου</span> <span class="kw-tag">αριθμός διαβατηριο</span> <span class="kw-tag">Greek passport</span> <span class="kw-tag">Greece passport</span> <span class="kw-tag">Hellenic passport</span> <span class="kw-tag">διαβατήριο</span> <span class="kw-tag">ελληνικό διαβατήριο</span> <span class="kw-tag">Ελληνική Αστυνομία</span> <span class="kw-tag">travel document</span> <span class="kw-tag">passport issuance</span> <span class="kw-tag">passport expiry</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">issuing authority</span> </div>
+      <code class="regex-code">(?i)(?:passport#|passportid|passportno|passportnumber|passportnumbers|αριθμός διαβατηρίου|αριθμούς διαβατηρίου|αριθμός διαβατηριο|Greek passport|Greece passport|Hellenic passport|διαβατήριο|ελληνικό διαβατήριο|Ελληνική Αστυνομία|travel document|passport issuance|passport expiry|date of issue|issuing authority)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-20">
+      <h3>
+        <span class="idx">20.</span> Hungary passport number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-hungary-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-hungary-passport-number</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-hungary-passport-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-hungary-passport-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>Format consists of two letters followed by six or seven digits (source: Microsoft DLP policy documentation)</li>
+<li>No spaces or delimiters are used in the passport number (source: Microsoft DLP policy documentation)</li>
+<li>Total length is either 8 characters (2 letters + 6 digits) or 9 characters (2 letters + 7 digits) (source: Microsoft DLP policy documentation)</li>
+<li>First two characters must be alphabetic letters (source: Microsoft DLP policy documentation)</li>
+<li>Remaining characters after the first two letters must be numeric digits only (source: Microsoft DLP policy documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_hungary_eu_passport_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">two-letters-prefix</div>
+          <div class="rule-desc">Passport number begins with exactly two alphabetic letters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Za-z]{2}[\s\-]?\d{6,7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">six-or-seven-digits</div>
+          <div class="rule-desc">After the two-letter prefix, the passport number contains either six or seven numeric digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6,7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">total-length-eight-or-nine</div>
+          <div class="rule-desc">Total length is either 8 characters (2 letters + 6 digits) or 9 characters (2 letters + 7 digits)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6,7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters</div>
+          <div class="rule-desc">No spaces, hyphens, or other delimiters are used in the passport number</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6,7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">alphanumeric-only</div>
+          <div class="rule-desc">Passport number contains only alphabetic letters (first two positions) and numeric digits (remaining positions)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6,7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?\d{6,7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">útlevél száma</span> <span class="kw-tag">Útlevelek száma</span> <span class="kw-tag">útlevél szám</span> <span class="kw-tag">útlevél</span> <span class="kw-tag">Hungary passport</span> <span class="kw-tag">Hungarian passport</span> <span class="kw-tag">Magyar útlevél</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport#</span> <span class="kw-tag">passportid</span> <span class="kw-tag">passportnumber</span> <span class="kw-tag">passportno</span> <span class="kw-tag">date of issue</span> <span class="kw-tag">date of expiry</span> <span class="kw-tag">kiállítás dátuma</span> <span class="kw-tag">lejárat dátuma</span> <span class="kw-tag">érvényesség</span> <span class="kw-tag">Magyar Köztársaság</span> <span class="kw-tag">Magyarország</span> <span class="kw-tag">travel document</span> <span class="kw-tag">útiokmány</span> </div>
+      <code class="regex-code">(?i)(?:[uú]tlev[eé]l sz[aá]ma|[UÚ]tlevelek sz[aá]ma|[uú]tlev[eé]l sz[aá]m|[uú]tlev[eé]l|Hungary passport|Hungarian passport|Magyar [uú]tlev[eé]l|passport number|passport#|passportid|passportnumber|passportno|date of issue|date of expiry|ki[aá]ll[ií]t[aá]s d[aá]tuma|lej[aá]rat d[aá]tuma|[eé]rv[eé]nyess[eé]g|Magyar K[oö]zt[aá]rsas[aá]g|Magyarorsz[aá]g|travel document|[uú]tiokm[aá]ny)</code>
+    </div>
+      </details>
+    </div>
+
+<footer>
+  Generated by regex-automator &bull; 20 identifiers analysed
+</footer>
+</body>
+</html>

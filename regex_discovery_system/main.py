@@ -122,22 +122,41 @@ def main() -> None:
     logger.info("Policy Researcher: %d rules found (authority: %s)",
                 policy_count, policies.get("numbering_authority", "unknown"))
 
+    policy_confidence = policies.get("policy_confidence", "high")
     sot = {
         "data_source": data_source,
         "total_values": stats.get("total", 0),
         "train_count": stats.get("train", 0),
         "test_count": stats.get("test", 0),
+        "policy_confidence": policy_confidence,
         "policies": policies.get("policies", []),
         "numbering_authority": policies.get("numbering_authority", ""),
         "vendor_patterns": policies.get("vendor_patterns", []),
         "sources": policies.get("sources", []),
         "vendor_keywords": policies.get("vendor_keywords", []),
     }
+    if policy_confidence != "high":
+        sot["policy_confidence_reason"] = policies.get(
+            "policy_confidence_reason",
+            "Relevance gate flagged one or both research phases.",
+        )
+        logger.warning(
+            "Policy confidence is '%s': %s",
+            policy_confidence, sot["policy_confidence_reason"],
+        )
     slug = paths["raw"].split("/")[1].rsplit("_raw", 1)[0]
     sot_path = f"results/{slug}_source_of_truth.json"
     with open(sot_path, "w") as f:
         json.dump(sot, f, indent=2)
     logger.info("Source-of-truth saved → %s", sot_path)
+
+    if stats.get("total", 0) == 0:
+        logger.warning(
+            "No example data collected (source: %s). "
+            "Pipeline will continue using policies only — "
+            "regex generation proceeds without example values.",
+            data_source,
+        )
 
     logger.info("=" * 60)
     logger.info("STEP 2/4 — Pattern Analyzer")

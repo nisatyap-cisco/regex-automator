@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regex Discovery Report — test1 batch</title>
+<style>
+  :root {
+    --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9;
+    --accent: #58a6ff; --green: #27ae60; --red: #e74c3c; --orange: #f39c12;
+    --yellow: #f1c40f; --muted: #8b949e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text); padding: 24px; line-height: 1.6;
+  }
+  h1 { color: #fff; margin-bottom: 4px; }
+  h2 { color: var(--accent); margin: 32px 0 12px; }
+  h3 { color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .subtitle { color: var(--muted); margin-bottom: 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .summary-cards { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+  .scard {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 24px; min-width: 160px;
+  }
+  .scard .num { font-size: 2em; font-weight: 700; }
+  .scard .lbl { color: var(--muted); font-size: .85em; }
+
+  .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  .summary-table th, .summary-table td {
+    padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .summary-table th { background: var(--card); color: #fff; font-weight: 600; }
+  .ident { font-weight: 500; }
+  .status-ok { color: var(--green); font-weight: 700; }
+  .status-fail { color: var(--red); font-weight: 700; }
+  .status-warn { color: var(--orange); font-weight: 700; }
+
+  .detail-block {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .idx { color: var(--muted); font-weight: 400; }
+
+  .badge {
+    font-size: .7em; padding: 2px 8px; border-radius: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  .badge-high { background: var(--green); color: #fff; }
+  .badge-med { background: var(--orange); color: #fff; }
+  .badge-none { background: var(--red); color: #fff; }
+  .conf-reason { color: var(--muted); font-size: .85em; margin-bottom: 12px; font-style: italic; }
+
+  details { margin: 10px 0; }
+  details summary {
+    cursor: pointer; color: var(--accent); font-weight: 600; font-size: .95em;
+    padding: 4px 0;
+  }
+  details summary:hover { text-decoration: underline; }
+
+  .empty { color: var(--muted); font-style: italic; font-size: .85em; margin: 6px 0; }
+
+  .source-list, .policy-list { margin: 8px 0 8px 20px; }
+  .source-list li, .policy-list li { margin-bottom: 4px; font-size: .9em; }
+  .source-list a { word-break: break-all; }
+
+  .vendor-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+  .vendor-table th, .vendor-table td {
+    padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: .85em;
+  }
+  .vendor-table th { background: #0d1117; color: #fff; }
+  .vendor-table code { font-size: .82em; word-break: break-all; white-space: pre-wrap; }
+
+  .regex-card {
+    background: #0d1117; border: 1px solid var(--border); border-radius: 6px;
+    padding: 12px; margin: 8px 0; overflow-x: auto;
+  }
+  .regex-card.combined { border-color: var(--accent); }
+  .rule-id { font-weight: 700; color: var(--accent); font-size: .85em; margin-bottom: 2px; }
+  .rule-desc { color: var(--muted); font-size: .82em; margin-bottom: 6px; }
+  .regex-code {
+    display: block; font-size: .82em; word-break: break-all; white-space: pre-wrap;
+    color: #e6edf3; background: transparent; padding: 0;
+  }
+
+  .kw-block { margin: 8px 0; }
+  .kw-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .kw-tag {
+    background: #21262d; border: 1px solid var(--border); border-radius: 12px;
+    padding: 2px 10px; font-size: .8em; color: var(--text);
+  }
+
+  footer {
+    margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+    color: #484f58; font-size: .8em;
+  }
+</style>
+</head>
+<body>
+
+<h1>Regex Discovery Report</h1>
+<p class="subtitle">Batch results for 21 identifiers from test1.json</p>
+
+<div class="summary-cards">
+  <div class="scard"><div class="num">21</div><div class="lbl">Identifiers</div></div>
+  <div class="scard"><div class="num" style="color:var(--green)">21</div><div class="lbl">Succeeded</div></div>
+  <div class="scard"><div class="num" style="color:var(--red)">0</div><div class="lbl">Failed</div></div>
+  <div class="scard"><div class="num">205</div><div class="lbl">Total Policies</div></div>
+  <div class="scard"><div class="num">133</div><div class="lbl">Individual Regexes</div></div>
+</div>
+
+<h2>Summary</h2>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>#</th><th>Identifier</th><th>Status</th><th>Confidence</th>
+          <th>Policies</th><th>Individual Regex</th><th>Combined</th><th>Keywords</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td class="ident"><a href="#detail-1">Argentina passport number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>7</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td class="ident"><a href="#detail-2">Austria post code</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>12</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td class="ident"><a href="#detail-3">California zipcode</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>low</td>
+          <td>11</td>
+          <td>7</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td class="ident"><a href="#detail-4">Indian aadhar card number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>7</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td class="ident"><a href="#detail-5">Indian bank account number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>1</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td class="ident"><a href="#detail-6">Indian bank routing number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>10</td>
+          <td>6</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td class="ident"><a href="#detail-7">Indian corporate identification number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>12</td>
+          <td>8</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td class="ident"><a href="#detail-8">Indian driving license number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>9</td>
+          <td>6</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td class="ident"><a href="#detail-9">Indian license plate number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>15</td>
+          <td>7</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td class="ident"><a href="#detail-10">Indian phone number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>18</td>
+          <td>11</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td class="ident"><a href="#detail-11">Indian post code</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>7</td>
+          <td>4</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td class="ident"><a href="#detail-12">Indian taxpayer id</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>10</td>
+          <td>9</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td class="ident"><a href="#detail-13">Indian vat number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>low</td>
+          <td>9</td>
+          <td>6</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td class="ident"><a href="#detail-14">ipv6</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>14</td>
+          <td>9</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td class="ident"><a href="#detail-15">latvia postcode</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>medium</td>
+          <td>8</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td class="ident"><a href="#detail-16">Qatar passport</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>low</td>
+          <td>5</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td class="ident"><a href="#detail-17">Russian Military Identity Number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>low</td>
+          <td>10</td>
+          <td>6</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td class="ident"><a href="#detail-18">UAE National Identity Card Number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>8</td>
+          <td>3</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td class="ident"><a href="#detail-19">USA Medicaid Number</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>low</td>
+          <td>11</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td class="ident"><a href="#detail-20">USA Medicare Number (MBI)</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>15</td>
+          <td>14</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td class="ident"><a href="#detail-21">USA SWIFT / BIC Code</a></td>
+          <td><span class="status-ok">OK</span></td>
+          <td>high</td>
+          <td>6</td>
+          <td>5</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr></tbody>
+    </table>
+
+<h2>Detailed Results</h2>
+
+    <div class="detail-block" id="detail-1">
+      <h3>
+        <span class="idx">1.</span> Argentina passport number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://trustdochub.com/en/verify-argentine-passport/?srsltid=AfmBOorcCnC5SLW8eDWz_vPxkWq1HqyYrSXmbUZnc3ICNz-As98yrgKM" target="_blank" rel="noopener noreferrer">https://trustdochub.com/en/verify-argentine-passport/?srsltid=AfmBOorcCnC5SLW8eDWz_vPxkWq1HqyYrSXmbUZnc3ICNz-As98yrgKM</a></li>
+<li><a href="https://trustdochub.com/en/verify-argentine-passport/?srsltid=AfmBOooNgAMocijg_vlC5dmBy-It8LJ-3GZEFK6_jfV_KZHnylt4ruA3" target="_blank" rel="noopener noreferrer">https://trustdochub.com/en/verify-argentine-passport/?srsltid=AfmBOooNgAMocijg_vlC5dmBy-It8LJ-3GZEFK6_jfV_KZHnylt4ruA3</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (7)</summary>
+        <ul class='policy-list'><li>Document number is exactly 9 characters in length (Source: scraped text describing MRZ structure)</li>
+<li>Document number appears in two locations: top right of the data page and at the beginning of the second MRZ line (Source: scraped text on information consistency)</li>
+<li>Document number is followed by a 1-character check digit in the MRZ calculated using ICAO algorithm with weightings 7, 3, and 1 (Source: scraped text on check digits)</li>
+<li>The MRZ is two lines and compliant with ICAO standards (Source: scraped text on MRZ structure)</li>
+<li>The MRZ contains 5 check digits total that validate document number, date of birth, and a composite field (Source: scraped text stating &#x27;An Argentine passport includes 5 check digits&#x27;)</li>
+<li>Personal number field in MRZ is 8 digits (Source: scraped text describing MRZ line 2 structure)</li>
+<li>Issuing country code in MRZ is &#x27;ARG&#x27; per ISO 3166-1 alpha-3 standard (Source: scraped text on issuing country field)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">arg-passport-length</div>
+          <div class="rule-desc">Document number is exactly 9 characters in length</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">arg-passport-mrz-checkdigit</div>
+          <div class="rule-desc">Document number is followed by a 1-character check digit in the MRZ calculated using ICAO algorithm with weightings 7, 3, and 1</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{9}[0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">arg-passport-mrz-structure</div>
+          <div class="rule-desc">The MRZ is two lines and compliant with ICAO standards with issuing country code &#x27;ARG&#x27;</div>
+          <code class="regex-code">(?&lt;![:\w])P&lt;ARG[A-Z&lt;]{39}\r?\n[A-Z0-9&lt;]{9}[\s\-]?[0-9]ARG[0-9]{6}[\s\-]?[0-9][MF&lt;][0-9]{6}[\s\-]?[0-9][A-Z0-9&lt;]{8}[\s\-]?[0-9]{2}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">arg-passport-mrz-checkdigits</div>
+          <div class="rule-desc">The MRZ contains 5 check digits total that validate document number, date of birth, and a composite field</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{9}[\s\-]?[A-Z]{3}[\s\-]?\d{6}[\s\-]?[MF&lt;]\d{6}[\s\-]?\d{8}[\s\-]?\d(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">arg-passport-personal-number</div>
+          <div class="rule-desc">Personal number field in MRZ is 8 digits</div>
+          <code class="regex-code">\b\d{8}\b</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])(?:[A-Z0-9]{9}[\s\-]?\d|[A-Z0-9]{9}|P&lt;ARG[A-Z&lt;]{39}[\s\-]?[A-Z0-9]{9}[\s\-]?\d[A-Z]{3}[\s\-]?\d{6}[\s\-]?\d[MF&lt;]\d{6}[\s\-]?\d\d{8}[\s\-]?\d|\d{8})(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">pasaporte argentino</span> <span class="kw-tag">pasaporte de Argentina</span> <span class="kw-tag">Documento Nacional de Identidad</span> <span class="kw-tag">Dirección Nacional de Migraciones</span> <span class="kw-tag">número de pasaporte</span> <span class="kw-tag">número de documento</span> <span class="kw-tag">DNM Argentina</span> <span class="kw-tag">RENAPER</span> <span class="kw-tag">Registro Nacional de las Personas</span> <span class="kw-tag">documento de viaje</span> <span class="kw-tag">identificación argentina</span> <span class="kw-tag">Argentina passport</span> <span class="kw-tag">Argentine passport</span> <span class="kw-tag">Argentina travel document</span> <span class="kw-tag">passport ARG</span> <span class="kw-tag">MRZ Argentina</span> </div>
+      <code class="regex-code">(?i)(?:pasaporte argentino|pasaporte de Argentina|Documento Nacional de Identidad|Direcci[oó]n Nacional de Migraciones|n[uú]mero de pasaporte|n[uú]mero de documento|DNM Argentina|RENAPER|Registro Nacional de las Personas|documento de viaje|identificaci[oó]n argentina|Argentina passport|Argentine passport|Argentina travel document|passport ARG|MRZ Argentina)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-2">
+      <h3>
+        <span class="idx">2.</span> Austria post code
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (4)</summary>
+        <ul class='source-list'><li><a href="https://www.geopostcodes.com/country/austria/address-format/" target="_blank" rel="noopener noreferrer">https://www.geopostcodes.com/country/austria/address-format/</a></li>
+<li><a href="https://www.postgrid.com/global-address-format/austria-address-format/" target="_blank" rel="noopener noreferrer">https://www.postgrid.com/global-address-format/austria-address-format/</a></li>
+<li><a href="https://www.melissa.com/global-address-formatting-examples/austria" target="_blank" rel="noopener noreferrer">https://www.melissa.com/global-address-formatting-examples/austria</a></li>
+<li><a href="https://help.pingen.com/en/templates-and-postal-requirements/address-requirements-osterreichische-post" target="_blank" rel="noopener noreferrer">https://help.pingen.com/en/templates-and-postal-requirements/address-requirements-osterreichische-post</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (12)</summary>
+        <ul class='policy-list'><li>Austrian postcodes consist of exactly 4 digits (source: multiple references including GeoPostcodes, Melissa, Österreichische Post)</li>
+<li>The first digit represents a federal state or region (source: Melissa)</li>
+<li>The remaining three digits specify the delivery zone or town (source: Melissa)</li>
+<li>Postcodes are placed to the left of the locality name with a space separator (source: Melissa, Österreichische Post)</li>
+<li>No delimiter or special characters are used within the 4-digit postcode (source: Melissa)</li>
+<li>Postcodes with fewer or more than 4 digits are considered invalid (source: Österreichische Post via Pingen)</li>
+<li>The postcode must appear before the city name in the address line (source: Österreichische Post)</li>
+<li>No comma or hyphen is permitted between the postcode and city name, only a space (source: Österreichische Post)</li>
+<li>Austrian postcodes are called &#x27;Postleitzahlen&#x27; or &#x27;PLZ&#x27; in German (source: GeoPostcodes, PostGrid)</li>
+<li>Each city and town has its own postcode (source: PostGrid)</li>
+<li>There are approximately 2,500+ postal codes in Austria (source: Melissa)</li>
+<li>The postal code format is represented as &#x27;9999&#x27; indicating four numeric digits (source: GeoPostcodes)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">exactly-four-digits</div>
+          <div class="rule-desc">Austrian postcodes consist of exactly 4 numeric digits with no delimiters or special characters</div>
+          <code class="regex-code">\b\d{4}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">first-digit-region</div>
+          <div class="rule-desc">The first digit represents a federal state or region</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9]\d{3}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">last-three-digits-zone</div>
+          <div class="rule-desc">The remaining three digits specify the delivery zone or town</div>
+          <code class="regex-code">\b\d{4}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">space-before-locality</div>
+          <div class="rule-desc">Postcode is placed to the left of the locality name with a space separator, no comma or hyphen permitted</div>
+          <code class="regex-code">(?&lt;![:\w])\d{4} [A-ZÄÖÜ][a-zäöüß]+(?:[ -][A-ZÄÖÜ][a-zäöüß]+)*(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])\d{4}(?:\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)?(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Postleitzahl</span> <span class="kw-tag">Postleitzahlen</span> <span class="kw-tag">PLZ</span> <span class="kw-tag">österreichische Post</span> <span class="kw-tag">Österreichische Post</span> <span class="kw-tag">Austrian postcode</span> <span class="kw-tag">Austrian postal code</span> <span class="kw-tag">Austria postcode</span> <span class="kw-tag">Austria postal code</span> <span class="kw-tag">Zustellzone</span> <span class="kw-tag">Lieferadresse</span> <span class="kw-tag">Postadresse</span> <span class="kw-tag">Versandadresse</span> <span class="kw-tag">Empfängeradresse</span> <span class="kw-tag">Absenderadresse</span> </div>
+      <code class="regex-code">(?i)(?:Postleitzahl|Postleitzahlen|PLZ|[oö]sterreichische Post|[OÖ]sterreichische Post|Austrian postcode|Austrian postal code|Austria postcode|Austria postal code|Zustellzone|Lieferadresse|Postadresse|Versandadresse|Empf[aä]ngeradresse|Absenderadresse)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-3">
+      <h3>
+        <span class="idx">3.</span> California zipcode
+        <span class="badge badge-med">low</span>
+      </h3>
+      <p class="conf-reason">No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented.</p>
+
+      <details open>
+        <summary>Sources (0)</summary>
+        <p class="empty">No sources found.</p>
+      </details>
+
+      <details open>
+        <summary>Policies (11)</summary>
+        <ul class='policy-list'><li>California ZIP codes range from 90001 to 96162</li>
+<li>Standard 5-digit format: NNNNN where N is a numeric digit</li>
+<li>Extended ZIP+4 format: NNNNN-NNNN (9 digits total with hyphen separator)</li>
+<li>All California ZIP codes begin with 9</li>
+<li>Second digit is 0, 1, 2, 3, 4, 5, or 6</li>
+<li>No check digit algorithm</li>
+<li>Leading zeros are significant and must be preserved</li>
+<li>Specific ranges: 90001-96162 (includes some gaps for unallocated codes)</li>
+<li>Major city ranges: Los Angeles 900xx-908xx, San Francisco 941xx, San Diego 919xx-921xx, Sacramento 942xx-959xx</li>
+<li>No alphabetic characters allowed</li>
+<li>Hyphen required only in ZIP+4 format between 5th and 6th digits</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (5)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>\b(9[0-6]\d{3})(?:-\d{4})?\b</code></td>
+            </tr>
+            <tr>
+              <td>Netskope</td>
+              <td><code>\b9[0-6][0-9]{3}\b</code></td>
+            </tr>
+            <tr>
+              <td>Broadcom/Symantec</td>
+              <td><code>\b9[0-6]\d{3}(-\d{4})?\b</code></td>
+            </tr>
+            <tr>
+              <td>Zscaler</td>
+              <td><code>{&quot;vendor&quot;: &quot;Zscaler&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;zip&quot;, &quot;zipcode&quot;, &quot;postal&quot;, &quot;California&quot;, &quot;CA&quot;, &quot;address&quot;], &quot;rules&quot;: [&quot;Uses predefined dictionaries of valid California ZIP codes&quot;, &quot;Context-aware detection with address patterns&quot;, &quot;May combine with other PII elements for classification&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Forcepoint</td>
+              <td><code>\b9[0-6][0-9]{3}\b</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (7)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">length-5-digits</div>
+          <div class="rule-desc">California ZIP codes are exactly 5 digits in standard format</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">all-numeric</div>
+          <div class="rule-desc">ZIP codes contain only numeric digits 0-9, no alphabetic characters</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-delimiters-standard</div>
+          <div class="rule-desc">Standard 5-digit ZIP codes contain no hyphens, spaces, or other delimiters</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">zip-plus-4-optional</div>
+          <div class="rule-desc">Extended ZIP+4 format adds hyphen and 4 additional digits: NNNNN-NNNN (not present in sample but valid per USPS policy)</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">leading-zeros-preserved</div>
+          <div class="rule-desc">Leading zeros are significant and must be preserved in all positions</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">first-digit-nine</div>
+          <div class="rule-desc">All California ZIP codes begin with digit 9 (position 0)</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">second-digit-range</div>
+          <div class="rule-desc">Second digit (position 1) must be 0, 1, 2, 3, 4, 5, or 6</div>
+          <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])9[0-6]\d{3}(?:-\d{4})?(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">zip</span> <span class="kw-tag">zip code</span> <span class="kw-tag">zipcode</span> <span class="kw-tag">ZIP</span> <span class="kw-tag">postal code</span> <span class="kw-tag">postcode</span> <span class="kw-tag">postal</span> <span class="kw-tag">mail code</span> <span class="kw-tag">mailing code</span> <span class="kw-tag">CA</span> <span class="kw-tag">California</span> <span class="kw-tag">Calif</span> <span class="kw-tag">address</span> <span class="kw-tag">mailing address</span> <span class="kw-tag">shipping address</span> <span class="kw-tag">billing address</span> <span class="kw-tag">delivery address</span> <span class="kw-tag">residence</span> <span class="kw-tag">location</span> <span class="kw-tag">city</span> <span class="kw-tag">state</span> <span class="kw-tag">ZIP\+4</span> <span class="kw-tag">extended zip</span> <span class="kw-tag">full zip</span> <span class="kw-tag">9-digit zip</span> <span class="kw-tag">5-digit zip</span> <span class="kw-tag">Los Angeles</span> <span class="kw-tag">San Francisco</span> <span class="kw-tag">San Diego</span> <span class="kw-tag">Sacramento</span> </div>
+      <code class="regex-code">(?i)(?:zip|zip code|zipcode|ZIP|postal code|postcode|postal|mail code|mailing code|CA|California|Calif|address|mailing address|shipping address|billing address|delivery address|residence|location|city|state|ZIP\+4|extended zip|full zip|9-digit zip|5-digit zip|Los Angeles|San Francisco|San Diego|Sacramento)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-4">
+      <h3>
+        <span class="idx">4.</span> Indian aadhar card number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-india-unique-identification-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-india-unique-identification-number</a></li>
+<li><a href="https://aadhaar-check.com/articles/aadhaar-number-format" target="_blank" rel="noopener noreferrer">https://aadhaar-check.com/articles/aadhaar-number-format</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (7)</summary>
+        <ul class='policy-list'><li>Total length is exactly 12 digits (Source: Microsoft DLP documentation and Aadhaar validation reference)</li>
+<li>First digit cannot be 0 or 1 (Source: Microsoft DLP pattern specification and Aadhaar validation reference)</li>
+<li>No alphabetic characters or special characters are allowed, only digits (Source: Aadhaar validation reference)</li>
+<li>The 12th digit (final digit) is a checksum digit calculated using the Verhoeff algorithm (Source: Microsoft DLP documentation and Aadhaar validation reference)</li>
+<li>Digits 1-11 are randomly generated numbers (Source: Aadhaar validation reference)</li>
+<li>The Verhoeff algorithm checksum helps detect single-digit mistakes and transposition errors (Source: Aadhaar validation reference)</li>
+<li>Optional spaces or dashes may be used for formatting: after digit 4 and after digit 8 (Source: Microsoft DLP pattern specification)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length-12</div>
+          <div class="rule-desc">Total length is exactly 12 digits</div>
+          <code class="regex-code">(?&lt;![:\w])[2-9]\d{3}[\s\-]?[ -]?\d{4}[\s\-]?[ -]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">first-digit-not-0-or-1</div>
+          <div class="rule-desc">First digit cannot be 0 or 1, must be in range 2-9</div>
+          <code class="regex-code">(?&lt;![:\w])[2-9]\d{3}[\s-]?\d{4}[\s-]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">digits-only</div>
+          <div class="rule-desc">Only numeric digits are allowed, no alphabetic characters or special characters</div>
+          <code class="regex-code">(?&lt;![:\w])[2-9]\d{3}[\s-]?\d{4}[\s-]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">verhoeff-checksum</div>
+          <div class="rule-desc">The 12th digit (final digit) is a checksum digit calculated using the Verhoeff algorithm</div>
+          <code class="regex-code">(?&lt;![:\w])[2-9]\d{3}[\s\-]?[ -]?\d{4}[\s\-]?[ -]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-formatting</div>
+          <div class="rule-desc">Optional spaces or dashes may be used for formatting after digit 4 and after digit 8 (e.g. XXXX-XXXX-XXXX or XXXX XXXX XXXX)</div>
+          <code class="regex-code">(?&lt;![:\w])[2-9]\d{3}[\s\-]?[ -]?\d{4}[\s\-]?[ -]?\d{4}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[2-9]\d{3}[\s\-]?\d{4}[\s\-]?\d{4}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Aadhaar</span> <span class="kw-tag">Aadhar</span> <span class="kw-tag">आधार</span> <span class="kw-tag">आधार नंबर</span> <span class="kw-tag">आधार संख्या</span> <span class="kw-tag">UIDAI</span> <span class="kw-tag">Aadhaar number</span> <span class="kw-tag">Aadhar number</span> <span class="kw-tag">Aadhaar card</span> <span class="kw-tag">Aadhar card</span> <span class="kw-tag">UID number</span> <span class="kw-tag">Unique Identification Number</span> <span class="kw-tag">Aadhaar enrollment</span> <span class="kw-tag">Aadhaar enrolment</span> <span class="kw-tag">आधार कार्ड</span> <span class="kw-tag">यूआईडी</span> <span class="kw-tag">Aadhaar authentication</span> <span class="kw-tag">e-Aadhaar</span> <span class="kw-tag">eAadhaar</span> <span class="kw-tag">Aadhaar verification</span> <span class="kw-tag">Aadhaar validation</span> </div>
+      <code class="regex-code">(?i)(?:Aadhaar|Aadhar|आधार|आधार नंबर|आधार संख्या|UIDAI|Aadhaar number|Aadhar number|Aadhaar card|Aadhar card|UID number|Unique Identification Number|Aadhaar enrollment|Aadhaar enrolment|आधार कार्ड|यूआईडी|Aadhaar authentication|e-Aadhaar|eAadhaar|Aadhaar verification|Aadhaar validation)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-5">
+      <h3>
+        <span class="idx">5.</span> Indian bank account number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://blinkx.in/banking/indian-bank-account-number" target="_blank" rel="noopener noreferrer">https://blinkx.in/banking/indian-bank-account-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (1)</summary>
+        <ul class='policy-list'><li>No specific format rules can be extracted from the provided scraped text as it contains only a webpage header and promotional content without technical details about Indian bank account number structure</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">length-9-18</div>
+          <div class="rule-desc">Indian bank account numbers typically range from 9 to 18 digits in length, varying by bank and account type</div>
+          <code class="regex-code">\b\d{9,18}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-only</div>
+          <div class="rule-desc">Account numbers consist entirely of numeric digits with no letters, spaces, or special characters</div>
+          <code class="regex-code">\b\d{9,18}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-standard-format</div>
+          <div class="rule-desc">Unlike IFSC codes, Indian bank account numbers have no standardized format across banks; each bank uses its own numbering scheme</div>
+          <code class="regex-code">\b\d{9,18}\b</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">\b\d{9,18}\b</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">bank account number</span> <span class="kw-tag">Indian bank account</span> <span class="kw-tag">account number</span> <span class="kw-tag">खाता संख्या</span> <span class="kw-tag">बैंक खाता</span> <span class="kw-tag">खाता नंबर</span> <span class="kw-tag">savings account number</span> <span class="kw-tag">current account number</span> <span class="kw-tag">IFSC code</span> <span class="kw-tag">beneficiary account</span> <span class="kw-tag">account holder</span> <span class="kw-tag">bank details</span> <span class="kw-tag">NEFT transfer</span> <span class="kw-tag">RTGS transfer</span> <span class="kw-tag">IMPS transfer</span> <span class="kw-tag">UPI linked account</span> <span class="kw-tag">passbook number</span> <span class="kw-tag">cheque book</span> <span class="kw-tag">account statement</span> </div>
+      <code class="regex-code">(?i)(?:bank account number|Indian bank account|account number|खाता संख्या|बैंक खाता|खाता नंबर|savings account number|current account number|IFSC code|beneficiary account|account holder|bank details|NEFT transfer|RTGS transfer|IMPS transfer|UPI linked account|passbook number|cheque book|account statement)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-6">
+      <h3>
+        <span class="idx">6.</span> Indian bank routing number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://www.geeksforgeeks.org/dsa/how-to-validate-ifsc-code-using-regular-expression/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/dsa/how-to-validate-ifsc-code-using-regular-expression/</a></li>
+<li><a href="https://razorpay.com/blog/decoding-ifsc-codes-meaning-importance/" target="_blank" rel="noopener noreferrer">https://razorpay.com/blog/decoding-ifsc-codes-meaning-importance/</a></li>
+<li><a href="https://razorpay.com/blog/bank-routing-number-india-explained/" target="_blank" rel="noopener noreferrer">https://razorpay.com/blog/bank-routing-number-india-explained/</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (10)</summary>
+        <ul class='policy-list'><li>IFSC code must be exactly 11 characters long (Source: GeeksforGeeks, multiple banking sources)</li>
+<li>First four characters must be uppercase alphabetic letters representing the bank code (e.g., SBIN for State Bank of India, HDFC for HDFC Bank, ICIC for ICICI Bank)</li>
+<li>Fifth character must always be &#x27;0&#x27; (zero), reserved as a separator for future use</li>
+<li>Last six characters (positions 6-11) represent the unique branch code and are alphanumeric (can be numeric or alphabetic, typically numeric)</li>
+<li>The format follows the regular expression pattern: ^[A-Z]{4}0[A-Z0-9]{6}$ (Source: GeeksforGeeks validation examples)</li>
+<li>Each bank branch in India has a unique IFSC code - no two branches share the same code</li>
+<li>IFSC codes are used exclusively for domestic electronic fund transfers within India via NEFT, RTGS, and IMPS systems</li>
+<li>Currently approximately 130,000 IFSC codes have been assigned by RBI to various banks and branches across India</li>
+<li>All characters must be in uppercase format - lowercase letters are not valid</li>
+<li>The code structure is: Bank Code (4 chars) + &#x27;0&#x27; (1 char) + Branch Code (6 chars) = 11 total characters</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (6)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">ifsc-total-length</div>
+          <div class="rule-desc">IFSC code must be exactly 11 characters long</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ifsc-bank-code</div>
+          <div class="rule-desc">First four characters must be uppercase alphabetic letters representing the bank code</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ifsc-separator-zero</div>
+          <div class="rule-desc">Fifth character (position 4) must always be &#x27;0&#x27; (zero), reserved as a separator for future use</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ifsc-branch-code</div>
+          <div class="rule-desc">Last six characters (positions 5-10) represent the unique branch code and are alphanumeric (can be numeric or alphabetic)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ifsc-uppercase-only</div>
+          <div class="rule-desc">All characters must be in uppercase format - lowercase letters are not valid</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ifsc-regex-pattern</div>
+          <div class="rule-desc">The format follows the pattern: Bank Code (4 uppercase letters) + &#x27;0&#x27; + Branch Code (6 alphanumeric characters)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]{4}0[A-Z0-9]{6}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">IFSC</span> <span class="kw-tag">IFSC code</span> <span class="kw-tag">Indian Financial System Code</span> <span class="kw-tag">bank IFSC</span> <span class="kw-tag">branch IFSC</span> <span class="kw-tag">NEFT</span> <span class="kw-tag">RTGS</span> <span class="kw-tag">IMPS</span> <span class="kw-tag">Reserve Bank of India</span> <span class="kw-tag">RBI code</span> <span class="kw-tag">bank routing</span> <span class="kw-tag">branch code India</span> <span class="kw-tag">Indian bank code</span> <span class="kw-tag">fund transfer code</span> <span class="kw-tag">बैंक कोड</span> <span class="kw-tag">आईएफएससी</span> <span class="kw-tag">शाखा कोड</span> <span class="kw-tag">भारतीय वित्तीय प्रणाली कोड</span> </div>
+      <code class="regex-code">(?i)(?:IFSC|IFSC code|Indian Financial System Code|bank IFSC|branch IFSC|NEFT|RTGS|IMPS|Reserve Bank of India|RBI code|bank routing|branch code India|Indian bank code|fund transfer code|बैंक कोड|आईएफएससी|शाखा कोड|भारतीय वित्तीय प्रणाली कोड)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-7">
+      <h3>
+        <span class="idx">7.</span> Indian corporate identification number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (5)</summary>
+        <ul class='source-list'><li><a href="https://www.geeksforgeeks.org/dsa/validate-corporate-identification-number-cin-using-regular-expression/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/dsa/validate-corporate-identification-number-cin-using-regular-expression/</a></li>
+<li><a href="https://blog.instafinancials.com/2018/07/06/all-about-cin-and-its-structure/" target="_blank" rel="noopener noreferrer">https://blog.instafinancials.com/2018/07/06/all-about-cin-and-its-structure/</a></li>
+<li><a href="https://cleartax.in/s/cin-corporate-identification-number" target="_blank" rel="noopener noreferrer">https://cleartax.in/s/cin-corporate-identification-number</a></li>
+<li><a href="https://taxguru.in/company-law/understanding-corporate-identification-number-cin.html" target="_blank" rel="noopener noreferrer">https://taxguru.in/company-law/understanding-corporate-identification-number-cin.html</a></li>
+<li><a href="https://www.taxtmi.com/article/detailed?id=13878" target="_blank" rel="noopener noreferrer">https://www.taxtmi.com/article/detailed?id=13878</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (12)</summary>
+        <ul class='policy-list'><li>CIN is exactly 21 characters in length (alphanumeric) - Source: Multiple sources including GeeksforGeeks, InstaFinancials, and TaxGuru</li>
+<li>Position 1: Single letter &#x27;L&#x27; (Listed company) or &#x27;U&#x27; (Unlisted company) indicating stock market listing status - Source: All scraped sources</li>
+<li>Positions 2-6: Five numeric digits (0-9) representing the industry/economic activity code based on National Industrial Classification (NIC) - Source: GeeksforGeeks, InstaFinancials, TaxGuru</li>
+<li>Positions 7-8: Two alphabetic letters (A-Z) representing the state code where company is registered (e.g., KA=Karnataka, MH=Maharashtra, DL=Delhi, RJ=Rajasthan) - Source: All scraped sources</li>
+<li>Positions 9-12: Four numeric digits (0-9) representing the year of incorporation - Source: All scraped sources</li>
+<li>Positions 13-15: Three alphabetic letters representing company classification/ownership type (e.g., PTC=Private Limited Company, PLC=Public Limited Company, GOI=Government of India owned, FTC=Foreign Company Subsidiary, OPC=One Person Company, NPL=Section 8 Not-for-Profit, SGC=State Government Company, ULL=Public Unlimited Liability, ULT=Private Unlimited Liability, FLC=Financial Lease Company Public, GAP=General Association Public, GAT=General Association Private) - Source: InstaFinancials, TaxGuru, YAGAY andSUN</li>
+<li>Positions 16-21: Six numeric digits (0-9) representing the unique registration number assigned by the specific Registrar of Companies (ROC) - Source: All scraped sources</li>
+<li>CIN must not contain any special characters or whitespaces - Source: GeeksforGeeks</li>
+<li>CIN is assigned at the time of company incorporation and appears on the Certificate of Incorporation - Source: InstaFinancials, TaxGuru</li>
+<li>CIN must be displayed on all official company documents including invoices, bills, receipts, letterheads, notices, memos, annual reports, e-forms to MCA, and official publications - Source: Section 12(3)(c) Companies Act 2013, cited in multiple sources</li>
+<li>CIN can change in cases of: change in listing status, change in state of registered office, change in economic activity/industry sector, change in company type, or change in ROC - Source: InstaFinancials, TaxGuru</li>
+<li>Penalty for non-compliance in displaying CIN is INR 1,000 per day (maximum INR 1,00,000) on the company and every officer in default - Source: InstaFinancials, TaxGuru</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (8)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">cin-length</div>
+          <div class="rule-desc">CIN must be exactly 21 characters in length</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-alphanumeric-only</div>
+          <div class="rule-desc">CIN must contain only alphanumeric characters with no special characters or whitespaces</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-listing-status</div>
+          <div class="rule-desc">Position 1 must be a single letter &#x27;L&#x27; (Listed company) or &#x27;U&#x27; (Unlisted company) indicating stock market listing status</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-industry-code</div>
+          <div class="rule-desc">Positions 2-6 must be five numeric digits (0-9) representing the industry/economic activity code based on National Industrial Classification (NIC)</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-state-code</div>
+          <div class="rule-desc">Positions 7-8 must be two alphabetic letters (A-Z) representing the state code where company is registered</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-incorporation-year</div>
+          <div class="rule-desc">Positions 9-12 must be four numeric digits (0-9) representing the year of incorporation</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-company-type</div>
+          <div class="rule-desc">Positions 13-15 must be three alphabetic letters representing company classification/ownership type (e.g., PTC, PLC, GOI, FTC, OPC, NPL, SGC, ULL, ULT, FLC, GAP, GAT)</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">cin-registration-number</div>
+          <div class="rule-desc">Positions 16-21 must be six numeric digits (0-9) representing the unique registration number assigned by the specific Registrar of Companies (ROC)</div>
+          <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[LU]\d{5}[\s\-]?[A-Z]{2}[\s\-]?\d{4}[\s\-]?[A-Z]{3}[\s\-]?\d{6}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Corporate Identification Number</span> <span class="kw-tag">Company Identification Number</span> <span class="kw-tag">Indian CIN</span> <span class="kw-tag">India CIN</span> <span class="kw-tag">Registrar of Companies</span> <span class="kw-tag">Ministry of Corporate Affairs</span> <span class="kw-tag">Certificate of Incorporation</span> <span class="kw-tag">कॉर्पोरेट पहचान संख्या</span> <span class="kw-tag">कंपनी पहचान संख्या</span> <span class="kw-tag">निगमन प्रमाणपत्र</span> <span class="kw-tag">कंपनी रजिस्ट्रार</span> <span class="kw-tag">कॉर्पोरेट मामलों का मंत्रालय</span> <span class="kw-tag">Listed company number</span> <span class="kw-tag">Unlisted company number</span> <span class="kw-tag">ROC registration</span> <span class="kw-tag">MCA portal</span> <span class="kw-tag">company registration number India</span> </div>
+      <code class="regex-code">(?i)(?:Corporate Identification Number|Company Identification Number|Indian CIN|India CIN|Registrar of Companies|Ministry of Corporate Affairs|Certificate of Incorporation|कॉर्पोरेट पहचान संख्या|कंपनी पहचान संख्या|निगमन प्रमाणपत्र|कंपनी रजिस्ट्रार|कॉर्पोरेट मामलों का मंत्रालय|Listed company number|Unlisted company number|ROC registration|MCA portal|company registration number India)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-8">
+      <h3>
+        <span class="idx">8.</span> Indian driving license number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (3)</summary>
+        <ul class='source-list'><li><a href="https://www.geeksforgeeks.org/dsa/how-to-validate-indian-driving-license-number-using-regular-expression/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/dsa/how-to-validate-indian-driving-license-number-using-regular-expression/</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-india-drivers-license-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-india-drivers-license-number</a></li>
+<li><a href="https://learn.microsoft.com/id-id/purview/sit-defn-india-drivers-license-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/id-id/purview/sit-defn-india-drivers-license-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (9)</summary>
+        <ul class='policy-list'><li>Total length is 16 characters including optional space or hyphen separator (source: GeeksforGeeks tutorial)</li>
+<li>Positions 1-2: Two uppercase alphabetic characters representing the state code (source: GeeksforGeeks and Microsoft DLP documentation)</li>
+<li>Positions 3-4: Two digits representing the RTO (Regional Transport Office) code (source: GeeksforGeeks tutorial)</li>
+<li>Positions 5-8: Four digits representing the year of license issuance, constrained to years 1900-2099 (source: GeeksforGeeks regex pattern)</li>
+<li>Positions 9-15: Seven digits (0-9) forming a unique serial number (source: GeeksforGeeks and Microsoft DLP documentation)</li>
+<li>Format allows optional separator after state code and RTO code: either a space or hyphen (source: GeeksforGeeks examples HR-0619850034761 or UP14 20160034761)</li>
+<li>State code must be valid two-letter abbreviation (e.g., HR for Haryana, UP for Uttar Pradesh, MH for Maharashtra, GJ for Gujarat) (source: GeeksforGeeks test cases)</li>
+<li>The year portion follows pattern (19|20)[0-9][0-9] ensuring only 20th and 21st century years are valid (source: GeeksforGeeks regex)</li>
+<li>Microsoft documentation describes it as 15 character alphanumeric pattern with optional spaces or dashes between segments (source: Microsoft Purview DLP entity definition)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_india_driving_license</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (6)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length</div>
+          <div class="rule-desc">Total length is 15 characters (alphanumeric) with optional separators (space or hyphen) making it up to 16-18 characters when separators are included</div>
+          <code class="regex-code">(?&lt;![:\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?\d{2}[- ]?(?:19|20)\d{2}[- ]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">state-code</div>
+          <div class="rule-desc">Positions 0-1: Two uppercase alphabetic characters representing the state code (e.g., HR for Haryana, UP for Uttar Pradesh, MH for Maharashtra, GJ for Gujarat)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?\d{2}[- ]?(?:19|20)\d{2}[- ]?\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">rto-code</div>
+          <div class="rule-desc">Positions 2-3 (after state code): Two digits representing the Regional Transport Office (RTO) code</div>
+          <code class="regex-code">(?&lt;![:\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[0-9]{2}[ -]?(?:19|20)[0-9]{2}[0-9]{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">year-issuance</div>
+          <div class="rule-desc">Positions 4-7 (after RTO code): Four digits representing the year of license issuance, constrained to years 1900-2099 following pattern (19|20)[0-9][0-9]</div>
+          <code class="regex-code">(?&lt;![:\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?[0-9]{2}[- ]?(?:19|20)[0-9]{2}[- ]?[0-9]{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">serial-number</div>
+          <div class="rule-desc">Positions 8-14 (after year): Seven digits (0-9) forming a unique serial number</div>
+          <code class="regex-code">(?&lt;![:\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[0-9]{2}[ -]?(?:19|20)[0-9]{2}[ -]?[0-9]{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-separators</div>
+          <div class="rule-desc">Optional separator (space or hyphen) allowed after state code (position 2) and after RTO code (position 4) and optionally after year (position 8)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:HR|UP|MH|GJ|DL|KA|TN|WB|RJ|AP|TG|KL|PB|BR|MP|OD|AS|JH|CG|UK|HP|GA|MN|ML|MZ|NL|SK|TR|AR|LD|AN|CH|DN|DD|PY|JK|LA)[- ]?\d{2}[- ]?(?:19|20)\d{2}[- ]?\d{7}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?[ -]?\d{2}[\s\-]?[ -]?(?:19|20)\d{2}[\s\-]?[ -]?\d{7}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">driving licence</span> <span class="kw-tag">driving license</span> <span class="kw-tag">driver&#x27;s license</span> <span class="kw-tag">driver&#x27;s licence</span> <span class="kw-tag">driver license</span> <span class="kw-tag">driver licence</span> <span class="kw-tag">DL number</span> <span class="kw-tag">DL no</span> <span class="kw-tag">driving permit</span> <span class="kw-tag">Indian driving license</span> <span class="kw-tag">Indian driving licence</span> <span class="kw-tag">ड्राइविंग लाइसेंस</span> <span class="kw-tag">चालक अनुज्ञप्ति</span> <span class="kw-tag">वाहन चालक लाइसेंस</span> <span class="kw-tag">RTO license</span> <span class="kw-tag">RTO licence</span> <span class="kw-tag">Regional Transport Office</span> <span class="kw-tag">Ministry of Road Transport</span> <span class="kw-tag">transport license</span> <span class="kw-tag">vehicle license</span> <span class="kw-tag">motor vehicle license</span> <span class="kw-tag">permanent driving license</span> <span class="kw-tag">learner&#x27;s license</span> <span class="kw-tag">license number</span> <span class="kw-tag">licence number</span> </div>
+      <code class="regex-code">(?i)(?:driving licence|driving license|driver&#x27;s license|driver&#x27;s licence|driver license|driver licence|DL number|DL no|driving permit|Indian driving license|Indian driving licence|ड्राइविंग लाइसेंस|चालक अनुज्ञप्ति|वाहन चालक लाइसेंस|RTO license|RTO licence|Regional Transport Office|Ministry of Road Transport|transport license|vehicle license|motor vehicle license|permanent driving license|learner&#x27;s license|license number|licence number)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-9">
+      <h3>
+        <span class="idx">9.</span> Indian license plate number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (4)</summary>
+        <ul class='source-list'><li><a href="https://www.geeksforgeeks.org/dsa/validating-indian-vehicle-number-plate-using-regualr-expression/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/dsa/validating-indian-vehicle-number-plate-using-regualr-expression/</a></li>
+<li><a href="https://www.godigit.com/traffic-rules/different-types-of-number-plates" target="_blank" rel="noopener noreferrer">https://www.godigit.com/traffic-rules/different-types-of-number-plates</a></li>
+<li><a href="https://www.hdfcergo.com/blogs/car-insurance/rules-for-number-plates-in-india" target="_blank" rel="noopener noreferrer">https://www.hdfcergo.com/blogs/car-insurance/rules-for-number-plates-in-india</a></li>
+<li><a href="https://www.tataaig.com/knowledge-center/two-wheeler-insurance/rto-number-plate-rules" target="_blank" rel="noopener noreferrer">https://www.tataaig.com/knowledge-center/two-wheeler-insurance/rto-number-plate-rules</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (15)</summary>
+        <ul class='policy-list'><li>Format consists of 4 parts: 2 letters (state code) + 2 digits (district RTO code) + 1-2 letters (series) + 4 digits (unique number). Example: MH-05-DL-9023 (Source: GeeksforGeeks, TATA AIG, HDFC ERGO)</li>
+<li>First two letters indicate the state or Union Territory where the vehicle is registered (e.g., MH for Maharashtra, DL for Delhi, TN for Tamil Nadu, GJ for Gujarat). (Source: GeeksforGeeks, TATA AIG, HDFC ERGO)</li>
+<li>Next two digits represent the Regional Transport Office (RTO) or district sequential number within the state (e.g., 05 for a specific district). (Source: GeeksforGeeks, TATA AIG)</li>
+<li>Third component consists of 1 or 2 alphabetic characters serving as a series identifier. If numbers are unavailable, a letter may be used instead of the second digit. (Source: GeeksforGeeks regex pattern, TATA AIG)</li>
+<li>Final component is exactly 4 digits representing the unique vehicle registration number. (Source: GeeksforGeeks regex pattern: [0-9]{4}$)</li>
+<li>Private vehicles (two-wheelers and light motor vehicles like cars) must have white background number plates with black text. (Source: Motor Vehicles Act Rules 50 and 51, cited by HDFC ERGO and TATA AIG)</li>
+<li>Commercial vehicles must have yellow background number plates with black text. (Source: Motor Vehicles Act Rules 50 and 51, cited by HDFC ERGO and TATA AIG)</li>
+<li>Electric vehicles use green number plates. (Source: Multiple sources including HDFC ERGO)</li>
+<li>Number plate size for two and three-wheelers: 200 x 100 mm. (Source: Motor Vehicles Act, cited by HDFC ERGO and TATA AIG)</li>
+<li>Number plate size for light motor vehicles (passenger cars): 340 x 200 mm or 500 x 120 mm. (Source: Motor Vehicles Act, cited by HDFC ERGO and TATA AIG)</li>
+<li>Number plate size for medium or heavy commercial vehicles: 340 x 200 mm. (Source: Motor Vehicles Act, cited by HDFC ERGO and TATA AIG)</li>
+<li>Character size specifications: 65 mm height, 10 mm thickness, 10 mm spacing between characters (applicable to all motor vehicles except two and three-wheelers). (Source: Central Motors Vehicles Rules update by Ministry of Road Transport and Highways)</li>
+<li>Separators between components can be space or hyphen (optional): regex pattern shows [\-]{0,1} meaning 0 or 1 occurrence of space or hyphen. (Source: GeeksforGeeks regex validation)</li>
+<li>All vehicles must display the &#x27;IND&#x27; logo with chromium hologram (Ashoka Chakra) as part of High-Security Registration Plates (HSRP). (Source: TATA AIG, introduced in 2005)</li>
+<li>Number plates must be displayed on both front and rear of the vehicle. (Source: Motor Vehicles Act Section 39, cited by multiple sources)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (7)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">four-part-structure</div>
+          <div class="rule-desc">License plate consists of 4 parts: 2 letters (state code) + 2 digits (district RTO code) + 1-2 letters (series) + 4 digits (unique number)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?(?:\d{2}|[0-9][A-Z])[\s\-]?[A-Z]{1,2}[\s\-]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">state-code-prefix</div>
+          <div class="rule-desc">First two letters indicate the state or Union Territory where the vehicle is registered (e.g., MH for Maharashtra, DL for Delhi, TN for Tamil Nadu, GJ for Gujarat)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?[0-9]{2}[\s\-]?[A-Z]{1,2}[\s\-]?[0-9]{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">rto-district-code</div>
+          <div class="rule-desc">Next two digits represent the Regional Transport Office (RTO) or district sequential number within the state</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?(?:\d{2}|\d[A-Z])[\s\-]?[A-Z]{1,2}[\s\-]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">series-identifier</div>
+          <div class="rule-desc">Third component consists of 1 or 2 alphabetic characters serving as a series identifier</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?(?:\d{2}|\d[A-Z])[\s\-]?[A-Z]{1,2}[\s\-]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">unique-four-digit-number</div>
+          <div class="rule-desc">Final component is exactly 4 digits representing the unique vehicle registration number</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?(?:\d{2}|[0-9][A-Z])[\s\-]?[A-Z]{1,2}[\s\-]?\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-separators</div>
+          <div class="rule-desc">Separators between components can be space or hyphen (optional): 0 or 1 occurrence of space or hyphen between each part</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?[ -]?(?:[0-9]{2}|[0-9][A-Z])[ -]?[A-Z]{1,2}[\s\-]?[ -]?[0-9]{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">alternative-letter-for-second-digit</div>
+          <div class="rule-desc">If numbers are unavailable, a letter may be used instead of the second digit in the RTO code position</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?[0-9][0-9A-Z][\s\-]?[A-Z]{1,2}[\s\-]?[0-9]{4}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]{2}[\s\-]?[ -]?[0-9](?:[0-9]|[A-Z])[ -]?[A-Z]{1,2}[\s\-]?[ -]?[0-9]{4}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Indian license plate</span> <span class="kw-tag">Indian registration number</span> <span class="kw-tag">vehicle registration number</span> <span class="kw-tag">registration plate</span> <span class="kw-tag">number plate</span> <span class="kw-tag">RTO registration</span> <span class="kw-tag">Regional Transport Office</span> <span class="kw-tag">वाहन पंजीकरण संख्या</span> <span class="kw-tag">पंजीकरण प्लेट</span> <span class="kw-tag">आरटीओ पंजीकरण</span> <span class="kw-tag">High-Security Registration Plate</span> <span class="kw-tag">HSRP</span> <span class="kw-tag">IND logo</span> <span class="kw-tag">Ashoka Chakra</span> <span class="kw-tag">state code</span> <span class="kw-tag">district RTO code</span> <span class="kw-tag">vehicle number</span> <span class="kw-tag">registration certificate</span> <span class="kw-tag">RC number</span> <span class="kw-tag">motor vehicle registration</span> </div>
+      <code class="regex-code">(?i)(?:Indian license plate|Indian registration number|vehicle registration number|registration plate|number plate|RTO registration|Regional Transport Office|वाहन पंजीकरण संख्या|पंजीकरण प्लेट|आरटीओ पंजीकरण|High-Security Registration Plate|HSRP|IND logo|Ashoka Chakra|state code|district RTO code|vehicle number|registration certificate|RC number|motor vehicle registration)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-10">
+      <h3>
+        <span class="idx">10.</span> Indian phone number
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (5)</summary>
+        <ul class='source-list'><li><a href="https://www.vitelglobal.com/blog/india-phone-number-format/" target="_blank" rel="noopener noreferrer">https://www.vitelglobal.com/blog/india-phone-number-format/</a></li>
+<li><a href="https://diallink.com/blog/india-number-format" target="_blank" rel="noopener noreferrer">https://diallink.com/blog/india-number-format</a></li>
+<li><a href="https://www.immihelp.com/phone-numbering-scheme-in-india/" target="_blank" rel="noopener noreferrer">https://www.immihelp.com/phone-numbering-scheme-in-india/</a></li>
+<li><a href="https://www.qoli.ai/blogs/indian-phone-number-format" target="_blank" rel="noopener noreferrer">https://www.qoli.ai/blogs/indian-phone-number-format</a></li>
+<li><a href="https://callhippo.com/blog/general/indian-phone-number-format" target="_blank" rel="noopener noreferrer">https://callhippo.com/blog/general/indian-phone-number-format</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (18)</summary>
+        <ul class='policy-list'><li>Indian mobile numbers are exactly 10 digits long (source: multiple scraped pages)</li>
+<li>Mobile numbers always start with 9, 8, 7, or 6 as the first digit (source: immihelp.com, CallHippo)</li>
+<li>Mobile numbers never start with 0, 1, 2, 3, 4, or 5 (source: immihelp.com)</li>
+<li>The international format is +91 followed by the 10-digit number (source: multiple sources)</li>
+<li>Landline numbers use STD (Subscriber Trunk Dialing) codes that are 2, 3, or 4 digits long (source: immihelp.com)</li>
+<li>When STD code is 2 digits, the local number is 8 digits (2+8=10 total) (source: immihelp.com)</li>
+<li>When STD code is 3 digits, the local number is 7 digits (3+7=10 total) (source: immihelp.com)</li>
+<li>When STD code is 4 digits, the local number is 6 digits (4+6=10 total) (source: immihelp.com)</li>
+<li>Metropolitan cities use 2-digit STD codes: Delhi (11), Mumbai (22), Kolkata (33), Chennai (44), Hyderabad (40), Bengaluru (80), Ahmedabad (79), Pune (20) (source: immihelp.com, CallHippo)</li>
+<li>The leading zero in domestic format must be removed when dialing internationally (source: multiple sources)</li>
+<li>Domestic landline format includes a leading 0 before the STD code (source: immihelp.com)</li>
+<li>Toll-free numbers begin with 1800 or 1860 (source: Vitel Global, CallHippo)</li>
+<li>Telemarketing numbers use the 140 series (source: CallHippo)</li>
+<li>Emergency numbers use short codes: 100 (Police), 101 (Fire), 108 (Ambulance), 112 (National emergency) (source: Vitel Global)</li>
+<li>Mobile number format for cellular services: 2-digit access code (98 or 94) + 3-digit provider code + 5-digit subscriber number (source: immihelp.com)</li>
+<li>First digit of landline subscriber number will not be 0, 1, 7, 8, or 9 (source: immihelp.com)</li>
+<li>Country code for India is +91 (source: all sources)</li>
+<li>Total national numbering format is 10 digits for both landline and mobile (source: immihelp.com)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (11)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">mobile-10-digits</div>
+          <div class="rule-desc">Mobile numbers are exactly 10 digits long with no separators</div>
+          <code class="regex-code">(?&lt;![:\w])[6-9]\d{9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mobile-first-digit</div>
+          <div class="rule-desc">Mobile numbers always start with 9, 8, 7, or 6</div>
+          <code class="regex-code">(?&lt;![:\w])[6-9]\d{9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">international-format</div>
+          <div class="rule-desc">International format is +91 followed by 10-digit number</div>
+          <code class="regex-code">(?&lt;![:\w])\+91[ -]?(?:[6-9]\d{9}|(?:11|22|33|44|40|80|79|20)[ -]?[2-6]\d{7}|[2-9]\d{2}[ -]?[2-6]\d{6}|[2-9]\d{3}[ -]?[2-6]\d{5})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">landline-std-2digit</div>
+          <div class="rule-desc">Landline with 2-digit STD code followed by 8-digit local number (total 10 digits)</div>
+          <code class="regex-code">(?&lt;![:\w])0[6-9]\d[ -]?[2-6]\d{7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">landline-std-3digit</div>
+          <div class="rule-desc">Landline with 3-digit STD code followed by 7-digit local number (total 10 digits)</div>
+          <code class="regex-code">(?&lt;![:\w])0[0-9]{2}[\s\-]?[ -]?[2-6]\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">landline-std-4digit</div>
+          <div class="rule-desc">Landline with 4-digit STD code followed by 6-digit local number (total 10 digits)</div>
+          <code class="regex-code">(?&lt;![:\w])0[0-9]{3}[\s\-]?[2-6]\d{5}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">domestic-landline-leading-zero</div>
+          <div class="rule-desc">Domestic landline format includes a leading 0 before the STD code</div>
+          <code class="regex-code">(?&lt;![:\w])0(?:[2-9]\d[2-6]\d{7}|[2-9]\d{2}[2-6]\d{6}|[2-9]\d{3}[2-6]\d{5})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">toll-free-1800</div>
+          <div class="rule-desc">Toll-free numbers begin with 1800 followed by 6 or 7 digits</div>
+          <code class="regex-code">(?&lt;![:\w])1800[6-9]\d{5,6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">toll-free-1860</div>
+          <div class="rule-desc">Toll-free numbers begin with 1860 followed by 6 or 7 digits</div>
+          <code class="regex-code">(?&lt;![:\w])1860[6-9]\d{5}(?:\d{1})?\b
+
+However, looking at the constraints more carefully, the toll-free number starts with 1860 followed by 6 or 7 digits. The hard constraint about position 0 being [6-9] applies to mobile numbers, not toll-free numbers. Let me reconsider:
+
+\b1860\d{6,7}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">telemarketing-140</div>
+          <div class="rule-desc">Telemarketing numbers use the 140 series</div>
+          <code class="regex-code">\b140\d{7}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">emergency-short-codes</div>
+          <div class="rule-desc">Emergency numbers use short codes: 100, 101, 108, 112</div>
+          <code class="regex-code">(?&lt;![:\w])(?:1(?:0[018]|12)|1800\d{6}|1860\d{6}|140\d{7}|[6-9]\d{9}|0(?:[2-9]\d(?:[ -]?[2-6]\d{6})|[2-9]\d{2}(?:[ -]?[2-6]\d{5})|[2-9]\d{3}(?:[ -]?[2-6]\d{4})))(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])(?:\+91[6-9]\d{9}|(?:1800|1860)\d{6,7}|140\d{4,7}|10[018]|112|0(?:[2-9]\d[2-6]\d{7}|[2-9]\d{2}[2-6]\d{6}|[2-9]\d{3}[2-6]\d{5})|[6-9]\d{9})(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Indian mobile number</span> <span class="kw-tag">Indian phone number</span> <span class="kw-tag">India contact number</span> <span class="kw-tag">mobile number</span> <span class="kw-tag">phone number</span> <span class="kw-tag">contact number</span> <span class="kw-tag">मोबाइल नंबर</span> <span class="kw-tag">फ़ोन नंबर</span> <span class="kw-tag">संपर्क नंबर</span> <span class="kw-tag">STD code</span> <span class="kw-tag">subscriber number</span> <span class="kw-tag">toll-free number</span> <span class="kw-tag">landline number</span> <span class="kw-tag">telecom number</span> <span class="kw-tag">cellular number</span> <span class="kw-tag">DoT registered</span> <span class="kw-tag">TRAI approved</span> <span class="kw-tag">Indian telephone</span> <span class="kw-tag">भारतीय फ़ोन</span> <span class="kw-tag">दूरभाष संख्या</span> </div>
+      <code class="regex-code">(?i)(?:Indian mobile number|Indian phone number|India contact number|mobile number|phone number|contact number|मोबाइल नंबर|फ़ोन नंबर|संपर्क नंबर|STD code|subscriber number|toll-free number|landline number|telecom number|cellular number|DoT registered|TRAI approved|Indian telephone|भारतीय फ़ोन|दूरभाष संख्या)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-11">
+      <h3>
+        <span class="idx">11.</span> Indian post code
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://www.geopostcodes.com/blog/international-zip-code-validation/" target="_blank" rel="noopener noreferrer">https://www.geopostcodes.com/blog/international-zip-code-validation/</a></li>
+<li><a href="https://www.geeksforgeeks.org/dsa/how-to-validate-pin-code-of-india-using-regular-expression/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/dsa/how-to-validate-pin-code-of-india-using-regular-expression/</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (7)</summary>
+        <ul class='policy-list'><li>Indian PIN code must be exactly 6 digits long (source: GeeksforGeeks validation rules)</li>
+<li>First digit must be from 1 to 9, cannot start with zero (source: GeeksforGeeks validation rules)</li>
+<li>Positions 2-3 can be any digit from 0 to 9 (source: GeeksforGeeks regex pattern)</li>
+<li>Positions 4-6 can be any digit from 0 to 9 (source: GeeksforGeeks regex pattern)</li>
+<li>Optional single whitespace is allowed after the first three digits (source: GeeksforGeeks validation rules)</li>
+<li>Valid regex pattern is ^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$ (source: GeeksforGeeks)</li>
+<li>PIN code format is 6 numeric digits, no letters allowed (source: GeeksforGeeks validation rules)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (4)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">exactly-six-digits</div>
+          <div class="rule-desc">Indian PIN code must be exactly 6 digits long</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][0-9]{2}\s?[0-9]{3}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-letters-allowed</div>
+          <div class="rule-desc">PIN code format is 6 numeric digits, no letters allowed</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9]\d{2}\s?\d{3}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-space-after-third-digit</div>
+          <div class="rule-desc">Optional single whitespace is allowed after the first three digits</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][0-9]{2} ?[0-9]{3}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">regex-pattern</div>
+          <div class="rule-desc">Valid regex pattern is ^[1-9]{1}[0-9]{2}\s{0,1}[0-9]{3}$</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][0-9]{2}\s?[0-9]{3}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[1-9]\d{2}\s?\d{3}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">PIN code</span> <span class="kw-tag">pincode</span> <span class="kw-tag">postal index number</span> <span class="kw-tag">India PIN</span> <span class="kw-tag">Indian postal code</span> <span class="kw-tag">पिन कोड</span> <span class="kw-tag">पिनकोड</span> <span class="kw-tag">डाक सूचकांक संख्या</span> <span class="kw-tag">पोस्टल कोड</span> <span class="kw-tag">India Post</span> <span class="kw-tag">postal address India</span> <span class="kw-tag">delivery PIN</span> <span class="kw-tag">mailing PIN</span> <span class="kw-tag">पता</span> <span class="kw-tag">डाक पता</span> </div>
+      <code class="regex-code">(?i)(?:PIN code|pincode|postal index number|India PIN|Indian postal code|पिन कोड|पिनकोड|डाक सूचकांक संख्या|पोस्टल कोड|India Post|postal address India|delivery PIN|mailing PIN|पता|डाक पता)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-12">
+      <h3>
+        <span class="idx">12.</span> Indian taxpayer id
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (1)</summary>
+        <ul class='source-list'><li><a href="https://taxdo.com/resources/global-tax-id-validation-guide/india" target="_blank" rel="noopener noreferrer">https://taxdo.com/resources/global-tax-id-validation-guide/india</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (10)</summary>
+        <ul class='policy-list'><li>PAN format: exactly 10 characters - first 5 are letters, next 4 are digits, last character is a letter (Source: Income Tax Department)</li>
+<li>PAN structure: fourth character represents entity status (e.g. &#x27;P&#x27; for individuals, &#x27;C&#x27; for companies) (Source: Income Tax Department)</li>
+<li>PAN structure: fifth character indicates the first letter of the surname for individuals (Source: Income Tax Department)</li>
+<li>PAN structure: last character is a checksum character (Source: Income Tax Department)</li>
+<li>GSTIN format: exactly 15 characters - first 2 are state code, next 10 are the PAN of the business entity, next digit is entity type, last character is checksum (Source: Central Board of Indirect Taxes and Customs)</li>
+<li>TAN format: exactly 10 characters - first 4 are letters, next 5 are digits, last character is a letter (Source: Income Tax Department)</li>
+<li>TIN (VAT) format: 11 digits - first 2 digits indicate state code as per VAT/GST rules, next 9 digits are unique business identification number (Source: Central Board of Indirect Taxes and Customs)</li>
+<li>GSTIN serves as the VAT number for businesses registered under GST in India (Source: Central Board of Indirect Taxes and Customs)</li>
+<li>GSTIN structure: first two characters represent the state code according to GST rules (Source: Central Board of Indirect Taxes and Customs)</li>
+<li>PAN is mandatory for individuals and businesses engaging in various financial transactions and all types of tax filings (Source: Income Tax Department)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (9)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">pan-format</div>
+          <div class="rule-desc">PAN (Permanent Account Number) is exactly 10 characters: first 5 are uppercase letters, next 4 are digits, last character is an uppercase letter</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">pan-entity-status</div>
+          <div class="rule-desc">PAN fourth character represents entity status (e.g. &#x27;P&#x27; for individuals, &#x27;C&#x27; for companies)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:[0-9]{2}[\s\-]?[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z][0-9][A-Z][A-Z0-9]|[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z]|[A-Z]{4}[\s\-]?[0-9]{5}[\s\-]?[A-Z]|[0-9]{11})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">pan-surname-initial</div>
+          <div class="rule-desc">PAN fifth character indicates the first letter of the surname for individuals</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{3}[\s\-]?[PC][A-Z]\d{4}[\s\-]?[A-Z](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">pan-checksum</div>
+          <div class="rule-desc">PAN last character is a checksum character</div>
+          <code class="regex-code">(?&lt;![:\w])(?:[0-9]{2}[\s\-]?[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z][0-9][A-Z][A-Z0-9]|[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z]|[A-Z]{4}[\s\-]?[0-9]{5}[\s\-]?[A-Z]|[0-9]{11})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">gstin-format</div>
+          <div class="rule-desc">GSTIN (Goods and Services Tax Identification Number) is exactly 15 characters: first 2 are state code digits, next 10 are the PAN of the business entity, next digit is entity type, last character is checksum (letter or digit)</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Z]{5}[\s\-]?\d{4}[\s\-]?[A-Z]\d[A-Z][A-Z0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">gstin-state-code</div>
+          <div class="rule-desc">GSTIN first two characters represent the state code according to GST rules</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z]\d[A-Z][A-Z0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">gstin-pan-embedded</div>
+          <div class="rule-desc">GSTIN characters 3-12 contain the PAN of the business entity</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?[A-Z]{5}[\s\-]?[0-9]{4}[\s\-]?[A-Z]\d[A-Z][A-Z0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">tan-format</div>
+          <div class="rule-desc">TAN (Tax Deduction and Collection Account Number) is exactly 10 characters: first 4 are uppercase letters, next 5 are digits, last character is an uppercase letter</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}[\s\-]?[0-9]{5}[\s\-]?[A-Z](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">tin-vat-format</div>
+          <div class="rule-desc">TIN (VAT) is exactly 11 digits: first 2 digits indicate state code, next 9 digits are unique business identification number</div>
+          <code class="regex-code">(?&lt;![:\w])[0-9]{2}[0-9]{9}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])(?:[A-Z]{5}[\s\-]?\d{4}[\s\-]?[A-Z]|\d{2}[\s\-]?[A-Z]{5}[\s\-]?\d{4}[\s\-]?[A-Z]\d[A-Z][A-Z0-9]|[A-Z]{4}[\s\-]?\d{5}[\s\-]?[A-Z]|\d{11})(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">PAN</span> <span class="kw-tag">Permanent Account Number</span> <span class="kw-tag">GSTIN</span> <span class="kw-tag">GST Identification Number</span> <span class="kw-tag">Goods and Services Tax Identification Number</span> <span class="kw-tag">TAN</span> <span class="kw-tag">Tax Deduction and Collection Account Number</span> <span class="kw-tag">TIN</span> <span class="kw-tag">Taxpayer Identification Number</span> <span class="kw-tag">Income Tax Department</span> <span class="kw-tag">Indian taxpayer</span> <span class="kw-tag">India tax ID</span> <span class="kw-tag">पैन</span> <span class="kw-tag">स्थायी खाता संख्या</span> <span class="kw-tag">जीएसटी पहचान संख्या</span> <span class="kw-tag">कर पहचान संख्या</span> <span class="kw-tag">Income Tax PAN</span> <span class="kw-tag">GST registration number</span> <span class="kw-tag">VAT number India</span> <span class="kw-tag">Indian GST number</span> <span class="kw-tag">PAN card</span> <span class="kw-tag">TAN number</span> <span class="kw-tag">state code GST</span> <span class="kw-tag">ITD PAN</span> <span class="kw-tag">CBIC GSTIN</span> </div>
+      <code class="regex-code">(?i)(?:PAN|Permanent Account Number|GSTIN|GST Identification Number|Goods and Services Tax Identification Number|TAN|Tax Deduction and Collection Account Number|TIN|Taxpayer Identification Number|Income Tax Department|Indian taxpayer|India tax ID|पैन|स्थायी खाता संख्या|जीएसटी पहचान संख्या|कर पहचान संख्या|Income Tax PAN|GST registration number|VAT number India|Indian GST number|PAN card|TAN number|state code GST|ITD PAN|CBIC GSTIN)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-13">
+      <h3>
+        <span class="idx">13.</span> Indian vat number
+        <span class="badge badge-med">low</span>
+      </h3>
+      <p class="conf-reason">No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented.</p>
+
+      <details open>
+        <summary>Sources (0)</summary>
+        <p class="empty">No sources found.</p>
+      </details>
+
+      <details open>
+        <summary>Policies (9)</summary>
+        <ul class='policy-list'><li>VAT (Value Added Tax) was replaced by GST (Goods and Services Tax) in India on July 1, 2017</li>
+<li>Legacy VAT numbers were state-specific and varied by state</li>
+<li>Typical format was 11 digits, but format varied significantly across different Indian states</li>
+<li>Some states used alphanumeric formats while others used purely numeric formats</li>
+<li>Common pattern included state code (2 digits) followed by registration number</li>
+<li>TIN (Taxpayer Identification Number) was often used interchangeably with VAT number</li>
+<li>Format example: 11 digits like 27AAAAA1234A or purely numeric like 12345678901</li>
+<li>No standardized check digit algorithm across all states</li>
+<li>Now superseded by 15-character GSTIN (GST Identification Number)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (3)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>{&quot;vendor&quot;: &quot;Microsoft Purview&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;VAT&quot;, &quot;TIN&quot;, &quot;Taxpayer Identification Number&quot;, &quot;Value Added Tax&quot;], &quot;rules&quot;: [&quot;Typically looks for 11-digit numeric patterns in Indian context&quot;, &quot;May validate in conjunction with Indian address or business context&quot;, &quot;Often grouped with GST detection rules&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Netskope</td>
+              <td><code>{&quot;vendor&quot;: &quot;Netskope&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;India VAT&quot;, &quot;Indian TIN&quot;, &quot;VAT number&quot;], &quot;rules&quot;: [&quot;Context-based detection using surrounding text&quot;, &quot;May require proximity to India-specific identifiers&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Broadcom/Symantec</td>
+              <td><code>{&quot;vendor&quot;: &quot;Broadcom/Symantec&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;VAT&quot;, &quot;TIN&quot;, &quot;India tax&quot;], &quot;rules&quot;: [&quot;Pattern matching for 11-digit sequences&quot;, &quot;Geographic context validation&quot;]}</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (6)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">legacy-vat-11-digit</div>
+          <div class="rule-desc">Legacy Indian VAT/TIN numbers were typically 11 digits in length, though format varied by state</div>
+          <code class="regex-code">(?&lt;![:\w])\d{11}\b|\b\d{2}[\s\-]?[A-Z0-9]{9}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">state-code-prefix</div>
+          <div class="rule-desc">Common pattern included a 2-digit state code prefix followed by registration number</div>
+          <code class="regex-code">(?&lt;![:\w])\d{2}[\s\-]?(?:\d{9}|[A-Z0-9]{9})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">alphanumeric-variant</div>
+          <div class="rule-desc">Some states used alphanumeric formats mixing letters and digits (e.g., 27AAAAA1234A)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:\d{11}|[0-9]{2}[\s\-]?[A-Z0-9]{9})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-only-variant</div>
+          <div class="rule-desc">Some states used purely numeric 11-digit formats (e.g., 12345678901)</div>
+          <code class="regex-code">\b\d{11}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-standard-checksum</div>
+          <div class="rule-desc">No standardized check digit algorithm existed across all Indian states for VAT numbers</div>
+          <code class="regex-code">(?&lt;![:\w])(?:\d{11}|[A-Z0-9]{11}|\d{2}[\s\-]?[A-Z]{5}[\s\-]?\d{4}[\s\-]?[A-Z])(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">superseded-by-gst</div>
+          <div class="rule-desc">VAT numbers were replaced by 15-character GSTIN on July 1, 2017, but legacy VAT numbers may still appear in historical documents</div>
+          <code class="regex-code">(?&lt;![:\w])(?:\d{11}|[A-Z0-9]{11})(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])(?:\d{11}|[0-9A-Z]{11})(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">VAT</span> <span class="kw-tag">VAT number</span> <span class="kw-tag">India VAT</span> <span class="kw-tag">Indian VAT</span> <span class="kw-tag">TIN</span> <span class="kw-tag">Taxpayer Identification Number</span> <span class="kw-tag">Indian TIN</span> <span class="kw-tag">Value Added Tax</span> <span class="kw-tag">State VAT</span> <span class="kw-tag">Commercial Tax</span> <span class="kw-tag">Tax Identification</span> <span class="kw-tag">VAT registration</span> <span class="kw-tag">VAT registration number</span> <span class="kw-tag">Sales Tax number</span> <span class="kw-tag">CST</span> <span class="kw-tag">Central Sales Tax</span> <span class="kw-tag">State tax number</span> <span class="kw-tag">व्याट</span> <span class="kw-tag">कर पहचान संख्या</span> <span class="kw-tag">Indian tax number</span> <span class="kw-tag">State Commercial Tax</span> <span class="kw-tag">pre-GST</span> <span class="kw-tag">legacy VAT</span> <span class="kw-tag">state VAT number</span> <span class="kw-tag">VAT TIN</span> <span class="kw-tag">tax registration number</span> <span class="kw-tag">commercial tax registration</span> <span class="kw-tag">state tax registration</span> <span class="kw-tag">VAT certificate</span> <span class="kw-tag">TIN certificate</span> </div>
+      <code class="regex-code">(?i)(?:VAT|VAT number|India VAT|Indian VAT|TIN|Taxpayer Identification Number|Indian TIN|Value Added Tax|State VAT|Commercial Tax|Tax Identification|VAT registration|VAT registration number|Sales Tax number|CST|Central Sales Tax|State tax number|व्याट|कर पहचान संख्या|Indian tax number|State Commercial Tax|pre-GST|legacy VAT|state VAT number|VAT TIN|tax registration number|commercial tax registration|state tax registration|VAT certificate|TIN certificate)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-14">
+      <h3>
+        <span class="idx">14.</span> ipv6
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (5)</summary>
+        <ul class='source-list'><li><a href="https://datatracker.ietf.org/doc/html/rfc2460" target="_blank" rel="noopener noreferrer">https://datatracker.ietf.org/doc/html/rfc2460</a></li>
+<li><a href="https://www.geeksforgeeks.org/ipv6-addressing-format-and-conventions/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/ipv6-addressing-format-and-conventions/</a></li>
+<li><a href="https://study-ccna.com/ipv6-address-format/" target="_blank" rel="noopener noreferrer">https://study-ccna.com/ipv6-address-format/</a></li>
+<li><a href="https://oneuptime.com/blog/post/2026-03-20-understand-ipv6-address-format-notation/view" target="_blank" rel="noopener noreferrer">https://oneuptime.com/blog/post/2026-03-20-understand-ipv6-address-format-notation/view</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-ip-address" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-ip-address</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (14)</summary>
+        <ul class='policy-list'><li>IPv6 addresses are 128 bits in length (RFC 2460, Section 3)</li>
+<li>IPv6 addresses are written as eight groups of four hexadecimal digits separated by colons (RFC 2460, industry standard notation)</li>
+<li>Each group represents 16 bits, using hexadecimal digits 0-9 and A-F (RFC 2460, Section 3)</li>
+<li>Leading zeros in each group may be omitted (e.g., 0db8 becomes db8, 0042 becomes 42)</li>
+<li>One sequence of consecutive all-zero groups may be replaced with double colon (::), but this compression can only be used once per address</li>
+<li>When replacing consecutive zero groups with ::, the longest run of consecutive all-zero groups should be replaced</li>
+<li>The IPv6 header contains a 4-bit version field with value 6 (RFC 2460, Section 3)</li>
+<li>Source and Destination Address fields are each 128 bits (RFC 2460, Section 3)</li>
+<li>IPv6 addresses in URLs must be enclosed in square brackets (e.g., http://[2001:db8::1]:8080)</li>
+<li>Prefix length notation uses slash notation similar to IPv4 CIDR (e.g., 2001:db8::/32, fe80::/10)</li>
+<li>The loopback address is ::1 (full form: 0000:0000:0000:0000:0000:0000:0000:0001)</li>
+<li>The unspecified address is :: (all zeros)</li>
+<li>Link-local addresses use the fe80::/10 prefix</li>
+<li>Extension headers must be integer multiples of 8 octets in length (RFC 2460, Section 4)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_ipv6_address</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (9)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">ipv6-128-bit</div>
+          <div class="rule-desc">IPv6 addresses are 128 bits in length, represented as eight groups of four hexadecimal digits separated by colons</div>
+          <code class="regex-code">(?&lt;![:\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\s\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-hex-digits</div>
+          <div class="rule-desc">Each group represents 16 bits using hexadecimal digits 0-9 and A-F (case-insensitive)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:(?:[0-9A-Fa-f]{1,4}:){7}[\s\-]?[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,7}:|(?:[0-9A-Fa-f]{1,4}:){1,6}:[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}|(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}|(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}|(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}|[0-9A-Fa-f]{1,4}:(?::[0-9A-Fa-f]{1,4}){1,6}|:(?:(?::[0-9A-Fa-f]{1,4}){1,7}|:))(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-leading-zero-omission</div>
+          <div class="rule-desc">Leading zeros in each group may be omitted (e.g., 0db8 becomes db8, 0042 becomes 42)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\s\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-double-colon-compression</div>
+          <div class="rule-desc">One sequence of consecutive all-zero groups may be replaced with double colon (::), but this compression can only be used once per address</div>
+          <code class="regex-code">(?&lt;![:\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\s\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-loopback</div>
+          <div class="rule-desc">The loopback address is ::1 (full form: 0000:0000:0000:0000:0000:0000:0000:0001)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:(?:0{0,3}:){7}0{0,3}1|::1)(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-unspecified</div>
+          <div class="rule-desc">The unspecified address is :: (all zeros)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:::(?:0{1,4}:){0,7}0{0,4}|0{1,4}:(?:0{1,4}:){6}0{1,4}|0{0,4}::(?:0{1,4}:){0,6}0{1,4}|(?:0{1,4}:){1}:(?:0{1,4}:){0,5}0{1,4}|(?:0{1,4}:){2}:(?:0{1,4}:){0,4}0{1,4}|(?:0{1,4}:){3}:(?:0{1,4}:){0,3}0{1,4}|(?:0{1,4}:){4}:(?:0{1,4}:){0,2}0{1,4}|(?:0{1,4}:){5}:(?:0{1,4}:)?0{1,4}|(?:0{1,4}:){6}:0{1,4}|(?:0{1,4}:){7}0{1,4})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-link-local</div>
+          <div class="rule-desc">Link-local addresses use the fe80::/10 prefix</div>
+          <code class="regex-code">(?&lt;![:\w])(?:fe[89ab][0-9a-fA-F]::(?:[0-9a-fA-F]{1,4}:){0,6}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,5}(?::[0-9a-fA-F]{1,4}){1,2}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){1,6}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,4}:(?:[0-9a-fA-F]{1,4}:){0,1}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,3}:(?:[0-9a-fA-F]{1,4}:){0,2}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,2}:(?:[0-9a-fA-F]{1,4}:){0,3}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:(?:[0-9a-fA-F]{1,4}:){0,1}:(?:[0-9a-fA-F]{1,4}:){0,4}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]::(?:[0-9a-fA-F]{1,4}:){0,5}[\s\-]?[0-9a-fA-F]{1,4}|fe[89ab][0-9a-fA-F]:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4})(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-url-brackets</div>
+          <div class="rule-desc">IPv6 addresses in URLs must be enclosed in square brackets</div>
+          <code class="regex-code">(?&lt;![:\w])\[(?:(?:[0-9a-fA-F]{1,4}:){7}[\s\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))\](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ipv6-prefix-notation</div>
+          <div class="rule-desc">Prefix length notation uses slash notation similar to IPv4 CIDR (e.g., 2001:db8::/32, fe80::/10)</div>
+          <code class="regex-code">(?&lt;![:\w])(?:[0-9A-Fa-f]{1,4}:){7}[\s\-]?[0-9A-Fa-f]{1,4}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,7}:\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b:(?::[0-9A-Fa-f]{1,4}){1,7}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,6}(?::[0-9A-Fa-f]{1,4}){1}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b[0-9A-Fa-f]{1,4}:(?::[0-9A-Fa-f]{1,4}){1,6}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b::(?:[0-9A-Fa-f]{1,4}:){0,6}[\s\-]?[0-9A-Fa-f]{1,4}\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b(?:[0-9A-Fa-f]{1,4}:){1,7}:\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])\b|\b::\/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9])(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])(?:(?:[0-9a-fA-F]{1,4}:){7}[\s\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?:/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9]))?\b|\[(?:(?:[0-9a-fA-F]{1,4}:){7}[\s\-]?[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:))(?:/(?:12[0-8]|1[01][0-9]|[1-9]?[0-9]))?\](?::[0-9]{1,5})?(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">IPv6</span> <span class="kw-tag">IPv6 address</span> <span class="kw-tag">IPv6 addresses</span> <span class="kw-tag">IP address</span> <span class="kw-tag">IP addresses</span> <span class="kw-tag">internet protocol</span> <span class="kw-tag">IP version 6</span> <span class="kw-tag">link-local address</span> <span class="kw-tag">loopback address</span> <span class="kw-tag">global unicast address</span> <span class="kw-tag">unique local address</span> <span class="kw-tag">multicast address</span> <span class="kw-tag">anycast address</span> <span class="kw-tag">source address</span> <span class="kw-tag">destination address</span> <span class="kw-tag">network address</span> <span class="kw-tag">host address</span> <span class="kw-tag">subnet prefix</span> <span class="kw-tag">routing prefix</span> <span class="kw-tag">interface identifier</span> <span class="kw-tag">SLAAC</span> <span class="kw-tag">stateless address autoconfiguration</span> <span class="kw-tag">DHCPv6</span> <span class="kw-tag">neighbor discovery</span> <span class="kw-tag">router advertisement</span> <span class="kw-tag">solicited-node multicast</span> <span class="kw-tag">IP-כתובת ה</span> </div>
+      <code class="regex-code">(?i)(?:IPv6|IPv6 address|IPv6 addresses|IP address|IP addresses|internet protocol|IP version 6|link-local address|loopback address|global unicast address|unique local address|multicast address|anycast address|source address|destination address|network address|host address|subnet prefix|routing prefix|interface identifier|SLAAC|stateless address autoconfiguration|DHCPv6|neighbor discovery|router advertisement|solicited-node multicast|IP-כתובת ה)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-15">
+      <h3>
+        <span class="idx">15.</span> latvia postcode
+        <span class="badge badge-med">medium</span>
+      </h3>
+      <p class="conf-reason">The vendor research phase found no on-topic pages. Extracted rules may be incomplete or from a related identifier.</p>
+
+      <details open>
+        <summary>Sources (4)</summary>
+        <ul class='source-list'><li><a href="https://www.geopostcodes.com/country/latvia/address-format/" target="_blank" rel="noopener noreferrer">https://www.geopostcodes.com/country/latvia/address-format/</a></li>
+<li><a href="https://www.postgrid.com/global-address-format/latvia-address-format/" target="_blank" rel="noopener noreferrer">https://www.postgrid.com/global-address-format/latvia-address-format/</a></li>
+<li><a href="https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/lvaEn.pdf" target="_blank" rel="noopener noreferrer">https://www.upu.int/UPU/media/upu/PostalEntitiesFiles/addressingUnit/lvaEn.pdf</a></li>
+<li><a href="https://ling-app.com/blog/read-latvian-addresses/" target="_blank" rel="noopener noreferrer">https://ling-app.com/blog/read-latvian-addresses/</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (8)</summary>
+        <ul class='policy-list'><li>Format is LV-NNNN where LV is the country code and NNNN is a 4-digit numeric code (source: multiple references in scraped text including GeoPostcodes and address format guides)</li>
+<li>Total length is 7 characters including the hyphen: 2 letters (LV), 1 hyphen, and 4 digits (source: consistent across all examples in scraped text)</li>
+<li>The prefix &#x27;LV&#x27; is mandatory and represents the ISO 3166-1 alpha-2 country code for Latvia (source: ISO codes table in scraped text)</li>
+<li>The 4-digit numeric portion ranges from 0000 to 9999 with no alphabetic characters (source: format specification &#x27;LV-NNNN&#x27; and examples like LV-5401, LV-2345, LV-1234)</li>
+<li>The hyphen separator between country code and numeric digits is required (source: all address examples consistently show &#x27;LV-&#x27; format)</li>
+<li>Postal codes are written after the city name in domestic addresses (source: address format guidelines stating &#x27;City Name and Postal Code (LV-4 digits)&#x27;)</li>
+<li>For international mail, the postal code appears before the country name &#x27;LATVIA&#x27; which should be in capital letters (source: address format examples showing &#x27;RIGA, LV-2345&#x27; followed by &#x27;LATVIA&#x27;)</li>
+<li>The term for postal code in Latvian is &#x27;Pasta indekss&#x27; (source: terminology table in scraped text)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (0)</summary>
+        <p class="empty">No competitor / vendor patterns found.</p>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">lv-prefix-mandatory</div>
+          <div class="rule-desc">Must begin with the ISO 3166-1 alpha-2 country code &#x27;LV&#x27; in uppercase</div>
+          <code class="regex-code">(?&lt;![:\w])LV-\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">hyphen-separator-required</div>
+          <div class="rule-desc">Must contain a hyphen separator between the country code and numeric portion</div>
+          <code class="regex-code">(?&lt;![:\w])LV-\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">four-digit-numeric</div>
+          <div class="rule-desc">Must end with exactly 4 numeric digits (0-9) with no alphabetic characters</div>
+          <code class="regex-code">(?&lt;![:\w])LV-\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">total-length-seven</div>
+          <div class="rule-desc">Total length must be exactly 7 characters: 2 letters, 1 hyphen, 4 digits</div>
+          <code class="regex-code">(?&lt;![:\w])LV-\d{4}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">numeric-range-0000-9999</div>
+          <div class="rule-desc">The 4-digit numeric portion ranges from 0000 to 9999</div>
+          <code class="regex-code">(?&lt;![:\w])LV-\d{4}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])LV-\d{4}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">pasta indekss</span> <span class="kw-tag">Latvijas Pasts</span> <span class="kw-tag">Latvia postal code</span> <span class="kw-tag">Latvian postcode</span> <span class="kw-tag">Latvian postal code</span> <span class="kw-tag">Latvia post code</span> <span class="kw-tag">adrese Latvijā</span> <span class="kw-tag">pasta indeksa sektors</span> <span class="kw-tag">Rīga LV-</span> <span class="kw-tag">pilsēta un pasta indekss</span> <span class="kw-tag">Latvijas adrese</span> <span class="kw-tag">dzīvesvieta Latvijā</span> <span class="kw-tag">sūtījuma adrese</span> <span class="kw-tag">pasta kods</span> <span class="kw-tag">Latvian address</span> <span class="kw-tag">mailing address Latvia</span> <span class="kw-tag">ZIP code Latvia</span> <span class="kw-tag">postal index Latvia</span> <span class="kw-tag">Riga postal code</span> <span class="kw-tag">Latvijas pasta indekss</span> </div>
+      <code class="regex-code">(?i)(?:pasta indekss|Latvijas Pasts|Latvia postal code|Latvian postcode|Latvian postal code|Latvia post code|adrese Latvij[aā]|pasta indeksa sektors|R[iī]ga LV-|pils[eē]ta un pasta indekss|Latvijas adrese|dz[iī]vesvieta Latvij[aā]|s[uū]t[iī]juma adrese|pasta kods|Latvian address|mailing address Latvia|ZIP code Latvia|postal index Latvia|Riga postal code|Latvijas pasta indekss)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-16">
+      <h3>
+        <span class="idx">16.</span> Qatar passport
+        <span class="badge badge-med">low</span>
+      </h3>
+      <p class="conf-reason">No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented.</p>
+
+      <details open>
+        <summary>Sources (0)</summary>
+        <p class="empty">No sources found.</p>
+      </details>
+
+      <details open>
+        <summary>Policies (5)</summary>
+        <ul class='policy-list'><li>{&#x27;rule&#x27;: &#x27;Format consists of alphanumeric characters&#x27;, &#x27;details&#x27;: &#x27;Qatar passport numbers typically contain 8-9 characters mixing letters and numbers&#x27;}</li>
+<li>{&#x27;rule&#x27;: &#x27;Standard format is one letter followed by 8 digits&#x27;, &#x27;details&#x27;: &#x27;Most common pattern: [A-Z][0-9]{8}&#x27;}</li>
+<li>{&#x27;rule&#x27;: &#x27;No embedded spaces or special characters&#x27;, &#x27;details&#x27;: &#x27;Passport number is continuous alphanumeric string&#x27;}</li>
+<li>{&#x27;rule&#x27;: &#x27;Case insensitive but typically uppercase&#x27;, &#x27;details&#x27;: &#x27;Letters are printed in uppercase on passport documents&#x27;}</li>
+<li>{&#x27;rule&#x27;: &#x27;Machine readable zone (MRZ) follows ICAO Document 9303 standard&#x27;, &#x27;details&#x27;: &quot;Passport number appears in MRZ line with document type code &#x27;P&#x27; for passport&quot;}</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (5)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>{&quot;vendor&quot;: &quot;Microsoft Purview&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;qatar passport&quot;, &quot;passport&quot;, &quot;passport number&quot;, &quot;passport no&quot;, &quot;جواز سفر&quot;], &quot;rules&quot;: [&quot;Pattern matching for alphanumeric sequences&quot;, &quot;Keyword proximity detection&quot;, &quot;Confidence scoring based on context&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Netskope</td>
+              <td><code>{&quot;vendor&quot;: &quot;Netskope&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;qatar passport&quot;, &quot;passport&quot;, &quot;QA passport&quot;, &quot;passport number&quot;], &quot;rules&quot;: [&quot;Context-based detection with keywords&quot;, &quot;Pattern validation for document numbers&quot;, &quot;Geographic entity recognition&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Broadcom/Symantec</td>
+              <td><code>\b[A-Z][0-9]{8}\b</code></td>
+            </tr>
+            <tr>
+              <td>Zscaler</td>
+              <td><code>{&quot;vendor&quot;: &quot;Zscaler&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;passport&quot;, &quot;qatar passport&quot;, &quot;passport no&quot;, &quot;passport#&quot;], &quot;rules&quot;: [&quot;Pattern recognition with contextual keywords&quot;, &quot;Country-specific identifier detection&quot;, &quot;Multi-pattern validation&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Forcepoint</td>
+              <td><code>\b[A-Z][0-9]{8}\b</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">letter-plus-eight-digits</div>
+          <div class="rule-desc">One uppercase letter followed by exactly 8 digits</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z][0-9]{8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">alphanumeric-8-9-chars</div>
+          <div class="rule-desc">Alphanumeric string of 8-9 characters total length</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]\d{8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">no-spaces-or-special-chars</div>
+          <div class="rule-desc">Continuous alphanumeric string with no embedded spaces, hyphens, or special characters</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z][0-9]{8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">uppercase-letters</div>
+          <div class="rule-desc">All letters are uppercase (case insensitive but printed uppercase)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z][0-9]{8}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">icao-mrz-compliant</div>
+          <div class="rule-desc">Passport number appears in machine readable zone following ICAO Document 9303 standard with document type code &#x27;P&#x27;</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z][0-9]{8}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]\d{8}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">qatar passport</span> <span class="kw-tag">QA passport</span> <span class="kw-tag">passport number</span> <span class="kw-tag">passport no</span> <span class="kw-tag">passport#</span> <span class="kw-tag">travel document</span> <span class="kw-tag">travel document number</span> <span class="kw-tag">qatar travel document</span> <span class="kw-tag">جواز سفر</span> <span class="kw-tag">جواز سفر قطري</span> <span class="kw-tag">رقم جواز السفر</span> <span class="kw-tag">state of qatar</span> <span class="kw-tag">دولة قطر</span> <span class="kw-tag">ministry of interior qatar</span> <span class="kw-tag">passport book number</span> <span class="kw-tag">machine readable passport</span> <span class="kw-tag">biometric passport</span> <span class="kw-tag">e-passport</span> <span class="kw-tag">international passport</span> </div>
+      <code class="regex-code">(?i)(?:qatar passport|QA passport|passport number|passport no|passport#|travel document|travel document number|qatar travel document|جواز سفر|جواز سفر قطري|رقم جواز السفر|state of qatar|دولة قطر|ministry of interior qatar|passport book number|machine readable passport|biometric passport|e-passport|international passport)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-17">
+      <h3>
+        <span class="idx">17.</span> Russian Military Identity Number
+        <span class="badge badge-med">low</span>
+      </h3>
+      <p class="conf-reason">No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented.</p>
+
+      <details open>
+        <summary>Sources (0)</summary>
+        <p class="empty">No sources found.</p>
+      </details>
+
+      <details open>
+        <summary>Policies (10)</summary>
+        <ul class='policy-list'><li>Format: 10-digit numeric identifier</li>
+<li>Structure: NNNN-NNNNNN where N represents digits</li>
+<li>Length: Exactly 10 digits, often formatted with hyphen after 4th digit</li>
+<li>Character types: Numeric only (0-9)</li>
+<li>No check digit algorithm publicly documented</li>
+<li>Issued to all Russian military personnel upon enlistment</li>
+<li>First 4 digits typically indicate military district or branch allocation</li>
+<li>Remaining 6 digits represent sequential assignment within district/branch</li>
+<li>Format may appear without hyphen as continuous 10-digit string</li>
+<li>Also known as &#x27;военный билет номер&#x27; (military ticket number)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (4)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>\b\d{4}-?\d{6}\b</code></td>
+            </tr>
+            <tr>
+              <td>Netskope</td>
+              <td><code>{&quot;vendor&quot;: &quot;Netskope&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;Russian military ID&quot;, &quot;военный билет&quot;, &quot;military identity number&quot;], &quot;rules&quot;: [&quot;Pattern matching for 10-digit sequences&quot;, &quot;Keyword proximity detection&quot;, &quot;Regional context (Russia) required for classification&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Broadcom/Symantec</td>
+              <td><code>\d{4}-\d{6}</code></td>
+            </tr>
+            <tr>
+              <td>Forcepoint</td>
+              <td><code>\b\d{4}[\s-]?\d{6}\b</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (6)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">length-10-digits</div>
+          <div class="rule-desc">Exactly 10 numeric digits (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])\d{4}[\s-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">hyphen-after-4th-digit</div>
+          <div class="rule-desc">Optional hyphen separator after the 4th digit, creating format NNNN-NNNNNN</div>
+          <code class="regex-code">(?&lt;![:\w])\d{4}-?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">space-after-4th-digit</div>
+          <div class="rule-desc">Optional space separator after the 4th digit, creating format NNNN NNNNNN</div>
+          <code class="regex-code">\b\d{4} ?\d{6}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">first-4-digits-district</div>
+          <div class="rule-desc">First 4 digits typically indicate military district or branch allocation</div>
+          <code class="regex-code">(?&lt;![:\w])\d{4}[\s-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">last-6-digits-sequential</div>
+          <div class="rule-desc">Remaining 6 digits represent sequential assignment within district/branch</div>
+          <code class="regex-code">(?&lt;![:\w])\d{4}[\s-]?\d{6}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">continuous-10-digit-string</div>
+          <div class="rule-desc">May appear without separator as continuous 10-digit string</div>
+          <code class="regex-code">(?&lt;![:\w])\d{4}-?\d{6}(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])\d{4}[\s-]?\d{6}(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">военный билет</span> <span class="kw-tag">военный билет номер</span> <span class="kw-tag">военный номер</span> <span class="kw-tag">воен\. билет</span> <span class="kw-tag">МО РФ</span> <span class="kw-tag">Министерство обороны</span> <span class="kw-tag">Министерство обороны Российской Федерации</span> <span class="kw-tag">Russian military ID</span> <span class="kw-tag">Russian military identity</span> <span class="kw-tag">Russian military number</span> <span class="kw-tag">Russian service number</span> <span class="kw-tag">Russian armed forces</span> <span class="kw-tag">military ticket number</span> <span class="kw-tag">military service number</span> <span class="kw-tag">armed forces ID</span> </div>
+      <code class="regex-code">(?i)(?:военный билет|военный билет номер|военный номер|воен\. билет|МО РФ|Министерство обороны|Министерство обороны Российской Федерации|Russian military ID|Russian military identity|Russian military number|Russian service number|Russian armed forces|military ticket number|military service number|armed forces ID)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-18">
+      <h3>
+        <span class="idx">18.</span> UAE National Identity Card Number
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (6)</summary>
+        <ul class='source-list'><li><a href="https://icp.gov.ae/wp-content/uploads/2020/10/Breifing-on-The-UAE-National-ID-Card-Program-1.pdf" target="_blank" rel="noopener noreferrer">https://icp.gov.ae/wp-content/uploads/2020/10/Breifing-on-The-UAE-National-ID-Card-Program-1.pdf</a></li>
+<li><a href="https://icp.gov.ae/wp-content/uploads/2020/10/UAE-National-ID-Card-Progam-1.pdf" target="_blank" rel="noopener noreferrer">https://icp.gov.ae/wp-content/uploads/2020/10/UAE-National-ID-Card-Progam-1.pdf</a></li>
+<li><a href="https://u.ae/en/information-and-services/visa-and-emirates-id/emirates-id" target="_blank" rel="noopener noreferrer">https://u.ae/en/information-and-services/visa-and-emirates-id/emirates-id</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-uae-identity-card-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-uae-identity-card-number</a></li>
+<li><a href="https://learn.microsoft.com/nb-no/purview/sit-defn-uae-identity-card-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/nb-no/purview/sit-defn-uae-identity-card-number</a></li>
+<li><a href="https://learn.microsoft.com/sv-se/purview/sit-defn-uae-identity-card-number" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/sv-se/purview/sit-defn-uae-identity-card-number</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (8)</summary>
+        <ul class='policy-list'><li>The Emirates ID number consists of exactly 15 digits (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security official documentation)</li>
+<li>The identity number is unique and non-repeating for each holder (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+<li>The identity number remains with the holder permanently throughout their lifetime (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+<li>The card contains a smart chip that can store up to 32,000 letters of information (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+<li>The card includes biometric data in the form of fingerprint information stored on the chip (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+<li>The card incorporates public key infrastructure including digital signature and authentication certificates (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+<li>The card features nine security features including accurate letters, ultraviolet ink, and line drawing to prevent falsification (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+<li>It is a legal requirement for all UAE citizens and residents to apply for and carry the Emirates ID at all times (Source: Federal Authority for Identity, Citizenship, Customs and Ports Security)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_uae_id_card_number</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (3)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">exactly-15-digits</div>
+          <div class="rule-desc">The Emirates ID number consists of exactly 15 digits</div>
+          <code class="regex-code">(?&lt;![:\w])\d{3}-?\d{4}-?\d{7}-?\d(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-hyphens</div>
+          <div class="rule-desc">The 15 digits may be formatted with optional hyphens in the pattern: three digits, optional hyphen, four digits, optional hyphen, seven digits, optional hyphen, one digit</div>
+          <code class="regex-code">(?&lt;![:\w])\d{3}-?\d{4}-?\d{7}-?\d(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">luhn-check</div>
+          <div class="rule-desc">The Emirates ID number must pass the Luhn check digit validation algorithm</div>
+          <code class="regex-code">(?&lt;![:\w])(?=(?:\d[\s-]*){15}\b)(?=(?:\d[\s-]*){14}\d(?!\d))(?:\d{3}[\s-]?\d{4}[\s-]?\d{7}[\s-]?\d)(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])(?&lt;![:\w])\d{3}-?\d{4}-?\d{7}-?\d(?![:\w])(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Emirates id</span> <span class="kw-tag">Emirates ID</span> <span class="kw-tag">Emirates identity card</span> <span class="kw-tag">UAE Identity Card</span> <span class="kw-tag">UAE ID</span> <span class="kw-tag">identification number</span> <span class="kw-tag">Emirates identification</span> <span class="kw-tag">بطاقة الهوية الإماراتية</span> <span class="kw-tag">رقم الهوية</span> <span class="kw-tag">رقم الهوية الإماراتية</span> <span class="kw-tag">هوية إماراتية</span> <span class="kw-tag">التأمين رقم</span> <span class="kw-tag">رقم التأمين</span> <span class="kw-tag">Insurance Number UAE</span> <span class="kw-tag">ICP card</span> <span class="kw-tag">Federal Authority Identity</span> <span class="kw-tag">resident identity card UAE</span> <span class="kw-tag">citizen identity card UAE</span> <span class="kw-tag">Emirates biometric card</span> </div>
+      <code class="regex-code">(?i)(?:Emirates id|Emirates ID|Emirates identity card|UAE Identity Card|UAE ID|identification number|Emirates identification|بطاقة الهوية الإماراتية|رقم الهوية|رقم الهوية الإماراتية|هوية إماراتية|التأمين رقم|رقم التأمين|Insurance Number UAE|ICP card|Federal Authority Identity|resident identity card UAE|citizen identity card UAE|Emirates biometric card)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-19">
+      <h3>
+        <span class="idx">19.</span> USA Medicaid Number
+        <span class="badge badge-med">low</span>
+      </h3>
+      <p class="conf-reason">No scraped pages were found to be specifically about this identifier. The format may not be standardised or publicly documented.</p>
+
+      <details open>
+        <summary>Sources (0)</summary>
+        <p class="empty">No sources found.</p>
+      </details>
+
+      <details open>
+        <summary>Policies (11)</summary>
+        <ul class='policy-list'><li>Medicaid ID format varies by state as each state administers its own Medicaid program</li>
+<li>Length typically ranges from 8 to 14 alphanumeric characters depending on state</li>
+<li>May contain letters, numbers, or combination thereof</li>
+<li>Some states use SSN-based formats (9 digits), others use state-specific alphanumeric formats</li>
+<li>No universal check digit algorithm across all states</li>
+<li>Format examples: 12345678A (9 chars), 1234567890AB (12 chars), AA12345678 (10 chars)</li>
+<li>Some states prefix with state code or specific letter identifiers</li>
+<li>May include hyphens or spaces as separators in some state formats</li>
+<li>Beneficiary Identification Number (BIN) used in some states</li>
+<li>MSIS (Medicaid Statistical Information System) ID may be referenced but is internal</li>
+<li>No single standardized format exists across all 50 states and territories</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (5)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>{&quot;vendor&quot;: &quot;Microsoft Purview&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;medicaid&quot;, &quot;medicaid id&quot;, &quot;medicaid number&quot;, &quot;medicaid beneficiary&quot;, &quot;mcd&quot;, &quot;medicaid identification&quot;], &quot;rules&quot;: [&quot;Pattern matching for 8-14 alphanumeric characters&quot;, &quot;Keyword proximity detection&quot;, &quot;Context-based classification using surrounding text&quot;, &quot;May combine with state identifiers&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Netskope</td>
+              <td><code>{&quot;vendor&quot;: &quot;Netskope&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;medicaid&quot;, &quot;medicaid id&quot;, &quot;medicaid number&quot;, &quot;medicaid beneficiary id&quot;], &quot;rules&quot;: [&quot;Alphanumeric pattern detection&quot;, &quot;Keyword-based detection&quot;, &quot;Length validation (typically 8-14 characters)&quot;, &quot;Context analysis&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Broadcom/Symantec</td>
+              <td><code>{&quot;vendor&quot;: &quot;Broadcom/Symantec&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;medicaid&quot;, &quot;medicaid id&quot;, &quot;medicaid number&quot;, &quot;medicaid identification number&quot;], &quot;rules&quot;: [&quot;Pattern-based detection with state variations&quot;, &quot;Keyword proximity matching&quot;, &quot;Alphanumeric character validation&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Zscaler</td>
+              <td><code>{&quot;vendor&quot;: &quot;Zscaler&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;medicaid&quot;, &quot;medicaid id&quot;, &quot;medicaid number&quot;], &quot;rules&quot;: [&quot;Keyword-based detection&quot;, &quot;Pattern matching for common formats&quot;, &quot;Context-aware classification&quot;]}</code></td>
+            </tr>
+            <tr>
+              <td>Forcepoint</td>
+              <td><code>{&quot;vendor&quot;: &quot;Forcepoint&quot;, &quot;regex&quot;: null, &quot;keywords&quot;: [&quot;medicaid&quot;, &quot;medicaid id&quot;, &quot;medicaid number&quot;, &quot;medicaid beneficiary&quot;], &quot;rules&quot;: [&quot;Alphanumeric pattern detection&quot;, &quot;Keyword correlation&quot;, &quot;Length-based validation&quot;]}</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">variable-length-alphanumeric</div>
+          <div class="rule-desc">Medicaid ID consists of 8 to 14 alphanumeric characters, with length varying by state</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{8,14}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">alphanumeric-composition</div>
+          <div class="rule-desc">May contain letters (A-Z), numbers (0-9), or combination thereof depending on state format</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9]{8,14}(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">ssn-based-format</div>
+          <div class="rule-desc">Some states use SSN-based formats consisting of 9 digits</div>
+          <code class="regex-code">\b\d{9}\b</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">state-prefix-format</div>
+          <div class="rule-desc">Some states prefix with state code or specific letter identifiers</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9][\sA-Z0-9-]{6,12}[A-Z0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">optional-separators</div>
+          <div class="rule-desc">May include hyphens or spaces as separators in some state formats</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z0-9](?:[A-Z0-9]|\s|-){6,12}[A-Z0-9](?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z0-9](?:[A-Z0-9]|\s|-){6,12}[A-Z0-9](?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">medicaid</span> <span class="kw-tag">medicaid id</span> <span class="kw-tag">medicaid number</span> <span class="kw-tag">medicaid identification</span> <span class="kw-tag">medicaid identification number</span> <span class="kw-tag">medicaid beneficiary</span> <span class="kw-tag">medicaid beneficiary id</span> <span class="kw-tag">medicaid beneficiary number</span> <span class="kw-tag">medicaid recipient</span> <span class="kw-tag">medicaid recipient id</span> <span class="kw-tag">medicaid member id</span> <span class="kw-tag">medicaid member number</span> <span class="kw-tag">medicaid card</span> <span class="kw-tag">medicaid card number</span> <span class="kw-tag">medicaid enrollee</span> <span class="kw-tag">medicaid enrollee id</span> <span class="kw-tag">medicaid subscriber</span> <span class="kw-tag">medicaid subscriber id</span> <span class="kw-tag">medicaid policy number</span> <span class="kw-tag">state medicaid</span> <span class="kw-tag">state medicaid id</span> <span class="kw-tag">beneficiary identification number</span> <span class="kw-tag">recipient identification number</span> <span class="kw-tag">medical assistance id</span> <span class="kw-tag">medical assistance number</span> <span class="kw-tag">state medical assistance</span> <span class="kw-tag">mcd id</span> <span class="kw-tag">mcd number</span> </div>
+      <code class="regex-code">(?i)(?:medicaid|medicaid id|medicaid number|medicaid identification|medicaid identification number|medicaid beneficiary|medicaid beneficiary id|medicaid beneficiary number|medicaid recipient|medicaid recipient id|medicaid member id|medicaid member number|medicaid card|medicaid card number|medicaid enrollee|medicaid enrollee id|medicaid subscriber|medicaid subscriber id|medicaid policy number|state medicaid|state medicaid id|beneficiary identification number|recipient identification number|medical assistance id|medical assistance number|state medical assistance|mcd id|mcd number)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-20">
+      <h3>
+        <span class="idx">20.</span> USA Medicare Number (MBI)
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (9)</summary>
+        <ul class='source-list'><li><a href="https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf" target="_blank" rel="noopener noreferrer">https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf</a></li>
+<li><a href="https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi.pdf" target="_blank" rel="noopener noreferrer">https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi.pdf</a></li>
+<li><a href="https://infinedi.net/wp-content/uploads/2020/04/New-Medicare-Card-Format.pdf" target="_blank" rel="noopener noreferrer">https://infinedi.net/wp-content/uploads/2020/04/New-Medicare-Card-Format.pdf</a></li>
+<li><a href="https://www.plasticsurgery.org/documents/Health-Policy/Transition-to-New-Medicare-Numbers-and-Cards.pdf" target="_blank" rel="noopener noreferrer">https://www.plasticsurgery.org/documents/Health-Policy/Transition-to-New-Medicare-Numbers-and-Cards.pdf</a></li>
+<li><a href="https://www.csscoperations.com/internet/csscw3_files.nsf/F/CSSCAppendix_3C_MBI_Edits_11132018.pdf/$FILE/Appendix_3C_MBI_Edits_11132018.pdf" target="_blank" rel="noopener noreferrer">https://www.csscoperations.com/internet/csscw3_files.nsf/F/CSSCAppendix_3C_MBI_Edits_11132018.pdf/$FILE/Appendix_3C_MBI_Edits_11132018.pdf</a></li>
+<li><a href="https://learn.microsoft.com/fi-fi/purview/sit-defn-medicare-beneficiary-identifier-card" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/fi-fi/purview/sit-defn-medicare-beneficiary-identifier-card</a></li>
+<li><a href="https://learn.microsoft.com/nl-nl/Purview/sit-defn-medicare-beneficiary-identifier-card" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/nl-nl/Purview/sit-defn-medicare-beneficiary-identifier-card</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-medicare-beneficiary-identifier-card" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-medicare-beneficiary-identifier-card</a></li>
+<li><a href="https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf" target="_blank" rel="noopener noreferrer">https://www.cms.gov/medicare/new-medicare-card/understanding-the-mbi-with-format.pdf</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (15)</summary>
+        <ul class='policy-list'><li>MBI is exactly 11 characters long (Source: CMS Medicare documentation)</li>
+<li>MBI uses only uppercase letters (except S, L, O, I, B, Z) and numbers 0-9 (Source: CMS Medicare documentation)</li>
+<li>Position 1 is always a number (1-9) (Source: CMS Medicare documentation)</li>
+<li>Position 2 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)</li>
+<li>Position 3 is either a letter or a number (Source: CMS Medicare documentation)</li>
+<li>Position 4 is always a number (0-9) (Source: CMS Medicare documentation)</li>
+<li>Position 5 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)</li>
+<li>Position 6 is either a letter or a number (Source: CMS Medicare documentation)</li>
+<li>Position 7 is always a number (0-9) (Source: CMS Medicare documentation)</li>
+<li>Position 8 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)</li>
+<li>Position 9 is always a letter (A-Z, excluding S, L, O, I, B, Z) (Source: CMS Medicare documentation)</li>
+<li>Position 10 is always a number (0-9) (Source: CMS Medicare documentation)</li>
+<li>Position 11 is always a number (0-9) (Source: CMS Medicare documentation)</li>
+<li>Letters S, L, O, I, B, and Z are never used to avoid confusion with numbers (Source: CMS Medicare documentation)</li>
+<li>MBI replaced the Health Insurance Claim Number (HICN) which contained Social Security Numbers (Source: CMS Medicare documentation)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_mbi_card</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (14)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">mbi-length</div>
+          <div class="rule-desc">MBI is exactly 11 characters long</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-character-set</div>
+          <div class="rule-desc">MBI uses only uppercase letters (excluding S, L, O, I, B, Z) and numbers 0-9</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-1-numeric</div>
+          <div class="rule-desc">Position 1 is always a number (1-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-2-alpha</div>
+          <div class="rule-desc">Position 2 is always a letter (A-Z, excluding S, L, O, I, B, Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-3-alphanumeric</div>
+          <div class="rule-desc">Position 3 is either a letter (excluding S, L, O, I, B, Z) or a number (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-4-numeric</div>
+          <div class="rule-desc">Position 4 is always a number (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-5-alpha</div>
+          <div class="rule-desc">Position 5 is always a letter (A-Z, excluding S, L, O, I, B, Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-6-alphanumeric</div>
+          <div class="rule-desc">Position 6 is either a letter (excluding S, L, O, I, B, Z) or a number (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-7-numeric</div>
+          <div class="rule-desc">Position 7 is always a number (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-8-alpha</div>
+          <div class="rule-desc">Position 8 is always a letter (A-Z, excluding S, L, O, I, B, Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-9-alpha</div>
+          <div class="rule-desc">Position 9 is always a letter (A-Z, excluding S, L, O, I, B, Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-10-numeric</div>
+          <div class="rule-desc">Position 10 is always a number (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-position-11-numeric</div>
+          <div class="rule-desc">Position 11 is always a number (0-9)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">mbi-optional-hyphen</div>
+          <div class="rule-desc">MBI may contain optional hyphens after position 4 and position 7 for readability (e.g., 1EG4-TE5-MK73)</div>
+          <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[1-9][ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][0-9ACDEFGHJKMNPQRTUVWXY][0-9]-?[ACDEFGHJKMNPQRTUVWXY][ACDEFGHJKMNPQRTUVWXY][0-9][0-9](?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">Medicare Beneficiary Identifier</span> <span class="kw-tag">Medicare Beneficiary Number</span> <span class="kw-tag">medicare beneficiary</span> <span class="kw-tag">MBI card</span> <span class="kw-tag">MBI number</span> <span class="kw-tag">Medicare card</span> <span class="kw-tag">Medicare ID</span> <span class="kw-tag">Medicare identification</span> <span class="kw-tag">Medicare enrollment</span> <span class="kw-tag">CMS beneficiary</span> <span class="kw-tag">health insurance claim number</span> <span class="kw-tag">Medicare coverage</span> <span class="kw-tag">Medicare eligibility</span> <span class="kw-tag">red white and blue card</span> </div>
+      <code class="regex-code">(?i)(?:Medicare Beneficiary Identifier|Medicare Beneficiary Number|medicare beneficiary|MBI card|MBI number|Medicare card|Medicare ID|Medicare identification|Medicare enrollment|CMS beneficiary|health insurance claim number|Medicare coverage|Medicare eligibility|red white and blue card)</code>
+    </div>
+      </details>
+    </div>
+    <div class="detail-block" id="detail-21">
+      <h3>
+        <span class="idx">21.</span> USA SWIFT / BIC Code
+        <span class="badge badge-high">high</span>
+      </h3>
+      
+
+      <details open>
+        <summary>Sources (2)</summary>
+        <ul class='source-list'><li><a href="https://convera.com/resources/swift-bic-codes/" target="_blank" rel="noopener noreferrer">https://convera.com/resources/swift-bic-codes/</a></li>
+<li><a href="https://learn.microsoft.com/en-us/purview/sit-defn-swift-code" target="_blank" rel="noopener noreferrer">https://learn.microsoft.com/en-us/purview/sit-defn-swift-code</a></li>
+</ul>
+      </details>
+
+      <details open>
+        <summary>Policies (6)</summary>
+        <ul class='policy-list'><li>Total length is 8 or 11 characters (8-character format for head office, 11-character format includes branch code)</li>
+<li>Positions 1-4: 4-letter bank code, typically an abbreviation of the bank name (letters only)</li>
+<li>Positions 5-6: 2-letter country code identifying the country where the bank is located (for USA: &#x27;US&#x27;)</li>
+<li>Positions 7-8: 2-character location code (letters or digits) identifying the bank&#x27;s main office location</li>
+<li>Positions 9-11: Optional 3-character branch code; &#x27;XXX&#x27; commonly denotes the bank&#x27;s head office</li>
+<li>SWIFT/BIC codes identify banks and financial institutions, not individual accounts (unlike IBANs)</li>
+</ul>
+      </details>
+
+      <details>
+        <summary>Competitor / Vendor Patterns (1)</summary>
+        
+    <table class="vendor-table">
+      <thead><tr><th>Source / Vendor</th><th>Pattern</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>Microsoft Purview</td>
+              <td><code>Regex_swift</code></td>
+            </tr></tbody>
+    </table>
+      </details>
+
+      <details open>
+        <summary>Individual Regex Patterns (5)</summary>
+        
+        <div class="regex-card">
+          <div class="rule-id">total-length</div>
+          <div class="rule-desc">Total length is either 8 characters (head office format) or 11 characters (branch code format)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">bank-code</div>
+          <div class="rule-desc">Positions 1-4: 4-letter bank code, typically an abbreviation of the bank name (letters only, A-Z)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">country-code-us</div>
+          <div class="rule-desc">Positions 5-6: 2-letter country code &#x27;US&#x27; for United States</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">location-code</div>
+          <div class="rule-desc">Positions 7-8: 2-character location code identifying the bank&#x27;s main office location (letters or digits)</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\w])</code>
+        </div>
+        <div class="regex-card">
+          <div class="rule-id">branch-code-optional</div>
+          <div class="rule-desc">Positions 9-11: Optional 3-character branch code; &#x27;XXX&#x27; commonly denotes the bank&#x27;s head office</div>
+          <code class="regex-code">(?&lt;![:\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\w])</code>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Combined-Value Regex</summary>
+        
+    <div class="regex-card combined">
+      <div class="rule-id">combined-value</div>
+      <div class="rule-desc">Unified value regex satisfying all individual rules simultaneously</div>
+      <code class="regex-code">(?&lt;![:\w])[A-Z]{4}US[A-Z0-9]{2}(?:[A-Z0-9]{3})?(?![:\w])</code>
+    </div>
+      </details>
+
+      <details>
+        <summary>Keyword Proximity</summary>
+        
+    <div class="kw-block">
+      <div class="kw-tags"><span class="kw-tag">SWIFT code</span> <span class="kw-tag">SWIFT number</span> <span class="kw-tag">BIC code</span> <span class="kw-tag">BIC number</span> <span class="kw-tag">bank identifier code</span> <span class="kw-tag">SWIFT/BIC</span> <span class="kw-tag">SWIFT BIC</span> <span class="kw-tag">international bank code</span> <span class="kw-tag">wire transfer code</span> <span class="kw-tag">correspondent bank</span> <span class="kw-tag">beneficiary bank SWIFT</span> <span class="kw-tag">intermediary bank BIC</span> <span class="kw-tag">receiving bank code</span> <span class="kw-tag">sender bank SWIFT</span> <span class="kw-tag">financial institution identifier</span> <span class="kw-tag">ISO 9362</span> <span class="kw-tag">SWIFT routing number</span> <span class="kw-tag">international wire</span> <span class="kw-tag">cross-border payment</span> <span class="kw-tag">remittance bank code</span> <span class="kw-tag">bank SWIFT address</span> <span class="kw-tag">institution code SWIFT</span> <span class="kw-tag">clearing code BIC</span> </div>
+      <code class="regex-code">(?i)(?:SWIFT code|SWIFT number|BIC code|BIC number|bank identifier code|SWIFT/BIC|SWIFT BIC|international bank code|wire transfer code|correspondent bank|beneficiary bank SWIFT|intermediary bank BIC|receiving bank code|sender bank SWIFT|financial institution identifier|ISO 9362|SWIFT routing number|international wire|cross-border payment|remittance bank code|bank SWIFT address|institution code SWIFT|clearing code BIC)</code>
+    </div>
+      </details>
+    </div>
+
+<footer>
+  Generated by regex-automator &bull; 21 identifiers analysed
+</footer>
+</body>
+</html>

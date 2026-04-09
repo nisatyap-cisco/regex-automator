@@ -1,4 +1,4 @@
-model_id: "anthropic.claude-3-5-sonnet-20240620-v1:0"
+model_id: "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 temperature: 0.2
 max_tokens: 4096
 dataset_size: 1500

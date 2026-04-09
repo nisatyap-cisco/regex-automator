@@ -267,7 +267,7 @@ Return ONLY valid JSON, no markdown fences.
 ## Agent 3 — Regex Generator
 
 **File:** `agents/regex_generator.py`
-**Role:** Generates Python-compatible regex patterns from the discovered format rules.
+**Role:** Generates PCRE2/JavaScript-compatible regex patterns from the discovered format rules.
 
 ### Key Behaviors (enforced in code, not just prompts)
 
@@ -288,7 +288,7 @@ Return ONLY valid JSON, no markdown fences.
 ```
 You are a regex engineering expert.
 
-Write a single Python-compatible regex that matches values satisfying this rule:
+Write a single PCRE2/JavaScript-compatible regex that matches values satisfying this rule:
 
 RULE: {rule_description}
 RANGE CONSTRAINTS: {range_restrictions}
@@ -313,12 +313,13 @@ Return ONLY the regex string, no explanation.
 ### Refinement Prompt (on compile error)
 
 ```
-The regex you provided failed to compile in Python.
+The regex you provided is invalid.
 
 ORIGINAL REGEX: {regex}
-COMPILE ERROR: {error}
+ERROR: {error}
 
-Fix the regex so it compiles with Python's re module.
+Fix the regex so it is valid in both PCRE2 and JavaScript (ES2018+).
+Do NOT use Python-specific syntax (e.g. (?P<name>...), (?P=name)).
 Return ONLY the corrected regex string, no explanation.
 ```
 

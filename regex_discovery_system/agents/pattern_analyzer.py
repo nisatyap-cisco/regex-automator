@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import random
 from collections import Counter
 from statistics import mode as stats_mode
@@ -208,17 +209,21 @@ def analyze_patterns(
     train_path = (paths or {}).get("train", "data/train.txt")
     patterns_path = (paths or {}).get("patterns", "results/patterns.json")
 
-    with open(train_path) as f:
-        values = [line.strip() for line in f if line.strip()]
+    if os.path.isfile(train_path):
+        with open(train_path) as f:
+            values = [line.strip() for line in f if line.strip()]
+    else:
+        values = []
 
     logger.info("Agent 2: analyzing %d training values for '%s'", len(values), condition)
 
-    stats = _compute_stats(values)
-    logger.info("Agent 2: statistical pre-analysis complete")
+    stats = _compute_stats(values) if values else {}
+    if values:
+        logger.info("Agent 2: statistical pre-analysis complete")
 
     sample_size = min(200, len(values))
     rng = random.Random(42)
-    sample = rng.sample(values, sample_size)
+    sample = rng.sample(values, sample_size) if values else []
 
     policy_section = ""
     if policies:
@@ -273,11 +278,13 @@ def analyze_patterns(
 
         policy_section = "\n".join(parts) + "\n" if parts else ""
 
+    stats_text = json.dumps(stats, indent=2) if stats else "(no example data available)"
+    sample_text = "\n".join(sample) if sample else "(no example values — rely on policies and vendor patterns only)"
     prompt = PROMPT_TEMPLATE.format(
         condition=condition,
-        stats_json=json.dumps(stats, indent=2),
+        stats_json=stats_text,
         total=len(values),
-        sample_values="\n".join(sample),
+        sample_values=sample_text,
         policies=policy_section,
     )
 
